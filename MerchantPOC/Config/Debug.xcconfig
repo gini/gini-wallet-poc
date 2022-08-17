@@ -1,0 +1,6 @@
+//#include "./Pods/Target Support Files/Pods-skeleton/Pods-skeleton.debug.xcconfig"
+
+PRODUCT_NAME = $(inherited) dev
+
+// API
+API_BASE_URL = api.dev.example.com
