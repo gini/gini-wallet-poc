@@ -1,0 +1,4 @@
+//#include "./Pods/Target Support Files/Pods-skeleton/Pods-skeleton.release.xcconfig"
+
+// API
+API_BASE_URL = api.example.com

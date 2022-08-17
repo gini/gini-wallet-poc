@@ -1,0 +1,24 @@
+PODS:
+  - SwiftGen (6.4.0)
+  - SwiftLint (0.40.3)
+  - Wormholy (1.6.4)
+
+DEPENDENCIES:
+  - SwiftGen
+  - SwiftLint
+  - Wormholy
+
+SPEC REPOS:
+  trunk:
+    - SwiftGen
+    - SwiftLint
+    - Wormholy
+
+SPEC CHECKSUMS:
+  SwiftGen: 67860cc7c3cfc2ed25b9b74cfd55495fc89f9108
+  SwiftLint: dfd554ff0dff17288ee574814ccdd5cea85d76f7
+  Wormholy: 2e70f64227e010d363f8d33268369f77faf12471
+
+PODFILE CHECKSUM: c800c30325bb63dcd857e2f0735b30eb8c49c265
+
+COCOAPODS: 1.9.3

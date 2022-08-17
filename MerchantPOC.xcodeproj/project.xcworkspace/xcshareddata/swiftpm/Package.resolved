@@ -1,0 +1,43 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Alamofire",
+        "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
+        "state": {
+          "branch": null,
+          "revision": "8dd85aee02e39dd280c75eef88ffdb86eed4b07b",
+          "version": "5.6.2"
+        }
+      },
+      {
+        "package": "DIKit",
+        "repositoryURL": "https://github.com/Liftric/DIKit.git",
+        "state": {
+          "branch": null,
+          "revision": "dd076cb4ba22e97599a7aff0f1fb3d43ffb8ac8e",
+          "version": "1.6.1"
+        }
+      },
+      {
+        "package": "RestBird",
+        "repositoryURL": "https://github.com/halcyonmobile/RestBird.git",
+        "state": {
+          "branch": null,
+          "revision": "db51dc723cf29fbae3d237205e911fdc4debbd9d",
+          "version": "0.5.4"
+        }
+      },
+      {
+        "package": "ViewInspector",
+        "repositoryURL": "https://github.com/nalexn/ViewInspector.git",
+        "state": {
+          "branch": null,
+          "revision": "6b88c4ec1fa20cf38f2138052e63c8e79df5d76e",
+          "version": "0.9.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
