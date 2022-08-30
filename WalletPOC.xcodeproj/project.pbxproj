@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F42109E428BDE85D0069F486 /* InvoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42109E328BDE85D0069F486 /* InvoiceViewController.swift */; };
+		F42109E628BDE8C80069F486 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42109E528BDE8C80069F486 /* SceneDelegate.swift */; };
+		F42109E928BDEF7D0069F486 /* UIView+Autolayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42109E828BDEF7D0069F486 /* UIView+Autolayout.swift */; };
 		F955ED0F256D0F38005299AC /* ForgotPasswordPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F955ED0E256D0F38005299AC /* ForgotPasswordPage.swift */; };
 		F955ED13256D109A005299AC /* FilledButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F955ED12256D109A005299AC /* FilledButtonStyle.swift */; };
 		F955ED17256D14FE005299AC /* LoadingOverlayModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F955ED16256D14FE005299AC /* LoadingOverlayModifier.swift */; };
@@ -54,10 +57,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F42109E328BDE85D0069F486 /* InvoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceViewController.swift; sourceTree = "<group>"; };
+		F42109E528BDE8C80069F486 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		F42109E828BDEF7D0069F486 /* UIView+Autolayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Autolayout.swift"; sourceTree = "<group>"; };
 		F955ED0E256D0F38005299AC /* ForgotPasswordPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordPage.swift; sourceTree = "<group>"; };
 		F955ED12256D109A005299AC /* FilledButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledButtonStyle.swift; sourceTree = "<group>"; };
 		F955ED16256D14FE005299AC /* LoadingOverlayModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingOverlayModifier.swift; sourceTree = "<group>"; };
-		F955ED1D256D1C20005299AC /* MerchantPOCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MerchantPOCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F955ED1D256D1C20005299AC /* WalletPOCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WalletPOCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F955ED1F256D1C20005299AC /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		F955ED21256D1C20005299AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F97E1BFC25D3D8F7000884B4 /* AnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
@@ -82,7 +88,7 @@
 		F9CB746C25CDA388006F0FE2 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		F9CB747025CDA71B006F0FE2 /* UIViewController+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Error.swift"; sourceTree = "<group>"; };
 		F9CB747425CDA816006F0FE2 /* AppEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEngine.swift; sourceTree = "<group>"; };
-		F9D38E18253793E3007D4888 /* MerchantPOC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MerchantPOC.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9D38E18253793E3007D4888 /* WalletPOC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalletPOC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9D38E1B253793E3007D4888 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F9D38E24253793E3007D4888 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		F9D38E27253793E3007D4888 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -116,6 +122,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F42109E228BDE8510069F486 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				F42109E328BDE85D0069F486 /* InvoiceViewController.swift */,
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		F42109E728BDEF6E0069F486 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F42109E828BDEF7D0069F486 /* UIView+Autolayout.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		F955ED11256D108B005299AC /* Modifiers */ = {
 			isa = PBXGroup;
 			children = (
@@ -127,13 +149,13 @@
 			path = Modifiers;
 			sourceTree = "<group>";
 		};
-		F955ED1E256D1C20005299AC /* MerchantPOCTests */ = {
+		F955ED1E256D1C20005299AC /* WalletPOCTests */ = {
 			isa = PBXGroup;
 			children = (
 				F955ED1F256D1C20005299AC /* Tests.swift */,
 				F955ED21256D1C20005299AC /* Info.plist */,
 			);
-			path = MerchantPOCTests;
+			path = WalletPOCTests;
 			sourceTree = "<group>";
 		};
 		F97E1BFB25D3D8CE000884B4 /* Analytics */ = {
@@ -179,6 +201,7 @@
 		F997090D2549FC3000E24EAA /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
+				F42109E228BDE8510069F486 /* New Group */,
 				F997090F2549FC4600E24EAA /* Screens */,
 				F955ED11256D108B005299AC /* Modifiers */,
 				F997090E2549FC3A00E24EAA /* Components */,
@@ -230,6 +253,7 @@
 				F9D38E1B253793E3007D4888 /* AppDelegate.swift */,
 				F9CB747425CDA816006F0FE2 /* AppEngine.swift */,
 				F9D38E26253793E3007D4888 /* LaunchScreen.storyboard */,
+				F42109E528BDE8C80069F486 /* SceneDelegate.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -245,8 +269,8 @@
 		F9D38E0F253793E3007D4888 = {
 			isa = PBXGroup;
 			children = (
-				F9D38E1A253793E3007D4888 /* MerchantPOC */,
-				F955ED1E256D1C20005299AC /* MerchantPOCTests */,
+				F9D38E1A253793E3007D4888 /* WalletPOC */,
+				F955ED1E256D1C20005299AC /* WalletPOCTests */,
 				F9D38E50253794ED007D4888 /* Core */,
 				F9D38E19253793E3007D4888 /* Products */,
 			);
@@ -255,15 +279,16 @@
 		F9D38E19253793E3007D4888 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F9D38E18253793E3007D4888 /* MerchantPOC.app */,
-				F955ED1D256D1C20005299AC /* MerchantPOCTests.xctest */,
+				F9D38E18253793E3007D4888 /* WalletPOC.app */,
+				F955ED1D256D1C20005299AC /* WalletPOCTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F9D38E1A253793E3007D4888 /* MerchantPOC */ = {
+		F9D38E1A253793E3007D4888 /* WalletPOC */ = {
 			isa = PBXGroup;
 			children = (
+				F42109E728BDEF6E0069F486 /* Extensions */,
 				F9BAE6AD253795AB008FF118 /* Main */,
 				F99709032549FAD600E24EAA /* Config */,
 				F997090D2549FC3000E24EAA /* User Interface */,
@@ -272,7 +297,7 @@
 				F99709082549FB8D00E24EAA /* Resources */,
 				F997090C2549FBEE00E24EAA /* Supporting Files */,
 			);
-			path = MerchantPOC;
+			path = WalletPOC;
 			sourceTree = "<group>";
 		};
 		F9D6CC0125711582007E6779 /* Utility */ = {
@@ -317,9 +342,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F955ED1C256D1C20005299AC /* MerchantPOCTests */ = {
+		F955ED1C256D1C20005299AC /* WalletPOCTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F955ED24256D1C20005299AC /* Build configuration list for PBXNativeTarget "MerchantPOCTests" */;
+			buildConfigurationList = F955ED24256D1C20005299AC /* Build configuration list for PBXNativeTarget "WalletPOCTests" */;
 			buildPhases = (
 				F955ED19256D1C20005299AC /* Sources */,
 				F955ED1A256D1C20005299AC /* Frameworks */,
@@ -330,17 +355,17 @@
 			dependencies = (
 				F955ED23256D1C20005299AC /* PBXTargetDependency */,
 			);
-			name = MerchantPOCTests;
+			name = WalletPOCTests;
 			packageProductDependencies = (
 				F955ED2B256D1CF8005299AC /* ViewInspector */,
 			);
 			productName = Tests;
-			productReference = F955ED1D256D1C20005299AC /* MerchantPOCTests.xctest */;
+			productReference = F955ED1D256D1C20005299AC /* WalletPOCTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		F9D38E17253793E3007D4888 /* MerchantPOC */ = {
+		F9D38E17253793E3007D4888 /* WalletPOC */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F9D38E2C253793E3007D4888 /* Build configuration list for PBXNativeTarget "MerchantPOC" */;
+			buildConfigurationList = F9D38E2C253793E3007D4888 /* Build configuration list for PBXNativeTarget "WalletPOC" */;
 			buildPhases = (
 				F9D38E14253793E3007D4888 /* Sources */,
 				F9D38E15253793E3007D4888 /* Frameworks */,
@@ -350,12 +375,12 @@
 			);
 			dependencies = (
 			);
-			name = MerchantPOC;
+			name = WalletPOC;
 			packageProductDependencies = (
 				F9BAE6BE253799BF008FF118 /* Core */,
 			);
 			productName = skeleton;
-			productReference = F9D38E18253793E3007D4888 /* MerchantPOC.app */;
+			productReference = F9D38E18253793E3007D4888 /* WalletPOC.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -376,7 +401,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F9D38E13253793E3007D4888 /* Build configuration list for PBXProject "MerchantPOC" */;
+			buildConfigurationList = F9D38E13253793E3007D4888 /* Build configuration list for PBXProject "WalletPOC" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -392,8 +417,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F9D38E17253793E3007D4888 /* MerchantPOC */,
-				F955ED1C256D1C20005299AC /* MerchantPOCTests */,
+				F9D38E17253793E3007D4888 /* WalletPOC */,
+				F955ED1C256D1C20005299AC /* WalletPOCTests */,
 			);
 		};
 /* End PBXProject section */
@@ -439,11 +464,13 @@
 				F9CB746D25CDA388006F0FE2 /* BaseViewController.swift in Sources */,
 				F9970913254AB38600E24EAA /* RootPage.swift in Sources */,
 				F955ED13256D109A005299AC /* FilledButtonStyle.swift in Sources */,
+				F42109E928BDEF7D0069F486 /* UIView+Autolayout.swift in Sources */,
 				F9B0AAD425D13EC8000C90B5 /* ForgotPasswordViewModel.swift in Sources */,
 				F9D889C427E3B3B600FF7F8E /* main.swift in Sources */,
 				F9D38E1C253793E3007D4888 /* AppDelegate.swift in Sources */,
 				F9875516256D2D630049EB19 /* ChipTextfieldStyle.swift in Sources */,
 				F9CB747125CDA71B006F0FE2 /* UIViewController+Error.swift in Sources */,
+				F42109E628BDE8C80069F486 /* SceneDelegate.swift in Sources */,
 				F9D6CC032571158D007E6779 /* Validation.swift in Sources */,
 				F9E98EE42582710000729B87 /* Assets.swift in Sources */,
 				F9DA38D425E7A99B0030D771 /* ErrorModel.swift in Sources */,
@@ -454,6 +481,7 @@
 				F997091A254AB3C000E24EAA /* SignUpPage.swift in Sources */,
 				F9970936254ABE3300E24EAA /* ProfileSetupView.swift in Sources */,
 				F9CB747525CDA816006F0FE2 /* AppEngine.swift in Sources */,
+				F42109E428BDE85D0069F486 /* InvoiceViewController.swift in Sources */,
 				F955ED0F256D0F38005299AC /* ForgotPasswordPage.swift in Sources */,
 				F9C2B92F25893B6B002DBADF /* Config.swift in Sources */,
 				F98344A925CC021F0096DA55 /* Bundle.swift in Sources */,
@@ -467,7 +495,7 @@
 /* Begin PBXTargetDependency section */
 		F955ED23256D1C20005299AC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F9D38E17253793E3007D4888 /* MerchantPOC */;
+			target = F9D38E17253793E3007D4888 /* WalletPOC */;
 			targetProxy = F955ED22256D1C20005299AC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -501,7 +529,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MerchantPOC.app/MerchantPOC";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WalletPOC.app/WalletPOC";
 			};
 			name = Debug;
 		};
@@ -522,7 +550,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MerchantPOC.app/MerchantPOC";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WalletPOC.app/WalletPOC";
 			};
 			name = Release;
 		};
@@ -543,7 +571,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MerchantPOC.app/MerchantPOC";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WalletPOC.app/WalletPOC";
 			};
 			name = Internal;
 		};
@@ -611,14 +639,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y6P2NYW2G8;
-				INFOPLIST_FILE = "$(SRCROOT)/MerchantPOC/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/WalletPOC/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.halcyonmobile.merchantpoc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.halcyonmobile.walletpoc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -751,14 +779,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y6P2NYW2G8;
-				INFOPLIST_FILE = "$(SRCROOT)/MerchantPOC/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/WalletPOC/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.halcyonmobile.merchantpoc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.halcyonmobile.walletpoc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -773,14 +801,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y6P2NYW2G8;
-				INFOPLIST_FILE = "$(SRCROOT)/MerchantPOC/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/WalletPOC/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.halcyonmobile.merchantpoc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.halcyonmobile.walletpoc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -790,7 +818,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F955ED24256D1C20005299AC /* Build configuration list for PBXNativeTarget "MerchantPOCTests" */ = {
+		F955ED24256D1C20005299AC /* Build configuration list for PBXNativeTarget "WalletPOCTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F955ED25256D1C20005299AC /* Debug */,
@@ -800,7 +828,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F9D38E13253793E3007D4888 /* Build configuration list for PBXProject "MerchantPOC" */ = {
+		F9D38E13253793E3007D4888 /* Build configuration list for PBXProject "WalletPOC" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F9D38E2A253793E3007D4888 /* Debug */,
@@ -810,7 +838,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F9D38E2C253793E3007D4888 /* Build configuration list for PBXNativeTarget "MerchantPOC" */ = {
+		F9D38E2C253793E3007D4888 /* Build configuration list for PBXNativeTarget "WalletPOC" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F9D38E2D253793E3007D4888 /* Debug */,

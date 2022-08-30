@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F9D38E17253793E3007D4888"
-               BuildableName = "MerchantPOC.app"
-               BlueprintName = "MerchantPOC"
-               ReferencedContainer = "container:MerchantPOC.xcodeproj">
+               BuildableName = "WalletPOC.app"
+               BlueprintName = "WalletPOC"
+               ReferencedContainer = "container:WalletPOC.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F955ED1C256D1C20005299AC"
-               BuildableName = "MerchantPOCTests.xctest"
-               BlueprintName = "MerchantPOCTests"
-               ReferencedContainer = "container:MerchantPOC.xcodeproj">
+               BuildableName = "WalletPOCTests.xctest"
+               BlueprintName = "WalletPOCTests"
+               ReferencedContainer = "container:WalletPOC.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F9D38E17253793E3007D4888"
-            BuildableName = "MerchantPOC.app"
-            BlueprintName = "MerchantPOC"
-            ReferencedContainer = "container:MerchantPOC.xcodeproj">
+            BuildableName = "WalletPOC.app"
+            BlueprintName = "WalletPOC"
+            ReferencedContainer = "container:WalletPOC.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F9D38E17253793E3007D4888"
-            BuildableName = "MerchantPOC.app"
-            BlueprintName = "MerchantPOC"
-            ReferencedContainer = "container:MerchantPOC.xcodeproj">
+            BuildableName = "WalletPOC.app"
+            BlueprintName = "WalletPOC"
+            ReferencedContainer = "container:WalletPOC.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
