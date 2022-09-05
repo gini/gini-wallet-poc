@@ -8,6 +8,12 @@
 import UIKit
 
 protocol PaymentViewModel {
+    var titleText: String { get }
+    var fromText: String { get }
+    var userAccountText: String { get }
+    var userAccountNumber: String { get }
+    
+    
     
 }
 

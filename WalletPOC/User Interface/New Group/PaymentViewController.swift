@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import PDFKit
 
-class PaymentViewController: UIViewController {
+class PaymentViewController: UIViewController, XMLParserDelegate {
     
     private let titleLabel = UILabel.autoLayout()
     private let fromLabel = UILabel.autoLayout()
@@ -41,25 +41,39 @@ class PaymentViewController: UIViewController {
     private let payLaterButton = UIButton.autoLayout()
     private let refuseButton = UIButton.autoLayout()
 
+    var xmlDict = [String: Any]()
+    var xmlDictArr = [[String: Any]]()
+    var currentElement = ""
+    
+    var facts = [Account]()
+
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
+        loadMerchantData()
     }
     
     private func setupViews() {
         view.backgroundColor = .white
         
         titleLabel.text = "Online Payment"
+        titleLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 18)
+        titleLabel.textAlignment = .left
         
         toLabel.text = "To"
+        toLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
         toLabel.textAlignment = .left
 
         fromLabel.text = "From"
+        fromLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
         fromLabel.textAlignment = .left
         
+        invoiceLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
         invoiceLabel.text = "Invoice"
+        
         
         grayView.backgroundColor = .lightGray
         //mocked
@@ -70,15 +84,23 @@ class PaymentViewController: UIViewController {
         fromAccountLabel.textColor = .gray
         
         fromAmountLabel.text = "€6.231,40"
-        fromAmountLabel.textColor = .gray
+        fromAmountLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 14)
+        fromAmountLabel.textColor = .black
         
         switchAccountButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
         switchAccountButton.tintColor = .black
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        grayView.addGestureRecognizer(tap)
+        
         
         grayViewSecond.backgroundColor = .lightGray
         merchantAccountLabel.text = "Zalando AG"
+        merchantAccountLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 14)
+
         toAccountLabel.text  = "DE 88762181787817687"
+        toAccountLabel.textColor = .gray
         toAmountLabel.text = "Ref: Invoice #378981798"
+        toAmountLabel.textColor = .gray
         
         
         merchantLogo.setImage(UIImage(named: "zalandoLogo"), for: .normal)
@@ -88,24 +110,46 @@ class PaymentViewController: UIViewController {
         
         pdfView.autoScales = true
 
-        contentView.backgroundColor = .green
+        contentView.backgroundColor = .white
         
-        scrollView.backgroundColor = .yellow
+        scrollView.backgroundColor = .white
         scrollView.contentInsetAdjustmentBehavior = .never
         scrollView.isScrollEnabled = true
 
         view.backgroundColor = .blue
         
-        bottomView.backgroundColor = .systemPink
+        bottomView.backgroundColor = .white
         amountLabel.text = "€255.00"
+        amountLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 32)
+
         
         payNowButton.setTitle("Pay Now", for: .normal)
-        payNowButton.backgroundColor = .green
+        payNowButton.setTitleColor(.gray, for: .normal)
+        //payNowButton.backgroundColor = .green
+        payNowButton.backgroundColor = .clear
+        payNowButton.layer.cornerRadius = 5
+        payNowButton.layer.borderWidth = 1
+        payNowButton.layer.borderColor = UIColor.black.cgColor
+        
         
         payLaterButton.setTitle("Pay Later", for: .normal)
+        //payLaterButton.backgroundColor = .clear
+        payLaterButton.layer.cornerRadius = 5
+        payLaterButton.layer.borderWidth = 1
+        payLaterButton.layer.borderColor = UIColor.black.cgColor
         payLaterButton.backgroundColor = .blue
         
         refuseButton.setTitle("Refuse", for: .normal)
+        refuseButton.setTitleColor(.gray, for: .normal)
+        
+        
+        
+        /*
+         paymentMethodLabel.font = UIFont(name: "PlusJakartaSans-Bold", size: 18)
+         paymentMethodLabel.textAlignment = .left
+         paymentMethodLabel.text = "Payment Method"
+         
+         */
         
         view.addSubview(bottomView)
         view.addSubview(scrollView)
@@ -136,7 +180,7 @@ class PaymentViewController: UIViewController {
             bottomView.heightAnchor.constraint(equalToConstant: 150),
             
             amountLabel.centerXAnchor.constraint(equalTo: bottomView.centerXAnchor),
-            amountLabel.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: 20),
+            amountLabel.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: 10),
             
             payNowButton.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 50) * 2/3),
             payNowButton.topAnchor.constraint(equalTo: amountLabel.bottomAnchor, constant: 15),
@@ -148,12 +192,9 @@ class PaymentViewController: UIViewController {
             payLaterButton.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -20),
             
             refuseButton.centerXAnchor.constraint(equalTo: bottomView.centerXAnchor),
-            refuseButton.topAnchor.constraint(equalTo: payLaterButton.bottomAnchor, constant: 15),
+            refuseButton.topAnchor.constraint(equalTo: payLaterButton.bottomAnchor, constant: 6),
             refuseButton.leadingAnchor.constraint(greaterThanOrEqualTo: bottomView.leadingAnchor, constant: 20),
 
-            
-            
-            
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -231,5 +272,69 @@ class PaymentViewController: UIViewController {
             pdfView.heightAnchor.constraint(equalToConstant: 400)
             ]
         NSLayoutConstraint.activate(constraints)
+    }
+    
+    func loadMerchantData() {
+        let xmlResponseData = Bundle.main.getFileData("DS-01.xml")
+        let parser = XMLParser(data: xmlResponseData)
+        parser.delegate = self
+        parser.parse()
+    }
+    
+    /* In this method we will be notified of the start of the process and the start of each element tag.*/
+    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
+        if elementName == "element" {
+            xmlDict = [:]
+        } else {
+            currentElement = elementName
+        }
+    }
+    
+    /* In this method, we are notified of the values of the element tag through the parameter of string*/
+    func parser(_ parser: XMLParser, foundCharacters string: String) {
+        if !string.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            if xmlDict[currentElement] == nil {
+                   xmlDict.updateValue(string, forKey: currentElement)
+            }
+        }
+    }
+    /* This method is called on encountering the closing tag of an element. Whether it is the current element or not, is for us to judge.*/
+    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+        if elementName == "element" {
+                xmlDictArr.append(xmlDict)
+        }
+    }
+    
+    /* This method is called when the complete document has ended and the parser has encountered a closing root tag.*/
+    func parserDidEndDocument(_ parser: XMLParser) {
+         parsingCompleted()
+    }
+    
+    /* In the parserDidEndDocument method we can call our user defined method where we map the dictionary we have created into the data model we require. So the parsingCompleted() method will be written like so:*/
+    func parsingCompleted() {
+        self.facts = self.xmlDictArr.map { Account(details: $0) }
+        
+        print(facts)
+        //self.updateUI()
+    }
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        // handling code
+        present(AccountSwitchViewController(), animated: true)
+        
+    }
+}
+
+extension Bundle {
+    func getFileData(_ file: String) -> Data {
+        guard let url = self.url(forResource: file, withExtension: nil) else {
+            fatalError("Failed to locate \(file) in bundle")
+        }
+        
+        guard let data = try? Data(contentsOf: url) else {
+            fatalError("Failed to load \(file) in bundle")
+        }
+        
+        return data
     }
 }

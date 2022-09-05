@@ -9,6 +9,19 @@
 /* Begin PBXBuildFile section */
 		F41C08B028BE51310050510E /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41C08AF28BE51310050510E /* PaymentViewModel.swift */; };
 		F41C08B228BE59A70050510E /* pdfMock2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F41C08B128BE59A70050510E /* pdfMock2.pdf */; };
+		F41C08B428C0D3400050510E /* DS-01.xml in Resources */ = {isa = PBXBuildFile; fileRef = F41C08B328C0D33F0050510E /* DS-01.xml */; };
+		F41C08B628C5CD910050510E /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41C08B528C5CD910050510E /* Account.swift */; };
+		F41C08C828C5D7120050510E /* PlusJakartaSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F41C08BD28C5CFA90050510E /* PlusJakartaSans-Bold.ttf */; };
+		F41C08C928C5D7150050510E /* PlusJakartaSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F41C08B828C5CFA80050510E /* PlusJakartaSans-BoldItalic.ttf */; };
+		F41C08CA28C5D71B0050510E /* PlusJakartaSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F41C08BE28C5CFA90050510E /* PlusJakartaSans-Light.ttf */; };
+		F41C08CB28C5D71E0050510E /* PlusJakartaSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F41C08C528C5CFAA0050510E /* PlusJakartaSans-ExtraBoldItalic.ttf */; };
+		F41C08CC28C5D7220050510E /* PlusJakartaSans-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F41C08BF28C5CFA90050510E /* PlusJakartaSans-ExtraLight.ttf */; };
+		F41C08CD28C5D7280050510E /* PlusJakartaSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F41C08BA28C5CFA90050510E /* PlusJakartaSans-Medium.ttf */; };
+		F41C08CE28C5D72B0050510E /* PlusJakartaSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F41C08BB28C5CFA90050510E /* PlusJakartaSans-SemiBold.ttf */; };
+		F41C08CF28C5D7300050510E /* PlusJakartaSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F41C08B928C5CFA90050510E /* PlusJakartaSans-ExtraBold.ttf */; };
+		F41C08D028C5D7D10050510E /* PlusJakartaSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F41C08C028C5CFA90050510E /* PlusJakartaSans-Regular.ttf */; };
+		F41C08D228C5DE7E0050510E /* AccountSwitchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41C08D128C5DE7E0050510E /* AccountSwitchViewController.swift */; };
+		F41C08D428C5E9750050510E /* AccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41C08D328C5E9750050510E /* AccountCell.swift */; };
 		F42109E428BDE85D0069F486 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42109E328BDE85D0069F486 /* PaymentViewController.swift */; };
 		F42109E628BDE8C80069F486 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42109E528BDE8C80069F486 /* SceneDelegate.swift */; };
 		F42109E928BDEF7D0069F486 /* UIView+Autolayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42109E828BDEF7D0069F486 /* UIView+Autolayout.swift */; };
@@ -61,6 +74,24 @@
 /* Begin PBXFileReference section */
 		F41C08AF28BE51310050510E /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		F41C08B128BE59A70050510E /* pdfMock2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = pdfMock2.pdf; sourceTree = "<group>"; };
+		F41C08B328C0D33F0050510E /* DS-01.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "DS-01.xml"; sourceTree = "<group>"; };
+		F41C08B528C5CD910050510E /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		F41C08B828C5CFA80050510E /* PlusJakartaSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		F41C08B928C5CFA90050510E /* PlusJakartaSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		F41C08BA28C5CFA90050510E /* PlusJakartaSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-Medium.ttf"; sourceTree = "<group>"; };
+		F41C08BB28C5CFA90050510E /* PlusJakartaSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		F41C08BC28C5CFA90050510E /* PlusJakartaSans-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		F41C08BD28C5CFA90050510E /* PlusJakartaSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-Bold.ttf"; sourceTree = "<group>"; };
+		F41C08BE28C5CFA90050510E /* PlusJakartaSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-Light.ttf"; sourceTree = "<group>"; };
+		F41C08BF28C5CFA90050510E /* PlusJakartaSans-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-ExtraLight.ttf"; sourceTree = "<group>"; };
+		F41C08C028C5CFA90050510E /* PlusJakartaSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-Regular.ttf"; sourceTree = "<group>"; };
+		F41C08C128C5CFA90050510E /* PlusJakartaSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		F41C08C228C5CFAA0050510E /* PlusJakartaSans-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-MediumItalic.ttf"; sourceTree = "<group>"; };
+		F41C08C328C5CFAA0050510E /* PlusJakartaSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-Italic.ttf"; sourceTree = "<group>"; };
+		F41C08C428C5CFAA0050510E /* PlusJakartaSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		F41C08C528C5CFAA0050510E /* PlusJakartaSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		F41C08D128C5DE7E0050510E /* AccountSwitchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSwitchViewController.swift; sourceTree = "<group>"; };
+		F41C08D328C5E9750050510E /* AccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCell.swift; sourceTree = "<group>"; };
 		F42109E328BDE85D0069F486 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		F42109E528BDE8C80069F486 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F42109E828BDEF7D0069F486 /* UIView+Autolayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Autolayout.swift"; sourceTree = "<group>"; };
@@ -126,11 +157,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F41C08B728C5CF800050510E /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				F41C08BD28C5CFA90050510E /* PlusJakartaSans-Bold.ttf */,
+				F41C08B828C5CFA80050510E /* PlusJakartaSans-BoldItalic.ttf */,
+				F41C08B928C5CFA90050510E /* PlusJakartaSans-ExtraBold.ttf */,
+				F41C08C528C5CFAA0050510E /* PlusJakartaSans-ExtraBoldItalic.ttf */,
+				F41C08BF28C5CFA90050510E /* PlusJakartaSans-ExtraLight.ttf */,
+				F41C08BC28C5CFA90050510E /* PlusJakartaSans-ExtraLightItalic.ttf */,
+				F41C08C328C5CFAA0050510E /* PlusJakartaSans-Italic.ttf */,
+				F41C08BE28C5CFA90050510E /* PlusJakartaSans-Light.ttf */,
+				F41C08C428C5CFAA0050510E /* PlusJakartaSans-LightItalic.ttf */,
+				F41C08BA28C5CFA90050510E /* PlusJakartaSans-Medium.ttf */,
+				F41C08C228C5CFAA0050510E /* PlusJakartaSans-MediumItalic.ttf */,
+				F41C08C028C5CFA90050510E /* PlusJakartaSans-Regular.ttf */,
+				F41C08BB28C5CFA90050510E /* PlusJakartaSans-SemiBold.ttf */,
+				F41C08C128C5CFA90050510E /* PlusJakartaSans-SemiBoldItalic.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		F42109E228BDE8510069F486 /* New Group */ = {
 			isa = PBXGroup;
 			children = (
 				F42109E328BDE85D0069F486 /* PaymentViewController.swift */,
 				F41C08AF28BE51310050510E /* PaymentViewModel.swift */,
+				F41C08B328C0D33F0050510E /* DS-01.xml */,
+				F41C08B528C5CD910050510E /* Account.swift */,
+				F41C08D128C5DE7E0050510E /* AccountSwitchViewController.swift */,
+				F41C08D328C5E9750050510E /* AccountCell.swift */,
 			);
 			path = "New Group";
 			sourceTree = "<group>";
@@ -186,6 +242,7 @@
 		F99709082549FB8D00E24EAA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F41C08B728C5CF800050510E /* Fonts */,
 				F41C08B128BE59A70050510E /* pdfMock2.pdf */,
 				F9E98EE32582710000729B87 /* Assets.swift */,
 				F9875511256D23850049EB19 /* Strings.swift */,
@@ -442,9 +499,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9D38E28253793E3007D4888 /* LaunchScreen.storyboard in Resources */,
+				F41C08CE28C5D72B0050510E /* PlusJakartaSans-SemiBold.ttf in Resources */,
 				F41C08B228BE59A70050510E /* pdfMock2.pdf in Resources */,
+				F41C08C828C5D7120050510E /* PlusJakartaSans-Bold.ttf in Resources */,
+				F41C08CF28C5D7300050510E /* PlusJakartaSans-ExtraBold.ttf in Resources */,
 				F9C2B948258954E1002DBADF /* Images.xcassets in Resources */,
+				F41C08CA28C5D71B0050510E /* PlusJakartaSans-Light.ttf in Resources */,
+				F41C08B428C0D3400050510E /* DS-01.xml in Resources */,
+				F41C08CC28C5D7220050510E /* PlusJakartaSans-ExtraLight.ttf in Resources */,
+				F41C08CD28C5D7280050510E /* PlusJakartaSans-Medium.ttf in Resources */,
+				F41C08C928C5D7150050510E /* PlusJakartaSans-BoldItalic.ttf in Resources */,
 				F997090A2549FBC700E24EAA /* Localizable.strings in Resources */,
+				F41C08CB28C5D71E0050510E /* PlusJakartaSans-ExtraBoldItalic.ttf in Resources */,
+				F41C08D028C5D7D10050510E /* PlusJakartaSans-Regular.ttf in Resources */,
 				F9D38E25253793E3007D4888 /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -474,6 +541,8 @@
 				F42109E928BDEF7D0069F486 /* UIView+Autolayout.swift in Sources */,
 				F9B0AAD425D13EC8000C90B5 /* ForgotPasswordViewModel.swift in Sources */,
 				F9D889C427E3B3B600FF7F8E /* main.swift in Sources */,
+				F41C08D228C5DE7E0050510E /* AccountSwitchViewController.swift in Sources */,
+				F41C08D428C5E9750050510E /* AccountCell.swift in Sources */,
 				F9D38E1C253793E3007D4888 /* AppDelegate.swift in Sources */,
 				F9875516256D2D630049EB19 /* ChipTextfieldStyle.swift in Sources */,
 				F9CB747125CDA71B006F0FE2 /* UIViewController+Error.swift in Sources */,
@@ -485,6 +554,7 @@
 				F9970917254AB3B800E24EAA /* LogInPage.swift in Sources */,
 				F9F4A4D7257105A800B6A1A0 /* LoginPageViewModel.swift in Sources */,
 				F9C2B93325893C35002DBADF /* SafariView.swift in Sources */,
+				F41C08B628C5CD910050510E /* Account.swift in Sources */,
 				F97FB31B256D36A400F37C0D /* ErrorAlertModifier.swift in Sources */,
 				F997091A254AB3C000E24EAA /* SignUpPage.swift in Sources */,
 				F9970936254ABE3300E24EAA /* ProfileSetupView.swift in Sources */,
