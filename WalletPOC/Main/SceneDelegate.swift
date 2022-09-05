@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
     
-        let nav1 = UINavigationController(rootViewController: PaymentViewController())
+        let nav1 = UINavigationController(rootViewController: PaymentViewController(viewModel: PaymentViewModelImpl()))
         window.rootViewController = nav1
         
         //window.rootViewController = HomeViewController()

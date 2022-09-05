@@ -17,7 +17,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     private let invoiceLabel = UILabel.autoLayout()
     
     private let grayView = UIView.autoLayout()
-    private let savingsAccountLabel = UILabel.autoLayout()
+    private let userAccountLabel = UILabel.autoLayout()
     private let fromAccountLabel = UILabel.autoLayout()
     private let fromAmountLabel = UILabel.autoLayout()
     private let switchAccountButton = UIButton.autoLayout()
@@ -28,7 +28,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     private let grayViewSecond = UIView.autoLayout()
     private let merchantAccountLabel = UILabel.autoLayout()
     private let toAccountLabel = UILabel.autoLayout()
-    private let toAmountLabel = UILabel.autoLayout()
+    private let merchantInvoice = UILabel.autoLayout()
     private let merchantLogo = UIButton.autoLayout()
     
     private let pdfView = PDFView.autoLayout()
@@ -40,6 +40,15 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     private let payNowButton = UIButton.autoLayout()
     private let payLaterButton = UIButton.autoLayout()
     private let refuseButton = UIButton.autoLayout()
+    
+    private let payFullButton = UIButton.autoLayout()
+    private let buyNowPayLaterButton = UIButton.autoLayout()
+    private let installmentsLabel = UILabel.autoLayout()
+    private let threeMonthButton = UIButton.autoLayout()
+    private let sixMontButton = UIButton.autoLayout()
+    
+    
+    
 
     var xmlDict = [String: Any]()
     var xmlDictArr = [[String: Any]]()
@@ -47,6 +56,16 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     
     var facts = [Account]()
 
+    private let viewModel: PaymentViewModel
+        
+    init(viewModel: PaymentViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
 
     override func viewDidLoad() {
@@ -59,31 +78,31 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     private func setupViews() {
         view.backgroundColor = .white
         
-        titleLabel.text = "Online Payment"
+        titleLabel.text = viewModel.titleText
         titleLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 18)
         titleLabel.textAlignment = .left
         
-        toLabel.text = "To"
+        toLabel.text = viewModel.toText
         toLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
         toLabel.textAlignment = .left
 
-        fromLabel.text = "From"
+        fromLabel.text = viewModel.fromText
         fromLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
         fromLabel.textAlignment = .left
         
         invoiceLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
-        invoiceLabel.text = "Invoice"
+        invoiceLabel.text = viewModel.invoiceText
         
         
         grayView.backgroundColor = .lightGray
         //mocked
-        savingsAccountLabel.text = "Savings Account"
-        savingsAccountLabel.textColor = .gray
+        userAccountLabel.text = viewModel.userAccountText
+        userAccountLabel.textColor = .gray
         
-        fromAccountLabel.text = "DE23 3701 0044 1344 8291 01"
+        fromAccountLabel.text = viewModel.userAccountNumber
         fromAccountLabel.textColor = .gray
         
-        fromAmountLabel.text = "€6.231,40"
+        fromAmountLabel.text = viewModel.userAccountNumber
         fromAmountLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 14)
         fromAmountLabel.textColor = .black
         
@@ -94,17 +113,15 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         
         
         grayViewSecond.backgroundColor = .lightGray
-        merchantAccountLabel.text = "Zalando AG"
+        merchantAccountLabel.text = viewModel.merchantNameText
         merchantAccountLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 14)
 
-        toAccountLabel.text  = "DE 88762181787817687"
+        toAccountLabel.text  = viewModel.merchantIban
         toAccountLabel.textColor = .gray
-        toAmountLabel.text = "Ref: Invoice #378981798"
-        toAmountLabel.textColor = .gray
-        
+        merchantInvoice.text = viewModel.merchantInvoice
+        merchantInvoice.textColor = .gray
         
         merchantLogo.setImage(UIImage(named: "zalandoLogo"), for: .normal)
-        
         
         tinyView.backgroundColor = .lightGray
         
@@ -116,24 +133,19 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         scrollView.contentInsetAdjustmentBehavior = .never
         scrollView.isScrollEnabled = true
 
-        view.backgroundColor = .blue
         
         bottomView.backgroundColor = .white
         amountLabel.text = "€255.00"
         amountLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 32)
 
-        
         payNowButton.setTitle("Pay Now", for: .normal)
         payNowButton.setTitleColor(.gray, for: .normal)
-        //payNowButton.backgroundColor = .green
         payNowButton.backgroundColor = .clear
         payNowButton.layer.cornerRadius = 5
         payNowButton.layer.borderWidth = 1
         payNowButton.layer.borderColor = UIColor.black.cgColor
         
-        
         payLaterButton.setTitle("Pay Later", for: .normal)
-        //payLaterButton.backgroundColor = .clear
         payLaterButton.layer.cornerRadius = 5
         payLaterButton.layer.borderWidth = 1
         payLaterButton.layer.borderColor = UIColor.black.cgColor
@@ -142,24 +154,15 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         refuseButton.setTitle("Refuse", for: .normal)
         refuseButton.setTitleColor(.gray, for: .normal)
         
-        
-        
-        /*
-         paymentMethodLabel.font = UIFont(name: "PlusJakartaSans-Bold", size: 18)
-         paymentMethodLabel.textAlignment = .left
-         paymentMethodLabel.text = "Payment Method"
-         
-         */
-        
         view.addSubview(bottomView)
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
 
         [titleLabel, fromLabel, toLabel, grayView, grayViewSecond, tinyView, invoiceLabel, pdfView].forEach { contentView.addSubview($0) }
         
-        [savingsAccountLabel, fromAccountLabel, fromAmountLabel, switchAccountButton].forEach{ grayView.addSubview($0) }
+        [userAccountLabel, fromAccountLabel, fromAmountLabel, switchAccountButton].forEach{ grayView.addSubview($0) }
         
-        [merchantAccountLabel, toAccountLabel, toAmountLabel, merchantLogo].forEach{ grayViewSecond.addSubview($0) }
+        [merchantAccountLabel, toAccountLabel, merchantInvoice, merchantLogo].forEach{ grayViewSecond.addSubview($0) }
         
         [amountLabel, payNowButton, payLaterButton, refuseButton].forEach{ bottomView.addSubview($0) }
         
@@ -174,26 +177,30 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     private func setupConstraints() {
         
         let constraints = [
-            bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            bottomView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             bottomView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             bottomView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bottomView.heightAnchor.constraint(equalToConstant: 150),
             
-            amountLabel.centerXAnchor.constraint(equalTo: bottomView.centerXAnchor),
             amountLabel.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: 10),
+            amountLabel.centerXAnchor.constraint(equalTo: bottomView.centerXAnchor),
+            amountLabel.bottomAnchor.constraint(equalTo: payNowButton.topAnchor, constant: -10),
             
             payNowButton.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 50) * 2/3),
             payNowButton.topAnchor.constraint(equalTo: amountLabel.bottomAnchor, constant: 15),
             payNowButton.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor, constant: 20),
+            payNowButton.heightAnchor.constraint(equalToConstant: 50),
+
             
             payLaterButton.centerYAnchor.constraint(equalTo: payNowButton.centerYAnchor),
             payNowButton.leadingAnchor.constraint(greaterThanOrEqualTo: payLaterButton.trailingAnchor, constant: 10),
             payLaterButton.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 50) * 1/3),
             payLaterButton.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -20),
+            payLaterButton.heightAnchor.constraint(equalToConstant: 50),
             
             refuseButton.centerXAnchor.constraint(equalTo: bottomView.centerXAnchor),
             refuseButton.topAnchor.constraint(equalTo: payLaterButton.bottomAnchor, constant: 6),
             refuseButton.leadingAnchor.constraint(greaterThanOrEqualTo: bottomView.leadingAnchor, constant: 20),
+            refuseButton.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor, constant: 10),
 
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -217,15 +224,15 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
             grayView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             grayView.heightAnchor.constraint(equalToConstant: 100),
             
-            savingsAccountLabel.topAnchor.constraint(equalTo: grayView.topAnchor, constant: 15),
-            savingsAccountLabel.leadingAnchor.constraint(equalTo: grayView.leadingAnchor, constant: 15),
-            savingsAccountLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -20),
+            userAccountLabel.topAnchor.constraint(equalTo: grayView.topAnchor, constant: 15),
+            userAccountLabel.leadingAnchor.constraint(equalTo: grayView.leadingAnchor, constant: 15),
+            userAccountLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -20),
             
-            fromAccountLabel.topAnchor.constraint(equalTo: savingsAccountLabel.bottomAnchor, constant: 5),
-            fromAccountLabel.leadingAnchor.constraint(equalTo: savingsAccountLabel.leadingAnchor),
+            fromAccountLabel.topAnchor.constraint(equalTo: userAccountLabel.bottomAnchor, constant: 5),
+            fromAccountLabel.leadingAnchor.constraint(equalTo: userAccountLabel.leadingAnchor),
             
             fromAmountLabel.topAnchor.constraint(equalTo: fromAccountLabel.bottomAnchor, constant: 5),
-            fromAmountLabel.leadingAnchor.constraint(equalTo: savingsAccountLabel.leadingAnchor),
+            fromAmountLabel.leadingAnchor.constraint(equalTo: userAccountLabel.leadingAnchor),
             
             switchAccountButton.centerYAnchor.constraint(equalTo: grayView.centerYAnchor),
             switchAccountButton.trailingAnchor.constraint(equalTo: grayView.trailingAnchor, constant: -15),
@@ -253,8 +260,8 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
             toAccountLabel.topAnchor.constraint(equalTo: merchantAccountLabel.bottomAnchor, constant: 5),
             toAccountLabel.leadingAnchor.constraint(equalTo: merchantAccountLabel.leadingAnchor),
             
-            toAmountLabel.topAnchor.constraint(equalTo: toAccountLabel.bottomAnchor, constant: 5),
-            toAmountLabel.leadingAnchor.constraint(equalTo: merchantAccountLabel.leadingAnchor),
+            merchantInvoice.topAnchor.constraint(equalTo: toAccountLabel.bottomAnchor, constant: 5),
+            merchantInvoice.leadingAnchor.constraint(equalTo: merchantAccountLabel.leadingAnchor),
             
             merchantLogo.centerYAnchor.constraint(equalTo: grayViewSecond.centerYAnchor),
             merchantLogo.trailingAnchor.constraint(equalTo: grayViewSecond.trailingAnchor, constant: -15),
@@ -283,7 +290,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     
     /* In this method we will be notified of the start of the process and the start of each element tag.*/
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
-        if elementName == "element" {
+        if elementName == "IBAN" {
             xmlDict = [:]
         } else {
             currentElement = elementName
@@ -300,7 +307,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     }
     /* This method is called on encountering the closing tag of an element. Whether it is the current element or not, is for us to judge.*/
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
-        if elementName == "element" {
+        if elementName == "IBAN" {
                 xmlDictArr.append(xmlDict)
         }
     }
@@ -313,6 +320,8 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     /* In the parserDidEndDocument method we can call our user defined method where we map the dictionary we have created into the data model we require. So the parsingCompleted() method will be written like so:*/
     func parsingCompleted() {
         self.facts = self.xmlDictArr.map { Account(details: $0) }
+        
+        print(xmlDictArr)
         
         print(facts)
         //self.updateUI()
