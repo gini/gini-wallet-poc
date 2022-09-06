@@ -70,6 +70,7 @@ class AccountSwitchViewController: UIViewController {
         cancelButton.setTitleColor(.gray, for: .normal)
         cancelButton.setTitle("Cancel", for: .normal)
         cancelButton.titleLabel?.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
+        cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
 
         containerView.addSubview(tableView)
         containerView.addSubview(titleLabel)
@@ -121,6 +122,10 @@ class AccountSwitchViewController: UIViewController {
         ]
         NSLayoutConstraint.activate(constraints)
         
+    }
+    
+    @objc private func cancelButtonTapped() {
+        dismiss(animated: true, completion: nil)
     }
     
 }

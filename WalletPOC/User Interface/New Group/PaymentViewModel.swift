@@ -24,14 +24,13 @@ protocol PaymentViewModel {
     var payNowText: String { get }
     var payLaterText: String { get }
     var refuseText: String { get }
-
-
+    var installmentsText: String { get }
 
 }
 
 class PaymentViewModelImpl: PaymentViewModel {
-    var titleText = "Online payment"
     
+    var titleText = "Online payment"
     var fromText = "From"
     
     var userAccountText = "Savings Account"
@@ -57,6 +56,7 @@ class PaymentViewModelImpl: PaymentViewModel {
     var payLaterText = "Pay later"
     
     var refuseText = "Refuse"
+    var installmentsText = "Installments"
     
     
 }
