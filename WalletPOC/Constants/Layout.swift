@@ -30,4 +30,7 @@ extension CGFloat {
     static let padding10x: CGFloat = 10 * padding
     
     static let alertViewRadius: CGFloat = 16
+    static let actionButtonHeight: CGFloat = 56
+    static let borderThickness: CGFloat = 1
+    static let actionButtonRadius: CGFloat = 12
 }

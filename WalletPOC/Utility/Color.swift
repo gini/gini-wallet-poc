@@ -17,8 +17,9 @@ extension UIColor {
     static let primaryText = Asset.Colors.darkGray.color
     static let secondaryText = Asset.Colors.gray.color
     
-    static let error = Asset.Colors.darkRed.color
+    static let error = Asset.Colors.red.color
     static let inactiveError = Asset.Colors.transparentRed.color
+    static let errorText = Asset.Colors.darkRed.color
     
     static let yellowText = Asset.Colors.darkYellow.color
 }

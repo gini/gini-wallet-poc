@@ -33,8 +33,17 @@ final class AlertViewController: UIViewController {
         super.viewDidAppear(animated)
         
         UIView.animate(withDuration: 0.25) {
-            self.view.backgroundColor = .black.withAlphaComponent(0.4)
+            self.view.backgroundColor = .gray.withAlphaComponent(0.4)
             self.contentView.alpha = 1
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        UIView.animate(withDuration: 0.10) {
+            self.view.backgroundColor = .clear
+            self.contentView.alpha = 0
         }
     }
     
