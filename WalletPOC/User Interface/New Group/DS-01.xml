@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:pain.013.001.07">
+    <CdtrPmtActvtnReq>
+        <GrpHdr>
+            <!-- unique id -->
+            <MsgId>uniqueId123</MsgId>
+            <!-- Creation Date Time-->
+            <CreDtTm>2020-05-27T13:02:16.98</CreDtTm>
+            <NbOfTxs>1</NbOfTxs>
+            <InitgPty/>
+        </GrpHdr>
+        <PmtInf>
+            <!-- since multiple <PmtInf> blocks allows for multiple transactions, PmtInfId identifies each. For a single block, 1 should be fine  -->
+            <PmtInfId>1</PmtInfId>
+            <!-- hardcoded -->
+            <PmtMtd>TRF</PmtMtd>
+            <!-- AT-07 Requested Execution Date/Time of the payment to be initiated. Payment day: next day can be set -->
+            <ReqdExctnDt>
+                <DtTm>2022-08-07T02:07:25.67</DtTm>
+            </ReqdExctnDt>
+            <XpryDt>
+                <!-- AT-77 expiry date/time of the rtp. Can be 30 minutes later-->
+                <DtTm>2022-12-07T08:57:00.25</DtTm>
+            </XpryDt>
+            <Dbtr>
+                <!-- AT-01 Payer identifier -->
+                <Id>
+                    <PrvtId>
+                        <Othr>
+                            <!-- randomly generated string: max 35 chars -->
+                            <Id>eb2b65e0-16f2-11ed-8115-5d438a4d049</Id>
+                        </Othr>
+                    </PrvtId>
+                </Id>
+            </Dbtr>
+            <!-- AT-06 Financial institution servicing an account for the debtor -->
+            <DbtrAgt>
+                <FinInstnId>
+                    <Othr>
+                        <Id>gini</Id>
+                    </Othr>
+                </FinInstnId>
+            </DbtrAgt>
+            <CdtTrfTx>
+                <PmtId>
+                    <!-- Unique identification to unambiguously identify the instruction -->
+                    <InstrId>somestring</InstrId>
+                    <!-- Unique identification assigned to unambiguously identify the transaction -->
+                    <EndToEndId>someotherstring</EndToEndId>
+                </PmtId>
+                <PmtTpInf>
+                    <SvcLvl>
+                        <!-- AT-40 Identification code of the Scheme. Hardcoded -->
+                        <Cd>SEPA</Cd>
+                    </SvcLvl>
+                    <LclInstrm>
+                        <!-- AT-65 Type of payment instrument requested by the Payee. -->
+                        <!--TRF/INST/CRP/ITP. Hardcoded-->
+                        <Cd>TRF</Cd>
+                    </LclInstrm>
+                </PmtTpInf>
+                <Amt>
+                    <!-- AT-04 amount of the RTP -->
+                    <InstdAmt Ccy="EUR">552830.23</InstdAmt>
+                </Amt>
+                <!-- hardcoded -->
+                <ChrgBr>SLEV</ChrgBr>
+                <CdtrAgt>
+                    <FinInstnId>
+                        <Othr>
+                            <!-- hardcoded -->
+                            <Id>gini</Id>
+                        </Othr>
+                    </FinInstnId>
+                </CdtrAgt>
+                <Cdtr>
+                    <!-- AT-21 name of the payee -->
+                    <Nm>Zalando</Nm>
+                    <Id>
+                        <!-- AT-24  Payee's identification code.-->
+                        <OrgId>
+                            <Othr>
+                                <Id>zalando</Id>
+                                <SchmeNm>
+                                    <!-- hardcoded -->
+                                    <Prtry>OTID</Prtry>
+                                </SchmeNm>
+                            </Othr>
+                        </OrgId>
+                    </Id>
+                </Cdtr>
+                <CdtrAcct>
+                    <Id>
+                        <!-- Zalando's IBAN -->
+                        <IBAN>DE86210700200123010101</IBAN>
+                    </Id>
+                </CdtrAcct>
+                <RmtInf>
+                    <Strd>
+                        <AddtlRmtInf>Some cool Nike shoes</AddtlRmtInf>
+                    </Strd>
+                </RmtInf>
+                <NclsdFile>
+                    <Tp>
+                        <!--CINV=invoice, PUOR=purchase order -->
+                        <Cd>CINV</Cd>
+                    </Tp>
+                    <Id>123</Id>
+                    <IsseDt>
+                        <DtTm>2005-09-12T10:55:02+02:00</DtTm>
+                    </IsseDt>
+                    <!--Optional:-->
+                    <Nm>invoice_zalando</Nm>
+                    <Frmt>
+                        <!--hardcoded-->
+                        <Cd>DPDF</Cd>
+                    </Frmt>
+                    <Nclsr>binaryblabla</Nclsr>
+                </NclsdFile>
+            </CdtTrfTx>
+        </PmtInf>
+    </CdtrPmtActvtnReq>
+</Document>
