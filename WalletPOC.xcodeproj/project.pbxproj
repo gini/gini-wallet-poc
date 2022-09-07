@@ -23,6 +23,8 @@
 		F41C08D228C5DE7E0050510E /* AccountSwitchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41C08D128C5DE7E0050510E /* AccountSwitchViewController.swift */; };
 		F41C08D428C5E9750050510E /* AccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41C08D328C5E9750050510E /* AccountCell.swift */; };
 		F41C08D728C63CCB0050510E /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41C08D628C63CCB0050510E /* Layout.swift */; };
+		F41C08DA28C877930050510E /* CustomInstallmentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41C08D928C877930050510E /* CustomInstallmentButton.swift */; };
+		F41C08DC28C8A0760050510E /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41C08DB28C8A0760050510E /* AccountView.swift */; };
 		F42109E428BDE85D0069F486 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42109E328BDE85D0069F486 /* PaymentViewController.swift */; };
 		F42109E628BDE8C80069F486 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42109E528BDE8C80069F486 /* SceneDelegate.swift */; };
 		F42109E928BDEF7D0069F486 /* UIView+Autolayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42109E828BDEF7D0069F486 /* UIView+Autolayout.swift */; };
@@ -80,6 +82,8 @@
 		F41C08D128C5DE7E0050510E /* AccountSwitchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSwitchViewController.swift; sourceTree = "<group>"; };
 		F41C08D328C5E9750050510E /* AccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCell.swift; sourceTree = "<group>"; };
 		F41C08D628C63CCB0050510E /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
+		F41C08D928C877930050510E /* CustomInstallmentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInstallmentButton.swift; sourceTree = "<group>"; };
+		F41C08DB28C8A0760050510E /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		F42109E328BDE85D0069F486 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		F42109E528BDE8C80069F486 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F42109E828BDEF7D0069F486 /* UIView+Autolayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Autolayout.swift"; sourceTree = "<group>"; };
@@ -160,6 +164,15 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		F41C08D828C877700050510E /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				F41C08D928C877930050510E /* CustomInstallmentButton.swift */,
+				F41C08DB28C8A0760050510E /* AccountView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		F42109E228BDE8510069F486 /* New Group */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,6 +248,7 @@
 		F997090D2549FC3000E24EAA /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
+				F41C08D828C877700050510E /* Components */,
 				F42109E228BDE8510069F486 /* New Group */,
 			);
 			path = "User Interface";
@@ -436,8 +450,10 @@
 				F41C08D428C5E9750050510E /* AccountCell.swift in Sources */,
 				F9D38E1C253793E3007D4888 /* AppDelegate.swift in Sources */,
 				F9CB747125CDA71B006F0FE2 /* UIViewController+Error.swift in Sources */,
+				F41C08DC28C8A0760050510E /* AccountView.swift in Sources */,
 				F42109E628BDE8C80069F486 /* SceneDelegate.swift in Sources */,
 				F9D6CC032571158D007E6779 /* Validation.swift in Sources */,
+				F41C08DA28C877930050510E /* CustomInstallmentButton.swift in Sources */,
 				F9E98EE42582710000729B87 /* Assets.swift in Sources */,
 				F41C08D728C63CCB0050510E /* Layout.swift in Sources */,
 				F9DA38D425E7A99B0030D771 /* ErrorModel.swift in Sources */,

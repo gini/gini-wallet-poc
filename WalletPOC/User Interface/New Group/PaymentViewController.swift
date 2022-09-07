@@ -16,24 +16,15 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     private let toLabel = UILabel.autoLayout()
     private let invoiceLabel = UILabel.autoLayout()
     
-    private let grayView = UIView.autoLayout()
-    private let userAccountLabel = UILabel.autoLayout()
-    private let fromAccountLabel = UILabel.autoLayout()
-    private let fromAmountLabel = UILabel.autoLayout()
-    private let switchAccountButton = UIButton.autoLayout()
+    private let senderDetailsView = AccountView(type: .sender)
     
     private let tinyView = UIView.autoLayout()
     
-    
-    private let grayViewSecond = UIView.autoLayout()
-    private let merchantAccountLabel = UILabel.autoLayout()
-    private let toAccountLabel = UILabel.autoLayout()
-    private let merchantInvoice = UILabel.autoLayout()
-    private let merchantLogo = UIButton.autoLayout()
+    private let merchantDetailsView = AccountView(type: .merchant)
     
     private let pdfView = PDFView.autoLayout()
     private let scrollView = UIScrollView.autoLayout()
-    private let contentView = UIView.autoLayout()
+    private let contentView = UIStackView.autoLayout()
     
     private let bottomView = UIView.autoLayout()
     private let amountLabel = UILabel.autoLayout()
@@ -41,26 +32,25 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     private let payLaterButton = UIButton.autoLayout()
     private let refuseButton = UIButton.autoLayout()
     
-    private let payFullButton = UIButton.autoLayout()
-    private let buyNowPayLaterButton = UIButton.autoLayout()
+    private let payFullButton = CustomInstallmentButton(type: .payButton(type: .payNowFull))
+    private let buyNowPayLaterButton = CustomInstallmentButton(type: .payButton(type: .buyNowPayLater))
+    
     private let installmentsLabel = UILabel.autoLayout()
+        
+    private let threeMonthsButton = CustomInstallmentButton(type: .installmentButton(type: .threeMonths))
+    private let sixMonthsButton = CustomInstallmentButton(type: .installmentButton(type: .sixMonths))
+    private let nineMonthsButton = CustomInstallmentButton(type: .installmentButton(type: .nineMonths))
     
-    private let threeMonthButton = UIButton.autoLayout()
-    private let threeMonthLineOnelabel = UILabel.autoLayout()
-    private let threeMonthLineTwoLabel = UILabel.autoLayout()
-    
-    private let sixMonthsButton = UIButton.autoLayout()
-    private let sixMonthsLineOnelabel = UILabel.autoLayout()
-    private let sixMonthsLineTwoLabel = UILabel.autoLayout()
+    private let horizontalScrollView = UIScrollView.autoLayout()
+    private let horizontalContentView = UIView.autoLayout()
     
     private let acceptLabel = UILabel.autoLayout()
     private let termsConditionsButton = UIButton.autoLayout()
 
-    var xmlDict = [String: Any]()
-    var xmlDictArr = [[String: Any]]()
-    var currentElement = ""
-    
-    var facts = [Account]()
+//    var xmlDict = [String: Any]()
+//    var xmlDictArr = [[String: Any]]()
+//    var currentElement = ""
+    //var facts = [Account]()
 
     private let viewModel: PaymentViewModel
         
@@ -77,7 +67,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
-        loadMerchantData()
+//        loadMerchantData()
     }
     
     private func setupViews() {
@@ -98,33 +88,20 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         invoiceLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
         invoiceLabel.text = viewModel.invoiceText
         
-        grayView.backgroundColor = .lightGray
+        senderDetailsView.backgroundColor = .lightGray
         //mocked
-        userAccountLabel.text = viewModel.userAccountText
-        userAccountLabel.textColor = .gray
+        senderDetailsView.accountNameLabel.text = viewModel.userAccountText
+        senderDetailsView.ibanLabel.text = viewModel.userAccountNumber
+        senderDetailsView.amountInvoiceLabel.text = viewModel.userAccountAmount
+        senderDetailsView.switchAccountButton.tintColor = .black
         
-        fromAccountLabel.text = viewModel.userAccountNumber
-        fromAccountLabel.textColor = .gray
-        
-        fromAmountLabel.text = viewModel.userAccountAmount
-        fromAmountLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 14)
-        fromAmountLabel.textColor = .black
-        
-        switchAccountButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
-        switchAccountButton.tintColor = .black
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
-        grayView.addGestureRecognizer(tap)
+        senderDetailsView.addGestureRecognizer(tap)
         
-        grayViewSecond.backgroundColor = .lightGray
-        merchantAccountLabel.text = viewModel.merchantNameText
-        merchantAccountLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 14)
-
-        toAccountLabel.text  = viewModel.merchantIban
-        toAccountLabel.textColor = .gray
-        merchantInvoice.text = viewModel.merchantInvoice
-        merchantInvoice.textColor = .gray
-        
-        merchantLogo.setImage(UIImage(named: "zalandoLogo"), for: .normal)
+        merchantDetailsView.backgroundColor = .lightGray
+        merchantDetailsView.accountNameLabel.text = viewModel.merchantNameText
+        merchantDetailsView.ibanLabel.text  = viewModel.merchantIban
+        merchantDetailsView.amountInvoiceLabel.text = viewModel.merchantInvoice
         
         tinyView.backgroundColor = .lightGray
         
@@ -154,70 +131,23 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         payLaterButton.backgroundColor = .clear
         payLaterButton.setTitleColor(.gray, for: .normal)
         payLaterButton.titleLabel?.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
-        
+
         payFullButton.titleLabel?.lineBreakMode = .byWordWrapping
-        payFullButton.titleLabel?.textAlignment = .center
-        payFullButton.setTitle("Pay now \n in full", for: .normal)
-        payFullButton.layer.cornerRadius = 5
-        payFullButton.layer.borderWidth = 1
-        payFullButton.layer.borderColor = UIColor.lightGray.cgColor
-        payFullButton.backgroundColor = .clear
-        payFullButton.setTitleColor(.black, for: .normal)
-        payFullButton.titleLabel?.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
+        payFullButton.addTarget(self, action: #selector(payFullTapped), for: .touchUpInside)
         
-        buyNowPayLaterButton.titleLabel?.lineBreakMode = .byWordWrapping
-        buyNowPayLaterButton.titleLabel?.textAlignment = .center
-        buyNowPayLaterButton.setTitle("Buy now, \n Pay later", for: .normal)
-        buyNowPayLaterButton.layer.cornerRadius = 5
-        buyNowPayLaterButton.layer.borderWidth = 1
-        buyNowPayLaterButton.layer.borderColor = UIColor.lightGray.cgColor
-        buyNowPayLaterButton.backgroundColor = .clear
-        buyNowPayLaterButton.setTitleColor(.black, for: .normal)
-        buyNowPayLaterButton.titleLabel?.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
+        buyNowPayLaterButton.addTarget(self, action: #selector(buyNowPayLaterTapped), for: .touchUpInside)
         
         installmentsLabel.text = viewModel.installmentsText
         installmentsLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
         installmentsLabel.textAlignment = .left
+                
+        horizontalScrollView.backgroundColor = .white
+        horizontalScrollView.contentInsetAdjustmentBehavior = .never
+        horizontalScrollView.isScrollEnabled = true
+        horizontalScrollView.backgroundColor = .green
         
-        threeMonthLineOnelabel.text = "€85 / mo."
-        threeMonthLineOnelabel.textColor = .black
-        threeMonthLineOnelabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
-        threeMonthLineOnelabel.textAlignment = .center
-                        
-        threeMonthLineTwoLabel.text = "for 3 months"
-        threeMonthLineTwoLabel.textColor = .gray
-        threeMonthLineTwoLabel.font = UIFont(name: "PlusJakartaSans-Medium", size: 12)
-        threeMonthLineTwoLabel.textAlignment = .center
-
-        threeMonthButton.layer.cornerRadius = 5
-        threeMonthButton.layer.borderWidth = 1
-        threeMonthButton.layer.borderColor = UIColor.lightGray.cgColor
-        threeMonthButton.backgroundColor = .clear
-
-        threeMonthButton.addSubview(threeMonthLineOnelabel)
-        threeMonthButton.insertSubview(threeMonthLineTwoLabel, belowSubview: threeMonthLineOnelabel)
-        
-        sixMonthsLineOnelabel.text = "€42.5 / mo."
-        sixMonthsLineOnelabel.textColor = .black
-        sixMonthsLineOnelabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
-        sixMonthsLineOnelabel.textAlignment = .center
-        sixMonthsLineTwoLabel.text = "for 6 months"
-        sixMonthsLineTwoLabel.textColor = .gray
-        sixMonthsLineTwoLabel.font = UIFont(name: "PlusJakartaSans-Medium", size: 12)
-        sixMonthsLineTwoLabel.textAlignment = .center
-        
-        sixMonthsButton.layer.cornerRadius = 5
-        sixMonthsButton.layer.borderWidth = 1
-        sixMonthsButton.layer.borderColor = UIColor.lightGray.cgColor
-        sixMonthsButton.backgroundColor = .clear
-
-        sixMonthsButton.addSubview(sixMonthsLineOnelabel)
-        sixMonthsButton.insertSubview(sixMonthsLineTwoLabel, belowSubview: sixMonthsLineOnelabel)
-        
-      
         acceptLabel.text = "I accept the"
         acceptLabel.font = UIFont(name: "PlusJakartaSans-Medium", size: 16)
-        
         termsConditionsButton.setTitle("Terms and Conditions", for: .normal)
         termsConditionsButton.setTitleColor(.blue, for: .normal)
         termsConditionsButton.titleLabel?.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
@@ -229,11 +159,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
 
-        [titleLabel, fromLabel, toLabel, grayView, grayViewSecond, tinyView, invoiceLabel, pdfView, payFullButton, buyNowPayLaterButton, installmentsLabel, threeMonthButton, sixMonthsButton, acceptLabel, termsConditionsButton].forEach { contentView.addSubview($0) }
-        
-        [userAccountLabel, fromAccountLabel, fromAmountLabel, switchAccountButton].forEach{ grayView.addSubview($0) }
-        
-        [merchantAccountLabel, toAccountLabel, merchantInvoice, merchantLogo].forEach{ grayViewSecond.addSubview($0) }
+        [titleLabel, fromLabel, toLabel, senderDetailsView, merchantDetailsView, tinyView, invoiceLabel, pdfView, payFullButton, buyNowPayLaterButton].forEach { contentView.addSubview($0) }
         
         [amountLabel, payNowButton, payLaterButton, refuseButton].forEach{ bottomView.addSubview($0) }
         
@@ -246,6 +172,11 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     }
     
     private func setupConstraints() {
+        [payFullButton, buyNowPayLaterButton, senderDetailsView, merchantDetailsView].forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
+        
+        let constraint = tinyView.topAnchor.constraint(equalTo: payFullButton.bottomAnchor, constant: 20)
+                constraint.priority = UILayoutPriority(250)
+                constraint.isActive = true
         
         let constraints = [
             bottomView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
@@ -260,7 +191,6 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
             payNowButton.topAnchor.constraint(equalTo: amountLabel.bottomAnchor, constant: 15),
             payNowButton.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor, constant: 20),
             payNowButton.heightAnchor.constraint(equalToConstant: 50),
-
             
             payLaterButton.centerYAnchor.constraint(equalTo: payNowButton.centerYAnchor),
             payNowButton.leadingAnchor.constraint(greaterThanOrEqualTo: payLaterButton.trailingAnchor, constant: 10),
@@ -290,27 +220,12 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
             fromLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 25),
             fromLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             
-            grayView.topAnchor.constraint(equalTo: fromLabel.bottomAnchor, constant: 20),
-            grayView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            grayView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            grayView.heightAnchor.constraint(equalToConstant: 100),
+            senderDetailsView.topAnchor.constraint(equalTo: fromLabel.bottomAnchor, constant: 20),
+            senderDetailsView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            senderDetailsView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            senderDetailsView.heightAnchor.constraint(equalToConstant: 100),
             
-            userAccountLabel.topAnchor.constraint(equalTo: grayView.topAnchor, constant: 15),
-            userAccountLabel.leadingAnchor.constraint(equalTo: grayView.leadingAnchor, constant: 15),
-            userAccountLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -20),
-            
-            fromAccountLabel.topAnchor.constraint(equalTo: userAccountLabel.bottomAnchor, constant: 5),
-            fromAccountLabel.leadingAnchor.constraint(equalTo: userAccountLabel.leadingAnchor),
-            
-            fromAmountLabel.topAnchor.constraint(equalTo: fromAccountLabel.bottomAnchor, constant: 5),
-            fromAmountLabel.leadingAnchor.constraint(equalTo: userAccountLabel.leadingAnchor),
-            
-            switchAccountButton.centerYAnchor.constraint(equalTo: grayView.centerYAnchor),
-            switchAccountButton.trailingAnchor.constraint(equalTo: grayView.trailingAnchor, constant: -15),
-            switchAccountButton.widthAnchor.constraint(equalToConstant: 40),
-            switchAccountButton.heightAnchor.constraint(equalToConstant: 40),
-            
-            payFullButton.topAnchor.constraint(equalTo: grayView.bottomAnchor, constant: 10),
+            payFullButton.topAnchor.constraint(equalTo: senderDetailsView.bottomAnchor, constant: 10),
             payFullButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             payFullButton.heightAnchor.constraint(equalToConstant: 70),
             payFullButton.widthAnchor.constraint(equalToConstant: view.frame.size.width / 2 - 25),
@@ -320,38 +235,6 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
             buyNowPayLaterButton.widthAnchor.constraint(equalToConstant: view.frame.size.width / 2 - 25),
             buyNowPayLaterButton.heightAnchor.constraint(equalTo: payFullButton.heightAnchor),
             
-            installmentsLabel.topAnchor.constraint(equalTo: payFullButton.bottomAnchor, constant: 15),
-            installmentsLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            
-            threeMonthButton.topAnchor.constraint(equalTo: installmentsLabel.bottomAnchor, constant: 20),
-            threeMonthButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            threeMonthButton.heightAnchor.constraint(equalToConstant: 70),
-            threeMonthButton.widthAnchor.constraint(equalToConstant: view.frame.size.width / 2 - 25),
-            
-            threeMonthLineOnelabel.topAnchor.constraint(equalTo: threeMonthButton.topAnchor, constant: 15),
-            threeMonthLineOnelabel.centerXAnchor.constraint(equalTo: threeMonthButton.centerXAnchor),
-            
-            threeMonthLineTwoLabel.centerXAnchor.constraint(equalTo: threeMonthLineOnelabel.centerXAnchor),
-            threeMonthLineTwoLabel.bottomAnchor.constraint(equalTo: threeMonthButton.bottomAnchor, constant: -15),
-            
-            sixMonthsButton.centerYAnchor.constraint(equalTo: threeMonthButton.centerYAnchor),
-            sixMonthsButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            sixMonthsButton.widthAnchor.constraint(equalToConstant: view.frame.size.width / 2 - 25),
-            sixMonthsButton.heightAnchor.constraint(equalTo: threeMonthButton.heightAnchor),
-            
-            sixMonthsLineOnelabel.topAnchor.constraint(equalTo: sixMonthsButton.topAnchor, constant: 15),
-            sixMonthsLineOnelabel.centerXAnchor.constraint(equalTo: sixMonthsButton.centerXAnchor),
-            
-            sixMonthsLineTwoLabel.centerXAnchor.constraint(equalTo: sixMonthsLineOnelabel.centerXAnchor),
-            sixMonthsLineTwoLabel.bottomAnchor.constraint(equalTo: sixMonthsButton.bottomAnchor, constant: -15),
-            
-            acceptLabel.topAnchor.constraint(equalTo: threeMonthButton.bottomAnchor, constant: 20),
-            acceptLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 50),
-            
-            termsConditionsButton.centerYAnchor.constraint(equalTo: acceptLabel.centerYAnchor),
-            termsConditionsButton.leadingAnchor.constraint(equalTo: acceptLabel.trailingAnchor, constant: 5),
-            
-            tinyView.topAnchor.constraint(equalTo: acceptLabel.bottomAnchor, constant: 20),
             tinyView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             tinyView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             tinyView.heightAnchor.constraint(equalToConstant: 1),
@@ -359,27 +242,12 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
             toLabel.topAnchor.constraint(equalTo: tinyView.bottomAnchor, constant: 20),
             toLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             
-            grayViewSecond.topAnchor.constraint(equalTo: toLabel.bottomAnchor, constant: 20),
-            grayViewSecond.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            grayViewSecond.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            grayViewSecond.heightAnchor.constraint(equalToConstant: 100),
-            
-            merchantAccountLabel.topAnchor.constraint(equalTo: grayViewSecond.topAnchor, constant: 15),
-            merchantAccountLabel.leadingAnchor.constraint(equalTo: grayViewSecond.leadingAnchor, constant: 15),
-            merchantAccountLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -20),
-            
-            toAccountLabel.topAnchor.constraint(equalTo: merchantAccountLabel.bottomAnchor, constant: 5),
-            toAccountLabel.leadingAnchor.constraint(equalTo: merchantAccountLabel.leadingAnchor),
-            
-            merchantInvoice.topAnchor.constraint(equalTo: toAccountLabel.bottomAnchor, constant: 5),
-            merchantInvoice.leadingAnchor.constraint(equalTo: merchantAccountLabel.leadingAnchor),
-            
-            merchantLogo.centerYAnchor.constraint(equalTo: grayViewSecond.centerYAnchor),
-            merchantLogo.trailingAnchor.constraint(equalTo: grayViewSecond.trailingAnchor, constant: -15),
-            merchantLogo.widthAnchor.constraint(equalToConstant: 40),
-            merchantLogo.heightAnchor.constraint(equalToConstant: 40),
+            merchantDetailsView.topAnchor.constraint(equalTo: toLabel.bottomAnchor, constant: 20),
+            merchantDetailsView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            merchantDetailsView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            merchantDetailsView.heightAnchor.constraint(equalToConstant: 100),
 
-            invoiceLabel.topAnchor.constraint(equalTo: grayViewSecond.bottomAnchor, constant: 20),
+            invoiceLabel.topAnchor.constraint(equalTo: merchantDetailsView.bottomAnchor, constant: 20),
             invoiceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             
             pdfView.topAnchor.constraint(equalTo: invoiceLabel.bottomAnchor, constant: 20),
@@ -392,69 +260,142 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         NSLayoutConstraint.activate(constraints)
     }
     
-    func loadMerchantData() {
-        let xmlResponseData = Bundle.main.getFileData("DS-01.xml")
-        let parser = XMLParser(data: xmlResponseData)
-        parser.delegate = self
-        parser.parse()
-    }
+//    //MARK: - XML Parsing
+//
+//    func loadMerchantData() {
+//        let xmlResponseData = Bundle.main.getFileData("DS-01.xml")
+//        let parser = XMLParser(data: xmlResponseData)
+//        parser.delegate = self
+//        parser.parse()
+//    }
+//
+//    /* In this method we will be notified of the start of the process and the start of each element tag.*/
+//    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
+//        if elementName == "IBAN" {
+//            xmlDict = [:]
+//        } else {
+//            currentElement = elementName
+//        }
+//    }
+//
+//    /* In this method, we are notified of the values of the element tag through the parameter of string*/
+//    func parser(_ parser: XMLParser, foundCharacters string: String) {
+//        if !string.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+//            if xmlDict[currentElement] == nil {
+//                   xmlDict.updateValue(string, forKey: currentElement)
+//            }
+//        }
+//    }
+//
+//    /* This method is called on encountering the closing tag of an element. Whether it is the current element or not, is for us to judge.*/
+//    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+//        if elementName == "IBAN" {
+//                xmlDictArr.append(xmlDict)
+//        }
+//    }
+//
+//    /* This method is called when the complete document has ended and the parser has encountered a closing root tag.*/
+//    func parserDidEndDocument(_ parser: XMLParser) {
+//         parsingCompleted()
+//    }
+//
+//    /* In the parserDidEndDocument method we can call our user defined method where we map the dictionary we have created into the data model we require. So the parsingCompleted() method will be written like so:*/
+//    func parsingCompleted() {
+//        self.facts = self.xmlDictArr.map { Account(details: $0) }
+//        print(xmlDictArr)
+//        print(facts)
+//        //self.updateUI()
+//    }
     
-    /* In this method we will be notified of the start of the process and the start of each element tag.*/
-    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
-        if elementName == "IBAN" {
-            xmlDict = [:]
-        } else {
-            currentElement = elementName
-        }
-    }
     
-    /* In this method, we are notified of the values of the element tag through the parameter of string*/
-    func parser(_ parser: XMLParser, foundCharacters string: String) {
-        if !string.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            if xmlDict[currentElement] == nil {
-                   xmlDict.updateValue(string, forKey: currentElement)
-            }
-        }
-    }
-    /* This method is called on encountering the closing tag of an element. Whether it is the current element or not, is for us to judge.*/
-    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
-        if elementName == "IBAN" {
-                xmlDictArr.append(xmlDict)
-        }
-    }
-    
-    /* This method is called when the complete document has ended and the parser has encountered a closing root tag.*/
-    func parserDidEndDocument(_ parser: XMLParser) {
-         parsingCompleted()
-    }
-    
-    /* In the parserDidEndDocument method we can call our user defined method where we map the dictionary we have created into the data model we require. So the parsingCompleted() method will be written like so:*/
-    func parsingCompleted() {
-        self.facts = self.xmlDictArr.map { Account(details: $0) }
-        
-        print(xmlDictArr)
-        
-        print(facts)
-        //self.updateUI()
-    }
-    
-    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+    // MARK: - Tap handles
+    @objc private func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         // handling code
         present(AccountSwitchViewController(), animated: true)
         
     }
-}
+    
+    @objc private func buyNowPayLaterTapped() {
+        if buyNowPayLaterButton.backgroundColor == .clear  {
+            buyNowPayLaterButton.backgroundColor = .cyan
+            payFullButton.backgroundColor = .clear
+        }
+      buyNowPayLaterToggle()
+    }
+    
+    private func buyNowPayLaterToggle() {
+        
+        horizontalScrollView.addSubview(horizontalContentView)
+        [threeMonthsButton, sixMonthsButton, nineMonthsButton].forEach { horizontalContentView.addSubview($0) }
+        
+        [installmentsLabel, horizontalScrollView, termsConditionsButton, acceptLabel].forEach { contentView.addSubview($0) }
+        
+        
+        [threeMonthsButton, sixMonthsButton, nineMonthsButton].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        
+        let constraints = [
+        installmentsLabel.topAnchor.constraint(equalTo: payFullButton.bottomAnchor, constant: 15),
+        installmentsLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+        
+        horizontalScrollView.topAnchor.constraint(equalTo: installmentsLabel.bottomAnchor, constant: 20),
+        horizontalScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+        horizontalScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        horizontalScrollView.heightAnchor.constraint(equalToConstant: 85),
+        
+        horizontalContentView.topAnchor.constraint(equalTo: horizontalScrollView.topAnchor),
+        horizontalContentView.leadingAnchor.constraint(equalTo: horizontalScrollView.leadingAnchor),
+        horizontalContentView.trailingAnchor.constraint(equalTo: horizontalScrollView.trailingAnchor),
+//        horizontalContentView.bottomAnchor.constraint(equalTo: horizontalScrollView.bottomAnchor),
+        horizontalContentView.heightAnchor.constraint(equalToConstant: 83),
+        
+        threeMonthsButton.topAnchor.constraint(equalTo: horizontalContentView.topAnchor, constant: 4),
+        threeMonthsButton.leadingAnchor.constraint(equalTo: horizontalContentView.leadingAnchor, constant: 20),
+        threeMonthsButton.heightAnchor.constraint(equalToConstant: 70),
+        threeMonthsButton.widthAnchor.constraint(equalToConstant: contentView.frame.size.width / 2 - 35),
 
-extension Bundle {
-    func getFileData(_ file: String) -> Data {
-        guard let url = self.url(forResource: file, withExtension: nil) else {
-            fatalError("Failed to locate \(file) in bundle")
-        }
+        sixMonthsButton.centerYAnchor.constraint(equalTo: threeMonthsButton.centerYAnchor),
+        sixMonthsButton.leadingAnchor.constraint(equalTo: threeMonthsButton.trailingAnchor, constant: 20),
+        sixMonthsButton.widthAnchor.constraint(equalTo: threeMonthsButton.widthAnchor),
+        sixMonthsButton.heightAnchor.constraint(equalTo: threeMonthsButton.heightAnchor),
+
+        nineMonthsButton.centerYAnchor.constraint(equalTo: threeMonthsButton.centerYAnchor),
+        nineMonthsButton.widthAnchor.constraint(equalTo: threeMonthsButton.widthAnchor),
+        nineMonthsButton.heightAnchor.constraint(equalTo: threeMonthsButton.heightAnchor),
+        nineMonthsButton.leadingAnchor.constraint(equalTo: sixMonthsButton.trailingAnchor, constant: 20),
         
-        guard let data = try? Data(contentsOf: url) else {
-            fatalError("Failed to load \(file) in bundle")
-        }
+        acceptLabel.topAnchor.constraint(equalTo: horizontalScrollView.bottomAnchor, constant: 20),
+        acceptLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 50),
         
-        return data
+        termsConditionsButton.centerYAnchor.constraint(equalTo: acceptLabel.centerYAnchor),
+        termsConditionsButton.leadingAnchor.constraint(equalTo: acceptLabel.trailingAnchor, constant: 5),
+        
+        tinyView.topAnchor.constraint(equalTo: acceptLabel.bottomAnchor, constant: 20)
+        ]
+        
+        NSLayoutConstraint.activate(constraints)
+    
+    }
+    
+    @objc private func payFullTapped() {
+        if payFullButton.backgroundColor == .clear {
+            payFullButton.backgroundColor = .cyan
+            buyNowPayLaterButton.backgroundColor = .clear
+            //buyNowPayLaterToggle()
+        }
+        [installmentsLabel, horizontalScrollView, termsConditionsButton, acceptLabel].forEach { $0.removeFromSuperview() }
     }
 }
+
+//extension Bundle {
+//    func getFileData(_ file: String) -> Data {
+//        guard let url = self.url(forResource: file, withExtension: nil) else {
+//            fatalError("Failed to locate \(file) in bundle")
+//        }
+//
+//        guard let data = try? Data(contentsOf: url) else {
+//            fatalError("Failed to load \(file) in bundle")
+//        }
+//
+//        return data
+//    }
+//}

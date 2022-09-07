@@ -42,19 +42,12 @@ class PaymentViewModelImpl: PaymentViewModel {
     var toText = "To"
     
     var merchantNameText = "Zalando AG"
-    
     var merchantIban = "DE 88762181787817687"
-    
     var merchantInvoice = "Ref: Invoice #378981798"
-    
     var invoiceText = "Invoice"
-    
     var priceText = "€255.00"
-    
     var payNowText = "Pay now"
-    
     var payLaterText = "Pay later"
-    
     var refuseText = "Refuse"
     var installmentsText = "Installments"
     
