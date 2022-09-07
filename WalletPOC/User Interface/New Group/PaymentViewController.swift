@@ -81,7 +81,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     }
     
     private func setupViews() {
-        view.backgroundColor = .white
+        view.backgroundColor = .secondaryAccent
         
         titleLabel.text = viewModel.titleText
         titleLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 18)

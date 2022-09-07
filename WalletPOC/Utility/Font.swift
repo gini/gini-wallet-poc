@@ -7,7 +7,7 @@
 
 import Foundation
 
-import UIKit
+import UIKit.UIFont
 
 enum FontSize: CGFloat {
     /// 10
