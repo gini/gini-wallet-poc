@@ -447,8 +447,8 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     
     @objc private func didTaptest() {
         let vc = AlertViewController()
-        let subview = PaymentConfirmedAlertView(isScheduled: false, amountToPay: 324.5)
-        subview.delegate = self
+        let subview = SchedulePaymentsAlertView(isScheduled: false, amountToPay: 400.0)
+//        subview.delegate = self
         
         vc.modalPresentationStyle = .overFullScreen
         vc.populate(with: subview)
