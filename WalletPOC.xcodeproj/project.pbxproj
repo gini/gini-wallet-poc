@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2E1BB15228C8856F007F3587 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BB15028C8856F007F3587 /* Strings.swift */; };
 		2E1BB15328C8856F007F3587 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BB15128C8856F007F3587 /* Assets.swift */; };
+		2E1BB15528C88D37007F3587 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BB15428C88D37007F3587 /* Font.swift */; };
 		F41C08B028BE51310050510E /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41C08AF28BE51310050510E /* PaymentViewModel.swift */; };
 		F41C08B228BE59A70050510E /* pdfMock2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F41C08B128BE59A70050510E /* pdfMock2.pdf */; };
 		F41C08B428C0D3400050510E /* DS-01.xml in Resources */ = {isa = PBXBuildFile; fileRef = F41C08B328C0D33F0050510E /* DS-01.xml */; };
@@ -61,6 +62,7 @@
 /* Begin PBXFileReference section */
 		2E1BB15028C8856F007F3587 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		2E1BB15128C8856F007F3587 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		2E1BB15428C88D37007F3587 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		F41C08AF28BE51310050510E /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		F41C08B128BE59A70050510E /* pdfMock2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = pdfMock2.pdf; sourceTree = "<group>"; };
 		F41C08B328C0D33F0050510E /* DS-01.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "DS-01.xml"; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 				F9CB746C25CDA388006F0FE2 /* BaseViewController.swift */,
 				F9CB747025CDA71B006F0FE2 /* UIViewController+Error.swift */,
 				F9DA38D325E7A99B0030D771 /* ErrorModel.swift */,
+				2E1BB15428C88D37007F3587 /* Font.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -478,6 +481,7 @@
 				F9CB747125CDA71B006F0FE2 /* UIViewController+Error.swift in Sources */,
 				F42109E628BDE8C80069F486 /* SceneDelegate.swift in Sources */,
 				F9D6CC032571158D007E6779 /* Validation.swift in Sources */,
+				2E1BB15528C88D37007F3587 /* Font.swift in Sources */,
 				F41C08D728C63CCB0050510E /* Layout.swift in Sources */,
 				F9DA38D425E7A99B0030D771 /* ErrorModel.swift in Sources */,
 				F41C08B028BE51310050510E /* PaymentViewModel.swift in Sources */,
