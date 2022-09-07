@@ -31,6 +31,20 @@ enum AccountType {
         case .merchant: return UIImage(named: "zalandoLogo") ?? UIImage()
         }
     }
+    
+    var accountNameColor: UIColor {
+        switch self {
+        case .sender: return .black
+        case .merchant: return .gray
+        }
+    }
+    
+    var amountInvoiceColor: UIColor {
+        switch self {
+        case .sender: return .gray
+        case .merchant: return .black
+        }
+    }
 }
 
 class AccountView: UIView {
@@ -55,12 +69,14 @@ class AccountView: UIView {
     private func setupViews() {
         self.backgroundColor = .lightGray
         
+        accountNameLabel.textColor = type.accountNameColor
         accountNameLabel.font = type.accountNameFont
         
         
         ibanLabel.textColor = .gray
         ibanLabel.font = UIFont(name: "PlusJakartaSans-Medium", size: 16)
         
+        amountInvoiceLabel.textColor = type.amountInvoiceColor
         amountInvoiceLabel.font = type.amountInvoiceFont
         
         switchAccountButton.setImage(type.switchAccountImage, for: .normal)

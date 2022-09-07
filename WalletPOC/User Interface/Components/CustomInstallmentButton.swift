@@ -74,7 +74,7 @@ class CustomInstallmentButton: UIButton {
         
         self.layer.cornerRadius = 5
         self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.lightGray.cgColor
+        self.layer.borderColor = UIColor(named: "borderGray")?.cgColor
         self.backgroundColor = .clear
         
         self.addSubview(priceLabel)

@@ -47,11 +47,6 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     private let acceptLabel = UILabel.autoLayout()
     private let termsConditionsButton = UIButton.autoLayout()
 
-//    var xmlDict = [String: Any]()
-//    var xmlDictArr = [[String: Any]]()
-//    var currentElement = ""
-    //var facts = [Account]()
-
     private let viewModel: PaymentViewModel
         
     init(viewModel: PaymentViewModel) {
@@ -88,7 +83,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         invoiceLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
         invoiceLabel.text = viewModel.invoiceText
         
-        senderDetailsView.backgroundColor = .lightGray
+        senderDetailsView.backgroundColor = UIColor(named: "giniLightGray")
         //mocked
         senderDetailsView.accountNameLabel.text = viewModel.userAccountText
         senderDetailsView.ibanLabel.text = viewModel.userAccountNumber
@@ -98,7 +93,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         senderDetailsView.addGestureRecognizer(tap)
         
-        merchantDetailsView.backgroundColor = .lightGray
+        merchantDetailsView.backgroundColor = UIColor(named: "giniLightGray")
         merchantDetailsView.accountNameLabel.text = viewModel.merchantNameText
         merchantDetailsView.ibanLabel.text  = viewModel.merchantIban
         merchantDetailsView.amountInvoiceLabel.text = viewModel.merchantInvoice
@@ -114,11 +109,11 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         scrollView.isScrollEnabled = true
         
         bottomView.backgroundColor = .white
-        amountLabel.text = "€255.00"
+        amountLabel.text = viewModel.priceText
         amountLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 32)
 
         payNowButton.setTitle("Pay Now", for: .normal)
-        payNowButton.backgroundColor = .blue
+        payNowButton.backgroundColor = UIColor(named: "payNowLightBlueBorder")
         payNowButton.layer.cornerRadius = 5
         payNowButton.layer.borderWidth = 1
         payNowButton.layer.borderColor = UIColor.lightGray.cgColor
@@ -132,7 +127,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         payLaterButton.setTitleColor(.gray, for: .normal)
         payLaterButton.titleLabel?.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
 
-        payFullButton.titleLabel?.lineBreakMode = .byWordWrapping
+        //payFullButton.titleLabel?.lineBreakMode = .byWordWrapping
         payFullButton.addTarget(self, action: #selector(payFullTapped), for: .touchUpInside)
         
         buyNowPayLaterButton.addTarget(self, action: #selector(buyNowPayLaterTapped), for: .touchUpInside)
@@ -144,13 +139,14 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         horizontalScrollView.backgroundColor = .white
         horizontalScrollView.contentInsetAdjustmentBehavior = .never
         horizontalScrollView.isScrollEnabled = true
-        horizontalScrollView.backgroundColor = .green
+        //horizontalScrollView.backgroundColor = .green
         
-        acceptLabel.text = "I accept the"
+        acceptLabel.text = viewModel.acceptText
         acceptLabel.font = UIFont(name: "PlusJakartaSans-Medium", size: 16)
-        termsConditionsButton.setTitle("Terms and Conditions", for: .normal)
+        termsConditionsButton.setTitle(viewModel.termsConditionsText, for: .normal)
         termsConditionsButton.setTitleColor(.blue, for: .normal)
         termsConditionsButton.titleLabel?.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
+        termsConditionsButton.addTarget(self, action: #selector(didTapTermsConditions), for: .touchUpInside)
         
         refuseButton.setTitle("Refuse", for: .normal)
         refuseButton.setTitleColor(.gray, for: .normal)
@@ -193,7 +189,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
             payNowButton.heightAnchor.constraint(equalToConstant: 50),
             
             payLaterButton.centerYAnchor.constraint(equalTo: payNowButton.centerYAnchor),
-            payNowButton.leadingAnchor.constraint(greaterThanOrEqualTo: payLaterButton.trailingAnchor, constant: 10),
+            payLaterButton.leadingAnchor.constraint(greaterThanOrEqualTo: payLaterButton.trailingAnchor, constant: 10),
             payLaterButton.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 50) * 1/3),
             payLaterButton.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -20),
             payLaterButton.heightAnchor.constraint(equalToConstant: 50),
@@ -260,54 +256,6 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         NSLayoutConstraint.activate(constraints)
     }
     
-//    //MARK: - XML Parsing
-//
-//    func loadMerchantData() {
-//        let xmlResponseData = Bundle.main.getFileData("DS-01.xml")
-//        let parser = XMLParser(data: xmlResponseData)
-//        parser.delegate = self
-//        parser.parse()
-//    }
-//
-//    /* In this method we will be notified of the start of the process and the start of each element tag.*/
-//    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
-//        if elementName == "IBAN" {
-//            xmlDict = [:]
-//        } else {
-//            currentElement = elementName
-//        }
-//    }
-//
-//    /* In this method, we are notified of the values of the element tag through the parameter of string*/
-//    func parser(_ parser: XMLParser, foundCharacters string: String) {
-//        if !string.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-//            if xmlDict[currentElement] == nil {
-//                   xmlDict.updateValue(string, forKey: currentElement)
-//            }
-//        }
-//    }
-//
-//    /* This method is called on encountering the closing tag of an element. Whether it is the current element or not, is for us to judge.*/
-//    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
-//        if elementName == "IBAN" {
-//                xmlDictArr.append(xmlDict)
-//        }
-//    }
-//
-//    /* This method is called when the complete document has ended and the parser has encountered a closing root tag.*/
-//    func parserDidEndDocument(_ parser: XMLParser) {
-//         parsingCompleted()
-//    }
-//
-//    /* In the parserDidEndDocument method we can call our user defined method where we map the dictionary we have created into the data model we require. So the parsingCompleted() method will be written like so:*/
-//    func parsingCompleted() {
-//        self.facts = self.xmlDictArr.map { Account(details: $0) }
-//        print(xmlDictArr)
-//        print(facts)
-//        //self.updateUI()
-//    }
-    
-    
     // MARK: - Tap handles
     @objc private func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         // handling code
@@ -317,7 +265,12 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     
     @objc private func buyNowPayLaterTapped() {
         if buyNowPayLaterButton.backgroundColor == .clear  {
-            buyNowPayLaterButton.backgroundColor = .cyan
+            buyNowPayLaterButton.backgroundColor = UIColor(named: "payNowLightBlue")
+            buyNowPayLaterButton.layer.borderColor = UIColor(named: "payNowLightBlueBorder")?.cgColor
+            payFullButton.layer.borderColor = UIColor(named: "borderGray")?.cgColor
+            //self.layer.borderColor = UIColor.lightGray.cgColor
+
+
             payFullButton.backgroundColor = .clear
         }
       buyNowPayLaterToggle()
@@ -378,24 +331,17 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     
     @objc private func payFullTapped() {
         if payFullButton.backgroundColor == .clear {
-            payFullButton.backgroundColor = .cyan
+            payFullButton.backgroundColor = UIColor(named: "payNowLightBlue")
+            payFullButton.layer.borderColor = UIColor(named: "payNowLightBlueBorder")?.cgColor
             buyNowPayLaterButton.backgroundColor = .clear
+            buyNowPayLaterButton.layer.borderColor = UIColor(named: "borderGray")?.cgColor
             //buyNowPayLaterToggle()
         }
         [installmentsLabel, horizontalScrollView, termsConditionsButton, acceptLabel].forEach { $0.removeFromSuperview() }
     }
+    
+    @objc private func didTapTermsConditions() {
+        present(TermsServicesViewController(), animated: true, completion: nil)
+        
+    }
 }
-
-//extension Bundle {
-//    func getFileData(_ file: String) -> Data {
-//        guard let url = self.url(forResource: file, withExtension: nil) else {
-//            fatalError("Failed to locate \(file) in bundle")
-//        }
-//
-//        guard let data = try? Data(contentsOf: url) else {
-//            fatalError("Failed to load \(file) in bundle")
-//        }
-//
-//        return data
-//    }
-//}
