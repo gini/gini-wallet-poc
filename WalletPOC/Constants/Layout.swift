@@ -28,4 +28,6 @@ extension CGFloat {
     static let padding9x: CGFloat = 9 * padding
     /// 80
     static let padding10x: CGFloat = 10 * padding
+    
+    static let alertViewRadius: CGFloat = 16
 }

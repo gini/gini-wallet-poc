@@ -11,6 +11,11 @@
 		2E1BB15328C8856F007F3587 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BB15128C8856F007F3587 /* Assets.swift */; };
 		2E1BB15528C88D37007F3587 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BB15428C88D37007F3587 /* Font.swift */; };
 		2E1BB15728C89253007F3587 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BB15628C89253007F3587 /* Color.swift */; };
+		2E1BB15A28C8A47F007F3587 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BB15928C8A47F007F3587 /* AlertViewController.swift */; };
+		2E1BB15D28C8AA8C007F3587 /* ViewDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BB15C28C8AA8C007F3587 /* ViewDecorator.swift */; };
+		2E1BB15F28C8AAE2007F3587 /* ShadowDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BB15E28C8AAE2007F3587 /* ShadowDecorator.swift */; };
+		2E1BB16128C8AAF7007F3587 /* BorderDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BB16028C8AAF7007F3587 /* BorderDecorator.swift */; };
+		2E1BB16328C8AB0E007F3587 /* CornerRadiusDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BB16228C8AB0E007F3587 /* CornerRadiusDecorator.swift */; };
 		F41C08B028BE51310050510E /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41C08AF28BE51310050510E /* PaymentViewModel.swift */; };
 		F41C08B228BE59A70050510E /* pdfMock2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F41C08B128BE59A70050510E /* pdfMock2.pdf */; };
 		F41C08B428C0D3400050510E /* DS-01.xml in Resources */ = {isa = PBXBuildFile; fileRef = F41C08B328C0D33F0050510E /* DS-01.xml */; };
@@ -65,6 +70,11 @@
 		2E1BB15128C8856F007F3587 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		2E1BB15428C88D37007F3587 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		2E1BB15628C89253007F3587 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		2E1BB15928C8A47F007F3587 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		2E1BB15C28C8AA8C007F3587 /* ViewDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDecorator.swift; sourceTree = "<group>"; };
+		2E1BB15E28C8AAE2007F3587 /* ShadowDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowDecorator.swift; sourceTree = "<group>"; };
+		2E1BB16028C8AAF7007F3587 /* BorderDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderDecorator.swift; sourceTree = "<group>"; };
+		2E1BB16228C8AB0E007F3587 /* CornerRadiusDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRadiusDecorator.swift; sourceTree = "<group>"; };
 		F41C08AF28BE51310050510E /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		F41C08B128BE59A70050510E /* pdfMock2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = pdfMock2.pdf; sourceTree = "<group>"; };
 		F41C08B328C0D33F0050510E /* DS-01.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "DS-01.xml"; sourceTree = "<group>"; };
@@ -150,6 +160,33 @@
 				F99709092549FBC700E24EAA /* Localizable.strings */,
 			);
 			path = Strings;
+			sourceTree = "<group>";
+		};
+		2E1BB15828C8A46D007F3587 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2E1BB15928C8A47F007F3587 /* AlertViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		2E1BB15B28C8AA7F007F3587 /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				2E1BB16428C8AB4A007F3587 /* Decorator */,
+			);
+			path = Style;
+			sourceTree = "<group>";
+		};
+		2E1BB16428C8AB4A007F3587 /* Decorator */ = {
+			isa = PBXGroup;
+			children = (
+				2E1BB15C28C8AA8C007F3587 /* ViewDecorator.swift */,
+				2E1BB15E28C8AAE2007F3587 /* ShadowDecorator.swift */,
+				2E1BB16028C8AAF7007F3587 /* BorderDecorator.swift */,
+				2E1BB16228C8AB0E007F3587 /* CornerRadiusDecorator.swift */,
+			);
+			path = Decorator;
 			sourceTree = "<group>";
 		};
 		F41C08B728C5CF800050510E /* Fonts */ = {
@@ -254,6 +291,8 @@
 		F997090D2549FC3000E24EAA /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
+				2E1BB15B28C8AA7F007F3587 /* Style */,
+				2E1BB15828C8A46D007F3587 /* ViewControllers */,
 				F42109E228BDE8510069F486 /* New Group */,
 			);
 			path = "User Interface";
@@ -473,7 +512,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F97E1BFD25D3D8F7000884B4 /* AnalyticsEvent.swift in Sources */,
+				2E1BB15F28C8AAE2007F3587 /* ShadowDecorator.swift in Sources */,
+				2E1BB16328C8AB0E007F3587 /* CornerRadiusDecorator.swift in Sources */,
 				F9CB746D25CDA388006F0FE2 /* BaseViewController.swift in Sources */,
+				2E1BB15D28C8AA8C007F3587 /* ViewDecorator.swift in Sources */,
 				2E1BB15728C89253007F3587 /* Color.swift in Sources */,
 				2E1BB15228C8856F007F3587 /* Strings.swift in Sources */,
 				F42109E928BDEF7D0069F486 /* UIView+Autolayout.swift in Sources */,
@@ -485,12 +527,14 @@
 				F9CB747125CDA71B006F0FE2 /* UIViewController+Error.swift in Sources */,
 				F42109E628BDE8C80069F486 /* SceneDelegate.swift in Sources */,
 				F9D6CC032571158D007E6779 /* Validation.swift in Sources */,
+				2E1BB16128C8AAF7007F3587 /* BorderDecorator.swift in Sources */,
 				2E1BB15528C88D37007F3587 /* Font.swift in Sources */,
 				F41C08D728C63CCB0050510E /* Layout.swift in Sources */,
 				F9DA38D425E7A99B0030D771 /* ErrorModel.swift in Sources */,
 				F41C08B028BE51310050510E /* PaymentViewModel.swift in Sources */,
 				F41C08B628C5CD910050510E /* Account.swift in Sources */,
 				F9CB747525CDA816006F0FE2 /* AppEngine.swift in Sources */,
+				2E1BB15A28C8A47F007F3587 /* AlertViewController.swift in Sources */,
 				F42109E428BDE85D0069F486 /* PaymentViewController.swift in Sources */,
 				F9C2B92F25893B6B002DBADF /* Config.swift in Sources */,
 				F98344A925CC021F0096DA55 /* Bundle.swift in Sources */,
