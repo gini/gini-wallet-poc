@@ -22,4 +22,7 @@ extension UIColor {
     static let errorText = Asset.Colors.darkRed.color
     
     static let yellowText = Asset.Colors.darkYellow.color
+    
+    static let lightgrayBackground = Asset.Colors.extraLightgray.color
+    static let borderColor = Asset.Colors.borderColor.color
 }
