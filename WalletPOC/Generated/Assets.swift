@@ -26,20 +26,21 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 internal enum Asset {
   internal enum Colors {
     internal static let accentColor = ColorAsset(name: "AccentColor")
+    internal static let secondaryAccent = ColorAsset(name: "SecondaryAccent")
     internal static let darkGray = ColorAsset(name: "darkGray")
     internal static let darkRed = ColorAsset(name: "darkRed")
     internal static let darkYellow = ColorAsset(name: "darkYellow")
-    internal static let extraLightGray = ColorAsset(name: "extraLightGray")
+    internal static let extraLightgray = ColorAsset(name: "extraLightgray")
     internal static let gray = ColorAsset(name: "gray")
     internal static let lightGray = ColorAsset(name: "lightGray")
     internal static let red = ColorAsset(name: "red")
-    internal static let secondaryAccent = ColorAsset(name: "secondaryAccent")
     internal static let transparentAccent = ColorAsset(name: "transparentAccent")
     internal static let transparentRed = ColorAsset(name: "transparentRed")
   }
   internal enum Images {
     internal static let app = ImageAsset(name: "App")
     internal static let pdfMock = ImageAsset(name: "pdfMock")
+    internal static let success = ImageAsset(name: "success")
     internal static let zalandoLogo = ImageAsset(name: "zalandoLogo")
   }
 }
