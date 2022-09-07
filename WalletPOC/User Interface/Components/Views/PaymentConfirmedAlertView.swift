@@ -42,7 +42,7 @@ final class PaymentConfirmedAlertView: UIView {
         label.textColor = .secondaryText
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.text = "You will pay a total of €255.00 in 3 installments."
+        label.text = "You will pay a total of €\(amountToPay) in 3 installments."
         return label
     }()
     
@@ -109,10 +109,13 @@ final class PaymentConfirmedAlertView: UIView {
         }
     }
     
+    private var amountToPay: Double = 0
+    
     // MARK: - Lifecycle
     
-    init(isScheduled: Bool) {
+    init(isScheduled: Bool, amountToPay: Double) {
         self.isScheduled = isScheduled
+        self.amountToPay = amountToPay
         super.init(frame: .zero)
         
         setupUI()
@@ -190,7 +193,7 @@ final class PaymentConfirmedAlertView: UIView {
     
     @objc
     private func didTapConfirm() {
-        delegate?.didConfirm(with: false)
+        delegate?.didConfirm(with: isScheduled)
     }
     
     @objc
