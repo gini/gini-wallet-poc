@@ -17,7 +17,7 @@ final class SuccessAlertView: UIView {
     enum SuccessEnumType {
         case paymentAdded
         case paymentConfirmed
-        case firstPaymentConfirmed
+        case firstPaymentConfirmed(value: Double)
         case installmentPaid
         
         var title: String {
@@ -31,7 +31,7 @@ final class SuccessAlertView: UIView {
         
         var message: String {
             switch self {
-            case .firstPaymentConfirmed: return "You will pay a total of €255.00 in 3 installments."
+            case .firstPaymentConfirmed(let value): return "You will pay a total of €\(value) in 3 installments."
             default: return ""
             }
         }

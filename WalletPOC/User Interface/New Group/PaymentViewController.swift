@@ -81,7 +81,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     }
     
     private func setupViews() {
-        view.backgroundColor = .secondaryAccent
+        view.backgroundColor = .white
         
         titleLabel.text = viewModel.titleText
         titleLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 18)
@@ -164,6 +164,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         payFullButton.backgroundColor = .clear
         payFullButton.setTitleColor(.black, for: .normal)
         payFullButton.titleLabel?.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
+        payFullButton.addTarget(self, action: #selector(didTaptest), for: .touchUpInside)
         
         buyNowPayLaterButton.titleLabel?.lineBreakMode = .byWordWrapping
         buyNowPayLaterButton.titleLabel?.textAlignment = .center
@@ -442,6 +443,22 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         // handling code
         present(AccountSwitchViewController(), animated: true)
         
+    }
+    
+    @objc private func didTaptest() {
+        let vc = AlertViewController()
+        let subview = PaymentConfirmedAlertView(isScheduled: false, amountToPay: 324.5)
+        subview.delegate = self
+        
+        vc.modalPresentationStyle = .overFullScreen
+        vc.populate(with: subview)
+        self.present(vc, animated: true)
+    }
+}
+
+extension PaymentViewController: PaymentConfirmedAlertViewDelegate {
+    func didConfirm(with schedule: Bool) {
+        dismiss(animated: true)
     }
 }
 
