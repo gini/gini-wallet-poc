@@ -15,6 +15,19 @@ final class SchedulePaymentsAlertViewModel {
         return "Schedule \(numberOfSchedules) payments"
     }
     var cellModels: [SchedulePaymentCellModel] = []
+    var isScheduled: Bool = true {
+        didSet {
+            if !isScheduled {
+                cellModels.forEach { $0.isChecked = false }
+            }
+            
+            cellModels.forEach{ $0.isEnabled = isScheduled }
+        }
+    }
+    
+    var instructions: String {
+        return isScheduled ? "Your remaining installments will be paid automatically on deadlines." : "You will need to pay all installments \nmanually."
+    }
     
     // MARK: - Private properties
     
@@ -47,10 +60,27 @@ final class SchedulePaymentsAlertViewModel {
     }
     
     func selectAll() {
-        cellModels.map{ $0.isChecked = true }
+        cellModels.forEach{ $0.isChecked = true }
     }
     
     func deselectAll() {
-        cellModels.map{ $0.isChecked = false }
+        cellModels.forEach{ $0.isChecked = false }
+    }
+    
+    func cellSelectionChanged(cellModel: SchedulePaymentCellModel) {
+        for index in cellModels.indices {
+            let model = cellModels[index]
+            if cellModel.dateString == model.dateString {
+                model.isChecked = cellModel.isChecked
+                cellModels[index] = model
+            }
+            break
+        }
+    }
+    
+    var checkedCellModels: [SchedulePaymentCellModel] {
+        return cellModels.filter{ $0.isChecked }
     }
 }
+
+

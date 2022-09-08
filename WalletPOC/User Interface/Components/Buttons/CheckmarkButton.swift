@@ -48,6 +48,7 @@ final class CheckmarkButton: UIButton {
         if isChecked {
             backgroundColor = isEnabled ? .accent : .lightGray
             setImage(Asset.Images.check.image, for: .normal)
+            borderColor = isEnabled ? .accent : .lightGray
         } else {
             borderColor = isEnabled ? .accent : .lightGray
             backgroundColor = .clear

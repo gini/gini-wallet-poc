@@ -110,6 +110,7 @@ final class SchedulePaymentCell: UITableViewCell {
     private func updateUI() {
         guard let viewModel = viewModel else { return }
 
+        selectionStyle = .none
         checkmarkButton.isChecked = viewModel.isChecked
         consigneeLabel.text = viewModel.consignee
         dateLabel.text = viewModel.dateString
@@ -118,6 +119,8 @@ final class SchedulePaymentCell: UITableViewCell {
         consigneeLabel.textColor = viewModel.isEnabled ? .primaryText : .lightGray
         dateLabel.textColor = viewModel.isEnabled ? .yellowText : .lightGray
         amountLabel.textColor = viewModel.isEnabled ? .yellowText : .lightGray
+        
+        checkmarkButton.isEnabled = viewModel.isEnabled
     }
     
     @objc
@@ -127,7 +130,9 @@ final class SchedulePaymentCell: UITableViewCell {
     
     func toggleCheckmark() {
         checkmarkButton.isChecked.toggle()
-        viewModel?.isChecked = checkmarkButton.isChecked
+        guard let viewModel = viewModel else { return }
+        viewModel.isChecked = checkmarkButton.isChecked
+        viewModel.chechmarkChanged?(checkmarkButton.isChecked)
     }
 }
 

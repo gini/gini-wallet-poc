@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol SchedulePaymentsAlertViewDelegate: AnyObject {
-    func didConfirm(with schedule: Bool)
+    func didConfirm(isScheduled: Bool, checkedCellModels: [SchedulePaymentCellModel])
 }
 
 final class SchedulePaymentsAlertView: UIView {
@@ -58,7 +58,7 @@ final class SchedulePaymentsAlertView: UIView {
     private lazy var switchView: UISwitch = {
         let switchView = UISwitch()
         switchView.onTintColor = .accent
-        switchView.isOn = isScheduled
+        switchView.isOn = viewModel?.isScheduled ?? true
         return switchView
     }()
     
@@ -104,12 +104,6 @@ final class SchedulePaymentsAlertView: UIView {
     
     weak var delegate: SchedulePaymentsAlertViewDelegate?
     
-    private var isScheduled: Bool = false {
-        didSet {
-            instructionLabel.text = isScheduled ? "Your remaining installments will be paid automatically on deadlines." : "You will need to pay all installments \nmanually."
-        }
-    }
-    
     private var amountToPay: Double = 0
     
     private var viewModel: SchedulePaymentsAlertViewModel?
@@ -152,7 +146,7 @@ final class SchedulePaymentsAlertView: UIView {
         buttonStackView.addArrangedSubview(unselectAllButton)
         
         switchView.addTarget(self, action: #selector(selectionChanged), for: .valueChanged)
-        instructionLabel.text = isScheduled ? "Your remaining installments will be paid automatically on deadlines." : "You will need to pay all installments \nmanually."
+        instructionLabel.text = viewModel?.instructions
         
 //        tableView.delegate = self
         tableView.dataSource = self
@@ -200,7 +194,11 @@ final class SchedulePaymentsAlertView: UIView {
     
     @objc
     private func didTapConfirm() {
-        delegate?.didConfirm(with: isScheduled)
+        guard let viewModel = viewModel else {
+            return
+        }
+
+        delegate?.didConfirm(isScheduled: viewModel.isScheduled, checkedCellModels: viewModel.checkedCellModels)
     }
     
     @objc
@@ -217,7 +215,11 @@ final class SchedulePaymentsAlertView: UIView {
     
     @objc
     private func selectionChanged() {
-        isScheduled = switchView.isOn
+        viewModel?.isScheduled = switchView.isOn
+        instructionLabel.text = viewModel?.instructions
+        selectAllButton.isEnabled = switchView.isOn
+        unselectAllButton.isEnabled = switchView.isOn
+        tableView.reloadData()
     }
 }
 
@@ -242,6 +244,10 @@ extension SchedulePaymentsAlertView: UITableViewDataSource {
         guard let cellModel = viewModel?.cellModels[indexPath.row] else { return UITableViewCell() }
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SchedulePaymentCell.self)
         cell.viewModel = cellModel
+        cell.viewModel?.chechmarkChanged = { [weak self] isChecked in
+            cellModel.isChecked = isChecked
+            self?.viewModel?.cellSelectionChanged(cellModel: cellModel)
+        }
         return cell
     }
 }

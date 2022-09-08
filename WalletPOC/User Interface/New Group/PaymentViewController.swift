@@ -448,7 +448,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     @objc private func didTaptest() {
         let vc = AlertViewController()
         let subview = SchedulePaymentsAlertView(viewModel: SchedulePaymentsAlertViewModel(numberOfSchedules: 9, totalAmount: 300, consignee: "Vileda"))
-//        subview.delegate = self
+        subview.delegate = self
         
         vc.modalPresentationStyle = .overFullScreen
         vc.populate(with: subview)
@@ -456,8 +456,10 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     }
 }
 
-extension PaymentViewController: PaymentConfirmedAlertViewDelegate {
-    func didConfirm(with schedule: Bool) {
+extension PaymentViewController: SchedulePaymentsAlertViewDelegate {
+    func didConfirm(isScheduled: Bool, checkedCellModels: [SchedulePaymentCellModel]) {
+        print(isScheduled)
+        print(checkedCellModels.map { $0.dateString })
         dismiss(animated: true)
     }
 }

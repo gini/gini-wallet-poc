@@ -20,6 +20,8 @@ class SchedulePaymentCellModel {
     
     var isEnabled: Bool = true
     
+    var chechmarkChanged: ((Bool) -> ())? = nil
+    
     private let amount: Double
     private let date: Date
     
