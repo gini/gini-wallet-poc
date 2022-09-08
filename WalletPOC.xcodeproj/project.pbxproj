@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E1BB15228C8856F007F3587 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BB15028C8856F007F3587 /* Strings.swift */; };
+		2E1BB15328C8856F007F3587 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BB15128C8856F007F3587 /* Assets.swift */; };
+		2E1BB15528C88D37007F3587 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BB15428C88D37007F3587 /* Font.swift */; };
+		2E1BB15728C89253007F3587 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BB15628C89253007F3587 /* Color.swift */; };
 		F41C08B028BE51310050510E /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41C08AF28BE51310050510E /* PaymentViewModel.swift */; };
 		F41C08B228BE59A70050510E /* pdfMock2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F41C08B128BE59A70050510E /* pdfMock2.pdf */; };
 		F41C08B428C0D3400050510E /* DS-01.xml in Resources */ = {isa = PBXBuildFile; fileRef = F41C08B328C0D33F0050510E /* DS-01.xml */; };
@@ -34,7 +38,6 @@
 		F97E1BFD25D3D8F7000884B4 /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E1BFC25D3D8F7000884B4 /* AnalyticsEvent.swift */; };
 		F97E1C0325D3D993000884B4 /* AnalyticsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E1C0225D3D993000884B4 /* AnalyticsProvider.swift */; };
 		F98344A925CC021F0096DA55 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98344A825CC021F0096DA55 /* Bundle.swift */; };
-		F9875512256D23850049EB19 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9875511256D23850049EB19 /* Strings.swift */; };
 		F997090A2549FBC700E24EAA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F99709092549FBC700E24EAA /* Localizable.strings */; };
 		F9BAE6BF253799BF008FF118 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = F9BAE6BE253799BF008FF118 /* Core */; };
 		F9C2B92F25893B6B002DBADF /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2B92E25893B6B002DBADF /* Config.swift */; };
@@ -48,7 +51,6 @@
 		F9D6CC032571158D007E6779 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D6CC022571158D007E6779 /* Validation.swift */; };
 		F9D889C427E3B3B600FF7F8E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D889C327E3B3B600FF7F8E /* main.swift */; };
 		F9DA38D425E7A99B0030D771 /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA38D325E7A99B0030D771 /* ErrorModel.swift */; };
-		F9E98EE42582710000729B87 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E98EE32582710000729B87 /* Assets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +64,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2E1BB15028C8856F007F3587 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		2E1BB15128C8856F007F3587 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		2E1BB15428C88D37007F3587 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		2E1BB15628C89253007F3587 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		F41C08AF28BE51310050510E /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		F41C08B128BE59A70050510E /* pdfMock2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = pdfMock2.pdf; sourceTree = "<group>"; };
 		F41C08B328C0D33F0050510E /* DS-01.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "DS-01.xml"; sourceTree = "<group>"; };
@@ -95,7 +101,6 @@
 		F97E1BFC25D3D8F7000884B4 /* AnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
 		F97E1C0225D3D993000884B4 /* AnalyticsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsProvider.swift; sourceTree = "<group>"; };
 		F98344A825CC021F0096DA55 /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
-		F9875511256D23850049EB19 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		F99709042549FAEA00E24EAA /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		F99709052549FB0100E24EAA /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		F99709062549FB0100E24EAA /* Internal.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Internal.xcconfig; sourceTree = "<group>"; };
@@ -114,7 +119,6 @@
 		F9D6CC022571158D007E6779 /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		F9D889C327E3B3B600FF7F8E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		F9DA38D325E7A99B0030D771 /* ErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
-		F9E98EE32582710000729B87 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +141,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E1BB14E28C884D0007F3587 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				2E1BB15128C8856F007F3587 /* Assets.swift */,
+				2E1BB15028C8856F007F3587 /* Strings.swift */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
+		2E1BB14F28C88504007F3587 /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				F99709092549FBC700E24EAA /* Localizable.strings */,
+			);
+			path = Strings;
+			sourceTree = "<group>";
+		};
 		F41C08B728C5CF800050510E /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -236,13 +257,11 @@
 		F99709082549FB8D00E24EAA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2E1BB14F28C88504007F3587 /* Strings */,
 				F41C08B728C5CF800050510E /* Fonts */,
 				F41C08B128BE59A70050510E /* pdfMock2.pdf */,
-				F9E98EE32582710000729B87 /* Assets.swift */,
-				F9875511256D23850049EB19 /* Strings.swift */,
 				F9D38E24253793E3007D4888 /* Colors.xcassets */,
 				F9C2B947258954E1002DBADF /* Images.xcassets */,
-				F99709092549FBC700E24EAA /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -299,6 +318,7 @@
 		F9D38E1A253793E3007D4888 /* WalletPOC */ = {
 			isa = PBXGroup;
 			children = (
+				2E1BB14E28C884D0007F3587 /* Generated */,
 				F41C08D528C63CC00050510E /* Constants */,
 				F42109E728BDEF6E0069F486 /* Extensions */,
 				F9BAE6AD253795AB008FF118 /* Main */,
@@ -320,6 +340,8 @@
 				F9CB746C25CDA388006F0FE2 /* BaseViewController.swift */,
 				F9CB747025CDA71B006F0FE2 /* UIViewController+Error.swift */,
 				F9DA38D325E7A99B0030D771 /* ErrorModel.swift */,
+				2E1BB15428C88D37007F3587 /* Font.swift */,
+				2E1BB15628C89253007F3587 /* Color.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -355,6 +377,7 @@
 				F9D38E14253793E3007D4888 /* Sources */,
 				F9D38E15253793E3007D4888 /* Frameworks */,
 				F9D38E16253793E3007D4888 /* Resources */,
+				2E1BB14828C883A6007F3587 /* SwiftGen */,
 			);
 			buildRules = (
 			);
@@ -440,6 +463,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2E1BB14828C883A6007F3587 /* SwiftGen */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftGen;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Adds support for Apple Silicon brew directory\nif test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nif which swiftgen >/dev/null; then\n    swiftgen\nelse\n    echo \"warning: SwiftGen not installed, download it from https://github.com/SwiftGen/SwiftGen\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F955ED19256D1C20005299AC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -455,17 +499,21 @@
 			files = (
 				F97E1BFD25D3D8F7000884B4 /* AnalyticsEvent.swift in Sources */,
 				F9CB746D25CDA388006F0FE2 /* BaseViewController.swift in Sources */,
+				2E1BB15728C89253007F3587 /* Color.swift in Sources */,
+				2E1BB15228C8856F007F3587 /* Strings.swift in Sources */,
 				F42109E928BDEF7D0069F486 /* UIView+Autolayout.swift in Sources */,
 				F9D889C427E3B3B600FF7F8E /* main.swift in Sources */,
 				F41C08D228C5DE7E0050510E /* AccountSwitchViewController.swift in Sources */,
 				F41C08D428C5E9750050510E /* AccountCell.swift in Sources */,
 				F9D38E1C253793E3007D4888 /* AppDelegate.swift in Sources */,
+				2E1BB15328C8856F007F3587 /* Assets.swift in Sources */,
 				F9CB747125CDA71B006F0FE2 /* UIViewController+Error.swift in Sources */,
 				F41C08DC28C8A0760050510E /* AccountView.swift in Sources */,
 				F42109E628BDE8C80069F486 /* SceneDelegate.swift in Sources */,
 				F9D6CC032571158D007E6779 /* Validation.swift in Sources */,
 				F41C08DA28C877930050510E /* CustomInstallmentButton.swift in Sources */,
 				F9E98EE42582710000729B87 /* Assets.swift in Sources */,
+				2E1BB15528C88D37007F3587 /* Font.swift in Sources */,
 				F41C08D728C63CCB0050510E /* Layout.swift in Sources */,
 				F9DA38D425E7A99B0030D771 /* ErrorModel.swift in Sources */,
 				F41C08B028BE51310050510E /* PaymentViewModel.swift in Sources */,
