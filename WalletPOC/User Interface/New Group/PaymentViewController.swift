@@ -447,7 +447,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     
     @objc private func didTaptest() {
         let vc = AlertViewController()
-        let subview = SchedulePaymentsAlertView(isScheduled: false, amountToPay: 400.0)
+        let subview = SchedulePaymentsAlertView(viewModel: SchedulePaymentsAlertViewModel(numberOfSchedules: 9, totalAmount: 300, consignee: "Vileda"))
 //        subview.delegate = self
         
         vc.modalPresentationStyle = .overFullScreen

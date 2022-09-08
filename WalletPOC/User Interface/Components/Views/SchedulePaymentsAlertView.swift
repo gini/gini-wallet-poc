@@ -96,6 +96,12 @@ final class SchedulePaymentsAlertView: UIView {
         return button
     }()
     
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
+    
     weak var delegate: SchedulePaymentsAlertViewDelegate?
     
     private var isScheduled: Bool = false {
@@ -106,11 +112,12 @@ final class SchedulePaymentsAlertView: UIView {
     
     private var amountToPay: Double = 0
     
+    private var viewModel: SchedulePaymentsAlertViewModel?
+    
     // MARK: - Lifecycle
     
-    init(isScheduled: Bool, amountToPay: Double) {
-        self.isScheduled = isScheduled
-        self.amountToPay = amountToPay
+    init(viewModel: SchedulePaymentsAlertViewModel) {
+        self.viewModel = viewModel
         super.init(frame: .zero)
         
         setupUI()
@@ -135,7 +142,8 @@ final class SchedulePaymentsAlertView: UIView {
         greyView.addSubview(buttonStackView)
         greyView.addSubview(separatorView)
         greyView.addSubview(instructionLabel)
-        greyView.addSubview(actionButton)
+        addSubview(tableView)
+        addSubview(actionButton)
         
         horizontalStackView.addArrangedSubview(scheduleLabel)
         horizontalStackView.addArrangedSubview(switchView)
@@ -145,6 +153,12 @@ final class SchedulePaymentsAlertView: UIView {
         
         switchView.addTarget(self, action: #selector(selectionChanged), for: .valueChanged)
         instructionLabel.text = isScheduled ? "Your remaining installments will be paid automatically on deadlines." : "You will need to pay all installments \nmanually."
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(cellType: SchedulePaymentCell.self)
+        tableView.separatorStyle = .none
+        tableView.estimatedRowHeight = UITableView.automaticDimension
     }
     
     private func setupLayout() {
@@ -169,8 +183,13 @@ final class SchedulePaymentsAlertView: UIView {
             buttonStackView.topAnchor.constraint(equalTo: instructionLabel.bottomAnchor, constant: .padding3x),
             buttonStackView.leadingAnchor.constraint(equalTo: greyView.leadingAnchor, constant: .padding2x),
             buttonStackView.bottomAnchor.constraint(equalTo: greyView.bottomAnchor, constant: -.padding3x),
+            
+            tableView.topAnchor.constraint(equalTo: greyView.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            tableView.heightAnchor.constraint(equalToConstant: 300),
 
-            actionButton.topAnchor.constraint(equalTo: greyView.bottomAnchor, constant: .padding3x),
+            actionButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: .padding3x),
             actionButton.leadingAnchor.constraint(equalTo: greyView.leadingAnchor, constant: .padding2x),
             actionButton.trailingAnchor.constraint(equalTo: greyView.trailingAnchor, constant: -.padding2x),
             actionButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -.padding2x)
@@ -197,6 +216,26 @@ final class SchedulePaymentsAlertView: UIView {
     @objc
     private func selectionChanged() {
         isScheduled = switchView.isOn
+    }
+}
+
+extension SchedulePaymentsAlertView: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+}
+
+extension SchedulePaymentsAlertView: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        viewModel?.cellModels.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cellModel = viewModel?.cellModels[indexPath.row] else { return UITableViewCell() }
+        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SchedulePaymentCell.self)
+        cell.viewModel = cellModel
+        return cell
     }
 }
 
