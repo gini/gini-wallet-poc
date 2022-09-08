@@ -83,7 +83,8 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         invoiceLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
         invoiceLabel.text = viewModel.invoiceText
         
-        senderDetailsView.backgroundColor = UIColor(named: "giniLightGray")
+        senderDetailsView.backgroundColor = .lightGray
+//        UIColor(named: "giniLightGray")
         //mocked
         senderDetailsView.accountNameLabel.text = viewModel.userAccountText
         senderDetailsView.ibanLabel.text = viewModel.userAccountNumber
@@ -93,7 +94,8 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         senderDetailsView.addGestureRecognizer(tap)
         
-        merchantDetailsView.backgroundColor = UIColor(named: "giniLightGray")
+        merchantDetailsView.backgroundColor = .lightGray
+        //UIColor(named: "giniLightGray")
         merchantDetailsView.accountNameLabel.text = viewModel.merchantNameText
         merchantDetailsView.ibanLabel.text  = viewModel.merchantIban
         merchantDetailsView.amountInvoiceLabel.text = viewModel.merchantInvoice
@@ -113,7 +115,8 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         amountLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 32)
 
         payNowButton.setTitle("Pay Now", for: .normal)
-        payNowButton.backgroundColor = UIColor(named: "payNowLightBlueBorder")
+        payNowButton.backgroundColor = .blue
+//        UIColor(named: "payNowLightBlueBorder")
         payNowButton.layer.cornerRadius = 5
         payNowButton.layer.borderWidth = 1
         payNowButton.layer.borderColor = UIColor.lightGray.cgColor
@@ -265,9 +268,12 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     
     @objc private func buyNowPayLaterTapped() {
         if buyNowPayLaterButton.backgroundColor == .clear  {
-            buyNowPayLaterButton.backgroundColor = UIColor(named: "payNowLightBlue")
-            buyNowPayLaterButton.layer.borderColor = UIColor(named: "payNowLightBlueBorder")?.cgColor
-            payFullButton.layer.borderColor = UIColor(named: "borderGray")?.cgColor
+            buyNowPayLaterButton.backgroundColor = .blue
+//            UIColor(named: "payNowLightBlue")
+            buyNowPayLaterButton.layer.borderColor = UIColor.systemBlue.cgColor
+//            UIColor(named: "payNowLightBlueBorder")?.cgColor
+            payFullButton.layer.borderColor = UIColor.gray.cgColor
+//            UIColor(named: "borderGray")?.cgColor
             //self.layer.borderColor = UIColor.lightGray.cgColor
 
 
@@ -331,10 +337,13 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     
     @objc private func payFullTapped() {
         if payFullButton.backgroundColor == .clear {
-            payFullButton.backgroundColor = UIColor(named: "payNowLightBlue")
-            payFullButton.layer.borderColor = UIColor(named: "payNowLightBlueBorder")?.cgColor
+            payFullButton.backgroundColor = .blue
+//            UIColor(named: "payNowLightBlue")
+            payFullButton.layer.borderColor = UIColor.systemBlue.cgColor
+//            UIColor(named: "payNowLightBlueBorder")?.cgColor
             buyNowPayLaterButton.backgroundColor = .clear
-            buyNowPayLaterButton.layer.borderColor = UIColor(named: "borderGray")?.cgColor
+            buyNowPayLaterButton.layer.borderColor = UIColor.gray.cgColor
+//            UIColor(named: "borderGray")?.cgColor
             //buyNowPayLaterToggle()
         }
         [installmentsLabel, horizontalScrollView, termsConditionsButton, acceptLabel].forEach { $0.removeFromSuperview() }
