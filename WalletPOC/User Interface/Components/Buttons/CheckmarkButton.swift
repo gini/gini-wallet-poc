@@ -16,6 +16,14 @@ final class CheckmarkButton: UIButton {
         }
     }
     
+    private var borderColor: UIColor = .accent
+    
+    override var isEnabled: Bool {
+        didSet {
+            initView()
+        }
+    }
+    
     override var intrinsicContentSize: CGSize {
         return CGSize(width: 28, height: 28)
     }
@@ -38,9 +46,10 @@ final class CheckmarkButton: UIButton {
     
     private func initView() {
         if isChecked {
-            backgroundColor = .accent
+            backgroundColor = isEnabled ? .accent : .lightGray
             setImage(Asset.Images.check.image, for: .normal)
         } else {
+            borderColor = isEnabled ? .accent : .lightGray
             backgroundColor = .clear
             setImage(nil, for: .normal)
         }
@@ -48,6 +57,6 @@ final class CheckmarkButton: UIButton {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        decorate(with: [BorderDecorator(borderWidth: 1, borderColor: .accent), CornerRadiusDecorator(radius: 4)])
+        decorate(with: [BorderDecorator(borderWidth: 1, borderColor: borderColor), CornerRadiusDecorator(radius: 4)])
     }
 }

@@ -23,6 +23,7 @@ extension UIColor {
     
     static let yellowText = Asset.Colors.darkYellow.color
     
-    static let lightgrayBackground = Asset.Colors.extraLightgray.color
+    static let lightgrayBackground = Asset.Colors.extraLightGrey.color
     static let borderColor = Asset.Colors.borderColor.color
+    static let lightBorderColor = Asset.Colors.lightBorder.color
 }

@@ -18,6 +18,8 @@ class SchedulePaymentCellModel {
         return "- €\(String(format: "%.2f", amount))"
     }
     
+    var isEnabled: Bool = true
+    
     private let amount: Double
     private let date: Date
     

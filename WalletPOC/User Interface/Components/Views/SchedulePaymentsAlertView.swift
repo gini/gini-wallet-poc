@@ -51,7 +51,7 @@ final class SchedulePaymentsAlertView: UIView {
         label.font = UIFont.bodyLarge
         label.textColor = .primaryText
         label.numberOfLines = 0
-        label.text = "Schedule payments"
+        label.text = viewModel?.title
         return label
     }()
     
@@ -154,7 +154,7 @@ final class SchedulePaymentsAlertView: UIView {
         switchView.addTarget(self, action: #selector(selectionChanged), for: .valueChanged)
         instructionLabel.text = isScheduled ? "Your remaining installments will be paid automatically on deadlines." : "You will need to pay all installments \nmanually."
         
-        tableView.delegate = self
+//        tableView.delegate = self
         tableView.dataSource = self
         tableView.register(cellType: SchedulePaymentCell.self)
         tableView.separatorStyle = .none
@@ -205,12 +205,14 @@ final class SchedulePaymentsAlertView: UIView {
     
     @objc
     private func didTapSelectAll() {
-        
+        viewModel?.selectAll()
+        tableView.reloadData()
     }
     
     @objc
     private func didTapUnselectAll() {
-        
+        viewModel?.deselectAll()
+        tableView.reloadData()
     }
     
     @objc
@@ -219,11 +221,16 @@ final class SchedulePaymentsAlertView: UIView {
     }
 }
 
-extension SchedulePaymentsAlertView: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
-}
+//TODO: See if checkmark selection should happen even on cell selection
+//extension SchedulePaymentsAlertView: UITableViewDelegate {
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableView.deselectRow(at: indexPath, animated: true)
+//        if let cell = tableView.cellForRow(at: indexPath) as? SchedulePaymentCell {
+//            cell.toggleCheckmark()
+//        }
+//        viewModel?.cellModels[indexPath.row].isChecked.toggle()
+//    }
+//}
 
 extension SchedulePaymentsAlertView: UITableViewDataSource {
     

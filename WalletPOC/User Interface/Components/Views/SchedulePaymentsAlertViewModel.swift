@@ -45,4 +45,12 @@ final class SchedulePaymentsAlertViewModel {
         let calendar = Calendar.current
         return calendar.date(byAdding: .month, value: count, to: Date()) ?? Date()
     }
+    
+    func selectAll() {
+        cellModels.map{ $0.isChecked = true }
+    }
+    
+    func deselectAll() {
+        cellModels.map{ $0.isChecked = false }
+    }
 }

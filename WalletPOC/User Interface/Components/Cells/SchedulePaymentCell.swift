@@ -55,7 +55,7 @@ final class SchedulePaymentCell: UITableViewCell {
     private lazy var separatorView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .separator
+        view.backgroundColor = .lightBorderColor
         return view
     }()
     
@@ -108,14 +108,24 @@ final class SchedulePaymentCell: UITableViewCell {
     }
     
     private func updateUI() {
-        checkmarkButton.isChecked = viewModel?.isChecked ?? false
-        consigneeLabel.text = viewModel?.consignee
-        dateLabel.text = viewModel?.dateString
-        amountLabel.text = viewModel?.amountString
+        guard let viewModel = viewModel else { return }
+
+        checkmarkButton.isChecked = viewModel.isChecked
+        consigneeLabel.text = viewModel.consignee
+        dateLabel.text = viewModel.dateString
+        amountLabel.text = viewModel.amountString
+        
+        consigneeLabel.textColor = viewModel.isEnabled ? .primaryText : .lightGray
+        dateLabel.textColor = viewModel.isEnabled ? .yellowText : .lightGray
+        amountLabel.textColor = viewModel.isEnabled ? .yellowText : .lightGray
     }
     
     @objc
     private func didTapCheckmark() {
+        toggleCheckmark()
+    }
+    
+    func toggleCheckmark() {
         checkmarkButton.isChecked.toggle()
         viewModel?.isChecked = checkmarkButton.isChecked
     }
