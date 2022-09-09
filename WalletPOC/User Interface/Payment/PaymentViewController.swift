@@ -12,7 +12,6 @@ import Alamofire
 
 class PaymentViewController: UIViewController, XMLParserDelegate {
     
-    private let titleLabel = UILabel.autoLayout()
     private let fromLabel = UILabel.autoLayout()
     private let toLabel = UILabel.autoLayout()
     private let invoiceLabel = UILabel.autoLayout()
@@ -70,11 +69,8 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     }
     
     private func setupViews() {
+        navigationItem.title = viewModel.titleText
         view.backgroundColor = .white
-        
-        titleLabel.text = viewModel.titleText
-        titleLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 18)
-        titleLabel.textAlignment = .left
         
         toLabel.text = viewModel.toText
         toLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
@@ -177,7 +173,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         
-        [titleLabel, fromLabel, toLabel, senderDetailsView, merchantDetailsView, tinyView, invoiceLabel, pdfView, payFullButton, buyNowPayLaterButton].forEach { contentView.addSubview($0) }
+        [fromLabel, toLabel, senderDetailsView, merchantDetailsView, tinyView, invoiceLabel, pdfView, payFullButton, buyNowPayLaterButton].forEach { contentView.addSubview($0) }
         
         [amountLabel, payNowButton, payLaterButton, refuseButton, bottomTinyView].forEach{ bottomView.addSubview($0) }
         
@@ -226,7 +222,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
             refuseButton.leadingAnchor.constraint(greaterThanOrEqualTo: bottomView.leadingAnchor, constant: 20),
             refuseButton.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor, constant: 10),
             
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: bottomView.topAnchor),
@@ -237,10 +233,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: view.widthAnchor),
             
-            titleLabel.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: -20),
-            titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            
-            fromLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 25),
+            fromLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 25),
             fromLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             
             senderDetailsView.topAnchor.constraint(equalTo: fromLabel.bottomAnchor, constant: 20),
