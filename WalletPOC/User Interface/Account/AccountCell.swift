@@ -15,6 +15,8 @@ class AccountCell: UITableViewCell {
     private let ibanLabel = UILabel.autoLayout()
     private let amountLabel = UILabel.autoLayout()
     
+    let radioButton = RadioButton(isChecked: false)
+    
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -37,13 +39,17 @@ class AccountCell: UITableViewCell {
         ibanLabel.textColor = .gray
         
         amountLabel.font = UIFont(name: "PlusJakartaSans-Medium", size: 16)
+        
+        radioButton.addTarget(self, action: #selector(radioButtonTapped), for: .touchUpInside)
 
         contentView.addSubview(accountNameLabel)
         contentView.addSubview(ibanLabel)
         contentView.addSubview(amountLabel)
+        contentView.addSubview(radioButton)
     }
     
     private func setupConstraints() {
+        radioButton.translatesAutoresizingMaskIntoConstraints = false
         let constraints = [
             accountNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6),
             accountNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
@@ -56,7 +62,12 @@ class AccountCell: UITableViewCell {
             amountLabel.topAnchor.constraint(equalTo: ibanLabel.bottomAnchor, constant: 5),
             amountLabel.leadingAnchor.constraint(equalTo: accountNameLabel.leadingAnchor),
             amountLabel.trailingAnchor.constraint(equalTo: accountNameLabel.trailingAnchor),
-            amountLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5)
+            amountLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
+            
+            radioButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            radioButton.heightAnchor.constraint(equalToConstant: 25),
+            radioButton.widthAnchor.constraint(equalToConstant: 25),
+            radioButton.centerYAnchor.constraint(equalTo: ibanLabel.centerYAnchor),
         ]
         NSLayoutConstraint.activate(constraints)
     }
@@ -65,5 +76,9 @@ class AccountCell: UITableViewCell {
         accountNameLabel.text = name
         ibanLabel.text = iban
         amountLabel.text = amount
+    }
+    
+    @objc private func radioButtonTapped() {
+        radioButton.isChecked.toggle()
     }
 }

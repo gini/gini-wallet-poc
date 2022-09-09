@@ -28,7 +28,7 @@ enum AccountType {
     var switchAccountImage: UIImage {
         switch self {
         case .sender: return UIImage(systemName: "chevron.down") ?? UIImage()
-        case .merchant: return UIImage(named: "zalandoLogo") ?? UIImage()
+        case .merchant: return UIImage(named: "rainbowStore") ?? UIImage()
         }
     }
     

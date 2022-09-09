@@ -47,6 +47,7 @@
 		F42109E428BDE85D0069F486 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42109E328BDE85D0069F486 /* PaymentViewController.swift */; };
 		F42109E628BDE8C80069F486 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42109E528BDE8C80069F486 /* SceneDelegate.swift */; };
 		F42109E928BDEF7D0069F486 /* UIView+Autolayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42109E828BDEF7D0069F486 /* UIView+Autolayout.swift */; };
+		F4E49CD228CB2C4100BE74F5 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E49CD128CB2C4100BE74F5 /* RadioButton.swift */; };
 		F955ED20256D1C20005299AC /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F955ED1F256D1C20005299AC /* Tests.swift */; };
 		F955ED2C256D1CF8005299AC /* ViewInspector in Frameworks */ = {isa = PBXBuildFile; productRef = F955ED2B256D1CF8005299AC /* ViewInspector */; };
 		F97E1BFD25D3D8F7000884B4 /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E1BFC25D3D8F7000884B4 /* AnalyticsEvent.swift */; };
@@ -134,6 +135,7 @@
 		F42109E828BDEF7D0069F486 /* UIView+Autolayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Autolayout.swift"; sourceTree = "<group>"; };
 		F4E49CCC28CB1FF900BE74F5 /* ActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		F4E49CCE28CB1FF900BE74F5 /* RefusePaymentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefusePaymentView.swift; sourceTree = "<group>"; };
+		F4E49CD128CB2C4100BE74F5 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		F955ED1D256D1C20005299AC /* WalletPOCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WalletPOCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F955ED1F256D1C20005299AC /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		F955ED21256D1C20005299AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 			children = (
 				2E81252228CA0D110051B787 /* CheckmarkButton.swift */,
 				2E81252328CA0D110051B787 /* ActionButton.swift */,
+				F4E49CD128CB2C4100BE74F5 /* RadioButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -636,6 +639,7 @@
 				F42109E628BDE8C80069F486 /* SceneDelegate.swift in Sources */,
 				2E81253228CA0D110051B787 /* RefusePaymentView.swift in Sources */,
 				F9D6CC032571158D007E6779 /* Validation.swift in Sources */,
+				F4E49CD228CB2C4100BE74F5 /* RadioButton.swift in Sources */,
 				2E1BB16128C8AAF7007F3587 /* BorderDecorator.swift in Sources */,
 				F41C08DC28C8A0760050510E /* AccountView.swift in Sources */,
 				2E81252B28CA0D110051B787 /* SchedulePaymentCell.swift in Sources */,
