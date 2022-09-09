@@ -51,9 +51,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     private let termsConditionsButton = UIButton.autoLayout()
     private var checkmarkButton = CheckmarkButton(isChecked: false)
     
-    private let viewModel: PaymentViewModel
-    
-    private var IsSavingsAccount = false
+    private var viewModel: PaymentViewModel
     
     init(viewModel: PaymentViewModel) {
         self.viewModel = viewModel
@@ -96,6 +94,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         senderDetailsView.ibanLabel.text = viewModel.userAccountNumber
         senderDetailsView.amountInvoiceLabel.text = viewModel.userAccountAmount
         senderDetailsView.switchAccountButton.tintColor = .black
+        senderDetailsView.decorate(with: CornerRadiusDecorator(radius: .viewRadius))
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         senderDetailsView.addGestureRecognizer(tap)
@@ -105,6 +104,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         merchantDetailsView.accountNameLabel.text = viewModel.merchantNameText
         merchantDetailsView.ibanLabel.text  = viewModel.merchantIban
         merchantDetailsView.amountInvoiceLabel.text = viewModel.merchantInvoice
+        merchantDetailsView.decorate(with: CornerRadiusDecorator(radius: .viewRadius))
         
         tinyView.backgroundColor = UIColor(named: "giniLightGray")
         bottomTinyView.backgroundColor = UIColor(named: "giniLightGray")
@@ -172,11 +172,6 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         
         checkmarkButton.isEnabled = false
         termsConditionsButton.isEnabled = false
-        
-        
-        if senderDetailsView.accountNameLabel.text == "Savings Account"{
-            IsSavingsAccount = true
-        }
         
         view.addSubview(bottomView)
         view.addSubview(scrollView)
@@ -282,7 +277,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
             pdfView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             pdfView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             pdfView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
-            pdfView.heightAnchor.constraint(equalToConstant: 400),
+            pdfView.heightAnchor.constraint(equalToConstant: 400)
             
         ]
         NSLayoutConstraint.activate(constraints)
@@ -360,7 +355,8 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     
     // MARK: - Tap handles
     @objc private func handleTap(_ sender: UITapGestureRecognizer? = nil) {
-        let accountVC = AccountSwitchViewController(isSavingsAccount: IsSavingsAccount)
+        let accountVC = AccountSwitchViewController(selectedAccount: viewModel.selectedAccount)
+        accountVC.modalPresentationStyle = .overFullScreen
         accountVC.delegateProtocol = self
         present(accountVC, animated: true)
     }
@@ -477,19 +473,7 @@ extension PaymentViewController: AccountSwitchProtocol {
         senderDetailsView.accountNameLabel.text = account.name
         senderDetailsView.ibanLabel.text = account.iban
         senderDetailsView.amountInvoiceLabel.text = account.amount
-        
-        
-        if senderDetailsView.accountNameLabel.text == "Savings Account"{
-            IsSavingsAccount = true
-        }
-        
-        if senderDetailsView.accountNameLabel.text == "Main Account"{
-            IsSavingsAccount = false
-        }
-        
-        
-        print(":adasdsaasa")
-
+        viewModel.selectedAccount = account
     }
 }
 

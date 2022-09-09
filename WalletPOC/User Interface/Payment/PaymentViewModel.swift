@@ -33,8 +33,7 @@ protocol PaymentViewModel {
     var acceptText: String { get }
     var termsConditionsText: String { get }
     var viewUpdater: PaymentViewUpdater? { get set }
-
-
+    var selectedAccount: Account { get set }
 }
 
 class PaymentViewModelImpl: PaymentViewModel {
@@ -63,11 +62,7 @@ class PaymentViewModelImpl: PaymentViewModel {
     var termsConditionsText = "Terms and Conditions"
     
     var viewUpdater: PaymentViewUpdater?
-
-    
-    
- 
-    
+    var selectedAccount = Account(id: "2", name: "Savings Account", iban: "DE23 3701 0044 1344 8291 01", amount: "€6.231,40")
     //    var xmlDict = [String: Any]()
     //    var xmlDictArr = [[String: Any]]()
     //    var currentElement = ""

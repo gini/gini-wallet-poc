@@ -16,7 +16,7 @@ class AccountCell: UITableViewCell {
     private let amountLabel = UILabel.autoLayout()
     
     let radioButton = RadioButton(isChecked: false)
-    
+    var chechmarkChanged: ((Bool) -> ())? = nil
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -80,5 +80,6 @@ class AccountCell: UITableViewCell {
     
     @objc private func radioButtonTapped() {
         radioButton.isChecked.toggle()
+        chechmarkChanged?(true)
     }
 }
