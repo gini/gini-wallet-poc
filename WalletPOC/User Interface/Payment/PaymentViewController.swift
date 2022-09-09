@@ -361,6 +361,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     // MARK: - Tap handles
     @objc private func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         let accountVC = AccountSwitchViewController(isSavingsAccount: IsSavingsAccount)
+        accountVC.modalPresentationStyle = .overFullScreen
         accountVC.delegateProtocol = self
         present(accountVC, animated: true)
     }

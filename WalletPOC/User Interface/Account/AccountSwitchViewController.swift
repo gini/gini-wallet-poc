@@ -75,6 +75,9 @@ class AccountSwitchViewController: UIViewController {
         
         titleLabel.text = "Account from"
         titleLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        dimmedView.addGestureRecognizer(tap)
 
         cancelButton.setTitleColor(.gray, for: .normal)
         cancelButton.setTitle("Cancel", for: .normal)
@@ -137,6 +140,9 @@ class AccountSwitchViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 
