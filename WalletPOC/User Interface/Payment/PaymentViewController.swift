@@ -121,6 +121,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         amountLabel.font = UIFont(name: "PlusJakartaSans-Bold", size: 32)
         
         payNowButton.setTitle("Pay Now", for: .normal)
+        payNowButton.addTarget(self, action: #selector(didTapPayNow), for: .touchUpInside)
         payNowButton.backgroundColor = UIColor(named: "AccentColor")
         
         payNowButton.layer.cornerRadius = 5
@@ -129,6 +130,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         payNowButton.titleLabel?.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
         
         payLaterButton.setTitle("Pay Later", for: .normal)
+        payLaterButton.addTarget(self, action: #selector(didTapPayLater), for: .touchUpInside)
         payLaterButton.layer.cornerRadius = 5
         payLaterButton.layer.borderWidth = 1
         payLaterButton.layer.borderColor = UIColor(named: "borderGray")?.cgColor
@@ -165,6 +167,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         checkmarkButton.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)
         
         refuseButton.setTitle("Refuse", for: .normal)
+        refuseButton.addTarget(self, action: #selector(didTapRefuse), for: .touchUpInside)
         refuseButton.setTitleColor(.gray, for: .normal)
         
         checkmarkButton.isEnabled = false
@@ -426,6 +429,32 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     @objc private func checkButtonTapped() {
         checkmarkButton.isChecked.toggle()
     }
+    
+    @objc private func didTapPayNow() {
+        presentSuccessAlert(with: .paymentConfirmed)
+    }
+    
+    @objc private func didTapPayLater() {
+        presentSuccessAlert(with: .paymentAdded)
+    }
+    
+    @objc private func didTapRefuse() {
+        let alertView = RefusePaymentView()
+        alertView.delegate = self
+        let alertViewController = AlertViewController()
+        alertViewController.modalPresentationStyle = .overFullScreen
+        alertViewController.populate(with: alertView)
+        present(alertViewController, animated: true)
+    }
+    
+    private func presentSuccessAlert(with type: SuccessAlertView.SuccessEnumType) {
+        let alertView = SuccessAlertView(type: type)
+        alertView.delegate = self
+        let alertViewController = AlertViewController()
+        alertViewController.modalPresentationStyle = .overFullScreen
+        alertViewController.populate(with: alertView)
+        present(alertViewController, animated: true)
+    }
 }
 
 
@@ -458,4 +487,20 @@ extension PaymentViewController: TermsServicesProtocol {
     }
     
     
+}
+
+extension PaymentViewController: SuccessAlertViewDelegate {
+    func didClose() {
+        dismiss(animated: true)
+    }
+}
+
+extension PaymentViewController: RefusePaymentViewDelegate {
+    func didCancel() {
+        dismiss(animated: true)
+    }
+    
+    func didRefuse() {
+        dismiss(animated: true)
+    }
 }
