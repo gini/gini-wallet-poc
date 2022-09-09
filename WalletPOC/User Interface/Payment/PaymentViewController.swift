@@ -103,7 +103,10 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         
         tinyView.backgroundColor = UIColor(named: "giniLightGray")
         bottomTinyView.backgroundColor = UIColor(named: "giniLightGray")
+        
         pdfView.autoScales = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapPDFView))
+        pdfView.addGestureRecognizer(tapGesture)
         
         contentView.backgroundColor = .white
         
@@ -269,8 +272,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
             pdfView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             pdfView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             pdfView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
-            pdfView.heightAnchor.constraint(equalToConstant: 400)
-            
+            pdfView.heightAnchor.constraint(equalToConstant: 420)
         ]
         NSLayoutConstraint.activate(constraints)
     }
@@ -456,6 +458,12 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         alertViewController.modalPresentationStyle = .overFullScreen
         alertViewController.populate(with: alertView)
         present(alertViewController, animated: true)
+    }
+    
+    @objc private func didTapPDFView() {
+        let pdfVC = PDFViewController()
+        pdfVC.modalPresentationStyle = .overFullScreen
+        present(pdfVC, animated: true)
     }
 }
 

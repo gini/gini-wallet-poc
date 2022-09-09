@@ -28,6 +28,7 @@
 		2E81253428CB2C5E0051B787 /* FaceIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81253328CB2C5E0051B787 /* FaceIDViewController.swift */; };
 		2E81253628CB34630051B787 /* EmptyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81253528CB34630051B787 /* EmptyViewController.swift */; };
 		2E81253828CB66030051B787 /* AppStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81253728CB66030051B787 /* AppStyle.swift */; };
+		2E81253C28CB89EF0051B787 /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81253B28CB89EF0051B787 /* PDFViewController.swift */; };
 		F41C08B028BE51310050510E /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41C08AF28BE51310050510E /* PaymentViewModel.swift */; };
 		F41C08B228BE59A70050510E /* pdfMock2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F41C08B128BE59A70050510E /* pdfMock2.pdf */; };
 		F41C08B428C0D3400050510E /* DS-01.xml in Resources */ = {isa = PBXBuildFile; fileRef = F41C08B328C0D33F0050510E /* DS-01.xml */; };
@@ -112,6 +113,7 @@
 		2E81253328CB2C5E0051B787 /* FaceIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceIDViewController.swift; sourceTree = "<group>"; };
 		2E81253528CB34630051B787 /* EmptyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewController.swift; sourceTree = "<group>"; };
 		2E81253728CB66030051B787 /* AppStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStyle.swift; sourceTree = "<group>"; };
+		2E81253B28CB89EF0051B787 /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
 		F41C08AF28BE51310050510E /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		F41C08B128BE59A70050510E /* pdfMock2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = pdfMock2.pdf; sourceTree = "<group>"; };
 		F41C08B328C0D33F0050510E /* DS-01.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "DS-01.xml"; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				2E1BB15928C8A47F007F3587 /* AlertViewController.swift */,
 				2E81253328CB2C5E0051B787 /* FaceIDViewController.swift */,
 				2E81253528CB34630051B787 /* EmptyViewController.swift */,
+				2E81253B28CB89EF0051B787 /* PDFViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -655,6 +658,7 @@
 				2E81252B28CA0D110051B787 /* SchedulePaymentCell.swift in Sources */,
 				2E81253428CB2C5E0051B787 /* FaceIDViewController.swift in Sources */,
 				F42109E628BDE8C80069F486 /* SceneDelegate.swift in Sources */,
+				2E81253C28CB89EF0051B787 /* PDFViewController.swift in Sources */,
 				F9D6CC032571158D007E6779 /* Validation.swift in Sources */,
 				2E81252F28CA0D110051B787 /* PaymentConfirmedAlertView.swift in Sources */,
 				F41C08DA28C877930050510E /* CustomInstallmentButton.swift in Sources */,
