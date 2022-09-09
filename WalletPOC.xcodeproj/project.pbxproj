@@ -132,6 +132,8 @@
 		F42109E328BDE85D0069F486 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		F42109E528BDE8C80069F486 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F42109E828BDEF7D0069F486 /* UIView+Autolayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Autolayout.swift"; sourceTree = "<group>"; };
+		F4E49CCC28CB1FF900BE74F5 /* ActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
+		F4E49CCE28CB1FF900BE74F5 /* RefusePaymentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefusePaymentView.swift; sourceTree = "<group>"; };
 		F955ED1D256D1C20005299AC /* WalletPOCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WalletPOCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F955ED1F256D1C20005299AC /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		F955ED21256D1C20005299AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -234,6 +236,8 @@
 				2E8124F328C8C0A80051B787 /* SuccessAlertView.swift */,
 				2E8124FE28C9C7170051B787 /* SchedulePaymentCellModel.swift */,
 				2E1BB16A28C8B4AA007F3587 /* ActionButton.swift */,
+				F4E49CCC28CB1FF900BE74F5 /* ActionButton.swift */,
+				F4E49CCE28CB1FF900BE74F5 /* RefusePaymentView.swift */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
