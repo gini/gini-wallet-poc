@@ -11,6 +11,11 @@
 		2E1BB15328C8856F007F3587 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BB15128C8856F007F3587 /* Assets.swift */; };
 		2E1BB15528C88D37007F3587 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BB15428C88D37007F3587 /* Font.swift */; };
 		2E1BB15728C89253007F3587 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BB15628C89253007F3587 /* Color.swift */; };
+		2E1BB15A28C8A47F007F3587 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BB15928C8A47F007F3587 /* AlertViewController.swift */; };
+		2E1BB15D28C8AA8C007F3587 /* ViewDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BB15C28C8AA8C007F3587 /* ViewDecorator.swift */; };
+		2E1BB15F28C8AAE2007F3587 /* ShadowDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BB15E28C8AAE2007F3587 /* ShadowDecorator.swift */; };
+		2E1BB16128C8AAF7007F3587 /* BorderDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BB16028C8AAF7007F3587 /* BorderDecorator.swift */; };
+		2E1BB16328C8AB0E007F3587 /* CornerRadiusDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BB16228C8AB0E007F3587 /* CornerRadiusDecorator.swift */; };
 		F41C08B028BE51310050510E /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41C08AF28BE51310050510E /* PaymentViewModel.swift */; };
 		F41C08B228BE59A70050510E /* pdfMock2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F41C08B128BE59A70050510E /* pdfMock2.pdf */; };
 		F41C08B428C0D3400050510E /* DS-01.xml in Resources */ = {isa = PBXBuildFile; fileRef = F41C08B328C0D33F0050510E /* DS-01.xml */; };
@@ -33,6 +38,8 @@
 		F42109E428BDE85D0069F486 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42109E328BDE85D0069F486 /* PaymentViewController.swift */; };
 		F42109E628BDE8C80069F486 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42109E528BDE8C80069F486 /* SceneDelegate.swift */; };
 		F42109E928BDEF7D0069F486 /* UIView+Autolayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42109E828BDEF7D0069F486 /* UIView+Autolayout.swift */; };
+		F4E49CCF28CB1FF900BE74F5 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E49CCC28CB1FF900BE74F5 /* ActionButton.swift */; };
+		F4E49CD028CB1FF900BE74F5 /* RefusePaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E49CCE28CB1FF900BE74F5 /* RefusePaymentView.swift */; };
 		F955ED20256D1C20005299AC /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F955ED1F256D1C20005299AC /* Tests.swift */; };
 		F955ED2C256D1CF8005299AC /* ViewInspector in Frameworks */ = {isa = PBXBuildFile; productRef = F955ED2B256D1CF8005299AC /* ViewInspector */; };
 		F97E1BFD25D3D8F7000884B4 /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E1BFC25D3D8F7000884B4 /* AnalyticsEvent.swift */; };
@@ -68,6 +75,13 @@
 		2E1BB15128C8856F007F3587 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		2E1BB15428C88D37007F3587 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		2E1BB15628C89253007F3587 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		2E1BB15928C8A47F007F3587 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		2E1BB15C28C8AA8C007F3587 /* ViewDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDecorator.swift; sourceTree = "<group>"; };
+		2E1BB15E28C8AAE2007F3587 /* ShadowDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowDecorator.swift; sourceTree = "<group>"; };
+		2E1BB16028C8AAF7007F3587 /* BorderDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderDecorator.swift; sourceTree = "<group>"; };
+		2E1BB16228C8AB0E007F3587 /* CornerRadiusDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRadiusDecorator.swift; sourceTree = "<group>"; };
+		2E1BB16728C8B0D6007F3587 /* RefusePaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefusePaymentView.swift; sourceTree = "<group>"; };
+		2E1BB16A28C8B4AA007F3587 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		F41C08AF28BE51310050510E /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		F41C08B128BE59A70050510E /* pdfMock2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = pdfMock2.pdf; sourceTree = "<group>"; };
 		F41C08B328C0D33F0050510E /* DS-01.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "DS-01.xml"; sourceTree = "<group>"; };
@@ -95,6 +109,8 @@
 		F42109E328BDE85D0069F486 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		F42109E528BDE8C80069F486 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F42109E828BDEF7D0069F486 /* UIView+Autolayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Autolayout.swift"; sourceTree = "<group>"; };
+		F4E49CCC28CB1FF900BE74F5 /* ActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
+		F4E49CCE28CB1FF900BE74F5 /* RefusePaymentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefusePaymentView.swift; sourceTree = "<group>"; };
 		F955ED1D256D1C20005299AC /* WalletPOCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WalletPOCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F955ED1F256D1C20005299AC /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		F955ED21256D1C20005299AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -158,6 +174,33 @@
 			path = Strings;
 			sourceTree = "<group>";
 		};
+		2E1BB15828C8A46D007F3587 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2E1BB15928C8A47F007F3587 /* AlertViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		2E1BB15B28C8AA7F007F3587 /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				2E1BB16428C8AB4A007F3587 /* Decorator */,
+			);
+			path = Style;
+			sourceTree = "<group>";
+		};
+		2E1BB16428C8AB4A007F3587 /* Decorator */ = {
+			isa = PBXGroup;
+			children = (
+				2E1BB15C28C8AA8C007F3587 /* ViewDecorator.swift */,
+				2E1BB15E28C8AAE2007F3587 /* ShadowDecorator.swift */,
+				2E1BB16028C8AAF7007F3587 /* BorderDecorator.swift */,
+				2E1BB16228C8AB0E007F3587 /* CornerRadiusDecorator.swift */,
+			);
+			path = Decorator;
+			sourceTree = "<group>";
+		};
 		F41C08B728C5CF800050510E /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +233,8 @@
 		F41C08D828C877700050510E /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				F4E49CCB28CB1FF900BE74F5 /* Buttons */,
+				F4E49CCD28CB1FF900BE74F5 /* Views */,
 				F41C08D928C877930050510E /* CustomInstallmentButton.swift */,
 				F41C08DB28C8A0760050510E /* AccountView.swift */,
 			);
@@ -223,6 +268,31 @@
 				F42109E828BDEF7D0069F486 /* UIView+Autolayout.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F4E49CCA28CB1FC200BE74F5 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				2E1BB16728C8B0D6007F3587 /* RefusePaymentView.swift */,
+				2E1BB16A28C8B4AA007F3587 /* ActionButton.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		F4E49CCB28CB1FF900BE74F5 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				F4E49CCC28CB1FF900BE74F5 /* ActionButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		F4E49CCD28CB1FF900BE74F5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F4E49CCE28CB1FF900BE74F5 /* RefusePaymentView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		F955ED1E256D1C20005299AC /* WalletPOCTests */ = {
@@ -277,6 +347,8 @@
 		F997090D2549FC3000E24EAA /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
+				2E1BB15B28C8AA7F007F3587 /* Style */,
+				2E1BB15828C8A46D007F3587 /* ViewControllers */,
 				F41C08DD28C8B6640050510E /* Account */,
 				F41C08D828C877700050510E /* Components */,
 				F42109E228BDE8510069F486 /* Payment */,
@@ -303,6 +375,7 @@
 				F955ED1E256D1C20005299AC /* WalletPOCTests */,
 				F9D38E50253794ED007D4888 /* Core */,
 				F9D38E19253793E3007D4888 /* Products */,
+				F4E49CCA28CB1FC200BE74F5 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -498,9 +571,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F97E1BFD25D3D8F7000884B4 /* AnalyticsEvent.swift in Sources */,
+				2E1BB15F28C8AAE2007F3587 /* ShadowDecorator.swift in Sources */,
+				2E1BB16328C8AB0E007F3587 /* CornerRadiusDecorator.swift in Sources */,
 				F9CB746D25CDA388006F0FE2 /* BaseViewController.swift in Sources */,
+				2E1BB15D28C8AA8C007F3587 /* ViewDecorator.swift in Sources */,
 				2E1BB15728C89253007F3587 /* Color.swift in Sources */,
 				2E1BB15228C8856F007F3587 /* Strings.swift in Sources */,
+				F4E49CCF28CB1FF900BE74F5 /* ActionButton.swift in Sources */,
 				F42109E928BDEF7D0069F486 /* UIView+Autolayout.swift in Sources */,
 				F9D889C427E3B3B600FF7F8E /* main.swift in Sources */,
 				F41C08D228C5DE7E0050510E /* AccountSwitchViewController.swift in Sources */,
@@ -511,20 +588,21 @@
 				F41C08DC28C8A0760050510E /* AccountView.swift in Sources */,
 				F42109E628BDE8C80069F486 /* SceneDelegate.swift in Sources */,
 				F9D6CC032571158D007E6779 /* Validation.swift in Sources */,
+				2E1BB16128C8AAF7007F3587 /* BorderDecorator.swift in Sources */,
 				F41C08DA28C877930050510E /* CustomInstallmentButton.swift in Sources */,
-				F9E98EE42582710000729B87 /* Assets.swift in Sources */,
 				2E1BB15528C88D37007F3587 /* Font.swift in Sources */,
 				F41C08D728C63CCB0050510E /* Layout.swift in Sources */,
 				F9DA38D425E7A99B0030D771 /* ErrorModel.swift in Sources */,
 				F41C08B028BE51310050510E /* PaymentViewModel.swift in Sources */,
 				F41C08B628C5CD910050510E /* Account.swift in Sources */,
 				F9CB747525CDA816006F0FE2 /* AppEngine.swift in Sources */,
+				2E1BB15A28C8A47F007F3587 /* AlertViewController.swift in Sources */,
 				F42109E428BDE85D0069F486 /* PaymentViewController.swift in Sources */,
 				F9C2B92F25893B6B002DBADF /* Config.swift in Sources */,
 				F98344A925CC021F0096DA55 /* Bundle.swift in Sources */,
+				F4E49CD028CB1FF900BE74F5 /* RefusePaymentView.swift in Sources */,
 				F97E1C0325D3D993000884B4 /* AnalyticsProvider.swift in Sources */,
 				F41C08DF28C8C93A0050510E /* TermsServicesViewController.swift in Sources */,
-				F9875512256D23850049EB19 /* Strings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
