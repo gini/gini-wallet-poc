@@ -10,7 +10,7 @@ import UIKit
 import PDFKit
 import Alamofire
 
-class PaymentViewController: UIViewController, XMLParserDelegate {
+class PaymentViewController: BaseViewController, XMLParserDelegate {
     
     private let fromLabel = UILabel.autoLayout()
     private let toLabel = UILabel.autoLayout()
@@ -65,7 +65,6 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
-        //        loadMerchantData()
     }
     
     private func setupViews() {

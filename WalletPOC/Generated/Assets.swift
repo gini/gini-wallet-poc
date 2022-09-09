@@ -47,6 +47,7 @@ internal enum Asset {
   }
   internal enum Images {
     internal static let app = ImageAsset(name: "App")
+    internal static let arrowLeft = ImageAsset(name: "arrowLeft")
     internal static let check = ImageAsset(name: "check")
     internal static let faceID = ImageAsset(name: "faceID")
     internal static let pdfMock = ImageAsset(name: "pdfMock")
