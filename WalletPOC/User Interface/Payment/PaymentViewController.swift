@@ -392,25 +392,24 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     }
     
     @objc private func didTapPayNow() {
-        let alertView = SuccessAlertView(type: .paymentConfirmed)
-        alertView.delegate = self
-        let alertViewController = AlertViewController()
-        alertViewController.modalPresentationStyle = .overFullScreen
-        alertViewController.populate(with: alertView)
-        present(alertViewController, animated: true)
+        presentSuccessAlert(with: .paymentConfirmed)
     }
     
     @objc private func didTapPayLater() {
-        let alertView = SuccessAlertView(type: .paymentAdded)
-        alertView.delegate = self
-        let alertViewController = AlertViewController()
-        alertViewController.modalPresentationStyle = .overFullScreen
-        alertViewController.populate(with: alertView)
-        present(alertViewController, animated: true)
+        presentSuccessAlert(with: .paymentAdded)
     }
     
     @objc private func didTapRefuse() {
         let alertView = RefusePaymentView()
+        alertView.delegate = self
+        let alertViewController = AlertViewController()
+        alertViewController.modalPresentationStyle = .overFullScreen
+        alertViewController.populate(with: alertView)
+        present(alertViewController, animated: true)
+    }
+    
+    private func presentSuccessAlert(with type: SuccessAlertView.SuccessEnumType) {
+        let alertView = SuccessAlertView(type: type)
         alertView.delegate = self
         let alertViewController = AlertViewController()
         alertViewController.modalPresentationStyle = .overFullScreen
