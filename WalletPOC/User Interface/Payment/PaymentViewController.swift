@@ -392,11 +392,25 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     }
     
     @objc private func didTapPayNow() {
-        presentSuccessAlert(with: .paymentConfirmed)
+        let vc = FaceIDViewController()
+        vc.modalPresentationStyle = .overFullScreen
+        vc.didAuthorize = {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                self.presentSuccessAlert(with: .paymentConfirmed)
+            }
+        }
+        present(vc, animated: true)
     }
     
     @objc private func didTapPayLater() {
-        presentSuccessAlert(with: .paymentAdded)
+        let vc = FaceIDViewController()
+        vc.modalPresentationStyle = .overFullScreen
+        vc.didAuthorize = {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                self.presentSuccessAlert(with: .paymentAdded)
+            }
+        }
+        present(vc, animated: true)
     }
     
     @objc private func didTapRefuse() {
