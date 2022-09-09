@@ -49,6 +49,8 @@ internal enum Asset {
     internal static let check = ImageAsset(name: "check")
     internal static let faceID = ImageAsset(name: "faceID")
     internal static let pdfMock = ImageAsset(name: "pdfMock")
+    internal static let radio = ImageAsset(name: "radio")
+    internal static let rainbowStore = ImageAsset(name: "rainbowStore")
     internal static let success = ImageAsset(name: "success")
     internal static let zalandoLogo = ImageAsset(name: "zalandoLogo")
   }
