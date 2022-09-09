@@ -8,6 +8,10 @@
 import Foundation
 import UIKit
 
+protocol AccountSwitchProtocol {
+    func sendDataforUpdate(account: Account)
+}
+
 class AccountSwitchViewController: UIViewController {
     
     private let accountsArray = [Account(id: "1", name: "Main Account", iban: "DE23 3701 0044 2344 8191 02", amount: "€3.111,03"), Account(id: "2", name: "Savings Account", iban: "DE23 3701 0044 1344 8291 01", amount: "€6.231,40")]
@@ -40,6 +44,8 @@ class AccountSwitchViewController: UIViewController {
     private let tableView = UITableView.autoLayout()
     private let titleLabel = UILabel.autoLayout()
     private let cancelButton = UIButton.autoLayout()
+    
+    var delegateProtocol: AccountSwitchProtocol?
     
     
     init() {
@@ -148,7 +154,14 @@ extension AccountSwitchViewController: UITableViewDataSource {
 }
 
 extension AccountSwitchViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            delegateProtocol?.sendDataforUpdate(account: accountsArray[0])
+        } else {
+            delegateProtocol?.sendDataforUpdate(account: accountsArray[1])
+        }
+        dismiss(animated: true)
+    }
 }
 
 
