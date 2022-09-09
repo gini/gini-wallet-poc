@@ -50,7 +50,7 @@ class PaymentViewModelImpl: PaymentViewModel {
     
     var toText = "To"
     
-    var merchantNameText = "Zalando AG"
+    var merchantNameText = "Rainbow Store"
     var merchantIban = "DE 88762181787817687"
     var merchantInvoice = "Ref: Invoice #378981798"
     var invoiceText = "Invoice"

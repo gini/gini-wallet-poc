@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import PDFKit
+import Alamofire
 
 class PaymentViewController: UIViewController, XMLParserDelegate {
     
@@ -48,8 +49,11 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     
     private let acceptLabel = UILabel.autoLayout()
     private let termsConditionsButton = UIButton.autoLayout()
+    private var checkmarkButton = CheckmarkButton(isChecked: false)
     
     private let viewModel: PaymentViewModel
+    
+    private var IsSavingsAccount = false
     
     init(viewModel: PaymentViewModel) {
         self.viewModel = viewModel
@@ -158,8 +162,18 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         termsConditionsButton.titleLabel?.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
         termsConditionsButton.addTarget(self, action: #selector(didTapTermsConditions), for: .touchUpInside)
         
+        checkmarkButton.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)
+        
         refuseButton.setTitle("Refuse", for: .normal)
         refuseButton.setTitleColor(.gray, for: .normal)
+        
+        checkmarkButton.isEnabled = false
+        termsConditionsButton.isEnabled = false
+        
+        
+        if senderDetailsView.accountNameLabel.text == "Savings Account"{
+            IsSavingsAccount = true
+        }
         
         view.addSubview(bottomView)
         view.addSubview(scrollView)
@@ -275,7 +289,9 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         horizontalScrollView.addSubview(horizontalContentView)
         [threeMonthsButton, sixMonthsButton, nineMonthsButton].forEach { horizontalContentView.addSubview($0) }
         
-        [installmentsLabel, horizontalScrollView, termsConditionsButton, acceptLabel].forEach { contentView.addSubview($0) }
+        checkmarkButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        [installmentsLabel, horizontalScrollView, termsConditionsButton, acceptLabel, checkmarkButton].forEach { contentView.addSubview($0) }
         
         [threeMonthsButton, sixMonthsButton, nineMonthsButton].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         
@@ -310,8 +326,14 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
             nineMonthsButton.leadingAnchor.constraint(equalTo: sixMonthsButton.trailingAnchor, constant: 20),
             nineMonthsButton.trailingAnchor.constraint(equalTo: horizontalContentView.trailingAnchor, constant: -20),
             
-            acceptLabel.topAnchor.constraint(equalTo: horizontalScrollView.bottomAnchor, constant: 20),
-            acceptLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 50),
+            checkmarkButton.topAnchor.constraint(equalTo: horizontalScrollView.bottomAnchor, constant: 20),
+
+            checkmarkButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            checkmarkButton.widthAnchor.constraint(equalToConstant: 30),
+            checkmarkButton.heightAnchor.constraint(equalToConstant: 30),
+
+            acceptLabel.topAnchor.constraint(equalTo: horizontalScrollView.bottomAnchor, constant: 25),
+            acceptLabel.leadingAnchor.constraint(equalTo: checkmarkButton.trailingAnchor, constant: 20),
             
             termsConditionsButton.centerYAnchor.constraint(equalTo: acceptLabel.centerYAnchor),
             termsConditionsButton.leadingAnchor.constraint(equalTo: acceptLabel.trailingAnchor, constant: 5),
@@ -335,7 +357,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     
     // MARK: - Tap handles
     @objc private func handleTap(_ sender: UITapGestureRecognizer? = nil) {
-        let accountVC = AccountSwitchViewController()
+        let accountVC = AccountSwitchViewController(isSavingsAccount: IsSavingsAccount)
         accountVC.delegateProtocol = self
         present(accountVC, animated: true)
     }
@@ -353,7 +375,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
             buttonSelect(button: payFullButton)
             buttonDeselect(button: buyNowPayLaterButton)
         }
-        [installmentsLabel, horizontalScrollView, termsConditionsButton, acceptLabel].forEach { $0.removeFromSuperview() }
+        [installmentsLabel, horizontalScrollView, termsConditionsButton, acceptLabel, checkmarkButton].forEach { $0.removeFromSuperview() }
     }
     
     @objc private func threeMonthsBtnTapped() {
@@ -363,6 +385,9 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         sixMonthsButton.priceLabel.font = UIFont(name: "PlusJakartaSans-Medium", size: 16)
         buttonDeselect(button: nineMonthsButton)
         nineMonthsButton.priceLabel.font = UIFont(name: "PlusJakartaSans-Medium", size: 16)
+        
+        checkmarkButton.isEnabled = true
+        termsConditionsButton.isEnabled = true
 
     }
     
@@ -373,6 +398,11 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         threeMonthsButton.priceLabel.font = UIFont(name: "PlusJakartaSans-Medium", size: 16)
         buttonDeselect(button: nineMonthsButton)
         nineMonthsButton.priceLabel.font = UIFont(name: "PlusJakartaSans-Medium", size: 16)
+        
+        checkmarkButton.isEnabled = true
+        termsConditionsButton.isEnabled = true
+        
+
     }
     
     @objc private func nineMonthsBtnTapped() {
@@ -382,32 +412,50 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         threeMonthsButton.priceLabel.font = UIFont(name: "PlusJakartaSans-Medium", size: 16)
         buttonDeselect(button: sixMonthsButton)
         sixMonthsButton.priceLabel.font = UIFont(name: "PlusJakartaSans-Medium", size: 16)
+        
+        checkmarkButton.isEnabled = true
+        termsConditionsButton.isEnabled = true
     }
     
     @objc private func didTapTermsConditions() {
-        present(TermsServicesViewController(), animated: true, completion: nil)
+        let termsVC = TermsServicesViewController()
+        termsVC.delegateProtocol = self
+        present(termsVC, animated: true, completion: nil)
+    }
+    
+    @objc private func checkButtonTapped() {
+        checkmarkButton.isChecked.toggle()
     }
 }
 
 
-//extension PaymentViewController: PaymentViewUpdater {
-//    func reloadData() {
-//        senderDetailsView.reloadInputViews()
-//    }
-//
-    
-//}
-
 extension PaymentViewController: AccountSwitchProtocol {
     func sendDataforUpdate(account: Account) {
-        
         senderDetailsView.accountNameLabel.text = account.name
         senderDetailsView.ibanLabel.text = account.iban
         senderDetailsView.amountInvoiceLabel.text = account.amount
+        
+        
+        if senderDetailsView.accountNameLabel.text == "Savings Account"{
+            IsSavingsAccount = true
+        }
+        
+        if senderDetailsView.accountNameLabel.text == "Main Account"{
+            IsSavingsAccount = false
+        }
+        
+        
         print(":adasdsaasa")
-//        userAccountText = account.name
-//        userAccountNumber = account.iban
-//        userAccountAmount = account.amount
-//        viewUpdater?.reloadData()
+
     }
+}
+
+extension PaymentViewController: TermsServicesProtocol {
+    func termsAccepted() {
+        if checkmarkButton.backgroundColor != .accent {
+            checkmarkButton.isChecked.toggle()
+        }
+    }
+    
+    
 }

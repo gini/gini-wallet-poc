@@ -45,10 +45,13 @@ class AccountSwitchViewController: UIViewController {
     private let titleLabel = UILabel.autoLayout()
     private let cancelButton = UIButton.autoLayout()
     
+    private let isSavingsAccount: Bool
+    
     var delegateProtocol: AccountSwitchProtocol?
     
     
-    init() {
+    init(isSavingsAccount: Bool) {
+        self.isSavingsAccount = isSavingsAccount
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -147,6 +150,13 @@ extension AccountSwitchViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: AccountCell.reuseIdentifier, for: indexPath) as! AccountCell
         
         cell.configureCell(name: accountsArray[indexPath.row].name, iban: accountsArray[indexPath.row].iban, amount: accountsArray[indexPath.row].amount)
+        if isSavingsAccount && indexPath.row == 1 {
+            cell.radioButton.isChecked.toggle()
+        }
+        
+        if !isSavingsAccount && indexPath.row == 0 {
+            cell.radioButton.isChecked.toggle()
+        }
 
         return cell
     }

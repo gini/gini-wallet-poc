@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol TermsServicesProtocol {
+    func termsAccepted()
+}
+
 class TermsServicesViewController: UIViewController {
     
 //    private let accountsArray = [Account(id: "1", name: "Main Account", iban: "DE23 3701 0044 2344 8191 02", amount: "€3.111,03"), Account(id: "2", name: "Savings Account", iban: "DE23 3701 0044 1344 8291 01", amount: "€6.231,40")]
@@ -47,6 +51,8 @@ class TermsServicesViewController: UIViewController {
     private let acceptButton = UIButton.autoLayout()
     private let tinyView = UIView.autoLayout()
     
+    var delegateProtocol: TermsServicesProtocol?
+
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -176,6 +182,7 @@ class TermsServicesViewController: UIViewController {
     }
     
     @objc private func acceptButtonTapped() {
+        delegateProtocol?.termsAccepted()
         dismiss(animated: true, completion: nil)
     }
 }
