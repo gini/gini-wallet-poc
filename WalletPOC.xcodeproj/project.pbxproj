@@ -16,6 +16,15 @@
 		2E1BB15F28C8AAE2007F3587 /* ShadowDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BB15E28C8AAE2007F3587 /* ShadowDecorator.swift */; };
 		2E1BB16128C8AAF7007F3587 /* BorderDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BB16028C8AAF7007F3587 /* BorderDecorator.swift */; };
 		2E1BB16328C8AB0E007F3587 /* CornerRadiusDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BB16228C8AB0E007F3587 /* CornerRadiusDecorator.swift */; };
+		2E81252A28CA0D110051B787 /* SchedulePaymentCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81251F28CA0D110051B787 /* SchedulePaymentCellModel.swift */; };
+		2E81252B28CA0D110051B787 /* SchedulePaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81252028CA0D110051B787 /* SchedulePaymentCell.swift */; };
+		2E81252C28CA0D110051B787 /* CheckmarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81252228CA0D110051B787 /* CheckmarkButton.swift */; };
+		2E81252D28CA0D110051B787 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81252328CA0D110051B787 /* ActionButton.swift */; };
+		2E81252E28CA0D110051B787 /* SuccessAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81252528CA0D110051B787 /* SuccessAlertView.swift */; };
+		2E81252F28CA0D110051B787 /* PaymentConfirmedAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81252628CA0D110051B787 /* PaymentConfirmedAlertView.swift */; };
+		2E81253028CA0D110051B787 /* SchedulePaymentsAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81252728CA0D110051B787 /* SchedulePaymentsAlertView.swift */; };
+		2E81253128CA0D110051B787 /* SchedulePaymentsAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81252828CA0D110051B787 /* SchedulePaymentsAlertViewModel.swift */; };
+		2E81253228CA0D110051B787 /* RefusePaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81252928CA0D110051B787 /* RefusePaymentView.swift */; };
 		F41C08B028BE51310050510E /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41C08AF28BE51310050510E /* PaymentViewModel.swift */; };
 		F41C08B228BE59A70050510E /* pdfMock2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F41C08B128BE59A70050510E /* pdfMock2.pdf */; };
 		F41C08B428C0D3400050510E /* DS-01.xml in Resources */ = {isa = PBXBuildFile; fileRef = F41C08B328C0D33F0050510E /* DS-01.xml */; };
@@ -38,8 +47,6 @@
 		F42109E428BDE85D0069F486 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42109E328BDE85D0069F486 /* PaymentViewController.swift */; };
 		F42109E628BDE8C80069F486 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42109E528BDE8C80069F486 /* SceneDelegate.swift */; };
 		F42109E928BDEF7D0069F486 /* UIView+Autolayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42109E828BDEF7D0069F486 /* UIView+Autolayout.swift */; };
-		F4E49CCF28CB1FF900BE74F5 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E49CCC28CB1FF900BE74F5 /* ActionButton.swift */; };
-		F4E49CD028CB1FF900BE74F5 /* RefusePaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E49CCE28CB1FF900BE74F5 /* RefusePaymentView.swift */; };
 		F955ED20256D1C20005299AC /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F955ED1F256D1C20005299AC /* Tests.swift */; };
 		F955ED2C256D1CF8005299AC /* ViewInspector in Frameworks */ = {isa = PBXBuildFile; productRef = F955ED2B256D1CF8005299AC /* ViewInspector */; };
 		F97E1BFD25D3D8F7000884B4 /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E1BFC25D3D8F7000884B4 /* AnalyticsEvent.swift */; };
@@ -82,6 +89,22 @@
 		2E1BB16228C8AB0E007F3587 /* CornerRadiusDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRadiusDecorator.swift; sourceTree = "<group>"; };
 		2E1BB16728C8B0D6007F3587 /* RefusePaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefusePaymentView.swift; sourceTree = "<group>"; };
 		2E1BB16A28C8B4AA007F3587 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
+		2E8124F328C8C0A80051B787 /* SuccessAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessAlertView.swift; sourceTree = "<group>"; };
+		2E8124F528C8C9680051B787 /* PaymentConfirmedAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentConfirmedAlertView.swift; sourceTree = "<group>"; };
+		2E8124F728C8DCEC0051B787 /* SchedulePaymentsAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePaymentsAlertView.swift; sourceTree = "<group>"; };
+		2E8124F928C905230051B787 /* CheckmarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkButton.swift; sourceTree = "<group>"; };
+		2E8124FB28C90C360051B787 /* SchedulePaymentsAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePaymentsAlertViewModel.swift; sourceTree = "<group>"; };
+		2E8124FE28C9C7170051B787 /* SchedulePaymentCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePaymentCellModel.swift; sourceTree = "<group>"; };
+		2E81250028C9C7230051B787 /* SchedulePaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePaymentCell.swift; sourceTree = "<group>"; };
+		2E81251F28CA0D110051B787 /* SchedulePaymentCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchedulePaymentCellModel.swift; sourceTree = "<group>"; };
+		2E81252028CA0D110051B787 /* SchedulePaymentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchedulePaymentCell.swift; sourceTree = "<group>"; };
+		2E81252228CA0D110051B787 /* CheckmarkButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckmarkButton.swift; sourceTree = "<group>"; };
+		2E81252328CA0D110051B787 /* ActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
+		2E81252528CA0D110051B787 /* SuccessAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccessAlertView.swift; sourceTree = "<group>"; };
+		2E81252628CA0D110051B787 /* PaymentConfirmedAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentConfirmedAlertView.swift; sourceTree = "<group>"; };
+		2E81252728CA0D110051B787 /* SchedulePaymentsAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchedulePaymentsAlertView.swift; sourceTree = "<group>"; };
+		2E81252828CA0D110051B787 /* SchedulePaymentsAlertViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchedulePaymentsAlertViewModel.swift; sourceTree = "<group>"; };
+		2E81252928CA0D110051B787 /* RefusePaymentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefusePaymentView.swift; sourceTree = "<group>"; };
 		F41C08AF28BE51310050510E /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		F41C08B128BE59A70050510E /* pdfMock2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = pdfMock2.pdf; sourceTree = "<group>"; };
 		F41C08B328C0D33F0050510E /* DS-01.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "DS-01.xml"; sourceTree = "<group>"; };
@@ -201,6 +224,54 @@
 			path = Decorator;
 			sourceTree = "<group>";
 		};
+		2E81250228CA0C260051B787 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				2E8124F528C8C9680051B787 /* PaymentConfirmedAlertView.swift */,
+				2E81250028C9C7230051B787 /* SchedulePaymentCell.swift */,
+				2E8124F728C8DCEC0051B787 /* SchedulePaymentsAlertView.swift */,
+				2E1BB16728C8B0D6007F3587 /* RefusePaymentView.swift */,
+				2E8124FB28C90C360051B787 /* SchedulePaymentsAlertViewModel.swift */,
+				2E8124F928C905230051B787 /* CheckmarkButton.swift */,
+				2E8124F328C8C0A80051B787 /* SuccessAlertView.swift */,
+				2E8124FE28C9C7170051B787 /* SchedulePaymentCellModel.swift */,
+				2E1BB16A28C8B4AA007F3587 /* ActionButton.swift */,
+				F4E49CCC28CB1FF900BE74F5 /* ActionButton.swift */,
+				F4E49CCE28CB1FF900BE74F5 /* RefusePaymentView.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		2E81251E28CA0D110051B787 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				2E81251F28CA0D110051B787 /* SchedulePaymentCellModel.swift */,
+				2E81252028CA0D110051B787 /* SchedulePaymentCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		2E81252128CA0D110051B787 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				2E81252228CA0D110051B787 /* CheckmarkButton.swift */,
+				2E81252328CA0D110051B787 /* ActionButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		2E81252428CA0D110051B787 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2E81252528CA0D110051B787 /* SuccessAlertView.swift */,
+				2E81252628CA0D110051B787 /* PaymentConfirmedAlertView.swift */,
+				2E81252728CA0D110051B787 /* SchedulePaymentsAlertView.swift */,
+				2E81252828CA0D110051B787 /* SchedulePaymentsAlertViewModel.swift */,
+				2E81252928CA0D110051B787 /* RefusePaymentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		F41C08B728C5CF800050510E /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -233,8 +304,9 @@
 		F41C08D828C877700050510E /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				F4E49CCB28CB1FF900BE74F5 /* Buttons */,
-				F4E49CCD28CB1FF900BE74F5 /* Views */,
+				2E81252128CA0D110051B787 /* Buttons */,
+				2E81251E28CA0D110051B787 /* Cells */,
+				2E81252428CA0D110051B787 /* Views */,
 				F41C08D928C877930050510E /* CustomInstallmentButton.swift */,
 				F41C08DB28C8A0760050510E /* AccountView.swift */,
 			);
@@ -268,31 +340,6 @@
 				F42109E828BDEF7D0069F486 /* UIView+Autolayout.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		F4E49CCA28CB1FC200BE74F5 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				2E1BB16728C8B0D6007F3587 /* RefusePaymentView.swift */,
-				2E1BB16A28C8B4AA007F3587 /* ActionButton.swift */,
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
-		F4E49CCB28CB1FF900BE74F5 /* Buttons */ = {
-			isa = PBXGroup;
-			children = (
-				F4E49CCC28CB1FF900BE74F5 /* ActionButton.swift */,
-			);
-			path = Buttons;
-			sourceTree = "<group>";
-		};
-		F4E49CCD28CB1FF900BE74F5 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				F4E49CCE28CB1FF900BE74F5 /* RefusePaymentView.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		F955ED1E256D1C20005299AC /* WalletPOCTests */ = {
@@ -375,7 +422,7 @@
 				F955ED1E256D1C20005299AC /* WalletPOCTests */,
 				F9D38E50253794ED007D4888 /* Core */,
 				F9D38E19253793E3007D4888 /* Products */,
-				F4E49CCA28CB1FC200BE74F5 /* Recovered References */,
+				2E81250228CA0C260051B787 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -575,9 +622,10 @@
 				2E1BB16328C8AB0E007F3587 /* CornerRadiusDecorator.swift in Sources */,
 				F9CB746D25CDA388006F0FE2 /* BaseViewController.swift in Sources */,
 				2E1BB15D28C8AA8C007F3587 /* ViewDecorator.swift in Sources */,
+				2E81252E28CA0D110051B787 /* SuccessAlertView.swift in Sources */,
+				2E81252C28CA0D110051B787 /* CheckmarkButton.swift in Sources */,
 				2E1BB15728C89253007F3587 /* Color.swift in Sources */,
 				2E1BB15228C8856F007F3587 /* Strings.swift in Sources */,
-				F4E49CCF28CB1FF900BE74F5 /* ActionButton.swift in Sources */,
 				F42109E928BDEF7D0069F486 /* UIView+Autolayout.swift in Sources */,
 				F9D889C427E3B3B600FF7F8E /* main.swift in Sources */,
 				F41C08D228C5DE7E0050510E /* AccountSwitchViewController.swift in Sources */,
@@ -585,22 +633,30 @@
 				F9D38E1C253793E3007D4888 /* AppDelegate.swift in Sources */,
 				2E1BB15328C8856F007F3587 /* Assets.swift in Sources */,
 				F9CB747125CDA71B006F0FE2 /* UIViewController+Error.swift in Sources */,
-				F41C08DC28C8A0760050510E /* AccountView.swift in Sources */,
 				F42109E628BDE8C80069F486 /* SceneDelegate.swift in Sources */,
+				2E81253228CA0D110051B787 /* RefusePaymentView.swift in Sources */,
 				F9D6CC032571158D007E6779 /* Validation.swift in Sources */,
 				2E1BB16128C8AAF7007F3587 /* BorderDecorator.swift in Sources */,
+				F41C08DC28C8A0760050510E /* AccountView.swift in Sources */,
+				2E81252B28CA0D110051B787 /* SchedulePaymentCell.swift in Sources */,
+				F42109E628BDE8C80069F486 /* SceneDelegate.swift in Sources */,
+				F9D6CC032571158D007E6779 /* Validation.swift in Sources */,
+				2E81252F28CA0D110051B787 /* PaymentConfirmedAlertView.swift in Sources */,
 				F41C08DA28C877930050510E /* CustomInstallmentButton.swift in Sources */,
 				2E1BB15528C88D37007F3587 /* Font.swift in Sources */,
 				F41C08D728C63CCB0050510E /* Layout.swift in Sources */,
 				F9DA38D425E7A99B0030D771 /* ErrorModel.swift in Sources */,
 				F41C08B028BE51310050510E /* PaymentViewModel.swift in Sources */,
+				2E81252A28CA0D110051B787 /* SchedulePaymentCellModel.swift in Sources */,
 				F41C08B628C5CD910050510E /* Account.swift in Sources */,
 				F9CB747525CDA816006F0FE2 /* AppEngine.swift in Sources */,
 				2E1BB15A28C8A47F007F3587 /* AlertViewController.swift in Sources */,
 				F42109E428BDE85D0069F486 /* PaymentViewController.swift in Sources */,
 				F9C2B92F25893B6B002DBADF /* Config.swift in Sources */,
+				2E81253128CA0D110051B787 /* SchedulePaymentsAlertViewModel.swift in Sources */,
+				2E81253028CA0D110051B787 /* SchedulePaymentsAlertView.swift in Sources */,
+				2E81252D28CA0D110051B787 /* ActionButton.swift in Sources */,
 				F98344A925CC021F0096DA55 /* Bundle.swift in Sources */,
-				F4E49CD028CB1FF900BE74F5 /* RefusePaymentView.swift in Sources */,
 				F97E1C0325D3D993000884B4 /* AnalyticsProvider.swift in Sources */,
 				F41C08DF28C8C93A0050510E /* TermsServicesViewController.swift in Sources */,
 			);
