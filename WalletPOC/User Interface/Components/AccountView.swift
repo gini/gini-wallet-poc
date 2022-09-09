@@ -35,13 +35,13 @@ enum AccountType {
     var accountNameColor: UIColor {
         switch self {
         case .sender: return .black
-        case .merchant: return .gray
+        case .merchant: return UIColor(named: "gray") ?? UIColor()
         }
     }
     
     var amountInvoiceColor: UIColor {
         switch self {
-        case .sender: return .gray
+        case .sender: return UIColor(named: "gray") ?? UIColor()
         case .merchant: return .black
         }
     }
@@ -49,10 +49,10 @@ enum AccountType {
 
 class AccountView: UIView {
     
-     let accountNameLabel = UILabel.autoLayout()
-     let ibanLabel = UILabel.autoLayout()
-     let amountInvoiceLabel = UILabel.autoLayout()
-     let switchAccountButton = UIButton.autoLayout()
+     var accountNameLabel = UILabel.autoLayout()
+     var ibanLabel = UILabel.autoLayout()
+     var amountInvoiceLabel = UILabel.autoLayout()
+     var switchAccountButton = UIButton.autoLayout()
 
     private let type: AccountType
     init(type: AccountType) {
@@ -67,13 +67,14 @@ class AccountView: UIView {
     }
     
     private func setupViews() {
-        self.backgroundColor = .lightGray
+        self.backgroundColor = UIColor(named: "giniLightGray")
+
         
         accountNameLabel.textColor = type.accountNameColor
         accountNameLabel.font = type.accountNameFont
         
         
-        ibanLabel.textColor = .gray
+        ibanLabel.textColor = UIColor(named: "gray")
         ibanLabel.font = UIFont(name: "PlusJakartaSans-Medium", size: 16)
         
         amountInvoiceLabel.textColor = type.amountInvoiceColor

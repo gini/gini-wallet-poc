@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol PaymentViewUpdater {
+    func reloadData()
+}
+
 protocol PaymentViewModel {
     var titleText: String { get }
     var fromText: String { get }
@@ -28,6 +32,8 @@ protocol PaymentViewModel {
     
     var acceptText: String { get }
     var termsConditionsText: String { get }
+    var viewUpdater: PaymentViewUpdater? { get set }
+
 
 }
 
@@ -55,6 +61,12 @@ class PaymentViewModelImpl: PaymentViewModel {
     var installmentsText = "Installments"
     var acceptText = "I accept the"
     var termsConditionsText = "Terms and Conditions"
+    
+    var viewUpdater: PaymentViewUpdater?
+
+    
+    
+ 
     
     //    var xmlDict = [String: Any]()
     //    var xmlDictArr = [[String: Any]]()
@@ -109,6 +121,15 @@ class PaymentViewModelImpl: PaymentViewModel {
     //    }
 
 }
+
+//extension PaymentViewModelImpl: AccountSwitchProtocol {
+//    func sendDataforUpdate(account: Account) {
+//        userAccountText = account.name
+//        userAccountNumber = account.iban
+//        userAccountAmount = account.amount
+//        viewUpdater?.reloadData()
+//    }
+//}
 
 //extension Bundle {
 //    func getFileData(_ file: String) -> Data {
