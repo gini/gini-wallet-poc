@@ -48,7 +48,7 @@ enum InstallmentButtonType {
 
 class CustomInstallmentButton: UIButton {
         
-    private let priceLabel = UILabel.autoLayout()
+    let priceLabel = UILabel.autoLayout()
     private let periodLabel = UILabel.autoLayout()
     
     private let type: CustomButtonType
@@ -74,15 +74,14 @@ class CustomInstallmentButton: UIButton {
         
         self.layer.cornerRadius = 5
         self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.gray.cgColor
-//        UIColor(named: "borderGray")?.cgColor
+        self.layer.borderColor = UIColor(named: "borderGray")?.cgColor
         self.backgroundColor = .clear
         
         self.addSubview(priceLabel)
         self.insertSubview(periodLabel, belowSubview: priceLabel)
         
         priceLabel.textColor = .black
-        priceLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
+        priceLabel.font = UIFont(name: "PlusJakartaSans-Medium", size: 16)
         priceLabel.textAlignment = .center
         
         //periodLabel.text =
@@ -94,7 +93,7 @@ class CustomInstallmentButton: UIButton {
         self.titleLabel?.lineBreakMode = .byWordWrapping
         self.titleLabel?.textAlignment = .center
         self.setTitleColor(.black, for: .normal)
-        self.titleLabel?.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
+        self.titleLabel?.font = UIFont(name: "PlusJakartaSans-Medium", size: 16)
 
     }
     
