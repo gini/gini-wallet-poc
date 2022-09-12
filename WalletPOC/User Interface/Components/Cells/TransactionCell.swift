@@ -52,7 +52,7 @@ final class TransactionCell: UITableViewCell {
     private lazy var separatorView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .lightBorderColor
+        view.backgroundColor = .borderColor
         return view
     }()
     
@@ -118,7 +118,12 @@ final class TransactionCell: UITableViewCell {
             stackView.trailingAnchor.constraint(lessThanOrEqualTo: amountLabel.leadingAnchor, constant: -.padding2x),
             
             amountLabel.centerYAnchor.constraint(equalTo: logoImageView.centerYAnchor),
-            amountLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.padding3x)
+            amountLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.padding3x),
+            
+            separatorView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .padding3x),
+            separatorView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            separatorView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            separatorView.heightAnchor.constraint(equalToConstant: .borderThickness)
         ])
     }
     
