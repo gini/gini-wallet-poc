@@ -26,9 +26,10 @@ final class TabbarViewController: UITabBarController {
         let homeBarItem = UITabBarItem(title: "Home", image: Asset.Images.home.image, selectedImage: Asset.Images.home.image)
         homeVC.tabBarItem = homeBarItem
         
-        let walletVC = UIViewController()
+        let walletVC = WalletViewController(viewModel: WalletViewModel())
+        let walletNavController = UINavigationController(rootViewController: walletVC)
         let walletBarItem = UITabBarItem(title: "Wallet", image: Asset.Images.wallet.image, selectedImage: Asset.Images.walletSselected.image)
-        walletVC.tabBarItem = walletBarItem
+        walletNavController.tabBarItem = walletBarItem
         
         let tradingVC = UIViewController()
         let tradingBarItem = UITabBarItem(title: "Trading", image: Asset.Images.trading.image, selectedImage: Asset.Images.trading.image)
@@ -38,7 +39,7 @@ final class TabbarViewController: UITabBarController {
         let settingsBarItem = UITabBarItem(title: "Settings", image: Asset.Images.settings.image, selectedImage: Asset.Images.settings.image)
         settingsVC.tabBarItem = settingsBarItem
         
-        self.viewControllers = [homeVC, walletVC, tradingVC, settingsVC]
+        self.viewControllers = [homeVC, walletNavController, tradingVC, settingsVC]
         self.selectedIndex = 1
         self.tabBar.unselectedItemTintColor = .secondaryText
         self.tabBar.tintColor = .primaryText

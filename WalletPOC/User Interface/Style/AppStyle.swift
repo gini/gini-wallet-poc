@@ -14,7 +14,7 @@ struct AppStyle {
         let navigationBarAppearance = UINavigationBar.appearance()
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = .white
+        appearance.backgroundColor = .clear
         appearance.shadowColor = .clear
         let backButtonImage = Asset.Images.arrowLeft.image
         appearance.setBackIndicatorImage(backButtonImage, transitionMaskImage: backButtonImage)

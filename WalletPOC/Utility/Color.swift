@@ -27,4 +27,5 @@ extension UIColor {
     static let borderColor = Asset.Colors.borderColor.color
     static let lightBorderColor = Asset.Colors.lightBorder.color
     static let radioButtonColor = Asset.Colors.hued1.color
+    static let brightYellow = Asset.Colors.brightYellow.color
 }
