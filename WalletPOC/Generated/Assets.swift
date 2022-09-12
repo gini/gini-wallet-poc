@@ -55,6 +55,11 @@ internal enum Asset {
     internal static let radio = ImageAsset(name: "radio")
     internal static let rainbowStore = ImageAsset(name: "rainbowStore")
     internal static let success = ImageAsset(name: "success")
+    internal static let home = ImageAsset(name: "home")
+    internal static let settings = ImageAsset(name: "settings")
+    internal static let trading = ImageAsset(name: "trading")
+    internal static let wallet = ImageAsset(name: "wallet")
+    internal static let walletSselected = ImageAsset(name: "walletSselected")
     internal static let zalandoLogo = ImageAsset(name: "zalandoLogo")
   }
 }

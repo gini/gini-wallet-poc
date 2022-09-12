@@ -16,6 +16,7 @@
 		2E1BB15F28C8AAE2007F3587 /* ShadowDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BB15E28C8AAE2007F3587 /* ShadowDecorator.swift */; };
 		2E1BB16128C8AAF7007F3587 /* BorderDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BB16028C8AAF7007F3587 /* BorderDecorator.swift */; };
 		2E1BB16328C8AB0E007F3587 /* CornerRadiusDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BB16228C8AB0E007F3587 /* CornerRadiusDecorator.swift */; };
+		2E40C89C28CF531D00D438AF /* TabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E40C89B28CF531D00D438AF /* TabbarViewController.swift */; };
 		2E81252A28CA0D110051B787 /* SchedulePaymentCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81251F28CA0D110051B787 /* SchedulePaymentCellModel.swift */; };
 		2E81252B28CA0D110051B787 /* SchedulePaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81252028CA0D110051B787 /* SchedulePaymentCell.swift */; };
 		2E81252C28CA0D110051B787 /* CheckmarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81252228CA0D110051B787 /* CheckmarkButton.swift */; };
@@ -94,6 +95,7 @@
 		2E1BB16228C8AB0E007F3587 /* CornerRadiusDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRadiusDecorator.swift; sourceTree = "<group>"; };
 		2E1BB16728C8B0D6007F3587 /* RefusePaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefusePaymentView.swift; sourceTree = "<group>"; };
 		2E1BB16A28C8B4AA007F3587 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
+		2E40C89B28CF531D00D438AF /* TabbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarViewController.swift; sourceTree = "<group>"; };
 		2E8124F328C8C0A80051B787 /* SuccessAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessAlertView.swift; sourceTree = "<group>"; };
 		2E8124F528C8C9680051B787 /* PaymentConfirmedAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentConfirmedAlertView.swift; sourceTree = "<group>"; };
 		2E8124F728C8DCEC0051B787 /* SchedulePaymentsAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePaymentsAlertView.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 				2E81253328CB2C5E0051B787 /* FaceIDViewController.swift */,
 				2E81253528CB34630051B787 /* EmptyViewController.swift */,
 				2E81253B28CB89EF0051B787 /* PDFViewController.swift */,
+				2E40C89B28CF531D00D438AF /* TabbarViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -643,6 +646,7 @@
 				2E1BB15228C8856F007F3587 /* Strings.swift in Sources */,
 				F42109E928BDEF7D0069F486 /* UIView+Autolayout.swift in Sources */,
 				F9D889C427E3B3B600FF7F8E /* main.swift in Sources */,
+				2E40C89C28CF531D00D438AF /* TabbarViewController.swift in Sources */,
 				F41C08D228C5DE7E0050510E /* AccountSwitchViewController.swift in Sources */,
 				F41C08D428C5E9750050510E /* AccountCell.swift in Sources */,
 				F9D38E1C253793E3007D4888 /* AppDelegate.swift in Sources */,
