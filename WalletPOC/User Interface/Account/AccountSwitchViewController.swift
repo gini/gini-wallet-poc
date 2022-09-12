@@ -30,8 +30,7 @@ class AccountSwitchViewController: UIViewController {
     let maxDimmedAlpha: CGFloat = 0.4
     lazy var dimmedView: UIView = {
         let view = UIView()
-        view.backgroundColor = .black
-        view.alpha = maxDimmedAlpha
+        view.backgroundColor = .clear
         return view
     }()
     
@@ -45,13 +44,13 @@ class AccountSwitchViewController: UIViewController {
     private let titleLabel = UILabel.autoLayout()
     private let cancelButton = UIButton.autoLayout()
     
-    private let isSavingsAccount: Bool
+    private var selectedAccount: Account
     
     var delegateProtocol: AccountSwitchProtocol?
     
     
-    init(isSavingsAccount: Bool) {
-        self.isSavingsAccount = isSavingsAccount
+    init(selectedAccount: Account) {
+        self.selectedAccount = selectedAccount
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -64,6 +63,23 @@ class AccountSwitchViewController: UIViewController {
         setupView()
         setupConstraints()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UIView.animate(withDuration: 0.1) {
+            self.dimmedView.backgroundColor = .gray.withAlphaComponent(0.4)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        UIView.animate(withDuration: 0.1) {
+            self.dimmedView.backgroundColor = .clear
+        }
+    }
+    
     
     func setupView() {
         view.backgroundColor = .clear
@@ -130,7 +146,6 @@ class AccountSwitchViewController: UIViewController {
             tableView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
             tableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
             tableView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
-            //tableView.heightAnchor.constraint(equalToConstant: 100)
         ]
         NSLayoutConstraint.activate(constraints)
         
@@ -139,7 +154,6 @@ class AccountSwitchViewController: UIViewController {
     @objc private func cancelButtonTapped() {
         dismiss(animated: true, completion: nil)
     }
-    
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         dismiss(animated: true, completion: nil)
     }
@@ -155,27 +169,30 @@ extension AccountSwitchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AccountCell.reuseIdentifier, for: indexPath) as! AccountCell
         
-        cell.configureCell(name: accountsArray[indexPath.row].name, iban: accountsArray[indexPath.row].iban, amount: accountsArray[indexPath.row].amount)
-        if isSavingsAccount && indexPath.row == 1 {
-            cell.radioButton.isChecked.toggle()
+        cell.chechmarkChanged = { [weak self] isChecked in
+            guard let self = self else { return }
+            if isChecked {
+                self.selectedAccount = self.accountsArray[indexPath.row]
+                self.tableView.reloadData()
+                self.delegateProtocol?.sendDataforUpdate(account: self.selectedAccount)
+                self.dismiss(animated: true)
+            }
         }
         
-        if !isSavingsAccount && indexPath.row == 0 {
-            cell.radioButton.isChecked.toggle()
-        }
+        cell.configureCell(name: accountsArray[indexPath.row].name, iban: accountsArray[indexPath.row].iban, amount: accountsArray[indexPath.row].amount)
+        let account = accountsArray[indexPath.row]
+        cell.radioButton.isChecked = account.iban == selectedAccount.iban
 
         return cell
     }
-    
 }
 
 extension AccountSwitchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            delegateProtocol?.sendDataforUpdate(account: accountsArray[0])
-        } else {
-            delegateProtocol?.sendDataforUpdate(account: accountsArray[1])
-        }
+        selectedAccount = accountsArray[indexPath.row]
+        tableView.reloadData()
+        delegateProtocol?.sendDataforUpdate(account: accountsArray[indexPath.row])
+        
         dismiss(animated: true)
     }
 }

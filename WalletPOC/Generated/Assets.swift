@@ -38,6 +38,7 @@ internal enum Asset {
     internal static let extraLightgray = ColorAsset(name: "extraLightgray")
     internal static let giniLightGray = ColorAsset(name: "giniLightGray")
     internal static let gray = ColorAsset(name: "gray")
+    internal static let hued1 = ColorAsset(name: "hued1")
     internal static let lightBorder = ColorAsset(name: "lightBorder")
     internal static let lightGray = ColorAsset(name: "lightGray")
     internal static let red = ColorAsset(name: "red")
@@ -46,7 +47,9 @@ internal enum Asset {
   }
   internal enum Images {
     internal static let app = ImageAsset(name: "App")
+    internal static let arrowLeft = ImageAsset(name: "arrowLeft")
     internal static let check = ImageAsset(name: "check")
+    internal static let close = ImageAsset(name: "close")
     internal static let faceID = ImageAsset(name: "faceID")
     internal static let pdfMock = ImageAsset(name: "pdfMock")
     internal static let radio = ImageAsset(name: "radio")

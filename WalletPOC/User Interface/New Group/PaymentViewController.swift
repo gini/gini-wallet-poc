@@ -80,6 +80,13 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         loadMerchantData()
     }
     
+    override func layoutIfNeeded() {
+        super.layoutIfNeeded()
+        
+        grayView.decorate(with: CornerRadiusDecorator(radius: .viewRadius))
+        grayViewSecond.decorate(with: CornerRadiusDecorator(radius: .viewRadius))
+    }
+    
     private func setupViews() {
         view.backgroundColor = .white
         

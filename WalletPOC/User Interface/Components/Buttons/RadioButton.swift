@@ -46,20 +46,19 @@ final class RadioButton: UIButton {
     }
     
     private func initView() {
+        backgroundColor = .clear
         if isChecked {
-            backgroundColor = isEnabled ? .accent : .lightGray
-            setImage(Asset.Images.check.image, for: .normal)
-            borderColor = isEnabled ? .accent : .lightGray
+            setImage(Asset.Images.radio.image, for: .normal)
+            borderColor = .accent
         } else {
-            borderColor = isEnabled ? .accent : .lightGray
-            backgroundColor = .clear
+            borderColor = .radioButtonColor
             setImage(nil, for: .normal)
         }
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        decorate(with: [BorderDecorator(borderWidth: 1, borderColor: borderColor), CornerRadiusDecorator(radius: 8)])
+        decorate(with: [BorderDecorator(borderWidth: 1, borderColor: borderColor), CornerRadiusDecorator()])
     }
 }
 

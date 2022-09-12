@@ -33,4 +33,5 @@ extension CGFloat {
     static let actionButtonHeight: CGFloat = 56
     static let borderThickness: CGFloat = 1
     static let actionButtonRadius: CGFloat = 12
+    static let viewRadius: CGFloat = 8
 }

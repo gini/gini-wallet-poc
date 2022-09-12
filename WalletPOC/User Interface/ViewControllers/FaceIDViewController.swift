@@ -75,7 +75,7 @@ final class FaceIDViewController: UIViewController {
     private func setupUI() {
         view.addSubview(contentView)
         
-        contentView.decorate(with: CornerRadiusDecorator(radius: .alertViewRadius))
+        contentView.decorate(with: CornerRadiusDecorator(radius: .viewRadius))
         contentView.addSubview(imageView)
         contentView.addSubview(label)
     }

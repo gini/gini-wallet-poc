@@ -10,9 +10,8 @@ import UIKit
 import PDFKit
 import Alamofire
 
-class PaymentViewController: UIViewController, XMLParserDelegate {
+class PaymentViewController: BaseViewController, XMLParserDelegate {
     
-    private let titleLabel = UILabel.autoLayout()
     private let fromLabel = UILabel.autoLayout()
     private let toLabel = UILabel.autoLayout()
     private let invoiceLabel = UILabel.autoLayout()
@@ -51,9 +50,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     private let termsConditionsButton = UIButton.autoLayout()
     private var checkmarkButton = CheckmarkButton(isChecked: false)
     
-    private let viewModel: PaymentViewModel
-    
-    private var IsSavingsAccount = false
+    private var viewModel: PaymentViewModel
     
     init(viewModel: PaymentViewModel) {
         self.viewModel = viewModel
@@ -68,15 +65,11 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
-        //        loadMerchantData()
     }
     
     private func setupViews() {
+        navigationItem.title = viewModel.titleText
         view.backgroundColor = .white
-        
-        titleLabel.text = viewModel.titleText
-        titleLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 18)
-        titleLabel.textAlignment = .left
         
         toLabel.text = viewModel.toText
         toLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
@@ -96,6 +89,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         senderDetailsView.ibanLabel.text = viewModel.userAccountNumber
         senderDetailsView.amountInvoiceLabel.text = viewModel.userAccountAmount
         senderDetailsView.switchAccountButton.tintColor = .black
+        senderDetailsView.decorate(with: CornerRadiusDecorator(radius: .viewRadius))
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         senderDetailsView.addGestureRecognizer(tap)
@@ -105,10 +99,14 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         merchantDetailsView.accountNameLabel.text = viewModel.merchantNameText
         merchantDetailsView.ibanLabel.text  = viewModel.merchantIban
         merchantDetailsView.amountInvoiceLabel.text = viewModel.merchantInvoice
+        merchantDetailsView.decorate(with: CornerRadiusDecorator(radius: .viewRadius))
         
         tinyView.backgroundColor = UIColor(named: "giniLightGray")
         bottomTinyView.backgroundColor = UIColor(named: "giniLightGray")
+        
         pdfView.autoScales = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapPDFView))
+        pdfView.addGestureRecognizer(tapGesture)
         
         contentView.backgroundColor = .white
         
@@ -173,16 +171,11 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         checkmarkButton.isEnabled = false
         termsConditionsButton.isEnabled = false
         
-        
-        if senderDetailsView.accountNameLabel.text == "Savings Account"{
-            IsSavingsAccount = true
-        }
-        
         view.addSubview(bottomView)
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         
-        [titleLabel, fromLabel, toLabel, senderDetailsView, merchantDetailsView, tinyView, invoiceLabel, pdfView, payFullButton, buyNowPayLaterButton].forEach { contentView.addSubview($0) }
+        [fromLabel, toLabel, senderDetailsView, merchantDetailsView, tinyView, invoiceLabel, pdfView, payFullButton, buyNowPayLaterButton].forEach { contentView.addSubview($0) }
         
         [amountLabel, payNowButton, payLaterButton, refuseButton, bottomTinyView].forEach{ bottomView.addSubview($0) }
         
@@ -231,7 +224,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
             refuseButton.leadingAnchor.constraint(greaterThanOrEqualTo: bottomView.leadingAnchor, constant: 20),
             refuseButton.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor, constant: 10),
             
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: bottomView.topAnchor),
@@ -242,10 +235,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: view.widthAnchor),
             
-            titleLabel.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: -20),
-            titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            
-            fromLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 25),
+            fromLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 25),
             fromLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             
             senderDetailsView.topAnchor.constraint(equalTo: fromLabel.bottomAnchor, constant: 20),
@@ -282,8 +272,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
             pdfView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             pdfView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             pdfView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
-            pdfView.heightAnchor.constraint(equalToConstant: 400),
-            
+            pdfView.heightAnchor.constraint(equalToConstant: 420)
         ]
         NSLayoutConstraint.activate(constraints)
     }
@@ -360,7 +349,7 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
     
     // MARK: - Tap handles
     @objc private func handleTap(_ sender: UITapGestureRecognizer? = nil) {
-        let accountVC = AccountSwitchViewController(isSavingsAccount: IsSavingsAccount)
+        let accountVC = AccountSwitchViewController(selectedAccount: viewModel.selectedAccount)
         accountVC.modalPresentationStyle = .overFullScreen
         accountVC.delegateProtocol = self
         present(accountVC, animated: true)
@@ -470,6 +459,12 @@ class PaymentViewController: UIViewController, XMLParserDelegate {
         alertViewController.populate(with: alertView)
         present(alertViewController, animated: true)
     }
+    
+    @objc private func didTapPDFView() {
+        let pdfVC = PDFViewController()
+        pdfVC.modalPresentationStyle = .overFullScreen
+        present(pdfVC, animated: true)
+    }
 }
 
 
@@ -478,19 +473,7 @@ extension PaymentViewController: AccountSwitchProtocol {
         senderDetailsView.accountNameLabel.text = account.name
         senderDetailsView.ibanLabel.text = account.iban
         senderDetailsView.amountInvoiceLabel.text = account.amount
-        
-        
-        if senderDetailsView.accountNameLabel.text == "Savings Account"{
-            IsSavingsAccount = true
-        }
-        
-        if senderDetailsView.accountNameLabel.text == "Main Account"{
-            IsSavingsAccount = false
-        }
-        
-        
-        print(":adasdsaasa")
-
+        viewModel.selectedAccount = account
     }
 }
 
