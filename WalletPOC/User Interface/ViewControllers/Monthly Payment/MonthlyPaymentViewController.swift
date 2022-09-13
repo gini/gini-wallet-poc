@@ -25,7 +25,7 @@ final class MonthlyPaymentViewController: BaseViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .bodyLarge
         label.textColor = .primaryText
-        label.text = "€255.00"
+        label.text = viewModel.totalAmountText
         return label
     }()
     
@@ -163,7 +163,7 @@ extension MonthlyPaymentViewController: UITableViewDataSource {
         view?.title = viewModel.sectionModels[section].title
         view?.canSchedule = viewModel.sectionModels[section].canSchedulePayment
         view?.scheduleTapped = {
-            print("should schedule payment")
+            self.presnetScheduleAppointmentView()
         }
         return view
     }
@@ -178,10 +178,26 @@ extension MonthlyPaymentViewController: UITableViewDataSource {
         cell.contentView.backgroundColor = .white
         return cell
     }
+    
+    private func presnetScheduleAppointmentView() {
+        let alertView = SchedulePaymentsAlertView(viewModel: SchedulePaymentsAlertViewModel(numberOfSchedules: 3, totalAmount: viewModel.totalAmount, consignee: "Zalando"))
+        alertView.delegate = self
+        let alertViewController = AlertViewController()
+        alertViewController.modalPresentationStyle = .overFullScreen
+        alertViewController.populate(with: alertView)
+        present(alertViewController, animated: true)
+    }
 }
 
 extension MonthlyPaymentViewController: UITableViewDelegate {
     
+}
+
+extension MonthlyPaymentViewController: SchedulePaymentsAlertViewDelegate {
+    
+    func didConfirm(isScheduled: Bool, checkedCellModels: [SchedulePaymentCellModel]) {
+        dismiss(animated: true)
+    }
 }
 
 extension UIView {

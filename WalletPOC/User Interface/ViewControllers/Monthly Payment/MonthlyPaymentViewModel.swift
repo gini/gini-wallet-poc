@@ -16,8 +16,12 @@ final class MonthlyPaymentViewModel {
     
     private var totalMonths: Int
     private var paidMonths: Int
-    private var totalAmount: Double
+    var totalAmount: Double
     private var amountPerMonth: Double
+    
+    var totalAmountText: String? {
+        return "- €\(String(format: "%.2f", totalAmount))"
+    }
     
     init(totalMonths: Int, paidMonths: Int, totalAmount: Double) {
         self.totalAmount = totalAmount

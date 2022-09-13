@@ -122,7 +122,7 @@ extension WalletViewController: UITableViewDelegate {
 //        if cellModel.type == .scheduledUpcoming {
 //
 //        }
-        let monthlyPaymentVC = MonthlyPaymentViewController(viewModel: MonthlyPaymentViewModel(totalMonths: 9, paidMonths: 8, totalAmount: 260))
+        let monthlyPaymentVC = MonthlyPaymentViewController(viewModel: MonthlyPaymentViewModel(totalMonths: 3, paidMonths: 2, totalAmount: 190))
         navigationController?.pushViewController(monthlyPaymentVC, animated: true)
     }
 }
