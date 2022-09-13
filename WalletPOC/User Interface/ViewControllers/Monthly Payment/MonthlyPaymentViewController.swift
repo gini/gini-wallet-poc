@@ -11,6 +11,11 @@ import UIKit
 final class MonthlyPaymentViewController: BaseViewController {
     
     // MARK: - Properties
+    private lazy var footerView: PaymentFooterView = {
+        let footerView = PaymentFooterView()
+        return footerView
+    }()
+    
     private lazy var fullAmountLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -89,6 +94,18 @@ final class MonthlyPaymentViewController: BaseViewController {
         super.viewDidLayoutSubviews()
         
         tableView.decorate(with: CornerRadiusDecorator(radius: 16))
+
+        guard let footerView = tableView.tableFooterView else {
+            return
+        }
+
+        let size = footerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+
+        if footerView.frame.size.height != size.height {
+            footerView.frame.size.height = size.height
+            tableView.tableFooterView = footerView
+            tableView.layoutIfNeeded()
+        }
     }
     
     // MARK: - UI
@@ -145,7 +162,7 @@ final class MonthlyPaymentViewController: BaseViewController {
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.topAnchor.constraint(equalTo: grayView.bottomAnchor, constant: -20),
-            tableView.bottomAnchor.constraint(equalTo: bottomView.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: bottomView.topAnchor)
         ])
     }
     
@@ -177,6 +194,13 @@ extension MonthlyPaymentViewController: UITableViewDataSource {
         cell.viewModel = viewModel.sectionModels[indexPath.section].cellModels[indexPath.row]
         cell.contentView.backgroundColor = .white
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if section + 1 == viewModel.sectionModels.count {
+            return footerView
+        }
+        return nil
     }
     
     private func presnetScheduleAppointmentView() {
