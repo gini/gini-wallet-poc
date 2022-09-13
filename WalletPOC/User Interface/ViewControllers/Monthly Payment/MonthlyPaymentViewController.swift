@@ -16,6 +16,12 @@ final class MonthlyPaymentViewController: BaseViewController {
         return footerView
     }()
     
+    private lazy var progressView: ProgressView = {
+        let view = ProgressView(totalPortions: 3, portionsDone: 2, totalWidth: view.frame.width - Double(2 * .padding3x))
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private lazy var fullAmountLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -125,6 +131,7 @@ final class MonthlyPaymentViewController: BaseViewController {
         view.addSubview(grayView)
         view.addSubview(tableView)
         view.addSubview(bottomView)
+        grayView.addSubview(progressView)
         grayView.addSubview(fullAmountLabel)
         grayView.addSubview(fullAmountValueLabel)
         bottomView.addSubview(actionButton)
@@ -137,7 +144,11 @@ final class MonthlyPaymentViewController: BaseViewController {
             grayView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             grayView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            fullAmountLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: .padding2x),
+            progressView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: .padding),
+            progressView.leadingAnchor.constraint(equalTo: grayView.leadingAnchor, constant: .padding3x),
+            progressView.trailingAnchor.constraint(equalTo: grayView.trailingAnchor, constant: -.padding3x),
+            
+            fullAmountLabel.topAnchor.constraint(equalTo: progressView.bottomAnchor, constant: .padding2x),
             fullAmountLabel.leadingAnchor.constraint(equalTo: grayView.leadingAnchor, constant: .padding3x),
             fullAmountLabel.bottomAnchor.constraint(equalTo: grayView.bottomAnchor, constant: -.padding5x),
             

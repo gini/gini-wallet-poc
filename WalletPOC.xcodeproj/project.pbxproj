@@ -27,6 +27,7 @@
 		2E40C8AD28D083BF00D438AF /* MonthlyPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E40C8AC28D083BF00D438AF /* MonthlyPaymentViewController.swift */; };
 		2E40C8B028D083D600D438AF /* MonthlyPaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E40C8AF28D083D600D438AF /* MonthlyPaymentViewModel.swift */; };
 		2E40C8B228D0C1BA00D438AF /* PaymentFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E40C8B128D0C1BA00D438AF /* PaymentFooterView.swift */; };
+		2E40C8B428D0CCEB00D438AF /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E40C8B328D0CCEB00D438AF /* ProgressView.swift */; };
 		2E81252A28CA0D110051B787 /* SchedulePaymentCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81251F28CA0D110051B787 /* SchedulePaymentCellModel.swift */; };
 		2E81252B28CA0D110051B787 /* SchedulePaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81252028CA0D110051B787 /* SchedulePaymentCell.swift */; };
 		2E81252C28CA0D110051B787 /* CheckmarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81252228CA0D110051B787 /* CheckmarkButton.swift */; };
@@ -116,6 +117,7 @@
 		2E40C8AC28D083BF00D438AF /* MonthlyPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyPaymentViewController.swift; sourceTree = "<group>"; };
 		2E40C8AF28D083D600D438AF /* MonthlyPaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyPaymentViewModel.swift; sourceTree = "<group>"; };
 		2E40C8B128D0C1BA00D438AF /* PaymentFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentFooterView.swift; sourceTree = "<group>"; };
+		2E40C8B328D0CCEB00D438AF /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		2E8124F328C8C0A80051B787 /* SuccessAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessAlertView.swift; sourceTree = "<group>"; };
 		2E8124F528C8C9680051B787 /* PaymentConfirmedAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentConfirmedAlertView.swift; sourceTree = "<group>"; };
 		2E8124F728C8DCEC0051B787 /* SchedulePaymentsAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePaymentsAlertView.swift; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 				2E81252928CA0D110051B787 /* RefusePaymentView.swift */,
 				2E40C89F28CF6A6F00D438AF /* WalletHeaderView.swift */,
 				2E40C8B128D0C1BA00D438AF /* PaymentFooterView.swift */,
+				2E40C8B328D0CCEB00D438AF /* ProgressView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -730,6 +733,7 @@
 				F9C2B92F25893B6B002DBADF /* Config.swift in Sources */,
 				2E81253128CA0D110051B787 /* SchedulePaymentsAlertViewModel.swift in Sources */,
 				2E81253028CA0D110051B787 /* SchedulePaymentsAlertView.swift in Sources */,
+				2E40C8B428D0CCEB00D438AF /* ProgressView.swift in Sources */,
 				2E81252D28CA0D110051B787 /* ActionButton.swift in Sources */,
 				2E40C89E28CF652100D438AF /* WalletViewController.swift in Sources */,
 				2E40C8AB28CFC1ED00D438AF /* WalletSectionHeader.swift in Sources */,
