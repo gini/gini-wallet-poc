@@ -27,6 +27,7 @@ internal enum Asset {
   internal enum Colors {
     internal static let accentColor = ColorAsset(name: "AccentColor")
     internal static let secondaryAccent = ColorAsset(name: "SecondaryAccent")
+    internal static let blueishGray = ColorAsset(name: "blueishGray")
     internal static let borderColor = ColorAsset(name: "borderColor")
     internal static let borderGray = ColorAsset(name: "borderGray")
     internal static let borderGrayColorset113113877 = ColorAsset(name: "borderGray.colorset 11-31-13-877")

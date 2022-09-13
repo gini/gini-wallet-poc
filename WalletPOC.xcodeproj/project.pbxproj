@@ -24,6 +24,8 @@
 		2E40C8A728CF7C3D00D438AF /* TransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E40C8A628CF7C3D00D438AF /* TransactionCell.swift */; };
 		2E40C8A928CF7C4900D438AF /* TransactionCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E40C8A828CF7C4900D438AF /* TransactionCellModel.swift */; };
 		2E40C8AB28CFC1ED00D438AF /* WalletSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E40C8AA28CFC1ED00D438AF /* WalletSectionHeader.swift */; };
+		2E40C8AD28D083BF00D438AF /* MonthlyPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E40C8AC28D083BF00D438AF /* MonthlyPaymentViewController.swift */; };
+		2E40C8B028D083D600D438AF /* MonthlyPaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E40C8AF28D083D600D438AF /* MonthlyPaymentViewModel.swift */; };
 		2E81252A28CA0D110051B787 /* SchedulePaymentCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81251F28CA0D110051B787 /* SchedulePaymentCellModel.swift */; };
 		2E81252B28CA0D110051B787 /* SchedulePaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81252028CA0D110051B787 /* SchedulePaymentCell.swift */; };
 		2E81252C28CA0D110051B787 /* CheckmarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81252228CA0D110051B787 /* CheckmarkButton.swift */; };
@@ -110,6 +112,8 @@
 		2E40C8A628CF7C3D00D438AF /* TransactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCell.swift; sourceTree = "<group>"; };
 		2E40C8A828CF7C4900D438AF /* TransactionCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCellModel.swift; sourceTree = "<group>"; };
 		2E40C8AA28CFC1ED00D438AF /* WalletSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSectionHeader.swift; sourceTree = "<group>"; };
+		2E40C8AC28D083BF00D438AF /* MonthlyPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyPaymentViewController.swift; sourceTree = "<group>"; };
+		2E40C8AF28D083D600D438AF /* MonthlyPaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyPaymentViewModel.swift; sourceTree = "<group>"; };
 		2E8124F328C8C0A80051B787 /* SuccessAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessAlertView.swift; sourceTree = "<group>"; };
 		2E8124F528C8C9680051B787 /* PaymentConfirmedAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentConfirmedAlertView.swift; sourceTree = "<group>"; };
 		2E8124F728C8DCEC0051B787 /* SchedulePaymentsAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePaymentsAlertView.swift; sourceTree = "<group>"; };
@@ -226,6 +230,7 @@
 		2E1BB15828C8A46D007F3587 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				2E40C8AE28D083C500D438AF /* Monthly Payment */,
 				2E40C8A128CF79AD00D438AF /* Wallet */,
 				2E1BB15928C8A47F007F3587 /* AlertViewController.swift */,
 				2E81253328CB2C5E0051B787 /* FaceIDViewController.swift */,
@@ -264,6 +269,15 @@
 				2E40C8A428CF79E400D438AF /* Transaction.swift */,
 			);
 			path = Wallet;
+			sourceTree = "<group>";
+		};
+		2E40C8AE28D083C500D438AF /* Monthly Payment */ = {
+			isa = PBXGroup;
+			children = (
+				2E40C8AC28D083BF00D438AF /* MonthlyPaymentViewController.swift */,
+				2E40C8AF28D083D600D438AF /* MonthlyPaymentViewModel.swift */,
+			);
+			path = "Monthly Payment";
 			sourceTree = "<group>";
 		};
 		2E81250228CA0C260051B787 /* Recovered References */ = {
@@ -673,6 +687,7 @@
 				2E81252C28CA0D110051B787 /* CheckmarkButton.swift in Sources */,
 				2E1BB15728C89253007F3587 /* Color.swift in Sources */,
 				2E40C8A928CF7C4900D438AF /* TransactionCellModel.swift in Sources */,
+				2E40C8AD28D083BF00D438AF /* MonthlyPaymentViewController.swift in Sources */,
 				2E1BB15228C8856F007F3587 /* Strings.swift in Sources */,
 				2E40C8A328CF79C500D438AF /* WalletViewModel.swift in Sources */,
 				F42109E928BDEF7D0069F486 /* UIView+Autolayout.swift in Sources */,
@@ -719,6 +734,7 @@
 				2E81253628CB34630051B787 /* EmptyViewController.swift in Sources */,
 				F97E1C0325D3D993000884B4 /* AnalyticsProvider.swift in Sources */,
 				F41C08DF28C8C93A0050510E /* TermsServicesViewController.swift in Sources */,
+				2E40C8B028D083D600D438AF /* MonthlyPaymentViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
