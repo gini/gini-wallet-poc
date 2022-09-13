@@ -6,12 +6,14 @@
 //
 
 import Foundation
+import UIKit
 
 struct SectionModel {
     var title: String
     var isUpcoming: Bool
     var cellModels: [TransactionCellModel]
     var canSchedulePayment: Bool = false
+    var backGroundColor: UIColor = .white
 }
 
 class WalletViewModel {

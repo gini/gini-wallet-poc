@@ -30,7 +30,7 @@ final class MonthlyPaymentViewModel {
         setupUpcomingTransaction()
         
         sectionModels = [
-            SectionModel(title: "Upcoming", isUpcoming: true, cellModels: upcomingTransactions.map { TransactionCellModel(transaction: $0, type: .scheduledUpcoming)}),
+            SectionModel(title: "Upcoming", isUpcoming: true, cellModels: upcomingTransactions.map { TransactionCellModel(transaction: $0, type: .scheduledUpcoming)}, canSchedulePayment: true, backGroundColor: .yellow),
             SectionModel(title: "Paid so far", isUpcoming: false, cellModels: paidTransactions.map { TransactionCellModel(transaction: $0, type: .scheduledPaid)})
         ]
     }

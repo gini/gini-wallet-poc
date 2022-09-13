@@ -102,7 +102,7 @@ final class TransactionCell: UITableViewCell {
     
     private func setupLayout() {
         let heightAnchor = logoImageView.heightAnchor.constraint(equalToConstant: 50)
-        heightAnchor.priority = UILayoutPriority(250)
+//        heightAnchor.priority = UILayoutPriority(250)
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: .padding2x),
             logoImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .padding3x),
