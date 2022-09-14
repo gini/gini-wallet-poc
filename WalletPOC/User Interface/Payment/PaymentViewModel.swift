@@ -7,12 +7,38 @@
 
 import UIKit
 
+enum PaymentViewModelType {
+    case buyNow
+    case buyLater
+    case installment
+    
+    var title: String {
+        switch(self) {
+        case .installment:
+            return "Next installment"
+        default:
+            return "Online payment"
+        }
+    }
+    
+    var subtitle: String {
+        switch(self) {
+        case .installment:
+            return "3 of 3"
+        default:
+            return ""
+        }
+    }
+}
+
 protocol PaymentViewUpdater {
     func reloadData()
 }
 
 protocol PaymentViewModel {
     var titleText: String { get }
+    var subtitleText: String { get }
+
     var fromText: String { get }
     var userAccountText: String { get }
     var userAccountNumber: String { get }
@@ -34,11 +60,31 @@ protocol PaymentViewModel {
     var termsConditionsText: String { get }
     var viewUpdater: PaymentViewUpdater? { get set }
     var selectedAccount: Account { get set }
+    var type: PaymentViewModelType { get }
+    
+    //var type: PaymentViewModelType { get }
 }
 
 class PaymentViewModelImpl: PaymentViewModel {
+    //var viewModelType: PaymentViewModelType
     
-    var titleText = "Online payment"
+    
+     let type: PaymentViewModelType
+    
+    init(type: PaymentViewModelType) {
+        self.type = type
+    }
+    
+    //var titleText = "Olnine payment"
+    
+    var titleText: String {
+        type.title
+    }
+    
+    var subtitleText: String {
+        type.subtitle
+    }
+        
     var fromText = "From"
     
     var userAccountText = "Savings Account"
@@ -63,6 +109,8 @@ class PaymentViewModelImpl: PaymentViewModel {
     
     var viewUpdater: PaymentViewUpdater?
     var selectedAccount = Account(id: "2", name: "Savings Account", iban: "DE23 3701 0044 1344 8291 01", amount: "€6.231,40")
+    
+    
     //    var xmlDict = [String: Any]()
     //    var xmlDictArr = [[String: Any]]()
     //    var currentElement = ""

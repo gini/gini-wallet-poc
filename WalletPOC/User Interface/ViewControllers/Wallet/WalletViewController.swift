@@ -125,7 +125,14 @@ final class WalletViewController: UIViewController {
 }
 
 extension WalletViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //MARK: To be refactored -
+        
+        let viewModel = PaymentViewModelImpl(type: .buyNow)
+        let vc = PaymentViewController(viewModel: viewModel)
+        vc.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension WalletViewController: UITableViewDataSource {
