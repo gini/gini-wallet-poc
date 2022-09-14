@@ -13,15 +13,15 @@ enum AccountType {
     
     var accountNameFont: UIFont {
         switch self {
-        case .sender: return UIFont(name: "PlusJakartaSans-SemiBold", size: 16) ?? UIFont()
-        case .merchant: return UIFont(name: "PlusJakartaSans-Medium", size: 16) ?? UIFont()
+        case .sender: return .body
+        case .merchant: return .subtitle
         }
     }
     
     var amountInvoiceFont: UIFont {
         switch self {
-        case .sender: return UIFont(name: "PlusJakartaSans-Medium", size: 16) ?? UIFont()
-        case .merchant: return UIFont(name: "PlusJakartaSans-SemiBold", size: 16) ?? UIFont()
+        case .sender: return .subtitle
+        case .merchant: return .body
         }
     }
     
@@ -34,15 +34,15 @@ enum AccountType {
     
     var accountNameColor: UIColor {
         switch self {
-        case .sender: return .black
-        case .merchant: return UIColor(named: "gray") ?? UIColor()
+        case .sender: return .secondaryText
+        case .merchant: return .primaryText
         }
     }
     
     var amountInvoiceColor: UIColor {
         switch self {
-        case .sender: return UIColor(named: "gray") ?? UIColor()
-        case .merchant: return .black
+        case .sender: return .primaryText
+        case .merchant: return .secondaryText
         }
     }
 }

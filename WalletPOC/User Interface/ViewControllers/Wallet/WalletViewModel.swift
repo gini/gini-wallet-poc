@@ -6,11 +6,14 @@
 //
 
 import Foundation
+import UIKit
 
 struct SectionModel {
     var title: String
     var isUpcoming: Bool
     var cellModels: [TransactionCellModel]
+    var canSchedulePayment: Bool = false
+    var backGroundColor: UIColor = .white
 }
 
 class WalletViewModel {
@@ -24,7 +27,7 @@ class WalletViewModel {
         paidTransactions = [
             Transaction(merchantName: "Zalando", value: 123, merchantLogo: Asset.Images.zalando.image, dueDate: Date(), mention: ""),
             Transaction(merchantName: "Telekom", value: 50, merchantLogo: Asset.Images.telekom.image, dueDate: Date(), mention: ""),
-            Transaction(merchantName: "Zalando", value: 1234.9999, merchantLogo: Asset.Images.zalando.image, dueDate: Date(), mention: "")
+            Transaction(merchantName: "Zalando", value: 1234.9999, merchantLogo: Asset.Images.zalando.image, dueDate: Date(), mention: ""),
         ]
         
         let futureDate = Calendar.current.date(byAdding: .month, value: 1, to: Date())
