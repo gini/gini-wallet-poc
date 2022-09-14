@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class WalletViewController: UIViewController {
+final class WalletViewController: BaseViewController {
     
     // MARK: - Properties
     
@@ -49,8 +49,12 @@ final class WalletViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        removeBackButtonTitle()
         setupUI()
         setupLayout()
+        
+        self.hidesBottomBarWhenPushed = true
+        
     }
     
     override func viewWillLayoutSubviews() {
@@ -65,25 +69,11 @@ final class WalletViewController: UIViewController {
                 return
             }
 
-            // The table view header is created with the frame size set in
-            // the Storyboard. Calculate the new size and reset the header
-            // view to trigger the layout.
-            // Calculate the minimum height of the header view that allows
-            // the text label to fit its preferred width.
             let size = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
 
             if headerView.frame.size.height != size.height {
                 headerView.frame.size.height = size.height
-
-                // Need to set the header view property of the table view
-                // to trigger the new layout. Be careful to only do this
-                // once when the height changes or we get stuck in a layout loop.
                 tableView.tableHeaderView = headerView
-
-                // Now that the table view header is sized correctly have
-                // the table view redo its layout so that the cells are
-                // correcly positioned for the new header size.
-                // This only seems to be necessary on iOS 9.
                 tableView.layoutIfNeeded()
             }
         }
@@ -101,6 +91,7 @@ final class WalletViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
+        tableView.estimatedRowHeight = 100
         tableView.registerHeader(viewType: WalletSectionHeader.self)
         tableView.register(cellType: TransactionCell.self)
         view.addSubview(tableView)
@@ -125,7 +116,15 @@ final class WalletViewController: UIViewController {
 }
 
 extension WalletViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let cellModel = viewModel.sectionModels[indexPath.section].cellModels[indexPath.row]
+//        if cellModel.type == .scheduledUpcoming {
+//
+//        }
+        let monthlyPaymentVC = MonthlyPaymentViewController(viewModel: MonthlyPaymentViewModel(totalMonths: 3, paidMonths: 2, totalAmount: 190))
+        navigationController?.pushViewController(monthlyPaymentVC, animated: true)
+    }
 }
 
 extension WalletViewController: UITableViewDataSource {
