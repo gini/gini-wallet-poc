@@ -117,6 +117,13 @@ final class WalletViewController: BaseViewController {
 
 extension WalletViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //MARK: To be refactored - for testing PaymentVC purpose
+//
+//        let viewModel = PaymentViewModelImpl(type: .buyNow)
+//        let vc = PaymentViewController(viewModel: viewModel)
+//        vc.modalPresentationStyle = .fullScreen
+//        navigationController?.pushViewController(vc, animated: true)
+        
         tableView.deselectRow(at: indexPath, animated: true)
         let cellModel = viewModel.sectionModels[indexPath.section].cellModels[indexPath.row]
 //        if cellModel.type == .scheduledUpcoming {

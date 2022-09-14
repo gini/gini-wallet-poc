@@ -20,7 +20,7 @@ class EmptyViewController: BaseViewController {
         vc.modalPresentationStyle = .overFullScreen
         vc.didAuthorize = {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                self.navigationController?.pushViewController(PaymentViewController(viewModel: PaymentViewModelImpl()), animated: true)
+                self.navigationController?.pushViewController(PaymentViewController(viewModel: PaymentViewModelImpl(type: .buyLater)), animated: true)
             }
         }
         present(vc, animated: true)

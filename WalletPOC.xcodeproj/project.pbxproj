@@ -63,6 +63,7 @@
 		F42109E428BDE85D0069F486 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42109E328BDE85D0069F486 /* PaymentViewController.swift */; };
 		F42109E628BDE8C80069F486 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42109E528BDE8C80069F486 /* SceneDelegate.swift */; };
 		F42109E928BDEF7D0069F486 /* UIView+Autolayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42109E828BDEF7D0069F486 /* UIView+Autolayout.swift */; };
+		F45EDDA028D1B548006ED3CA /* NavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45EDD9F28D1B547006ED3CA /* NavigationItem.swift */; };
 		F4E49CD228CB2C4100BE74F5 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E49CD128CB2C4100BE74F5 /* RadioButton.swift */; };
 		F955ED20256D1C20005299AC /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F955ED1F256D1C20005299AC /* Tests.swift */; };
 		F955ED2C256D1CF8005299AC /* ViewInspector in Frameworks */ = {isa = PBXBuildFile; productRef = F955ED2B256D1CF8005299AC /* ViewInspector */; };
@@ -165,6 +166,7 @@
 		F42109E328BDE85D0069F486 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		F42109E528BDE8C80069F486 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F42109E828BDEF7D0069F486 /* UIView+Autolayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Autolayout.swift"; sourceTree = "<group>"; };
+		F45EDD9F28D1B547006ED3CA /* NavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationItem.swift; sourceTree = "<group>"; };
 		F4E49CCC28CB1FF900BE74F5 /* ActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		F4E49CCE28CB1FF900BE74F5 /* RefusePaymentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefusePaymentView.swift; sourceTree = "<group>"; };
 		F4E49CD128CB2C4100BE74F5 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
@@ -405,6 +407,7 @@
 			isa = PBXGroup;
 			children = (
 				F42109E828BDEF7D0069F486 /* UIView+Autolayout.swift */,
+				F45EDD9F28D1B547006ED3CA /* NavigationItem.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -741,6 +744,7 @@
 				2E81253628CB34630051B787 /* EmptyViewController.swift in Sources */,
 				2E40C8B228D0C1BA00D438AF /* PaymentFooterView.swift in Sources */,
 				F97E1C0325D3D993000884B4 /* AnalyticsProvider.swift in Sources */,
+				F45EDDA028D1B548006ED3CA /* NavigationItem.swift in Sources */,
 				F41C08DF28C8C93A0050510E /* TermsServicesViewController.swift in Sources */,
 				2E40C8B028D083D600D438AF /* MonthlyPaymentViewModel.swift in Sources */,
 			);

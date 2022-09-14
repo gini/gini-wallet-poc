@@ -68,7 +68,9 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     }
     
     private func setupViews() {
-        navigationItem.title = viewModel.titleText
+        //if viewModel.
+        
+        navigationItem.setTitle(title: viewModel.titleText, subtitle: viewModel.subtitleText)
         view.backgroundColor = .white
         
         toLabel.text = viewModel.toText
@@ -188,12 +190,15 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     }
     
     private func setupConstraints() {
-        [payFullButton, buyNowPayLaterButton, senderDetailsView, merchantDetailsView].forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
+        [senderDetailsView, merchantDetailsView].forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
         
-        let constraint = tinyView.topAnchor.constraint(equalTo: payFullButton.bottomAnchor, constant: 20)
+        let constraint = tinyView.topAnchor.constraint(equalTo: viewModel.type == .buyLater ? payFullButton.bottomAnchor : senderDetailsView.bottomAnchor, constant: 20)
         constraint.priority = UILayoutPriority(250)
         constraint.isActive = true
-        
+
+            payFullButton.translatesAutoresizingMaskIntoConstraints = false
+            buyNowPayLaterButton.translatesAutoresizingMaskIntoConstraints = false
+    
         let constraints = [
             bottomView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             bottomView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -275,6 +280,10 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
             pdfView.heightAnchor.constraint(equalToConstant: 420)
         ]
         NSLayoutConstraint.activate(constraints)
+        
+        if viewModel.type != .buyLater {
+            [payFullButton, buyNowPayLaterButton].forEach { $0.removeFromSuperview() }
+        }
     }
     
     private func buyNowPayLaterToggle() {
@@ -394,8 +403,6 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         
         checkmarkButton.isEnabled = true
         termsConditionsButton.isEnabled = true
-        
-
     }
     
     @objc private func nineMonthsBtnTapped() {
