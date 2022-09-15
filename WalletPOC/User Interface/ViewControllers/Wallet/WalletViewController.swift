@@ -11,6 +11,15 @@ import UIKit
 final class WalletViewController: BaseViewController {
     
     // MARK: - Properties
+    var transactionViewModel: TransactionViewModel? {
+        didSet {
+            guard let transactionViewModel = transactionViewModel else {
+                return
+            }
+
+            self.navigationController?.pushViewController(PaymentViewController(viewModel: PaymentViewModelImpl(type: transactionViewModel.buyNowPayLater == "true" ? .buyLater : .buyNow)), animated: true)
+        }
+    }
     
     private lazy var backgroundImageView: UIImageView = {
         let imageView = UIImageView()
