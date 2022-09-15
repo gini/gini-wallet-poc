@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import Core
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    
+    var tabbarController: TabbarViewController?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
@@ -17,11 +20,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-    
-//        let nav1 = UINavigationController(rootViewController: EmptyViewController())
-        window.rootViewController = TabbarViewController()
         
-        //window.rootViewController = HomeViewController()
+        self.tabbarController = TabbarViewController()
+        if let urlContext = connectionOptions.urlContexts.first {
+            let url = urlContext.url
+
+            decodeURLParams(url: url)
+        }
+        window.rootViewController = tabbarController ?? UIViewController()
 
         self.window = window
         window.makeKeyAndVisible()
@@ -55,7 +61,36 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
 
         // Save changes in the application's managed object context when the application transitions to the background.
-        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+//        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+    }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        if let urlContext = URLContexts.first {
+            let url = urlContext.url
+
+            decodeURLParams(url: url)
+        }
+    }
+    
+    private func decodeURLParams(url: URL) {
+        enum Params: String {
+            case buyNowPayLater
+            case transactionId
+            case merchantAppScheme
+        }
+        
+        guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true), let params = components.queryItems else {
+                    return
+            }
+
+        if let buyNowPayLater = params.first(where: { $0.name == Params.buyNowPayLater.rawValue })?.value,
+            let transactionId = params.first(where: { $0.name == Params.transactionId.rawValue })?.value,
+           let merchantAppScheme = params.first(where: { $0.name == Params.merchantAppScheme.rawValue })?.value {
+            
+            tabbarController?.transactionViewModel = TransactionViewModel(merchantAppScheme: merchantAppScheme, transactionId: transactionId, buyNowPayLater: buyNowPayLater)
+        } else {
+            print("Params are missing")
+        }
     }
 }
 

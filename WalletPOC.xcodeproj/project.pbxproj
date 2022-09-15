@@ -38,9 +38,9 @@
 		2E81253128CA0D110051B787 /* SchedulePaymentsAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81252828CA0D110051B787 /* SchedulePaymentsAlertViewModel.swift */; };
 		2E81253228CA0D110051B787 /* RefusePaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81252928CA0D110051B787 /* RefusePaymentView.swift */; };
 		2E81253428CB2C5E0051B787 /* FaceIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81253328CB2C5E0051B787 /* FaceIDViewController.swift */; };
-		2E81253628CB34630051B787 /* EmptyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81253528CB34630051B787 /* EmptyViewController.swift */; };
 		2E81253828CB66030051B787 /* AppStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81253728CB66030051B787 /* AppStyle.swift */; };
 		2E81253C28CB89EF0051B787 /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81253B28CB89EF0051B787 /* PDFViewController.swift */; };
+		2E82FF1428D33CBE00C59638 /* TransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E82FF1328D33CBE00C59638 /* TransactionViewModel.swift */; };
 		F41C08B028BE51310050510E /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41C08AF28BE51310050510E /* PaymentViewModel.swift */; };
 		F41C08B228BE59A70050510E /* pdfMock2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F41C08B128BE59A70050510E /* pdfMock2.pdf */; };
 		F41C08B428C0D3400050510E /* DS-01.xml in Resources */ = {isa = PBXBuildFile; fileRef = F41C08B328C0D33F0050510E /* DS-01.xml */; };
@@ -136,9 +136,9 @@
 		2E81252828CA0D110051B787 /* SchedulePaymentsAlertViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchedulePaymentsAlertViewModel.swift; sourceTree = "<group>"; };
 		2E81252928CA0D110051B787 /* RefusePaymentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefusePaymentView.swift; sourceTree = "<group>"; };
 		2E81253328CB2C5E0051B787 /* FaceIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceIDViewController.swift; sourceTree = "<group>"; };
-		2E81253528CB34630051B787 /* EmptyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewController.swift; sourceTree = "<group>"; };
 		2E81253728CB66030051B787 /* AppStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStyle.swift; sourceTree = "<group>"; };
 		2E81253B28CB89EF0051B787 /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
+		2E82FF1328D33CBE00C59638 /* TransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewModel.swift; sourceTree = "<group>"; };
 		F41C08AF28BE51310050510E /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		F41C08B128BE59A70050510E /* pdfMock2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = pdfMock2.pdf; sourceTree = "<group>"; };
 		F41C08B328C0D33F0050510E /* DS-01.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "DS-01.xml"; sourceTree = "<group>"; };
@@ -240,7 +240,6 @@
 				2E40C8A128CF79AD00D438AF /* Wallet */,
 				2E1BB15928C8A47F007F3587 /* AlertViewController.swift */,
 				2E81253328CB2C5E0051B787 /* FaceIDViewController.swift */,
-				2E81253528CB34630051B787 /* EmptyViewController.swift */,
 				2E81253B28CB89EF0051B787 /* PDFViewController.swift */,
 				2E40C89B28CF531D00D438AF /* TabbarViewController.swift */,
 			);
@@ -399,6 +398,7 @@
 				F41C08AF28BE51310050510E /* PaymentViewModel.swift */,
 				F41C08B328C0D33F0050510E /* DS-01.xml */,
 				F41C08DE28C8C93A0050510E /* TermsServicesViewController.swift */,
+				2E82FF1328D33CBE00C59638 /* TransactionViewModel.swift */,
 			);
 			path = Payment;
 			sourceTree = "<group>";
@@ -696,6 +696,7 @@
 				2E81252C28CA0D110051B787 /* CheckmarkButton.swift in Sources */,
 				2E1BB15728C89253007F3587 /* Color.swift in Sources */,
 				2E40C8A928CF7C4900D438AF /* TransactionCellModel.swift in Sources */,
+				2E82FF1428D33CBE00C59638 /* TransactionViewModel.swift in Sources */,
 				2E40C8AD28D083BF00D438AF /* MonthlyPaymentViewController.swift in Sources */,
 				2E1BB15228C8856F007F3587 /* Strings.swift in Sources */,
 				2E40C8A328CF79C500D438AF /* WalletViewModel.swift in Sources */,
@@ -741,7 +742,6 @@
 				2E40C89E28CF652100D438AF /* WalletViewController.swift in Sources */,
 				2E40C8AB28CFC1ED00D438AF /* WalletSectionHeader.swift in Sources */,
 				F98344A925CC021F0096DA55 /* Bundle.swift in Sources */,
-				2E81253628CB34630051B787 /* EmptyViewController.swift in Sources */,
 				2E40C8B228D0C1BA00D438AF /* PaymentFooterView.swift in Sources */,
 				F97E1C0325D3D993000884B4 /* AnalyticsProvider.swift in Sources */,
 				F45EDDA028D1B548006ED3CA /* NavigationItem.swift in Sources */,

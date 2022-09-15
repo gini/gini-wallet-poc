@@ -497,6 +497,15 @@ extension PaymentViewController: TermsServicesProtocol {
 extension PaymentViewController: SuccessAlertViewDelegate {
     func didClose() {
         dismiss(animated: true)
+        let url = URL(string: "\(viewModel.transactionViewModel.merchantAppScheme)://option?")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.33) {
+            UIApplication.shared.open(url!) { (result) in
+                if result {
+                    print("successfully navigated to merchant app")
+                }
+            }
+        }
+        navigationController?.popViewController(animated: true)
     }
 }
 

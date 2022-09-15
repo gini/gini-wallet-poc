@@ -11,6 +11,11 @@ import UIKit
 final class WalletViewController: BaseViewController {
     
     // MARK: - Properties
+    var transactionViewModel: TransactionViewModel? {
+        didSet {
+            presentPaymentIfNeeded()
+        }
+    }
     
     private lazy var backgroundImageView: UIImageView = {
         let imageView = UIImageView()
@@ -55,6 +60,10 @@ final class WalletViewController: BaseViewController {
         
         self.hidesBottomBarWhenPushed = true
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     override func viewWillLayoutSubviews() {
@@ -110,6 +119,22 @@ final class WalletViewController: BaseViewController {
             
             headerView.widthAnchor.constraint(equalTo: view.widthAnchor)
         ])
+    }
+    
+    private func presentPaymentIfNeeded() {
+        guard let transactionViewModel = transactionViewModel else {
+            return
+        }
+        
+        let vc = FaceIDViewController()
+        vc.modalPresentationStyle = .overFullScreen
+        vc.didAuthorize = {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                self.navigationController?.pushViewController(PaymentViewController(viewModel: PaymentViewModelImpl(type: transactionViewModel.buyNowPayLater == "true" ? .buyLater : .buyNow, transactionViewModel: transactionViewModel)), animated: true)
+            }
+        }
+        self.transactionViewModel = nil
+        present(vc, animated: true)
     }
     
     // MARK: - Actions
