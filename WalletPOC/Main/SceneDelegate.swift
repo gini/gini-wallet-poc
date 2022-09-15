@@ -17,20 +17,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         AppStyle.setupAppearance()
-        
-        if let urlContext = connectionOptions.urlContexts.first {
-            let url = urlContext.url
-
-            decodeURLParams(url: url)
-        }
 
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         
         self.tabbarController = TabbarViewController()
+        if let urlContext = connectionOptions.urlContexts.first {
+            let url = urlContext.url
+
+            decodeURLParams(url: url)
+        }
         window.rootViewController = tabbarController ?? UIViewController()
-        
-        //window.rootViewController = HomeViewController()
 
         self.window = window
         window.makeKeyAndVisible()

@@ -61,6 +61,7 @@ protocol PaymentViewModel {
     var viewUpdater: PaymentViewUpdater? { get set }
     var selectedAccount: Account { get set }
     var type: PaymentViewModelType { get }
+    var transactionViewModel: TransactionViewModel { get }
     
     //var type: PaymentViewModelType { get }
 }
@@ -70,9 +71,11 @@ class PaymentViewModelImpl: PaymentViewModel {
     
     
      let type: PaymentViewModelType
+    let transactionViewModel: TransactionViewModel
     
-    init(type: PaymentViewModelType) {
+    init(type: PaymentViewModelType, transactionViewModel: TransactionViewModel) {
         self.type = type
+        self.transactionViewModel = transactionViewModel
     }
     
     //var titleText = "Olnine payment"
