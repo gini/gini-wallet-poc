@@ -32,8 +32,8 @@ class WalletViewModel {
         
         let futureDate = Calendar.current.date(byAdding: .month, value: 1, to: Date())
         upcomingTransactions = [
-            Transaction(merchantName: "Zalando", value: 190, merchantLogo: Asset.Images.zalando.image, dueDate: futureDate, mention: ""),
-            Transaction(merchantName: "Telekom", value: 49.999, merchantLogo: Asset.Images.telekom.image, dueDate: futureDate, mention: "")
+            Transaction(merchantName: "Rainbow store", value: 190, merchantLogo: Asset.Images.rainbowStore.image, dueDate: futureDate, mention: ""),
+            Transaction(merchantName: "Rainbow store", value: 49.999, merchantLogo: Asset.Images.rainbowStore.image, dueDate: futureDate, mention: "")
         ]
         
         sectionModels = [

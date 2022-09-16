@@ -42,14 +42,14 @@ final class MonthlyPaymentViewModel {
     private func setupPaidTransactions() {
         for i in 1...paidMonths {
             let date = Calendar.current.date(byAdding: .month, value: -i, to: Date())
-            paidTransactions.append(Transaction(merchantName: "Zalando", value: amountPerMonth, merchantLogo: Asset.Images.zalando.image, dueDate: date, mention: ""))
+            paidTransactions.append(Transaction(merchantName: "Rainbow store", value: amountPerMonth, merchantLogo: Asset.Images.rainbowStore.image, dueDate: date, mention: ""))
         }
     }
     
     private func setupUpcomingTransaction() {
         let date = Calendar.current.date(byAdding: .day, value: 10, to: Date())
         upcomingTransactions = [
-            Transaction(merchantName: "Zalando", value: amountPerMonth, merchantLogo: Asset.Images.zalando.image, dueDate: date, mention: "")
+            Transaction(merchantName: "Rainbow store", value: amountPerMonth, merchantLogo: Asset.Images.rainbowStore.image, dueDate: date, mention: "")
         ]
     }
 }

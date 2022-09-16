@@ -215,7 +215,7 @@ extension MonthlyPaymentViewController: UITableViewDataSource {
     }
     
     private func presnetScheduleAppointmentView() {
-        let alertView = SchedulePaymentsAlertView(viewModel: SchedulePaymentsAlertViewModel(numberOfSchedules: 3, totalAmount: viewModel.totalAmount, consignee: "Zalando"))
+        let alertView = SchedulePaymentsAlertView(viewModel: SchedulePaymentsAlertViewModel(numberOfSchedules: 3, totalAmount: viewModel.totalAmount, consignee: "Rainbow store"))
         alertView.delegate = self
         let alertViewController = AlertViewController()
         alertViewController.modalPresentationStyle = .overFullScreen
