@@ -146,19 +146,30 @@ final class WalletViewController: BaseViewController {
 extension WalletViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //MARK: To be refactored - for testing PaymentVC purpose
-//
-//        let viewModel = PaymentViewModelImpl(type: .buyNow)
-//        let vc = PaymentViewController(viewModel: viewModel)
-//        vc.modalPresentationStyle = .fullScreen
-//        navigationController?.pushViewController(vc, animated: true)
+
+        
         
         tableView.deselectRow(at: indexPath, animated: true)
         let cellModel = viewModel.sectionModels[indexPath.section].cellModels[indexPath.row]
-//        if cellModel.type == .scheduledUpcoming {
-//
-//        }
-        let monthlyPaymentVC = MonthlyPaymentViewController(viewModel: MonthlyPaymentViewModel(totalMonths: 3, paidMonths: 2, totalAmount: 190))
-        navigationController?.pushViewController(monthlyPaymentVC, animated: true)
+        let sectionModel = viewModel.sectionModels[indexPath.section]
+        let transaction: Transaction
+        if sectionModel.isUpcoming {
+            transaction = viewModel.upcomingTransactions[indexPath.row]
+        } else {
+            transaction = viewModel.paidTransactions[indexPath.row]
+        }
+
+        if cellModel.type == .open {
+            viewModel.upcomingTransactions.remove(at: indexPath.row)
+            let paymentVC = PaymentViewController(viewModel: PaymentViewModelImpl(type: .buyNow, transactionViewModel: TransactionViewModel(merchantAppScheme: "", transactionId: "transaction.id", buyNowPayLater: "false"), transaction: transaction))
+            if paymentVC.walletDelegate == nil {
+                paymentVC.walletDelegate = viewModel
+            }
+            navigationController?.pushViewController(paymentVC, animated: true)
+        } else if cellModel.type == .scheduledUpcoming {
+            let monthlyPaymentVC = MonthlyPaymentViewController(viewModel: MonthlyPaymentViewModel(totalMonths: 3, paidMonths: 2, totalAmount: 190))
+            navigationController?.pushViewController(monthlyPaymentVC, animated: true)
+        }
     }
 }
 
