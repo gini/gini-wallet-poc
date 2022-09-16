@@ -11,7 +11,7 @@ import PDFKit
 import Alamofire
 
 protocol DataViewUpdater: AnyObject {
-    func updateTransactionList(transactions: [Transaction])
+    func updateTransactionList(transaction: Transaction)
 }
 
 class PaymentViewController: BaseViewController, XMLParserDelegate {
@@ -485,7 +485,6 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
                 if self.buyNowPayLaterButton.backgroundColor == UIColor(named: "extraLightBlue") {
                     if self.threeMonthsButton.backgroundColor == UIColor(named: "extraLightBlue")  {
                         self.presentSuccessAlert(with: .firstPaymentConfirmed(value: 255/3, installments: 3))
-                        self.walletDelegate?.updateTransactionList(transactions: [Transaction(merchantName: self.merchantDetailsView.accountNameLabel.text ?? "ff", value: 255, merchantLogo: self.merchantDetailsView.switchAccountButton.imageView?.image, dueDate: Date(), mention: nil)])
 
                     } else if self.sixMonthsButton.backgroundColor == UIColor(named: "extraLightBlue") {
                         self.presentSuccessAlert(with: .firstPaymentConfirmed(value: 255/6, installments: 6))
@@ -494,7 +493,9 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
                         self.presentSuccessAlert(with: .firstPaymentConfirmed(value: 255/9, installments: 9))
                     }
 
-                }                
+                } else {
+                    self.presentSuccessAlert(with: .paymentConfirmed)
+                }
             }
         }
         present(vc, animated: true)
@@ -552,12 +553,24 @@ extension PaymentViewController: TermsServicesProtocol {
             checkmarkButton.isChecked.toggle()
         }
     }
-    
-    
 }
 
 extension PaymentViewController: SuccessAlertViewDelegate {
-    func didClose() {
+    func didClose(type: SuccessAlertView.SuccessEnumType) {
+        switch type {
+        case .paymentAdded:
+            print("open added")
+            viewModel.transaction.dueDate = Calendar.current.date(byAdding: .month, value: 1, to: Date())
+            viewModel.transaction.type = .upcoming
+            walletDelegate?.updateTransactionList(transaction: viewModel.transaction)
+        case .paymentConfirmed:
+            viewModel.transaction.dueDate = Date()
+            viewModel.transaction.type = .paid
+            walletDelegate?.updateTransactionList(transaction: viewModel.transaction)
+        default:
+            print("ok")
+        }
+        
         dismiss(animated: true)
         let url = URL(string: "\(viewModel.transactionViewModel.merchantAppScheme)://option?")
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.33) {
@@ -578,5 +591,6 @@ extension PaymentViewController: RefusePaymentViewDelegate {
     
     func didRefuse() {
         dismiss(animated: true)
+        navigationController?.popViewController(animated: true)
     }
 }

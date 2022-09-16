@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol SuccessAlertViewDelegate: AnyObject {
-    func didClose()
+    func didClose(type: SuccessAlertView.SuccessEnumType)
 }
 
 final class SuccessAlertView: UIView {
@@ -76,10 +76,12 @@ final class SuccessAlertView: UIView {
     }()
     
     weak var delegate: SuccessAlertViewDelegate?
+    var type: SuccessEnumType = .installmentPaid
     
     // MARK: - Lifecycle
     
     init(type: SuccessEnumType) {
+        self.type = type
         super.init(frame: .zero)
         
         setupUI()
@@ -131,7 +133,7 @@ final class SuccessAlertView: UIView {
     
     @objc
     private func didTapClose() {
-        delegate?.didClose()
+        delegate?.didClose(type: type)
     }
 }
 

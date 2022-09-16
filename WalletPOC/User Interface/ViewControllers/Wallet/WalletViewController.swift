@@ -45,6 +45,7 @@ final class WalletViewController: BaseViewController {
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
+        viewModel.viewUpdater = self
     }
     
     required init?(coder: NSCoder) {
@@ -130,7 +131,9 @@ final class WalletViewController: BaseViewController {
         vc.modalPresentationStyle = .overFullScreen
         vc.didAuthorize = {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                self.navigationController?.pushViewController(PaymentViewController(viewModel: PaymentViewModelImpl(type: transactionViewModel.buyNowPayLater == "true" ? .buyLater : .buyNow, transactionViewModel: transactionViewModel)), animated: true)
+                let walletVc = PaymentViewController(viewModel: PaymentViewModelImpl(type: transactionViewModel.buyNowPayLater == "true" ? .buyLater : .buyNow, transactionViewModel: transactionViewModel, transaction: Transaction(merchantName: "Rainbow store", value: 300, merchantLogo: Asset.Images.rainbowStore.image, dueDate: Date(), mention: "")))
+                walletVc.walletDelegate = self.viewModel
+                self.navigationController?.pushViewController(walletVc, animated: true)
             }
         }
         self.transactionViewModel = nil

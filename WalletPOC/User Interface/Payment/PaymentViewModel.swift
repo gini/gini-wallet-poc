@@ -62,6 +62,7 @@ protocol PaymentViewModel {
     var selectedAccount: Account { get set }
     var type: PaymentViewModelType { get }
     var transactionViewModel: TransactionViewModel { get }
+    var transaction: Transaction { get set }
     
     //var type: PaymentViewModelType { get }
 }
@@ -70,18 +71,20 @@ class PaymentViewModelImpl: PaymentViewModel {
     //var viewModelType: PaymentViewModelType
     
     
-     let type: PaymentViewModelType
+    var transaction: Transaction
+    let type: PaymentViewModelType
     let transactionViewModel: TransactionViewModel
     
-    init(type: PaymentViewModelType, transactionViewModel: TransactionViewModel) {
+    init(type: PaymentViewModelType, transactionViewModel: TransactionViewModel, transaction: Transaction) {
         self.type = type
         self.transactionViewModel = transactionViewModel
+        self.transaction = transaction
     }
     
-    init(type: PaymentViewModelType) {
-        self.type = type
-        transactionViewModel = TransactionViewModel(merchantAppScheme: "ds", transactionId: "ds", buyNowPayLater: "ds")
-    }
+//    init(type: PaymentViewModelType) {
+//        self.type = type
+//        transactionViewModel = TransactionViewModel(merchantAppScheme: "ds", transactionId: "ds", buyNowPayLater: "ds")
+//    }
     
     //var titleText = "Olnine payment"
     
@@ -107,7 +110,9 @@ class PaymentViewModelImpl: PaymentViewModel {
     var merchantIban = "DE 88762181787817687"
     var merchantInvoice = "Ref: Invoice #378981798"
     var invoiceText = "Invoice"
-    var priceText = "€255.00"
+    var priceText: String {
+        return "€\(transaction.value)"
+    }
     var payNowText = "Pay now"
     var payLaterText = "Pay later"
     var refuseText = "Refuse"
