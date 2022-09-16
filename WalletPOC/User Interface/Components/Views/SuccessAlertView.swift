@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol SuccessAlertViewDelegate: AnyObject {
-    func didClose()
+    func didClose(type: SuccessAlertView.SuccessEnumType)
 }
 
 final class SuccessAlertView: UIView {
@@ -17,7 +17,7 @@ final class SuccessAlertView: UIView {
     enum SuccessEnumType {
         case paymentAdded
         case paymentConfirmed
-        case firstPaymentConfirmed(value: Double)
+        case firstPaymentConfirmed(value: Double, installments: Int)
         case installmentPaid
         
         var title: String {
@@ -31,7 +31,7 @@ final class SuccessAlertView: UIView {
         
         var message: String {
             switch self {
-            case .firstPaymentConfirmed(let value): return "You will pay a total of €\(value) in 3 installments."
+            case .firstPaymentConfirmed(let value, let installments): return "You will pay a total of €\(value) in \(installments) installments."
             default: return ""
             }
         }
@@ -76,10 +76,12 @@ final class SuccessAlertView: UIView {
     }()
     
     weak var delegate: SuccessAlertViewDelegate?
+    var type: SuccessEnumType = .installmentPaid
     
     // MARK: - Lifecycle
     
     init(type: SuccessEnumType) {
+        self.type = type
         super.init(frame: .zero)
         
         setupUI()
@@ -131,7 +133,7 @@ final class SuccessAlertView: UIView {
     
     @objc
     private func didTapClose() {
-        delegate?.didClose()
+        delegate?.didClose(type: type)
     }
 }
 

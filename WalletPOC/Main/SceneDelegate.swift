@@ -86,9 +86,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let buyNowPayLater = params.first(where: { $0.name == Params.buyNowPayLater.rawValue })?.value,
             let transactionId = params.first(where: { $0.name == Params.transactionId.rawValue })?.value,
            let merchantAppScheme = params.first(where: { $0.name == Params.merchantAppScheme.rawValue })?.value {
-            
-            print("=== \(merchantAppScheme)")
-            
             self.transactionViewModel = TransactionViewModel(merchantAppScheme: merchantAppScheme, transactionId: transactionId, buyNowPayLater: buyNowPayLater)
             tabbarController?.transactionViewModel = transactionViewModel
         } else {

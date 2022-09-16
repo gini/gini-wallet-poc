@@ -16,4 +16,9 @@ struct Transaction {
     var merchantLogo: UIImage?
     var dueDate: Date?
     var mention: String?
+    var type: TransactionType = .paid
+}
+
+enum TransactionType {
+    case paid, upcoming, installment(total: Int, paid: Int)
 }
