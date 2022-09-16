@@ -225,7 +225,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
             payLaterButton.heightAnchor.constraint(equalToConstant: 50),
             
             refuseButton.centerXAnchor.constraint(equalTo: bottomView.centerXAnchor),
-            refuseButton.topAnchor.constraint(equalTo: payLaterButton.bottomAnchor, constant: 6),
+            refuseButton.topAnchor.constraint(equalTo: amountLabel.bottomAnchor, constant: 66),
             refuseButton.leadingAnchor.constraint(greaterThanOrEqualTo: bottomView.leadingAnchor, constant: 20),
             refuseButton.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor, constant: 10),
             
@@ -284,6 +284,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         if viewModel.type != .buyLater {
             [payFullButton, buyNowPayLaterButton].forEach { $0.removeFromSuperview() }
         }
+        
     }
     
     private func buyNowPayLaterToggle() {
@@ -295,6 +296,9 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         [installmentsLabel, horizontalScrollView, termsConditionsButton, acceptLabel, checkmarkButton].forEach { contentView.addSubview($0) }
         
         [threeMonthsButton, sixMonthsButton, nineMonthsButton].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        
+        payLaterButton.removeFromSuperview()
+
         
         let constraints = [
             installmentsLabel.topAnchor.constraint(equalTo: payFullButton.bottomAnchor, constant: 15),
@@ -339,9 +343,21 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
             termsConditionsButton.centerYAnchor.constraint(equalTo: acceptLabel.centerYAnchor),
             termsConditionsButton.leadingAnchor.constraint(equalTo: acceptLabel.trailingAnchor, constant: 5),
             
-            tinyView.topAnchor.constraint(equalTo: acceptLabel.bottomAnchor, constant: 20)
+            tinyView.topAnchor.constraint(equalTo: acceptLabel.bottomAnchor, constant: 20),
+            payNowButton.widthAnchor.constraint(equalToConstant: (bottomView.frame.size.width - 40)),
+            payNowButton.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -20),
+
         ]
         NSLayoutConstraint.activate(constraints)
+        
+//        i!checkmarkButton.isChecked {
+//            payNowButton.isEnabled = false
+//        }
+        
+        //checkmarkButton.isChecked ? payNowButton.isEnabled : !payNowButton.isEnabled
+        
+        payNowButton.isEnabled = checkmarkButton.isChecked
+        payNowButton.alpha = payNowButton.isEnabled ? 1.0 : 0.5
     }
     
     private func buttonSelect(button: UIButton) {
@@ -369,6 +385,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
             buttonSelect(button: buyNowPayLaterButton)
             buttonDeselect(button: payFullButton)
         }
+        threeMonthsBtnTapped()
         buyNowPayLaterToggle()
     }
     
@@ -378,18 +395,43 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
             buttonDeselect(button: buyNowPayLaterButton)
         }
         [installmentsLabel, horizontalScrollView, termsConditionsButton, acceptLabel, checkmarkButton].forEach { $0.removeFromSuperview() }
+        
+        payNowButton.isEnabled = true
+        payNowButton.alpha = 1.0
+        
+        payNowButton.removeFromSuperview()
+        bottomView.addSubview(payNowButton)
+        bottomView.addSubview(payLaterButton)
+        
+        let constraints = [
+            
+            payNowButton.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 50) * 2/3),
+            payNowButton.topAnchor.constraint(equalTo: amountLabel.bottomAnchor, constant: 15),
+            payNowButton.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor, constant: 20),
+            payNowButton.heightAnchor.constraint(equalToConstant: 50),
+            payNowButton.trailingAnchor.constraint(equalTo: payLaterButton.leadingAnchor, constant: -10),
+            
+            payLaterButton.centerYAnchor.constraint(equalTo: payNowButton.centerYAnchor),
+            //payLaterButton.leadingAnchor.constraint(greaterThanOrEqualTo: payLaterButton.trailingAnchor, constant: 10),
+            payLaterButton.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 50) * 1/3),
+            payLaterButton.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -20),
+            payLaterButton.heightAnchor.constraint(equalToConstant: 50),
+        
+        ]
+        
+        NSLayoutConstraint.activate(constraints)
     }
     
     @objc private func threeMonthsBtnTapped() {
-        buttonSelect(button: threeMonthsButton)
-        threeMonthsButton.priceLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
-        buttonDeselect(button: sixMonthsButton)
-        sixMonthsButton.priceLabel.font = UIFont(name: "PlusJakartaSans-Medium", size: 16)
-        buttonDeselect(button: nineMonthsButton)
-        nineMonthsButton.priceLabel.font = UIFont(name: "PlusJakartaSans-Medium", size: 16)
-        
-        checkmarkButton.isEnabled = true
-        termsConditionsButton.isEnabled = true
+            buttonSelect(button: threeMonthsButton)
+            threeMonthsButton.priceLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
+            buttonDeselect(button: sixMonthsButton)
+            sixMonthsButton.priceLabel.font = UIFont(name: "PlusJakartaSans-Medium", size: 16)
+            buttonDeselect(button: nineMonthsButton)
+            nineMonthsButton.priceLabel.font = UIFont(name: "PlusJakartaSans-Medium", size: 16)
+            
+            checkmarkButton.isEnabled = true
+            termsConditionsButton.isEnabled = true
 
     }
     
@@ -425,6 +467,8 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     
     @objc private func checkButtonTapped() {
         checkmarkButton.isChecked.toggle()
+        payNowButton.isEnabled = checkmarkButton.isChecked
+        payNowButton.alpha = payNowButton.isEnabled ? 1.0 : 0.5
     }
     
     @objc private func didTapPayNow() {
