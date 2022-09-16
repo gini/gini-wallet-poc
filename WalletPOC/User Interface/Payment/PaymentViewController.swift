@@ -559,7 +559,6 @@ extension PaymentViewController: SuccessAlertViewDelegate {
     func didClose(type: SuccessAlertView.SuccessEnumType) {
         switch type {
         case .paymentAdded:
-            print("open added")
             viewModel.transaction.dueDate = Calendar.current.date(byAdding: .month, value: 1, to: Date())
             viewModel.transaction.type = .upcoming
             walletDelegate?.updateTransactionList(transaction: viewModel.transaction)

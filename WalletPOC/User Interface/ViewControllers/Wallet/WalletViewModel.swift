@@ -76,7 +76,17 @@ extension WalletViewModel: DataViewUpdater {
             viewUpdater?.reloadData()
             
         case .upcoming:
-            print("ok")
+            upcomingTransactions = upcomingTransactions.reversed()
+            upcomingTransactions.append(transaction)
+            upcomingTransactions = upcomingTransactions.reversed()
+            sectionModels = []
+            
+            sectionModels.append(SectionModel(title: "Open payments", isUpcoming: true, cellModels: upcomingTransactions.map { TransactionCellModel(transaction: $0, type: .open)}))
+            if !paidTransactions.isEmpty {
+                sectionModels.append(SectionModel(title: "Today", isUpcoming: false, cellModels: paidTransactions.map { TransactionCellModel(transaction: $0, type: .paid)}))
+            }
+            viewUpdater?.reloadData()
+            
         case.installment(let total, let paid):
             print("ok")
         }
