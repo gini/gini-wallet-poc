@@ -91,7 +91,7 @@ final class WalletViewController: BaseViewController {
     
     private func setupUI() {
         navigationItem.title = "My wallet"
-        
+        viewModel.viewUpdater = self
         view.backgroundColor = .white
         view.addSubview(backgroundImageView)
         
@@ -179,4 +179,11 @@ extension WalletViewController: UITableViewDataSource {
         cell.viewModel = viewModel.sectionModels[indexPath.section].cellModels[indexPath.row]
         return cell
     }
+}
+
+extension WalletViewController: WalletViewUpdater {
+    func reloadData() {
+        tableView.reloadData()
+    }
+
 }

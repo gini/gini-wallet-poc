@@ -78,6 +78,11 @@ class PaymentViewModelImpl: PaymentViewModel {
         self.transactionViewModel = transactionViewModel
     }
     
+    init(type: PaymentViewModelType) {
+        self.type = type
+        transactionViewModel = TransactionViewModel(merchantAppScheme: "ds", transactionId: "ds", buyNowPayLater: "ds")
+    }
+    
     //var titleText = "Olnine payment"
     
     var titleText: String {

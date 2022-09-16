@@ -10,6 +10,10 @@ import UIKit
 import PDFKit
 import Alamofire
 
+protocol DataViewUpdater: AnyObject {
+    func updateTransactionList(transactions: [Transaction])
+}
+
 class PaymentViewController: BaseViewController, XMLParserDelegate {
     
     private let fromLabel = UILabel.autoLayout()
@@ -51,6 +55,8 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     private var checkmarkButton = CheckmarkButton(isChecked: false)
     
     private var viewModel: PaymentViewModel
+    
+    weak var walletDelegate: DataViewUpdater?
     
     init(viewModel: PaymentViewModel) {
         self.viewModel = viewModel
@@ -476,7 +482,19 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         vc.modalPresentationStyle = .overFullScreen
         vc.didAuthorize = {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                self.presentSuccessAlert(with: .paymentConfirmed)
+                if self.buyNowPayLaterButton.backgroundColor == UIColor(named: "extraLightBlue") {
+                    if self.threeMonthsButton.backgroundColor == UIColor(named: "extraLightBlue")  {
+                        self.presentSuccessAlert(with: .firstPaymentConfirmed(value: 255/3, installments: 3))
+                        self.walletDelegate?.updateTransactionList(transactions: [Transaction(merchantName: self.merchantDetailsView.accountNameLabel.text ?? "ff", value: 255, merchantLogo: self.merchantDetailsView.switchAccountButton.imageView?.image, dueDate: Date(), mention: nil)])
+
+                    } else if self.sixMonthsButton.backgroundColor == UIColor(named: "extraLightBlue") {
+                        self.presentSuccessAlert(with: .firstPaymentConfirmed(value: 255/6, installments: 6))
+
+                    } else {
+                        self.presentSuccessAlert(with: .firstPaymentConfirmed(value: 255/9, installments: 9))
+                    }
+
+                }                
             }
         }
         present(vc, animated: true)

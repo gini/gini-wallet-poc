@@ -16,12 +16,19 @@ struct SectionModel {
     var backGroundColor: UIColor = .white
 }
 
+// MARK: - asta e pt comunicarea inspre VC
+protocol WalletViewUpdater: AnyObject {
+    func reloadData()
+}
+
 class WalletViewModel {
     
     var sectionModels: [SectionModel]
     
     private var paidTransactions: [Transaction]
     private var upcomingTransactions: [Transaction]
+    
+    weak var viewUpdater: WalletViewUpdater?
     
     init() {
         paidTransactions = [
@@ -40,5 +47,24 @@ class WalletViewModel {
             SectionModel(title: "Open payments", isUpcoming: true, cellModels: upcomingTransactions.map { TransactionCellModel(transaction: $0, type: .open)}),
             SectionModel(title: "Today", isUpcoming: false, cellModels: paidTransactions.map { TransactionCellModel(transaction: $0, type: .paid)})
         ]
+        // MARK: - de aici incepe :-?
+        getData()
+    }
+    
+    func getData() {
+        //teoretic ar terbui ceva instamna pt walletDelegate = self...dar mna..
+        let paymentVM = PaymentViewModelImpl(type: .buyLater)
+        let paymentVC = PaymentViewController(viewModel: paymentVM)
+        
+        paymentVC.walletDelegate = self
+        viewUpdater?.reloadData()
+    }
+}
+
+extension WalletViewModel: DataViewUpdater {
+    func updateTransactionList(transactions: [Transaction]) {
+        for transaction in transactions {
+            paidTransactions.append(transaction)
+        }
     }
 }
