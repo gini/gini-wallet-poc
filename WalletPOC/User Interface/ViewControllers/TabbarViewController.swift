@@ -18,6 +18,17 @@ final class TabbarViewController: UITabBarController {
     
     private var walletVC = WalletViewController(viewModel: WalletViewModel())
     
+    init(transactionViewModel: TransactionViewModel? = nil) {
+        self.transactionViewModel = transactionViewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -27,6 +38,12 @@ final class TabbarViewController: UITabBarController {
         
         view.backgroundColor = .white
         setupTabs()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.walletVC.transactionViewModel = self.transactionViewModel
     }
     
     private func setupTabs() {

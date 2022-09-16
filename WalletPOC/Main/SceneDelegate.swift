@@ -13,20 +13,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     
     var tabbarController: TabbarViewController?
+    var transactionViewModel: TransactionViewModel?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
         AppStyle.setupAppearance()
 
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         
-        self.tabbarController = TabbarViewController()
         if let urlContext = connectionOptions.urlContexts.first {
             let url = urlContext.url
 
             decodeURLParams(url: url)
         }
+        self.tabbarController = TabbarViewController(transactionViewModel: transactionViewModel)
         window.rootViewController = tabbarController ?? UIViewController()
 
         self.window = window
@@ -87,7 +87,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let transactionId = params.first(where: { $0.name == Params.transactionId.rawValue })?.value,
            let merchantAppScheme = params.first(where: { $0.name == Params.merchantAppScheme.rawValue })?.value {
             
-            tabbarController?.transactionViewModel = TransactionViewModel(merchantAppScheme: merchantAppScheme, transactionId: transactionId, buyNowPayLater: buyNowPayLater)
+            print("=== \(merchantAppScheme)")
+            
+            self.transactionViewModel = TransactionViewModel(merchantAppScheme: merchantAppScheme, transactionId: transactionId, buyNowPayLater: buyNowPayLater)
+            tabbarController?.transactionViewModel = transactionViewModel
         } else {
             print("Params are missing")
         }
