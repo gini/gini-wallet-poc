@@ -63,6 +63,7 @@ protocol PaymentViewModel {
     var type: PaymentViewModelType { get }
     var transactionViewModel: TransactionViewModel { get }
     var transaction: Transaction { get set }
+    var dateText: String { get }
     
     //var type: PaymentViewModelType { get }
 }
@@ -123,7 +124,7 @@ class PaymentViewModelImpl: PaymentViewModel {
     var viewUpdater: PaymentViewUpdater?
     var selectedAccount = Account(id: "2", name: "Savings Account", iban: "DE23 3701 0044 1344 8291 01", amount: "€6.231,40")
     
-    
+    var dateText = "23 May, 2022"
     //    var xmlDict = [String: Any]()
     //    var xmlDictArr = [[String: Any]]()
     //    var currentElement = ""
