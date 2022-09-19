@@ -63,6 +63,7 @@ protocol PaymentViewModel {
     var type: PaymentViewModelType { get }
     var transactionViewModel: TransactionViewModel { get }
     var transaction: Transaction { get set }
+    var transactionId: String { get }
     
     //var type: PaymentViewModelType { get }
 }
@@ -74,11 +75,13 @@ class PaymentViewModelImpl: PaymentViewModel {
     var transaction: Transaction
     let type: PaymentViewModelType
     let transactionViewModel: TransactionViewModel
+    var transactionId: String
     
     init(type: PaymentViewModelType, transactionViewModel: TransactionViewModel, transaction: Transaction) {
         self.type = type
         self.transactionViewModel = transactionViewModel
         self.transaction = transaction
+        self.transactionId = transactionViewModel.transactionId
     }
     
 //    init(type: PaymentViewModelType) {
@@ -123,80 +126,4 @@ class PaymentViewModelImpl: PaymentViewModel {
     var viewUpdater: PaymentViewUpdater?
     var selectedAccount = Account(id: "2", name: "Savings Account", iban: "DE23 3701 0044 1344 8291 01", amount: "€6.231,40")
     
-    
-    //    var xmlDict = [String: Any]()
-    //    var xmlDictArr = [[String: Any]]()
-    //    var currentElement = ""
-        //var facts = [Account]()
-    
-    //    //MARK: - XML Parsing
-    //
-    //    func loadMerchantData() {
-    //        let xmlResponseData = Bundle.main.getFileData("DS-01.xml")
-    //        let parser = XMLParser(data: xmlResponseData)
-    //        parser.delegate = self
-    //        parser.parse()
-    //    }
-    //
-    //    /* In this method we will be notified of the start of the process and the start of each element tag.*/
-    //    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
-    //        if elementName == "IBAN" {
-    //            xmlDict = [:]
-    //        } else {
-    //            currentElement = elementName
-    //        }
-    //    }
-    //
-    //    /* In this method, we are notified of the values of the element tag through the parameter of string*/
-    //    func parser(_ parser: XMLParser, foundCharacters string: String) {
-    //        if !string.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-    //            if xmlDict[currentElement] == nil {
-    //                   xmlDict.updateValue(string, forKey: currentElement)
-    //            }
-    //        }
-    //    }
-    //
-    //    /* This method is called on encountering the closing tag of an element. Whether it is the current element or not, is for us to judge.*/
-    //    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
-    //        if elementName == "IBAN" {
-    //                xmlDictArr.append(xmlDict)
-    //        }
-    //    }
-    //
-    //    /* This method is called when the complete document has ended and the parser has encountered a closing root tag.*/
-    //    func parserDidEndDocument(_ parser: XMLParser) {
-    //         parsingCompleted()
-    //    }
-    //
-    //    /* In the parserDidEndDocument method we can call our user defined method where we map the dictionary we have created into the data model we require. So the parsingCompleted() method will be written like so:*/
-    //    func parsingCompleted() {
-    //        self.facts = self.xmlDictArr.map { Account(details: $0) }
-    //        print(xmlDictArr)
-    //        print(facts)
-    //        //self.updateUI()
-    //    }
-
 }
-
-//extension PaymentViewModelImpl: AccountSwitchProtocol {
-//    func sendDataforUpdate(account: Account) {
-//        userAccountText = account.name
-//        userAccountNumber = account.iban
-//        userAccountAmount = account.amount
-//        viewUpdater?.reloadData()
-//    }
-//}
-
-//extension Bundle {
-//    func getFileData(_ file: String) -> Data {
-//        guard let url = self.url(forResource: file, withExtension: nil) else {
-//            fatalError("Failed to locate \(file) in bundle")
-//        }
-//
-//        guard let data = try? Data(contentsOf: url) else {
-//            fatalError("Failed to load \(file) in bundle")
-//        }
-//
-//        return data
-//    }
-//}

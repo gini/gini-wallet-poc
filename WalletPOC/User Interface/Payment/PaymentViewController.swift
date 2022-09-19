@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import PDFKit
 import Alamofire
+import Core
 
 protocol DataViewUpdater: AnyObject {
     func updateTransactionList(transaction: Transaction)
@@ -55,6 +56,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     private var checkmarkButton = CheckmarkButton(isChecked: false)
     
     private var viewModel: PaymentViewModel
+    private var transactionService = TransactionService()
     
     weak var walletDelegate: DataViewUpdater?
     
@@ -290,7 +292,6 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         if viewModel.type != .buyLater {
             [payFullButton, buyNowPayLaterButton].forEach { $0.removeFromSuperview() }
         }
-        
     }
     
     private func buyNowPayLaterToggle() {
@@ -472,10 +473,11 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     }
     
     @objc private func didTapPayNow() {
-        let vc = FaceIDViewController()
+        let vc = FaceIDViewController(isLoader: true)
         vc.modalPresentationStyle = .overFullScreen
         vc.didAuthorize = { _ in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { [weak self] in
+                guard let self = self else { return }
                 if self.buyNowPayLaterButton.backgroundColor == UIColor(named: "extraLightBlue") {
                     if self.threeMonthsButton.backgroundColor == UIColor(named: "extraLightBlue")  {
                         self.presentSuccessAlert(with: .firstPaymentConfirmed(value: 255/3, installments: 3))
@@ -492,6 +494,20 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
                 }
             }
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+            guard let self = self else { return }
+            self.transactionService.updateTransactionState(transactionId: self.viewModel.transactionId, iban: self.viewModel.merchantIban, amount: self.viewModel.transaction.value, accepted: true) { result in
+                switch result {
+                case .success:
+                    vc.didAuthorize?(true)
+                    vc.dismiss(animated: true)
+                case .failure:
+                    print("Error while accepting payment")
+                }
+            }
+        }
+        
         present(vc, animated: true)
     }
     

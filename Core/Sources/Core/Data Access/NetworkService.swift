@@ -9,24 +9,28 @@ import Alamofire
 import Foundation
 
 protocol NetworkService: AnyObject {
-    func execute(with request: Request, completion: @escaping (DataResponse<Data, AFError>) -> Void)
+    func execute(with request: Request, completion: @escaping (DataResponse<Data?, AFError>) -> Void)
 }
 
 final class NetworkServiceImpl: NetworkService {
-    func execute(with request: Request, completion: @escaping (DataResponse<Data, AFError>) -> Void) {
+    func execute(with request: Request, completion: @escaping (DataResponse<Data?, AFError>) -> Void) {
         let urlString = APIConstants.baseURL + (request.path ?? "")
         let encoding: ParameterEncoding = request.body != nil ? BodyStringEncoding(body: request.body!) : request.parameterEncoding
         
         AF.request(urlString, method: request.method, parameters: Dictionary(), encoding: encoding, headers: request.headers)
-            .responseData(completionHandler: { response in
+            .response { response in
                 switch response.result {
                 case .success(let data):
-                    print(String(decoding: data, as: UTF8.self))
+                    if let body = response.request?.httpBody {
+                        print(String(decoding: body, as: UTF8.self))
+                    }
+                    
+                    if let data = data { print(String(decoding: data, as: UTF8.self)) }
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
                 completion(response)
-            })
+            }
     }
 }
 

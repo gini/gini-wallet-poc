@@ -24,7 +24,7 @@ enum APIConstants {
                 case .accept:
                     return "/transactions/assessment/positive"
                 case .refuse:
-                    return "/transactions/assessment/negative"
+                    return "/transactions/assessment/positive"
                 }
             }
         }
