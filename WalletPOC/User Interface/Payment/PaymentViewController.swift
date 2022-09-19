@@ -572,24 +572,38 @@ extension PaymentViewController: SuccessAlertViewDelegate {
             viewModel.transaction.dueDate = Calendar.current.date(byAdding: .month, value: 1, to: Date())
             viewModel.transaction.type = .upcoming
             walletDelegate?.updateTransactionList(transaction: viewModel.transaction)
+            
+            dismiss(animated: true)
+            navigationController?.popViewController(animated: true)
         case .paymentConfirmed:
             viewModel.transaction.dueDate = Date()
             viewModel.transaction.type = .paid
             walletDelegate?.updateTransactionList(transaction: viewModel.transaction)
-        default:
-            print("ok")
-        }
-        
-        dismiss(animated: true)
-        let url = URL(string: "\(viewModel.transactionViewModel.merchantAppScheme)://option?")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.33) {
-            UIApplication.shared.open(url!) { (result) in
-                if result {
-                    print("successfully navigated to merchant app")
+            
+            dismiss(animated: true)
+            
+            let url = URL(string: "\(viewModel.transactionViewModel.merchantAppScheme)://option?")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.33) {
+                UIApplication.shared.open(url!) { (result) in
+                    if result {
+                        print("successfully navigated to merchant app")
+                    }
                 }
             }
+            navigationController?.popViewController(animated: true)
+        default:
+            dismiss(animated: true)
+            
+            let url = URL(string: "\(viewModel.transactionViewModel.merchantAppScheme)://option?")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.33) {
+                UIApplication.shared.open(url!) { (result) in
+                    if result {
+                        print("successfully navigated to merchant app")
+                    }
+                }
+            }
+            navigationController?.popViewController(animated: true)
         }
-        navigationController?.popViewController(animated: true)
     }
 }
 
@@ -599,7 +613,15 @@ extension PaymentViewController: RefusePaymentViewDelegate {
     }
     
     func didRefuse() {
-        dismiss(animated: true)
-        navigationController?.popViewController(animated: true)
+        self.transactionService.updateTransactionState(transactionId: self.viewModel.transactionId, iban: self.viewModel.merchantIban, amount: self.viewModel.transaction.value, accepted: false) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                self.dismiss(animated: true)
+                self.navigationController?.popViewController(animated: true)
+            case .failure:
+                print("Error while accepting payment")
+            }
+        }
     }
 }

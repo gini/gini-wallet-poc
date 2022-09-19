@@ -37,7 +37,7 @@ struct UpdateTransactionStateRequest: Request {
               <!-- refers to <PmtInfId> in DS-01  -->
               <OrgnlPmtInfId>1</OrgnlPmtInfId>
               <TxInfAndSts>
-                <TxSts>\(accepted ? "ACCP" : "RJTC")</TxSts>
+                <TxSts>\(accepted ? "ACCP" : "RJCT")</TxSts>
                 <StsRsnInf>
                   <Orgtr>
                     <!-- AT-01 Payer identifier -->
