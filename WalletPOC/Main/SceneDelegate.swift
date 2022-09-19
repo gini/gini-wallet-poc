@@ -77,6 +77,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             case buyNowPayLater
             case transactionId
             case merchantAppScheme
+            case transactionAmount
         }
         
         guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true), let params = components.queryItems else {
@@ -85,8 +86,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         if let buyNowPayLater = params.first(where: { $0.name == Params.buyNowPayLater.rawValue })?.value,
             let transactionId = params.first(where: { $0.name == Params.transactionId.rawValue })?.value,
-           let merchantAppScheme = params.first(where: { $0.name == Params.merchantAppScheme.rawValue })?.value {
-            self.transactionViewModel = TransactionViewModel(merchantAppScheme: merchantAppScheme, transactionId: transactionId, buyNowPayLater: buyNowPayLater)
+           let merchantAppScheme = params.first(where: { $0.name == Params.merchantAppScheme.rawValue })?.value,
+           let transactionAmountString = params.first(where: { $0.name == Params.transactionAmount.rawValue })?.value, let transactionAmount = Double(transactionAmountString) {
+            self.transactionViewModel = TransactionViewModel(merchantAppScheme: merchantAppScheme, transactionId: transactionId, buyNowPayLater: buyNowPayLater, transactionAmount: transactionAmount)
             tabbarController?.transactionViewModel = transactionViewModel
         } else {
             print("Params are missing")

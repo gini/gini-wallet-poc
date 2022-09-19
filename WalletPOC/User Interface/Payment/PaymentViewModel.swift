@@ -81,6 +81,7 @@ class PaymentViewModelImpl: PaymentViewModel {
         self.type = type
         self.transactionViewModel = transactionViewModel
         self.transaction = transaction
+        self.transaction.value = transactionViewModel.transactionAmount
         self.transactionId = transactionViewModel.transactionId
     }
     

@@ -65,7 +65,7 @@ struct UpdateTransactionStateRequest: Request {
                 <OrgnlTxRef>
                   <Amt>
                     <!-- refers to InstdAmt in DS-01 -->
-                    <InstdAmt Ccy="EUR">552830.23</InstdAmt>
+                    <InstdAmt Ccy="EUR">\(String(format: "%.2f", amount))</InstdAmt>
                   </Amt>
                   <!-- refers to ReqdExctnDt in DS-01 -->
                   <ReqdExctnDt>

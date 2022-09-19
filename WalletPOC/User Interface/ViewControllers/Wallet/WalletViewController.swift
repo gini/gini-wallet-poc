@@ -182,7 +182,7 @@ extension WalletViewController: UITableViewDelegate {
 
         if cellModel.type == .open {
             viewModel.upcomingTransactions.remove(at: indexPath.row)
-            let paymentVC = PaymentViewController(viewModel: PaymentViewModelImpl(type: .buyNow, transactionViewModel: TransactionViewModel(merchantAppScheme: "", transactionId: "transaction.id", buyNowPayLater: "false"), transaction: transaction))
+            let paymentVC = PaymentViewController(viewModel: PaymentViewModelImpl(type: .buyNow, transactionViewModel: TransactionViewModel(merchantAppScheme: "", transactionId: "transaction.id", buyNowPayLater: "false", transactionAmount: transaction.value), transaction: transaction))
             if paymentVC.walletDelegate == nil {
                 paymentVC.walletDelegate = viewModel
             }
