@@ -11,7 +11,6 @@ import DIKit
 import CoreData
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    @LazyInject private var pushNotificationService: PushNotificationService
 
     private let appEngine = AppEngine()
 
@@ -27,10 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: UISceneSession Lifecycle
     
     // MARK: - APNS
-    
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        pushNotificationService.didRegisterForRemoteNotifications(data: deviceToken)
-    }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         

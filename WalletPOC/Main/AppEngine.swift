@@ -16,13 +16,7 @@ import Core
 struct AppEngine {
 
     func prepareAppStart() {
-        DependencyContainer.defined(by: modules {
-            DependencyContainer.networkClient
-            DependencyContainer.apis
-            DependencyContainer.repos
-            DependencyContainer.states
-            DependencyContainer.useCases
-        })
+        
 
         #if canImport(Wormholy)
         Wormholy.ignoredHosts = ["app-measurement.com"]

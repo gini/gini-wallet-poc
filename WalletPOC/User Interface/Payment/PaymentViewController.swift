@@ -356,12 +356,6 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         ]
         NSLayoutConstraint.activate(constraints)
         
-//        i!checkmarkButton.isChecked {
-//            payNowButton.isEnabled = false
-//        }
-        
-        //checkmarkButton.isChecked ? payNowButton.isEnabled : !payNowButton.isEnabled
-        
         payNowButton.isEnabled = checkmarkButton.isChecked
         payNowButton.alpha = payNowButton.isEnabled ? 1.0 : 0.5
     }
@@ -480,7 +474,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     @objc private func didTapPayNow() {
         let vc = FaceIDViewController()
         vc.modalPresentationStyle = .overFullScreen
-        vc.didAuthorize = {
+        vc.didAuthorize = { _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                 if self.buyNowPayLaterButton.backgroundColor == UIColor(named: "extraLightBlue") {
                     if self.threeMonthsButton.backgroundColor == UIColor(named: "extraLightBlue")  {
@@ -504,7 +498,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     @objc private func didTapPayLater() {
         let vc = FaceIDViewController()
         vc.modalPresentationStyle = .overFullScreen
-        vc.didAuthorize = {
+        vc.didAuthorize = { _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                 self.presentSuccessAlert(with: .paymentAdded)
             }
