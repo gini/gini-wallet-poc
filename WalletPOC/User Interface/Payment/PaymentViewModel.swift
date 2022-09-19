@@ -115,7 +115,7 @@ class PaymentViewModelImpl: PaymentViewModel {
     var merchantInvoice = "Ref: Invoice #378981798"
     var invoiceText = "Invoice"
     var priceText: String {
-        return "€\(transaction.value)"
+        return "€ \(String(format: "%.2f", transaction.value))"
     }
     var payNowText = "Pay now"
     var payLaterText = "Pay later"
