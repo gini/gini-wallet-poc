@@ -35,6 +35,11 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     private let payNowButton = UIButton.autoLayout()
     private let payLaterButton = UIButton.autoLayout()
     private let refuseButton = UIButton.autoLayout()
+    private let refuseAttributes: [NSAttributedString.Key: Any] = [
+        NSAttributedString.Key.font: UIFont(name: "PlusJakartaSans-Bold", size: 16),
+        NSAttributedString.Key.foregroundColor: UIColor.gray,
+        NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue
+     ]
     
     private let bottomTinyView = UIView.autoLayout()
     
@@ -172,9 +177,16 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         
         checkmarkButton.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)
         
-        refuseButton.setTitle("Refuse", for: .normal)
+        let attributeString = NSMutableAttributedString(
+             string: "Refuse",
+             attributes: refuseAttributes
+           )
+        refuseButton.setAttributedTitle(attributeString, for: .normal)
+        
+        //refuseButton.setTitle("Refuse", for: .normal)
         refuseButton.addTarget(self, action: #selector(didTapRefuse), for: .touchUpInside)
         refuseButton.setTitleColor(.gray, for: .normal)
+        
         
         checkmarkButton.isEnabled = false
         termsConditionsButton.isEnabled = false
@@ -231,7 +243,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
             payLaterButton.heightAnchor.constraint(equalToConstant: 50),
             
             refuseButton.centerXAnchor.constraint(equalTo: bottomView.centerXAnchor),
-            refuseButton.topAnchor.constraint(equalTo: amountLabel.bottomAnchor, constant: 66),
+            refuseButton.topAnchor.constraint(equalTo: amountLabel.bottomAnchor, constant: 86),
             refuseButton.leadingAnchor.constraint(greaterThanOrEqualTo: bottomView.leadingAnchor, constant: 20),
             refuseButton.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor, constant: 10),
             
@@ -551,6 +563,8 @@ extension PaymentViewController: TermsServicesProtocol {
     func termsAccepted() {
         if checkmarkButton.backgroundColor != .accent {
             checkmarkButton.isChecked.toggle()
+            payNowButton.isEnabled = checkmarkButton.isChecked
+            payNowButton.alpha = payNowButton.isEnabled ? 1.0 : 0.5
         }
     }
 }
