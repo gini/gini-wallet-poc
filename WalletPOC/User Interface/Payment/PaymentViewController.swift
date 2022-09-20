@@ -207,6 +207,9 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         if let document = PDFDocument(url: path) {
             pdfView.document = document
         }
+        
+        buttonSelect(button: payFullButton)
+        buttonDeselect(button: buyNowPayLaterButton)
     }
     
     private func setupConstraints() {
@@ -394,6 +397,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     }
     
     @objc private func buyNowPayLaterTapped() {
+        payNowButton.setTitle("Buy now, Pay later", for: .normal)
         if buyNowPayLaterButton.backgroundColor == .clear  {
             buttonSelect(button: buyNowPayLaterButton)
             buttonDeselect(button: payFullButton)
@@ -403,6 +407,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     }
     
     @objc private func payFullTapped() {
+        payNowButton.setTitle("Pay now", for: .normal)
         if payFullButton.backgroundColor == .clear {
             buttonSelect(button: payFullButton)
             buttonDeselect(button: buyNowPayLaterButton)
