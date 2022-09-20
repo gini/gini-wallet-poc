@@ -672,7 +672,7 @@ extension PaymentViewController: SuccessAlertViewDelegate {
             
             dismiss(animated: true)
             
-            let url = URL(string: "\(viewModel.transactionViewModel.merchantAppScheme)://option?")
+            let url = URL(string: "merchantpoc://option?")
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.33) {
                 UIApplication.shared.open(url!) { (result) in
                     if result {
@@ -699,7 +699,7 @@ extension PaymentViewController: SuccessAlertViewDelegate {
                 
                 navigationController?.popViewController(animated: true)
             } else {
-                let url = URL(string: "\(viewModel.transactionViewModel.merchantAppScheme)://option?")
+                let url = URL(string: "merchantpoc://option?")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.33) {
                     UIApplication.shared.open(url!) { (result) in
                         if result {
@@ -725,6 +725,15 @@ extension PaymentViewController: RefusePaymentViewDelegate {
             switch result {
             case .success:
                 self.dismiss(animated: true)
+                
+                let url = URL(string: "merchantpoc://option?")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.33) {
+                    UIApplication.shared.open(url!) { (result) in
+                        if result {
+                            print("successfully navigated to merchant app")
+                        }
+                    }
+                }
                 self.navigationController?.popViewController(animated: true)
             case .failure:
                 print("Error while accepting payment")
