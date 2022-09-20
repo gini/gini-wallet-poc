@@ -40,7 +40,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         NSAttributedString.Key.font: UIFont(name: "PlusJakartaSans-Bold", size: 16),
         NSAttributedString.Key.foregroundColor: UIColor.gray,
         NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue
-     ]
+    ]
     
     private let bottomTinyView = UIView.autoLayout()
     
@@ -59,6 +59,9 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     private let acceptLabel = UILabel.autoLayout()
     private let termsConditionsButton = UIButton.autoLayout()
     private var checkmarkButton = CheckmarkButton(isChecked: false)
+    
+    private let dueDateLabel = UILabel()
+    private let dateLabel = UILabel()
     
     private var viewModel: PaymentViewModel
     private var transactionService = TransactionService()
@@ -98,7 +101,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         invoiceLabel.text = viewModel.invoiceText
         
         //senderDetailsView.backgroundColor = UIColor(named: "giniLightGray")
-
+        
         //mocked
         senderDetailsView.accountNameLabel.text = viewModel.userAccountText
         senderDetailsView.ibanLabel.text = viewModel.userAccountNumber
@@ -110,7 +113,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         senderDetailsView.addGestureRecognizer(tap)
         
         //merchantDetailsView.backgroundColor = UIColor(named: "giniLightGray")
-
+        
         merchantDetailsView.accountNameLabel.text = viewModel.merchantNameText
         merchantDetailsView.ibanLabel.text  = viewModel.merchantIban
         merchantDetailsView.amountInvoiceLabel.text = viewModel.merchantInvoice
@@ -159,7 +162,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         threeMonthsButton.addTarget(self, action: #selector(threeMonthsBtnTapped), for: .touchUpInside)
         sixMonthsButton.addTarget(self, action: #selector(sixMonthsBtnTapped), for: .touchUpInside)
         nineMonthsButton.addTarget(self, action: #selector(nineMonthsBtnTapped), for: .touchUpInside)
-
+        
         
         installmentsLabel.text = viewModel.installmentsText
         installmentsLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
@@ -180,15 +183,23 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         checkmarkButton.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)
         
         let attributeString = NSMutableAttributedString(
-             string: "Refuse",
-             attributes: refuseAttributes
-           )
+            string: "Refuse",
+            attributes: refuseAttributes
+        )
         refuseButton.setAttributedTitle(attributeString, for: .normal)
         
         //refuseButton.setTitle("Refuse", for: .normal)
         refuseButton.addTarget(self, action: #selector(didTapRefuse), for: .touchUpInside)
         refuseButton.setTitleColor(.gray, for: .normal)
         
+        
+        dueDateLabel.textColor = UIColor(named: "gray")
+        dueDateLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 14)
+        dueDateLabel.text = "Due date"
+        
+        dateLabel.font = UIFont(name: "PlusJakartaSans-Medium", size: 16)
+        dateLabel.textColor = .black
+        dateLabel.text = viewModel.dateText
         
         checkmarkButton.isEnabled = false
         termsConditionsButton.isEnabled = false
@@ -197,7 +208,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         
-        [fromLabel, toLabel, senderDetailsView, merchantDetailsView, tinyView, invoiceLabel, pdfView, payFullButton, buyNowPayLaterButton].forEach { contentView.addSubview($0) }
+        [fromLabel, toLabel, senderDetailsView, merchantDetailsView, tinyView, invoiceLabel, pdfView, payFullButton, buyNowPayLaterButton, dueDateLabel, dateLabel].forEach { contentView.addSubview($0) }
         
         [amountLabel, payNowButton, payLaterButton, refuseButton, bottomTinyView].forEach{ bottomView.addSubview($0) }
         
@@ -218,10 +229,14 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         let constraint = tinyView.topAnchor.constraint(equalTo: viewModel.type == .buyLater ? payFullButton.bottomAnchor : senderDetailsView.bottomAnchor, constant: 20)
         constraint.priority = UILayoutPriority(250)
         constraint.isActive = true
-
-            payFullButton.translatesAutoresizingMaskIntoConstraints = false
-            buyNowPayLaterButton.translatesAutoresizingMaskIntoConstraints = false
-    
+        
+        let invoiceConstraint = invoiceLabel.topAnchor.constraint(equalTo: viewModel.type == .installment ? dueDateLabel.bottomAnchor : merchantDetailsView.bottomAnchor, constant: 20)
+        invoiceConstraint.priority = UILayoutPriority(250)
+        invoiceConstraint.isActive = true
+        
+        payFullButton.translatesAutoresizingMaskIntoConstraints = false
+        buyNowPayLaterButton.translatesAutoresizingMaskIntoConstraints = false
+        
         let constraints = [
             bottomView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             bottomView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -293,7 +308,6 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
             merchantDetailsView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             merchantDetailsView.heightAnchor.constraint(equalToConstant: 100),
             
-            invoiceLabel.topAnchor.constraint(equalTo: merchantDetailsView.bottomAnchor, constant: 20),
             invoiceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             
             pdfView.topAnchor.constraint(equalTo: invoiceLabel.bottomAnchor, constant: 20),
@@ -307,6 +321,24 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         if viewModel.type != .buyLater {
             [payFullButton, buyNowPayLaterButton].forEach { $0.removeFromSuperview() }
         }
+        
+        if viewModel.type == .installment {
+            contentView.addSubview(dueDateLabel)
+            contentView.addSubview(dateLabel)
+            
+            dueDateLabel.translatesAutoresizingMaskIntoConstraints = false
+            dateLabel.translatesAutoresizingMaskIntoConstraints = false
+            
+            let constraints = [
+                dueDateLabel.topAnchor.constraint(equalTo: merchantDetailsView.bottomAnchor, constant: 20),
+                dueDateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+                
+                dateLabel.centerYAnchor.constraint(equalTo: dueDateLabel.centerYAnchor),
+                dateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)
+            ]
+            NSLayoutConstraint.activate(constraints)
+        }
+        
     }
     
     private func buyNowPayLaterToggle() {
@@ -320,7 +352,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         [threeMonthsButton, sixMonthsButton, nineMonthsButton].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         
         payLaterButton.removeFromSuperview()
-
+        
         
         let constraints = [
             installmentsLabel.topAnchor.constraint(equalTo: payFullButton.bottomAnchor, constant: 15),
@@ -354,11 +386,11 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
             nineMonthsButton.trailingAnchor.constraint(equalTo: horizontalContentView.trailingAnchor, constant: -20),
             
             checkmarkButton.topAnchor.constraint(equalTo: horizontalScrollView.bottomAnchor, constant: 20),
-
+            
             checkmarkButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             checkmarkButton.widthAnchor.constraint(equalToConstant: 30),
             checkmarkButton.heightAnchor.constraint(equalToConstant: 30),
-
+            
             acceptLabel.topAnchor.constraint(equalTo: horizontalScrollView.bottomAnchor, constant: 25),
             acceptLabel.leadingAnchor.constraint(equalTo: checkmarkButton.trailingAnchor, constant: 20),
             
@@ -368,7 +400,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
             tinyView.topAnchor.constraint(equalTo: acceptLabel.bottomAnchor, constant: 20),
             payNowButton.widthAnchor.constraint(equalToConstant: (bottomView.frame.size.width - 40)),
             payNowButton.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -20),
-
+            
         ]
         NSLayoutConstraint.activate(constraints)
         
@@ -434,23 +466,23 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
             payLaterButton.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 50) * 1/3),
             payLaterButton.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -20),
             payLaterButton.heightAnchor.constraint(equalToConstant: 50),
-        
+            
         ]
         
         NSLayoutConstraint.activate(constraints)
     }
     
     @objc private func threeMonthsBtnTapped() {
-            buttonSelect(button: threeMonthsButton)
-            threeMonthsButton.priceLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
-            buttonDeselect(button: sixMonthsButton)
-            sixMonthsButton.priceLabel.font = UIFont(name: "PlusJakartaSans-Medium", size: 16)
-            buttonDeselect(button: nineMonthsButton)
-            nineMonthsButton.priceLabel.font = UIFont(name: "PlusJakartaSans-Medium", size: 16)
-            
-            checkmarkButton.isEnabled = true
-            termsConditionsButton.isEnabled = true
-
+        buttonSelect(button: threeMonthsButton)
+        threeMonthsButton.priceLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
+        buttonDeselect(button: sixMonthsButton)
+        sixMonthsButton.priceLabel.font = UIFont(name: "PlusJakartaSans-Medium", size: 16)
+        buttonDeselect(button: nineMonthsButton)
+        nineMonthsButton.priceLabel.font = UIFont(name: "PlusJakartaSans-Medium", size: 16)
+        
+        checkmarkButton.isEnabled = true
+        termsConditionsButton.isEnabled = true
+        
     }
     
     @objc private func sixMonthsBtnTapped() {
@@ -498,14 +530,14 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
                 if self.buyNowPayLaterButton.backgroundColor == UIColor(named: "extraLightBlue") {
                     if self.threeMonthsButton.backgroundColor == UIColor(named: "extraLightBlue")  {
                         self.presentSuccessAlert(with: .firstPaymentConfirmed(value: 255/3, installments: 3))
-
+                        
                     } else if self.sixMonthsButton.backgroundColor == UIColor(named: "extraLightBlue") {
                         self.presentSuccessAlert(with: .firstPaymentConfirmed(value: 255/6, installments: 6))
-
+                        
                     } else {
                         self.presentSuccessAlert(with: .firstPaymentConfirmed(value: 255/9, installments: 9))
                     }
-
+                    
                 } else {
                     self.presentSuccessAlert(with: .paymentConfirmed)
                 }
