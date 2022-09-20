@@ -179,17 +179,23 @@ extension WalletViewController: UITableViewDelegate {
         } else {
             transaction = viewModel.paidTransactions[indexPath.row]
         }
-
-        if cellModel.type == .open {
+        
+        switch cellModel.type {
+        case .open:
             viewModel.upcomingTransactions.remove(at: indexPath.row)
             let paymentVC = PaymentViewController(viewModel: PaymentViewModelImpl(type: .buyNow, transactionViewModel: TransactionViewModel(merchantAppScheme: "", transactionId: "transaction.id", buyNowPayLater: "false", transactionAmount: transaction.value), transaction: transaction))
             if paymentVC.walletDelegate == nil {
                 paymentVC.walletDelegate = viewModel
             }
             navigationController?.pushViewController(paymentVC, animated: true)
-        } else if cellModel.type == .scheduledUpcoming {
+            
+        case .scheduledUpcoming(let totalInstallments, let paidInstallments):
             let monthlyPaymentVC = MonthlyPaymentViewController(viewModel: MonthlyPaymentViewModel(totalMonths: 3, paidMonths: 2, totalAmount: 190))
             navigationController?.pushViewController(monthlyPaymentVC, animated: true)
+            
+        default:
+            // TODO: [Noemi] open already payed transaction overview
+            print("Should open payed transactions overview")
         }
     }
 }

@@ -66,13 +66,14 @@ protocol PaymentViewModel {
     var transactionId: String { get }
     var dateText: String { get }
     
-    //var type: PaymentViewModelType { get }
+    var nrOfInstallments: Int? { get set }
+    
+    var amountPerThreeMonths: Double { get }
+    var amountPerSixMonths: Double { get }
+    var amountPerNineMonths: Double { get }
 }
 
 class PaymentViewModelImpl: PaymentViewModel {
-    //var viewModelType: PaymentViewModelType
-    
-    
     var transaction: Transaction
     let type: PaymentViewModelType
     let transactionViewModel: TransactionViewModel
@@ -105,7 +106,7 @@ class PaymentViewModelImpl: PaymentViewModel {
     var toText = "To"
     
     var merchantNameText = "Rainbow Store"
-    var merchantIban = "DE 88762181787817687"
+    var merchantIban = "DE86 2107 0020 0123 0101 01"
     var merchantInvoice = "Ref: Invoice #378981798"
     var invoiceText = "Invoice"
     var priceText: String {
@@ -121,4 +122,16 @@ class PaymentViewModelImpl: PaymentViewModel {
     var viewUpdater: PaymentViewUpdater?
     var selectedAccount = Account(id: "2", name: "Savings Account", iban: "DE23 3701 0044 1344 8291 01", amount: "€6.231,40")
     var dateText = "23 May, 2022"
+    
+    var nrOfInstallments: Int?
+    
+    var amountPerThreeMonths: Double {
+        return transaction.value / 3
+    }
+    var amountPerSixMonths: Double {
+        return transaction.value / 6
+    }
+    var amountPerNineMonths: Double {
+        return transaction.value / 9
+    }
 }

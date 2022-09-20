@@ -11,7 +11,7 @@ import UIKit
 class TransactionCellModel {
     
     enum TransactionType {
-        case paid, open, recurring, scheduledUpcoming, scheduledPaid
+        case paid, open, recurring, scheduledUpcoming(totalInstallments: Int, paidInstallments: Int), scheduledPaid
         
         var sideIcon: UIImage? {
             switch self {

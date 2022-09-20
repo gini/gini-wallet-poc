@@ -163,6 +163,9 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         sixMonthsButton.addTarget(self, action: #selector(sixMonthsBtnTapped), for: .touchUpInside)
         nineMonthsButton.addTarget(self, action: #selector(nineMonthsBtnTapped), for: .touchUpInside)
         
+        threeMonthsButton.price = viewModel.amountPerThreeMonths
+        sixMonthsButton.price = viewModel.amountPerSixMonths
+        nineMonthsButton.price = viewModel.amountPerNineMonths
         
         installmentsLabel.text = viewModel.installmentsText
         installmentsLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
@@ -429,6 +432,9 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     }
     
     @objc private func buyNowPayLaterTapped() {
+        if viewModel.nrOfInstallments == nil {
+            viewModel.nrOfInstallments = 3
+        }
         payNowButton.setTitle("Buy now, Pay later", for: .normal)
         if buyNowPayLaterButton.backgroundColor == .clear  {
             buttonSelect(button: buyNowPayLaterButton)
@@ -473,6 +479,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     }
     
     @objc private func threeMonthsBtnTapped() {
+        viewModel.nrOfInstallments = 3
         buttonSelect(button: threeMonthsButton)
         threeMonthsButton.priceLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
         buttonDeselect(button: sixMonthsButton)
@@ -486,6 +493,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     }
     
     @objc private func sixMonthsBtnTapped() {
+        viewModel.nrOfInstallments = 6
         buttonSelect(button: sixMonthsButton)
         sixMonthsButton.priceLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
         buttonDeselect(button: threeMonthsButton)
@@ -498,6 +506,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     }
     
     @objc private func nineMonthsBtnTapped() {
+        viewModel.nrOfInstallments = 9
         buttonSelect(button: nineMonthsButton)
         nineMonthsButton.priceLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
         buttonDeselect(button: threeMonthsButton)
