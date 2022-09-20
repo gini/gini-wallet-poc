@@ -17,7 +17,7 @@ final class MonthlyPaymentViewController: BaseViewController {
     }()
     
     private lazy var progressView: ProgressView = {
-        let view = ProgressView(totalPortions: 3, portionsDone: 2, totalWidth: view.frame.width - Double(2 * .padding3x))
+        let view = ProgressView(totalPortions: viewModel.totalMonths, portionsDone: viewModel.paidMonths, totalWidth: view.frame.width - Double(2 * .padding3x))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -136,6 +136,8 @@ final class MonthlyPaymentViewController: BaseViewController {
         grayView.addSubview(fullAmountValueLabel)
         bottomView.addSubview(actionButton)
         bottomView.addSubview(separatorView)
+        
+        footerView.merchantDetailsView.ibanLabel.text = viewModel.merchantIban
     }
     
     private func setupLayout() {

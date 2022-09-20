@@ -653,6 +653,14 @@ extension PaymentViewController: SuccessAlertViewDelegate {
                 }
             }
             navigationController?.popViewController(animated: true)
+            
+        case .firstPaymentConfirmed(_, let installments):
+            viewModel.transaction.dueDate = Calendar.current.date(byAdding: .month, value: 1, to: Date())
+            viewModel.transaction.type = .installment(total: installments, paid: 1)
+            walletDelegate?.updateTransactionList(transaction: viewModel.transaction)
+            
+            dismiss(animated: true)
+            navigationController?.popViewController(animated: true)
         default:
             dismiss(animated: true)
             

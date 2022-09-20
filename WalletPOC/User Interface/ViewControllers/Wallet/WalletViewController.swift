@@ -166,10 +166,7 @@ final class WalletViewController: BaseViewController {
 
 extension WalletViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //MARK: To be refactored - for testing PaymentVC purpose
 
-        
-        
         tableView.deselectRow(at: indexPath, animated: true)
         let cellModel = viewModel.sectionModels[indexPath.section].cellModels[indexPath.row]
         let sectionModel = viewModel.sectionModels[indexPath.section]
@@ -190,7 +187,7 @@ extension WalletViewController: UITableViewDelegate {
             navigationController?.pushViewController(paymentVC, animated: true)
             
         case .scheduledUpcoming(let totalInstallments, let paidInstallments):
-            let monthlyPaymentVC = MonthlyPaymentViewController(viewModel: MonthlyPaymentViewModel(totalMonths: 3, paidMonths: 2, totalAmount: 190))
+            let monthlyPaymentVC = MonthlyPaymentViewController(viewModel: MonthlyPaymentViewModel(totalMonths: totalInstallments, paidMonths: paidInstallments, transaction: transaction))
             navigationController?.pushViewController(monthlyPaymentVC, animated: true)
             
         default:

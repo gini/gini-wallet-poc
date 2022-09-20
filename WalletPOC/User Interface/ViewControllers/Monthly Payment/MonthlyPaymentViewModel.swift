@@ -14,42 +14,36 @@ final class MonthlyPaymentViewModel {
     private var paidTransactions: [Transaction] = []
     private var upcomingTransactions: [Transaction] = []
     
-    private var totalMonths: Int
-    private var paidMonths: Int
+    var totalMonths: Int
+    var paidMonths: Int
     var totalAmount: Double
     private var amountPerMonth: Double
+    private var transaction: Transaction
     
     var totalAmountText: String? {
-        return "- €\(String(format: "%.2f", totalAmount))"
+        return "€\(String(format: "%.2f", totalAmount))"
     }
     
-    init(totalMonths: Int, paidMonths: Int, totalAmount: Double) {
-        self.totalAmount = totalAmount
+    var merchantIban = "DE86 2107 0020 0123 0101 01"
+    
+    init(totalMonths: Int, paidMonths: Int, transaction: Transaction) {
+        self.transaction = transaction
+        self.totalAmount = transaction.value
         self.totalMonths = totalMonths
         self.paidMonths = paidMonths
         
         amountPerMonth = totalAmount / Double(totalMonths)
-        
-        setupPaidTransactions()
         setupUpcomingTransaction()
         
         sectionModels = [
-            SectionModel(title: "Upcoming", isUpcoming: true, cellModels: upcomingTransactions.map { TransactionCellModel(transaction: $0, type: .scheduledUpcoming(totalInstallments: 3, paidInstallments: 2))}, canSchedulePayment: true, backGroundColor: .yellow),
-            SectionModel(title: "Paid so far", isUpcoming: false, cellModels: paidTransactions.map { TransactionCellModel(transaction: $0, type: .scheduledPaid)})
+            SectionModel(title: "Upcoming", isUpcoming: true, cellModels: upcomingTransactions.map { TransactionCellModel(transaction: $0, type: .simple)}, canSchedulePayment: false, backGroundColor: .yellow),
         ]
-    }
-    
-    private func setupPaidTransactions() {
-        for i in 1...paidMonths {
-            let date = Calendar.current.date(byAdding: .month, value: -i, to: Date())
-            paidTransactions.append(Transaction(merchantName: "Zalando", value: amountPerMonth, merchantLogo: Asset.Images.zalando.image, dueDate: date, mention: ""))
-        }
     }
     
     private func setupUpcomingTransaction() {
-        let date = Calendar.current.date(byAdding: .day, value: 10, to: Date())
-        upcomingTransactions = [
-            Transaction(merchantName: "Zalando", value: amountPerMonth, merchantLogo: Asset.Images.zalando.image, dueDate: date, mention: "")
-        ]
+        for i in 1...(totalMonths - paidMonths) {
+            let date = Calendar.current.date(byAdding: .month, value: i, to: Date())
+            upcomingTransactions.append(Transaction(merchantName: "Rainbow Store", value: amountPerMonth, merchantLogo: Asset.Images.rainbowStore.image, dueDate: date, mention: ""))
+        }
     }
 }
