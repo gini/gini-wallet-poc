@@ -109,7 +109,11 @@ class PaymentViewModelImpl: PaymentViewModel {
     var merchantIban = "DE86 2107 0020 0123 0101 01"
     var merchantInvoice = "Ref: Invoice #378981798"
     var invoiceText = "Invoice"
+    
     var priceText: String {
+        if let nrOfInstallments = nrOfInstallments {
+            return "€ \(String(format: "%.2f", transaction.value / Double(nrOfInstallments))) / mo"
+        }
         return "€ \(String(format: "%.2f", transaction.value))"
     }
     var payNowText = "Pay now"

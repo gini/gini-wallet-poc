@@ -435,6 +435,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         if viewModel.nrOfInstallments == nil {
             viewModel.nrOfInstallments = 3
         }
+        updateAmountText()
         payNowButton.setTitle("Buy now, Pay later", for: .normal)
         if buyNowPayLaterButton.backgroundColor == .clear  {
             buttonSelect(button: buyNowPayLaterButton)
@@ -445,6 +446,8 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     }
     
     @objc private func payFullTapped() {
+        viewModel.nrOfInstallments = nil
+        updateAmountText()
         payNowButton.setTitle("Pay now", for: .normal)
         if payFullButton.backgroundColor == .clear {
             buttonSelect(button: payFullButton)
@@ -480,6 +483,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     
     @objc private func threeMonthsBtnTapped() {
         viewModel.nrOfInstallments = 3
+        updateAmountText()
         buttonSelect(button: threeMonthsButton)
         threeMonthsButton.priceLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
         buttonDeselect(button: sixMonthsButton)
@@ -494,6 +498,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     
     @objc private func sixMonthsBtnTapped() {
         viewModel.nrOfInstallments = 6
+        updateAmountText()
         buttonSelect(button: sixMonthsButton)
         sixMonthsButton.priceLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
         buttonDeselect(button: threeMonthsButton)
@@ -507,6 +512,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     
     @objc private func nineMonthsBtnTapped() {
         viewModel.nrOfInstallments = 9
+        updateAmountText()
         buttonSelect(button: nineMonthsButton)
         nineMonthsButton.priceLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
         buttonDeselect(button: threeMonthsButton)
@@ -536,16 +542,8 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         vc.didAuthorize = { _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { [weak self] in
                 guard let self = self else { return }
-                if self.buyNowPayLaterButton.backgroundColor == UIColor(named: "extraLightBlue") {
-                    if self.threeMonthsButton.backgroundColor == UIColor(named: "extraLightBlue")  {
-                        self.presentSuccessAlert(with: .firstPaymentConfirmed(value: 255/3, installments: 3))
-                        
-                    } else if self.sixMonthsButton.backgroundColor == UIColor(named: "extraLightBlue") {
-                        self.presentSuccessAlert(with: .firstPaymentConfirmed(value: 255/6, installments: 6))
-                        
-                    } else {
-                        self.presentSuccessAlert(with: .firstPaymentConfirmed(value: 255/9, installments: 9))
-                    }
+                if let installmentCount = self.viewModel.nrOfInstallments {
+                    self.presentSuccessAlert(with: .firstPaymentConfirmed(value: self.viewModel.transaction.value, installments: installmentCount))
                     
                 } else {
                     self.presentSuccessAlert(with: .paymentConfirmed)
@@ -602,6 +600,10 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         let pdfVC = PDFViewController()
         pdfVC.modalPresentationStyle = .overFullScreen
         present(pdfVC, animated: true)
+    }
+    
+    private func updateAmountText() {
+        amountLabel.text = viewModel.priceText
     }
 }
 
