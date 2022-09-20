@@ -42,7 +42,6 @@
 		2E81253C28CB89EF0051B787 /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81253B28CB89EF0051B787 /* PDFViewController.swift */; };
 		2E82FF1428D33CBE00C59638 /* TransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E82FF1328D33CBE00C59638 /* TransactionViewModel.swift */; };
 		2E82FF1728DA081200C59638 /* TransactionOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E82FF1628DA081200C59638 /* TransactionOverviewViewController.swift */; };
-		2E82FF1928DA087500C59638 /* TransactionOverviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E82FF1828DA087500C59638 /* TransactionOverviewViewModel.swift */; };
 		2E82FF1B28DA24C200C59638 /* receipt.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 2E82FF1A28DA24C200C59638 /* receipt.pdf */; };
 		F41C08B028BE51310050510E /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41C08AF28BE51310050510E /* PaymentViewModel.swift */; };
 		F41C08B228BE59A70050510E /* pdfMock2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F41C08B128BE59A70050510E /* pdfMock2.pdf */; };
@@ -143,7 +142,6 @@
 		2E81253B28CB89EF0051B787 /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
 		2E82FF1328D33CBE00C59638 /* TransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewModel.swift; sourceTree = "<group>"; };
 		2E82FF1628DA081200C59638 /* TransactionOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionOverviewViewController.swift; sourceTree = "<group>"; };
-		2E82FF1828DA087500C59638 /* TransactionOverviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionOverviewViewModel.swift; sourceTree = "<group>"; };
 		2E82FF1A28DA24C200C59638 /* receipt.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = receipt.pdf; sourceTree = "<group>"; };
 		F41C08AF28BE51310050510E /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		F41C08B128BE59A70050510E /* pdfMock2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = pdfMock2.pdf; sourceTree = "<group>"; };
@@ -351,7 +349,6 @@
 			isa = PBXGroup;
 			children = (
 				2E82FF1628DA081200C59638 /* TransactionOverviewViewController.swift */,
-				2E82FF1828DA087500C59638 /* TransactionOverviewViewModel.swift */,
 			);
 			path = TransactionOverview;
 			sourceTree = "<group>";
@@ -715,7 +712,6 @@
 				2E1BB15728C89253007F3587 /* Color.swift in Sources */,
 				2E40C8A928CF7C4900D438AF /* TransactionCellModel.swift in Sources */,
 				2E82FF1428D33CBE00C59638 /* TransactionViewModel.swift in Sources */,
-				2E82FF1928DA087500C59638 /* TransactionOverviewViewModel.swift in Sources */,
 				2E40C8AD28D083BF00D438AF /* MonthlyPaymentViewController.swift in Sources */,
 				2E1BB15228C8856F007F3587 /* Strings.swift in Sources */,
 				2E40C8A328CF79C500D438AF /* WalletViewModel.swift in Sources */,

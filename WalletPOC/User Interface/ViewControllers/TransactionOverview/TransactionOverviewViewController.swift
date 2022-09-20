@@ -93,6 +93,28 @@ final class TransactionOverviewViewController: UIViewController {
         return label
     }()
     
+    private lazy var bottomView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
+        return view
+    }()
+    
+    private lazy var separatorView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .borderColor
+        return view
+    }()
+
+    private lazy var amountLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .headig2
+        label.textColor = .primaryText
+        return label
+    }()
+    
     private var transaction: Transaction
     
     // MARK: - Lifecycle
@@ -128,15 +150,17 @@ final class TransactionOverviewViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapPDFView))
         pdfView.addGestureRecognizer(tapGesture)
         
-        merchantDetailsView.accountNameLabel.text = "Rainbow Store"
-        merchantDetailsView.ibanLabel.text  = "DE 88762181787817687"
+        merchantDetailsView.accountNameLabel.text = transaction.merchantName
+        merchantDetailsView.ibanLabel.text  = transaction.merchantIban
         merchantDetailsView.amountInvoiceLabel.text = "Ref: Invoice #378981798"
         merchantDetailsView.decorate(with: CornerRadiusDecorator(radius: .viewRadius))
+        merchantDetailsView.switchAccountButton.setImage(transaction.merchantLogo, for: .normal)
         
-        senderDetailsView.accountNameLabel.text = "Rainbow Store"
-        senderDetailsView.ibanLabel.text  = "DE 88762181787817687"
-        senderDetailsView.amountInvoiceLabel.text = "Ref: Invoice #378981798"
+        senderDetailsView.accountNameLabel.text = transaction.account.name
+        senderDetailsView.ibanLabel.text  = transaction.account.iban
+        senderDetailsView.amountInvoiceLabel.text = "€6.231,40"
         senderDetailsView.decorate(with: CornerRadiusDecorator(radius: .viewRadius))
+        senderDetailsView.isIconHidden = true
         
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
@@ -152,14 +176,24 @@ final class TransactionOverviewViewController: UIViewController {
         
         invoiceStackView.addArrangedSubview(invoiceLabel)
         invoiceStackView.addArrangedSubview(pdfView)
+        
+        view.addSubview(bottomView)
+        bottomView.addSubview(amountLabel)
+        amountLabel.text = "€\(transaction.value)"
+        bottomView.addSubview(separatorView)
     }
     
     private func setupLayout() {
         NSLayoutConstraint.activate([
+            bottomView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            bottomView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            bottomView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            bottomView.topAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            bottomView.heightAnchor.constraint(equalToConstant: 100),
+            
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
             stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: .padding3x),
@@ -170,7 +204,15 @@ final class TransactionOverviewViewController: UIViewController {
             
             pdfView.heightAnchor.constraint(equalToConstant: 420),
             merchantDetailsView.heightAnchor.constraint(equalToConstant: 100),
-            senderDetailsView.heightAnchor.constraint(equalToConstant: 100)
+            senderDetailsView.heightAnchor.constraint(equalToConstant: 100),
+            
+            amountLabel.centerXAnchor.constraint(equalTo: bottomView.centerXAnchor),
+            amountLabel.centerYAnchor.constraint(equalTo: bottomView.centerYAnchor),
+            
+            separatorView.heightAnchor.constraint(equalToConstant: .borderThickness),
+            separatorView.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor),
+            separatorView.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor),
+            separatorView.topAnchor.constraint(equalTo: bottomView.topAnchor)
         ])
     }
     

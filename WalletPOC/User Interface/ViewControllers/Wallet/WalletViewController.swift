@@ -197,7 +197,7 @@ extension WalletViewController: UITableViewDelegate {
             
         default:
             // TODO: [Noemi] open already payed transaction overview
-            print("Should open payed transactions overview")
+            print("p open payed transactions overview")
             let transactionOverviewVC = TransactionOverviewViewController(transaction: transaction)
             navigationController?.pushViewController(transactionOverviewVC, animated: true)
         }

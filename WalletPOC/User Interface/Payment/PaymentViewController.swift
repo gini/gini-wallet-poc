@@ -557,6 +557,9 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     }
     
     @objc private func didTapPayNow() {
+        viewModel.transaction.account = viewModel.selectedAccount
+        viewModel.transaction.merchantIban = viewModel.merchantIban
+        
         let vc = FaceIDViewController(isLoader: true)
         vc.modalPresentationStyle = .overFullScreen
         vc.didAuthorize = { _ in
@@ -591,6 +594,8 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     }
     
     @objc private func didTapPayLater() {
+        viewModel.transaction.account = viewModel.selectedAccount
+        viewModel.transaction.merchantIban = viewModel.merchantIban
         let vc = FaceIDViewController()
         vc.modalPresentationStyle = .overFullScreen
         vc.didAuthorize = { _ in

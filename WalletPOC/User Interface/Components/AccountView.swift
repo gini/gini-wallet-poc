@@ -53,6 +53,16 @@ class AccountView: UIView {
      var ibanLabel = UILabel.autoLayout()
      var amountInvoiceLabel = UILabel.autoLayout()
      var switchAccountButton = UIButton.autoLayout()
+    
+    var isIconHidden: Bool = false {
+        didSet {
+            if isIconHidden {
+                switchAccountButton.setImage(nil, for: .normal)
+            } else {
+                switchAccountButton.setImage(type.switchAccountImage, for: .normal)
+            }
+        }
+    }
 
     private let type: AccountType
     init(type: AccountType) {
@@ -60,6 +70,13 @@ class AccountView: UIView {
         super.init(frame: .zero)
         setupViews()
         setupConstraints()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        self.switchAccountButton.imageView?.clipsToBounds = true
+        self.switchAccountButton.imageView?.layer.cornerRadius = 20
     }
     
     required init?(coder: NSCoder) {
