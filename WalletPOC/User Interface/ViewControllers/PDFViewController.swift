@@ -33,18 +33,21 @@ final class PDFViewController: BaseViewController {
     }
     
     private func setupUI() {
-        closeButton.addTarget(self, action: #selector(didTapClose), for: .touchUpInside)
-        view.backgroundColor = .lightgrayBackground
         
         view.addSubview(closeButton)
         closeButton.tintColor = .secondaryText
-        guard let path = Bundle.main.url(forResource: "pdfMock2", withExtension: "pdf") else {
+        guard let path = Bundle.main.url(forResource: "receipt", withExtension: "pdf") else {
             return }
+        
+        pdfView.autoScales = true
         
         if let document = PDFDocument(url: path) {
             pdfView.document = document
         }
         view.addSubview(pdfView)
+        
+        closeButton.addTarget(self, action: #selector(didTapClose), for: .touchUpInside)
+        view.backgroundColor = .lightgrayBackground
     }
     
     private func setupLayout() {

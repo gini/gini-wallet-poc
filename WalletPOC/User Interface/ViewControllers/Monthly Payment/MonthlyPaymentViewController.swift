@@ -222,6 +222,7 @@ extension MonthlyPaymentViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if section + 1 == viewModel.sectionModels.count {
+            footerView.delegate = self
             return footerView
         }
         return nil
@@ -253,5 +254,14 @@ extension MonthlyPaymentViewController: MonthlyPaymentViewUpdater {
     func reloadData() {
         progressView.portionsDone = viewModel.paidMonths
         tableView.reloadData()
+    }
+}
+
+extension MonthlyPaymentViewController: PaymentFooterViewDelegate {
+    
+    func openPDFDetail() {
+        let pdfVC = PDFViewController()
+        pdfVC.modalPresentationStyle = .overFullScreen
+        present(pdfVC, animated: true)
     }
 }
