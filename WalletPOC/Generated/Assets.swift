@@ -62,6 +62,7 @@ internal enum Asset {
     internal static let request = ImageAsset(name: "request")
     internal static let scan = ImageAsset(name: "scan")
     internal static let send = ImageAsset(name: "send")
+    internal static let launch = ImageAsset(name: "launch")
     internal static let zalando = ImageAsset(name: "Zalando")
     internal static let telekom = ImageAsset(name: "telekom")
     internal static let pdfMock = ImageAsset(name: "pdfMock")

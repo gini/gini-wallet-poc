@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import PDFKit
 import Alamofire
+import Core
 
 protocol DataViewUpdater: AnyObject {
     func updateTransactionList(transaction: Transaction)
@@ -63,6 +64,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     private let dateLabel = UILabel()
     
     private var viewModel: PaymentViewModel
+    private var transactionService = TransactionService()
     
     weak var walletDelegate: DataViewUpdater?
     
@@ -216,6 +218,9 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         if let document = PDFDocument(url: path) {
             pdfView.document = document
         }
+        
+        buttonSelect(button: payFullButton)
+        buttonDeselect(button: buyNowPayLaterButton)
     }
     
     private func setupConstraints() {
@@ -333,6 +338,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
             ]
             NSLayoutConstraint.activate(constraints)
         }
+        
     }
     
     private func buyNowPayLaterToggle() {
@@ -398,12 +404,6 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         ]
         NSLayoutConstraint.activate(constraints)
         
-        //        i!checkmarkButton.isChecked {
-        //            payNowButton.isEnabled = false
-        //        }
-        
-        //checkmarkButton.isChecked ? payNowButton.isEnabled : !payNowButton.isEnabled
-        
         payNowButton.isEnabled = checkmarkButton.isChecked
         payNowButton.alpha = payNowButton.isEnabled ? 1.0 : 0.5
     }
@@ -429,6 +429,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     }
     
     @objc private func buyNowPayLaterTapped() {
+        payNowButton.setTitle("Buy now, Pay later", for: .normal)
         if buyNowPayLaterButton.backgroundColor == .clear  {
             buttonSelect(button: buyNowPayLaterButton)
             buttonDeselect(button: payFullButton)
@@ -438,6 +439,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     }
     
     @objc private func payFullTapped() {
+        payNowButton.setTitle("Pay now", for: .normal)
         if payFullButton.backgroundColor == .clear {
             buttonSelect(button: payFullButton)
             buttonDeselect(button: buyNowPayLaterButton)
@@ -520,10 +522,11 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     }
     
     @objc private func didTapPayNow() {
-        let vc = FaceIDViewController()
+        let vc = FaceIDViewController(isLoader: true)
         vc.modalPresentationStyle = .overFullScreen
-        vc.didAuthorize = {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+        vc.didAuthorize = { _ in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { [weak self] in
+                guard let self = self else { return }
                 if self.buyNowPayLaterButton.backgroundColor == UIColor(named: "extraLightBlue") {
                     if self.threeMonthsButton.backgroundColor == UIColor(named: "extraLightBlue")  {
                         self.presentSuccessAlert(with: .firstPaymentConfirmed(value: 255/3, installments: 3))
@@ -540,13 +543,27 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
                 }
             }
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+            guard let self = self else { return }
+            self.transactionService.updateTransactionState(transactionId: self.viewModel.transactionId, iban: self.viewModel.merchantIban, amount: self.viewModel.transaction.value, accepted: true) { result in
+                switch result {
+                case .success:
+                    vc.didAuthorize?(true)
+                    vc.dismiss(animated: true)
+                case .failure:
+                    print("Error while accepting payment")
+                }
+            }
+        }
+        
         present(vc, animated: true)
     }
     
     @objc private func didTapPayLater() {
         let vc = FaceIDViewController()
         vc.modalPresentationStyle = .overFullScreen
-        vc.didAuthorize = {
+        vc.didAuthorize = { _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                 self.presentSuccessAlert(with: .paymentAdded)
             }
@@ -606,24 +623,38 @@ extension PaymentViewController: SuccessAlertViewDelegate {
             viewModel.transaction.dueDate = Calendar.current.date(byAdding: .month, value: 1, to: Date())
             viewModel.transaction.type = .upcoming
             walletDelegate?.updateTransactionList(transaction: viewModel.transaction)
+            
+            dismiss(animated: true)
+            navigationController?.popViewController(animated: true)
         case .paymentConfirmed:
             viewModel.transaction.dueDate = Date()
             viewModel.transaction.type = .paid
             walletDelegate?.updateTransactionList(transaction: viewModel.transaction)
-        default:
-            print("ok")
-        }
-        
-        dismiss(animated: true)
-        let url = URL(string: "\(viewModel.transactionViewModel.merchantAppScheme)://option?")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.33) {
-            UIApplication.shared.open(url!) { (result) in
-                if result {
-                    print("successfully navigated to merchant app")
+            
+            dismiss(animated: true)
+            
+            let url = URL(string: "\(viewModel.transactionViewModel.merchantAppScheme)://option?")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.33) {
+                UIApplication.shared.open(url!) { (result) in
+                    if result {
+                        print("successfully navigated to merchant app")
+                    }
                 }
             }
+            navigationController?.popViewController(animated: true)
+        default:
+            dismiss(animated: true)
+            
+            let url = URL(string: "\(viewModel.transactionViewModel.merchantAppScheme)://option?")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.33) {
+                UIApplication.shared.open(url!) { (result) in
+                    if result {
+                        print("successfully navigated to merchant app")
+                    }
+                }
+            }
+            navigationController?.popViewController(animated: true)
         }
-        navigationController?.popViewController(animated: true)
     }
 }
 
@@ -633,7 +664,15 @@ extension PaymentViewController: RefusePaymentViewDelegate {
     }
     
     func didRefuse() {
-        dismiss(animated: true)
-        navigationController?.popViewController(animated: true)
+        self.transactionService.updateTransactionState(transactionId: self.viewModel.transactionId, iban: self.viewModel.merchantIban, amount: self.viewModel.transaction.value, accepted: false) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                self.dismiss(animated: true)
+                self.navigationController?.popViewController(animated: true)
+            case .failure:
+                print("Error while accepting payment")
+            }
+        }
     }
 }

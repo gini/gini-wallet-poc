@@ -11,4 +11,5 @@ struct TransactionViewModel {
     var merchantAppScheme: String
     var transactionId: String
     var buyNowPayLater: String
+    var transactionAmount: Double
 }

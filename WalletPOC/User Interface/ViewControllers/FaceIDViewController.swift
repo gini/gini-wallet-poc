@@ -12,7 +12,7 @@ final class FaceIDViewController: UIViewController {
     
     // MARK: - Properties
     
-    var didAuthorize: (() -> ())? = nil
+    var didAuthorize: ((Bool) -> ())? = nil
     
     private lazy var contentView: UIView = {
         let view = UIView()
@@ -38,7 +38,18 @@ final class FaceIDViewController: UIViewController {
         return label
     }()
     
+    private var isLoader: Bool
+    
     // MARK: - Lifecycle
+    
+    init(isLoader: Bool = false) {
+        self.isLoader = isLoader
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,9 +66,11 @@ final class FaceIDViewController: UIViewController {
             self.contentView.alpha = 1
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            self.didAuthorize?()
-            self.dismiss(animated: true)
+        if !isLoader {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                self.didAuthorize?(true)
+                self.dismiss(animated: true)
+            }
         }
     }
     

@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Core
 
 final class WalletViewController: BaseViewController {
     
@@ -16,6 +17,8 @@ final class WalletViewController: BaseViewController {
             presentPaymentIfNeeded()
         }
     }
+    
+    private var transactionService = TransactionService()
     
     private lazy var backgroundImageView: UIImageView = {
         let imageView = UIImageView()
@@ -127,15 +130,33 @@ final class WalletViewController: BaseViewController {
             return
         }
         
-        let vc = FaceIDViewController()
+        let vc = FaceIDViewController(isLoader: true)
         vc.modalPresentationStyle = .overFullScreen
-        vc.didAuthorize = {
+        vc.didAuthorize = { isEnabled in
+            guard isEnabled else { return }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                 let walletVc = PaymentViewController(viewModel: PaymentViewModelImpl(type: transactionViewModel.buyNowPayLater == "true" ? .buyLater : .buyNow, transactionViewModel: transactionViewModel, transaction: Transaction(merchantName: "Rainbow store", value: 300, merchantLogo: Asset.Images.rainbowStore.image, dueDate: Date(), mention: "")))
                 walletVc.walletDelegate = self.viewModel
                 self.navigationController?.pushViewController(walletVc, animated: true)
             }
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
+            guard let self = self else { return }
+            self.transactionService.loadTransactionState(transactionId: transactionViewModel.transactionId) { result in
+                
+                switch result {
+                case .success(let isEnabled):
+                    if isEnabled {
+                        vc.didAuthorize?(isEnabled)
+                        vc.dismiss(animated: true)
+                    }
+                case .failure:
+                    print("Error while loading transaction state")
+                }
+            }
+        }
+        
         self.transactionViewModel = nil
         present(vc, animated: true)
     }
@@ -161,7 +182,7 @@ extension WalletViewController: UITableViewDelegate {
 
         if cellModel.type == .open {
             viewModel.upcomingTransactions.remove(at: indexPath.row)
-            let paymentVC = PaymentViewController(viewModel: PaymentViewModelImpl(type: .buyNow, transactionViewModel: TransactionViewModel(merchantAppScheme: "", transactionId: "transaction.id", buyNowPayLater: "false"), transaction: transaction))
+            let paymentVC = PaymentViewController(viewModel: PaymentViewModelImpl(type: .buyNow, transactionViewModel: TransactionViewModel(merchantAppScheme: "", transactionId: "transaction.id", buyNowPayLater: "false", transactionAmount: transaction.value), transaction: transaction))
             if paymentVC.walletDelegate == nil {
                 paymentVC.walletDelegate = viewModel
             }
