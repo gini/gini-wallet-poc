@@ -76,7 +76,9 @@ class TransactionCellModel {
             if let dueDate = transaction.dueDate {
                 message = "Monthly: Next \(format(date: dueDate))"
             }
-        case .scheduledPaid, .simple:
+        case .scheduledPaid:
+            message = "Online shopping"
+        case .simple:
             if let dueDate = transaction.dueDate {
                 message = format(date: dueDate)
             }

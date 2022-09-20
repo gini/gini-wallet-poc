@@ -188,6 +188,12 @@ extension WalletViewController: UITableViewDelegate {
             
         case .scheduledUpcoming(let totalInstallments, let paidInstallments):
             let monthlyPaymentVC = MonthlyPaymentViewController(viewModel: MonthlyPaymentViewModel(totalMonths: totalInstallments, paidMonths: paidInstallments, transaction: transaction))
+            monthlyPaymentVC.transactionUpdated = { transaction in
+                print("====DAAAAAAAA \(transaction.type)")
+                self.viewModel.updateList(with: transaction, at: indexPath.row)
+                self.reloadData()
+                self.navigationController?.popToRootViewController(animated: true)
+            }
             navigationController?.pushViewController(monthlyPaymentVC, animated: true)
             
         default:
@@ -223,5 +229,4 @@ extension WalletViewController: WalletViewUpdater {
     func reloadData() {
         tableView.reloadData()
     }
-
 }

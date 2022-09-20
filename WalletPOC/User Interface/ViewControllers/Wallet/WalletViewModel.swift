@@ -71,6 +71,27 @@ class WalletViewModel {
         }
         return cellModels
     }
+    
+    func updateList(with transaction: Transaction, at index: Int) {
+        if case .installment(let total, let paid) = transaction.type, total == paid {
+            let cellModel = TransactionCellModel(transaction: transaction, type: .scheduledPaid)
+            upcomingTransactions.remove(at: index)
+            paidTransactions.reverse()
+            paidTransactions.append(transaction)
+            paidTransactions.reverse()
+        } else {
+            upcomingTransactions.remove(at: index)
+            upcomingTransactions.insert(transaction, at: index)
+        }
+        
+        sectionModels = []
+        if !upcomingTransactions.isEmpty {
+            sectionModels.append(SectionModel(title: "Open payments", isUpcoming: true, cellModels: upcomingTransactionCellModels))
+        }
+        if !paidTransactions.isEmpty {
+            sectionModels.append(SectionModel(title: "Today", isUpcoming: false, cellModels: paidTransactionCellModels))
+        }
+    }
 }
 
 extension WalletViewModel: DataViewUpdater {

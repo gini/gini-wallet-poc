@@ -10,7 +10,7 @@ import UIKit
 enum PaymentViewModelType {
     case buyNow
     case buyLater
-    case installment
+    case installment(total: Int, paid: Int)
     
     var title: String {
         switch(self) {
@@ -23,8 +23,8 @@ enum PaymentViewModelType {
     
     var subtitle: String {
         switch(self) {
-        case .installment:
-            return "3 of 3"
+        case .installment(let total, let paid):
+            return "\(paid + 1) of \(total)"
         default:
             return ""
         }
@@ -111,6 +111,10 @@ class PaymentViewModelImpl: PaymentViewModel {
     var invoiceText = "Invoice"
     
     var priceText: String {
+        if case .installment(let total, _) = type {
+            return "€ \(String(format: "%.2f", transaction.value / Double(total)))"
+        }
+        
         if let nrOfInstallments = nrOfInstallments {
             return "€ \(String(format: "%.2f", transaction.value / Double(nrOfInstallments))) / mo"
         }
@@ -125,7 +129,15 @@ class PaymentViewModelImpl: PaymentViewModel {
     
     var viewUpdater: PaymentViewUpdater?
     var selectedAccount = Account(id: "2", name: "Savings Account", iban: "DE23 3701 0044 1344 8291 01", amount: "€6.231,40")
-    var dateText = "23 May, 2022"
+    var dateText: String {
+        if case .installment(_, let paid) = type {
+            if let date = Calendar.current.date(byAdding: .month, value: paid, to: Date()) {
+                return format(date: date)
+            }
+            return ""
+        }
+        return ""
+    }
     
     var nrOfInstallments: Int?
     
@@ -137,5 +149,11 @@ class PaymentViewModelImpl: PaymentViewModel {
     }
     var amountPerNineMonths: Double {
         return transaction.value / 9
+    }
+    
+    private func format(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd, yyyy"
+        return dateFormatter.string(from: date)
     }
 }

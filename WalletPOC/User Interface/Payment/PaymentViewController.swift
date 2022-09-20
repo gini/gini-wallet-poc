@@ -229,11 +229,22 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     private func setupConstraints() {
         [senderDetailsView, merchantDetailsView].forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
         
-        let constraint = tinyView.topAnchor.constraint(equalTo: viewModel.type == .buyLater ? payFullButton.bottomAnchor : senderDetailsView.bottomAnchor, constant: 20)
+        var constraint: NSLayoutConstraint
+        if case .buyLater = viewModel.type {
+            constraint = tinyView.topAnchor.constraint(equalTo: payFullButton.bottomAnchor, constant: 20)
+        } else {
+            constraint = tinyView.topAnchor.constraint(equalTo: senderDetailsView.bottomAnchor, constant: 20)
+        }
+        
         constraint.priority = UILayoutPriority(250)
         constraint.isActive = true
         
-        let invoiceConstraint = invoiceLabel.topAnchor.constraint(equalTo: viewModel.type == .installment ? dueDateLabel.bottomAnchor : merchantDetailsView.bottomAnchor, constant: 20)
+        var invoiceConstraint: NSLayoutConstraint
+        if case .installment = viewModel.type {
+            invoiceConstraint = invoiceLabel.topAnchor.constraint(equalTo: dueDateLabel.bottomAnchor, constant: 20)
+        } else {
+            invoiceConstraint = invoiceLabel.topAnchor.constraint(equalTo: merchantDetailsView.bottomAnchor, constant: 20)
+        }
         invoiceConstraint.priority = UILayoutPriority(250)
         invoiceConstraint.isActive = true
         
@@ -254,7 +265,6 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
             amountLabel.centerXAnchor.constraint(equalTo: bottomView.centerXAnchor),
             amountLabel.bottomAnchor.constraint(equalTo: payNowButton.topAnchor, constant: -20),
             
-            payNowButton.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 50) * 2/3),
             payNowButton.topAnchor.constraint(equalTo: amountLabel.bottomAnchor, constant: 15),
             payNowButton.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor, constant: 20),
             payNowButton.heightAnchor.constraint(equalToConstant: 50),
@@ -321,11 +331,19 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         ]
         NSLayoutConstraint.activate(constraints)
         
-        if viewModel.type != .buyLater {
+        switch viewModel.type {
+        case .buyNow:
             [payFullButton, buyNowPayLaterButton].forEach { $0.removeFromSuperview() }
-        }
-        
-        if viewModel.type == .installment {
+            
+            payNowButton.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 50) * 2/3).isActive = true
+        case .installment:
+            [payFullButton, buyNowPayLaterButton].forEach { $0.removeFromSuperview() }
+            
+            refuseButton.isHidden = true
+            payLaterButton.isHidden = true
+            
+            payNowButton.widthAnchor.constraint(equalToConstant: view.frame.size.width - 40).isActive = true
+            
             contentView.addSubview(dueDateLabel)
             contentView.addSubview(dateLabel)
             
@@ -340,6 +358,8 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
                 dateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)
             ]
             NSLayoutConstraint.activate(constraints)
+        default:
+            payNowButton.widthAnchor.constraint(equalToConstant: (view.frame.size.width - 50) * 2/3).isActive = true
         }
         
     }
@@ -542,7 +562,10 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         vc.didAuthorize = { _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { [weak self] in
                 guard let self = self else { return }
-                if let installmentCount = self.viewModel.nrOfInstallments {
+                if case .installment(let total, let paid) = self.viewModel.type {
+                    self.presentSuccessAlert(with: .installmentPaid)
+                    
+                } else if let installmentCount = self.viewModel.nrOfInstallments {
                     self.presentSuccessAlert(with: .firstPaymentConfirmed(value: self.viewModel.transaction.value, installments: installmentCount))
                     
                 } else {
@@ -661,18 +684,27 @@ extension PaymentViewController: SuccessAlertViewDelegate {
             
             dismiss(animated: true)
             navigationController?.popViewController(animated: true)
-        default:
-            dismiss(animated: true)
             
-            let url = URL(string: "\(viewModel.transactionViewModel.merchantAppScheme)://option?")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.33) {
-                UIApplication.shared.open(url!) { (result) in
-                    if result {
-                        print("successfully navigated to merchant app")
+        case .installmentPaid:
+            if case .installment(let total, let paid) = viewModel.type {
+                dismiss(animated: true)
+                viewModel.transaction.dueDate = Calendar.current.date(byAdding: .month, value: paid + 1, to: Date())
+                viewModel.transaction.type = .installment(total: total, paid: paid + 1)
+                walletDelegate?.updateTransactionList(transaction: viewModel.transaction)
+                
+                navigationController?.popViewController(animated: true)
+            } else {
+                let url = URL(string: "\(viewModel.transactionViewModel.merchantAppScheme)://option?")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.33) {
+                    UIApplication.shared.open(url!) { (result) in
+                        if result {
+                            print("successfully navigated to merchant app")
+                        }
                     }
                 }
+                dismiss(animated: true)
+                navigationController?.popViewController(animated: true)
             }
-            navigationController?.popViewController(animated: true)
         }
     }
 }
