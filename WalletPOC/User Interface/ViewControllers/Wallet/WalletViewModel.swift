@@ -37,14 +37,7 @@ class WalletViewModel {
             Transaction(merchantName: "Zalando", value: 1234.9999, merchantLogo: Asset.Images.zalando.image, dueDate: Date(), mention: ""),
         ]
         
-//        let futureDate = Calendar.current.date(byAdding: .month, value: 1, to: Date())
-//        upcomingTransactions = [
-//            Transaction(merchantName: "Zalando", value: 190, merchantLogo: Asset.Images.zalando.image, dueDate: futureDate, mention: ""),
-//            Transaction(merchantName: "Telekom", value: 49.999, merchantLogo: Asset.Images.telekom.image, dueDate: futureDate, mention: "")
-//        ]
-        
         sectionModels = [
-//            SectionModel(title: "Open payments", isUpcoming: true, cellModels: upcomingTransactions.map { TransactionCellModel(transaction: $0, type: .open)}),
             SectionModel(title: "Today", isUpcoming: false, cellModels: paidTransactions.map { TransactionCellModel(transaction: $0, type: .paid)})
         ]
         // MARK: - de aici incepe :-?
@@ -52,12 +45,52 @@ class WalletViewModel {
     }
     
     func getData() {
-        //teoretic ar terbui ceva instamna pt walletDelegate = self...dar mna..
-//        let paymentVM = PaymentViewModelImpl(type: .buyLater)
-//        let paymentVC = PaymentViewController(viewModel: paymentVM)
-//        
-//        paymentVC.walletDelegate = self
-//        viewUpdater?.reloadData()
+
+    }
+    
+    var upcomingTransactionCellModels: [TransactionCellModel] {
+        var cellModels: [TransactionCellModel] = []
+        upcomingTransactions.forEach { transaction in
+            if case .installment(let total, let paid) = transaction.type {
+                cellModels.append(TransactionCellModel(transaction: transaction, type: .scheduledUpcoming(totalInstallments: total, paidInstallments: paid)))
+            } else {
+                cellModels.append(TransactionCellModel(transaction: transaction, type: .open))
+            }
+        }
+        return cellModels
+    }
+    
+    var paidTransactionCellModels: [TransactionCellModel] {
+        var cellModels: [TransactionCellModel] = []
+        paidTransactions.forEach { transaction in
+            if case .installment(let total, let paid) = transaction.type, total == paid {
+                cellModels.append(TransactionCellModel(transaction: transaction, type: .scheduledPaid))
+            } else {
+                cellModels.append(TransactionCellModel(transaction: transaction, type: .paid))
+            }
+        }
+        return cellModels
+    }
+    
+    func updateList(with transaction: Transaction, at index: Int) {
+        if case .installment(let total, let paid) = transaction.type, total == paid {
+            let cellModel = TransactionCellModel(transaction: transaction, type: .scheduledPaid)
+            upcomingTransactions.remove(at: index)
+            paidTransactions.reverse()
+            paidTransactions.append(transaction)
+            paidTransactions.reverse()
+        } else {
+            upcomingTransactions.remove(at: index)
+            upcomingTransactions.insert(transaction, at: index)
+        }
+        
+        sectionModels = []
+        if !upcomingTransactions.isEmpty {
+            sectionModels.append(SectionModel(title: "Open payments", isUpcoming: true, cellModels: upcomingTransactionCellModels))
+        }
+        if !paidTransactions.isEmpty {
+            sectionModels.append(SectionModel(title: "Today", isUpcoming: false, cellModels: paidTransactionCellModels))
+        }
     }
 }
 
@@ -70,9 +103,9 @@ extension WalletViewModel: DataViewUpdater {
             paidTransactions = paidTransactions.reversed()
             sectionModels = []
             if !upcomingTransactions.isEmpty {
-                sectionModels.append(SectionModel(title: "Open payments", isUpcoming: true, cellModels: upcomingTransactions.map { TransactionCellModel(transaction: $0, type: .open)}))
+                sectionModels.append(SectionModel(title: "Open payments", isUpcoming: true, cellModels: upcomingTransactionCellModels))
             }
-            sectionModels.append(SectionModel(title: "Today", isUpcoming: false, cellModels: paidTransactions.map { TransactionCellModel(transaction: $0, type: .paid)}))
+            sectionModels.append(SectionModel(title: "Today", isUpcoming: false, cellModels: paidTransactionCellModels))
             viewUpdater?.reloadData()
             
         case .upcoming:
@@ -88,7 +121,31 @@ extension WalletViewModel: DataViewUpdater {
             viewUpdater?.reloadData()
             
         case.installment(let total, let paid):
-            print("ok")
+            if total > paid {
+                // It is not paid in total yet
+                upcomingTransactions = upcomingTransactions.reversed()
+                upcomingTransactions.append(transaction)
+                upcomingTransactions = upcomingTransactions.reversed()
+                sectionModels = []
+                
+                sectionModels.append(SectionModel(title: "Open payments", isUpcoming: true, cellModels: upcomingTransactionCellModels))
+                if !paidTransactions.isEmpty {
+                    sectionModels.append(SectionModel(title: "Today", isUpcoming: false, cellModels: paidTransactionCellModels))
+                }
+                viewUpdater?.reloadData()
+                
+            } else {
+                // It is actually paid
+                paidTransactions = paidTransactions.reversed()
+                paidTransactions.append(transaction)
+                paidTransactions = paidTransactions.reversed()
+                sectionModels = []
+                if !upcomingTransactions.isEmpty {
+                    sectionModels.append(SectionModel(title: "Open payments", isUpcoming: true, cellModels: upcomingTransactionCellModels))
+                }
+                sectionModels.append(SectionModel(title: "Today", isUpcoming: false, cellModels: paidTransactionCellModels))
+                viewUpdater?.reloadData()
+            }
         }
     }
 }

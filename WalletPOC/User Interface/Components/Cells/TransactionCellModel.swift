@@ -11,36 +11,35 @@ import UIKit
 class TransactionCellModel {
     
     enum TransactionType {
-        case paid, open, recurring, scheduledUpcoming, scheduledPaid
+        case paid, open, recurring, scheduledUpcoming(totalInstallments: Int, paidInstallments: Int), scheduledPaid, simple
         
         var sideIcon: UIImage? {
             switch self {
-            case .paid: return Asset.Images.paid.image
+            case .paid, .scheduledPaid: return Asset.Images.paid.image
             case .open: return Asset.Images.open.image
-            case .recurring: return Asset.Images.recurring.image
+            case .scheduledUpcoming: return Asset.Images.recurring.image
             default: return nil
             }
         }
         
         var logoBorderColor: UIColor {
             switch self {
-            case .paid, .scheduledUpcoming, .scheduledPaid: return .borderColor
+            case .paid, .scheduledUpcoming, .scheduledPaid, .simple: return .borderColor
             case .open, .recurring: return .brightYellow
             }
         }
         
         var amountTextColor: UIColor {
             switch self {
-            case .paid, .scheduledPaid: return .secondaryText
+            case .paid, .scheduledPaid, .simple: return .primaryText
             case .open, .recurring, .scheduledUpcoming: return .yellowText
             }
         }
         
         var infoTextColor: UIColor {
             switch self {
-            case .paid, .scheduledPaid: return .secondaryText
-            case .scheduledUpcoming: return .purple
-            case .open, .recurring: return .yellowText
+            case .paid, .scheduledPaid, .simple: return .secondaryText
+            case .open, .recurring, .scheduledUpcoming: return .yellowText
             }
         }
     }
@@ -75,9 +74,11 @@ class TransactionCellModel {
             }
         case .scheduledUpcoming:
             if let dueDate = transaction.dueDate {
-                message = format(date: dueDate)
+                message = "Monthly: Next \(format(date: dueDate))"
             }
         case .scheduledPaid:
+            message = "Online shopping"
+        case .simple:
             if let dueDate = transaction.dueDate {
                 message = format(date: dueDate)
             }

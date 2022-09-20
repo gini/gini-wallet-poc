@@ -11,6 +11,7 @@ import UIKit
 // NOTE: this will probably have a totally different format
 // + more information attached for recurring, upcoming, automatic payments
 struct Transaction {
+    var id = ""
     var merchantName: String
     var value: Double
     var merchantLogo: UIImage?

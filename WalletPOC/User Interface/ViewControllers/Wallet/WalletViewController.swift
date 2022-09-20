@@ -166,10 +166,7 @@ final class WalletViewController: BaseViewController {
 
 extension WalletViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //MARK: To be refactored - for testing PaymentVC purpose
 
-        
-        
         tableView.deselectRow(at: indexPath, animated: true)
         let cellModel = viewModel.sectionModels[indexPath.section].cellModels[indexPath.row]
         let sectionModel = viewModel.sectionModels[indexPath.section]
@@ -179,17 +176,28 @@ extension WalletViewController: UITableViewDelegate {
         } else {
             transaction = viewModel.paidTransactions[indexPath.row]
         }
-
-        if cellModel.type == .open {
+        
+        switch cellModel.type {
+        case .open:
             viewModel.upcomingTransactions.remove(at: indexPath.row)
-            let paymentVC = PaymentViewController(viewModel: PaymentViewModelImpl(type: .buyNow, transactionViewModel: TransactionViewModel(merchantAppScheme: "", transactionId: "transaction.id", buyNowPayLater: "false", transactionAmount: transaction.value), transaction: transaction))
+            let paymentVC = PaymentViewController(viewModel: PaymentViewModelImpl(type: .buyNow, transactionViewModel: TransactionViewModel(merchantAppScheme: "", transactionId: transaction.id, buyNowPayLater: "false", transactionAmount: transaction.value), transaction: transaction))
             if paymentVC.walletDelegate == nil {
                 paymentVC.walletDelegate = viewModel
             }
             navigationController?.pushViewController(paymentVC, animated: true)
-        } else if cellModel.type == .scheduledUpcoming {
-            let monthlyPaymentVC = MonthlyPaymentViewController(viewModel: MonthlyPaymentViewModel(totalMonths: 3, paidMonths: 2, totalAmount: 190))
+            
+        case .scheduledUpcoming(let totalInstallments, let paidInstallments):
+            let monthlyPaymentVC = MonthlyPaymentViewController(viewModel: MonthlyPaymentViewModel(totalMonths: totalInstallments, paidMonths: paidInstallments, transaction: transaction))
+            monthlyPaymentVC.transactionUpdated = { transaction in
+                self.viewModel.updateList(with: transaction, at: indexPath.row)
+                self.reloadData()
+                self.navigationController?.popToRootViewController(animated: true)
+            }
             navigationController?.pushViewController(monthlyPaymentVC, animated: true)
+            
+        default:
+            // TODO: [Noemi] open already payed transaction overview
+            print("Should open payed transactions overview")
         }
     }
 }
@@ -220,5 +228,4 @@ extension WalletViewController: WalletViewUpdater {
     func reloadData() {
         tableView.reloadData()
     }
-
 }

@@ -29,14 +29,6 @@ enum InstallmentButtonType {
     case sixMonths
     case nineMonths
     
-    var priceLabel: String {
-        switch self {
-        case .threeMonths: return "€85 / mo."
-        case .sixMonths: return "€42.5 / mo."
-        case .nineMonths: return "€28.3 / mo."
-        }
-    }
-    
     var periodLabel: String {
         switch self {
         case .threeMonths: return "for 3 months"
@@ -47,6 +39,14 @@ enum InstallmentButtonType {
 }
 
 class CustomInstallmentButton: UIButton {
+    
+    var price: Double? {
+        didSet {
+            guard let price = price else { return }
+            let priceString = String(format: "%.2f", price)
+            priceLabel.text = "€\(priceString) / mo"
+        }
+    }
         
     let priceLabel = UILabel.autoLayout()
     private let periodLabel = UILabel.autoLayout()
@@ -57,8 +57,9 @@ class CustomInstallmentButton: UIButton {
         self.type = type
         super.init(frame: .zero)
         switch type {
-        case .payButton(let type): self.setTitle(type.title, for: .normal)
-        case .installmentButton(let type): priceLabel.text = type.priceLabel
+        case .payButton(let type):
+            self.setTitle(type.title, for: .normal)
+        case .installmentButton(let type):
             periodLabel.text = type.periodLabel
         }
         setupButton()

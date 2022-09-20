@@ -44,7 +44,7 @@ final class PaymentFooterView: UIView {
         return view
     }()
      
-    private lazy var merchantDetailsView: AccountView = {
+    lazy var merchantDetailsView: AccountView = {
         let view = AccountView(type: .merchant)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view

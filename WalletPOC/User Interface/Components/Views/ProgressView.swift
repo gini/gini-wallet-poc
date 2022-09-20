@@ -32,6 +32,9 @@ final class ProgressView: UIView {
         return view
     }()
     
+    private var anchor: NSLayoutConstraint?
+    private var labelAnchor: NSLayoutConstraint?
+    
     private var totalWidth: Double
     private var totalPortions: Int
     var portionsDone: Int {
@@ -80,6 +83,8 @@ final class ProgressView: UIView {
     }
     
     private func setupLayout() {
+        anchor = progressView.trailingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: Double(portionsDone) * portionWidth + (portionsDone == 0 ? 0 : 2))
+        labelAnchor = label.centerXAnchor.constraint(equalTo: baseView.leadingAnchor, constant: Double(portionsDone) * portionWidth)
         
         NSLayoutConstraint.activate([
             baseView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -91,15 +96,18 @@ final class ProgressView: UIView {
             progressView.centerXAnchor.constraint(equalTo: baseView.centerXAnchor),
             progressView.heightAnchor.constraint(equalTo: baseView.heightAnchor),
             progressView.leadingAnchor.constraint(equalTo: baseView.leadingAnchor),
-            progressView.trailingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: Double(portionsDone) * portionWidth + (portionsDone == 0 ? 0 : 2)),
             
-            label.bottomAnchor.constraint(equalTo: baseView.topAnchor, constant: -.padding/2),
-            label.centerXAnchor.constraint(equalTo: baseView.leadingAnchor, constant: Double(portionsDone) * portionWidth)
+            label.bottomAnchor.constraint(equalTo: baseView.topAnchor, constant: -.padding/2)
         ])
+        
+        anchor?.isActive = true
+        labelAnchor?.isActive = true
     }
     
     private func updateUI() {
-        
+        label.text = "\(portionsDone) / \(totalPortions)"
+        anchor?.constant = Double(portionsDone) * portionWidth + (portionsDone == 0 ? 0 : 2)
+        labelAnchor?.constant = Double(portionsDone) * portionWidth
     }
     
     private func addDots() {

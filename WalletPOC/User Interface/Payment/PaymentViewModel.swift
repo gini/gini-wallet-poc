@@ -10,7 +10,7 @@ import UIKit
 enum PaymentViewModelType {
     case buyNow
     case buyLater
-    case installment
+    case installment(total: Int, paid: Int)
     
     var title: String {
         switch(self) {
@@ -23,8 +23,8 @@ enum PaymentViewModelType {
     
     var subtitle: String {
         switch(self) {
-        case .installment:
-            return "3 of 3"
+        case .installment(let total, let paid):
+            return "\(paid + 1) of \(total)"
         default:
             return ""
         }
@@ -66,13 +66,14 @@ protocol PaymentViewModel {
     var transactionId: String { get }
     var dateText: String { get }
     
-    //var type: PaymentViewModelType { get }
+    var nrOfInstallments: Int? { get set }
+    
+    var amountPerThreeMonths: Double { get }
+    var amountPerSixMonths: Double { get }
+    var amountPerNineMonths: Double { get }
 }
 
 class PaymentViewModelImpl: PaymentViewModel {
-    //var viewModelType: PaymentViewModelType
-    
-    
     var transaction: Transaction
     let type: PaymentViewModelType
     let transactionViewModel: TransactionViewModel
@@ -84,6 +85,7 @@ class PaymentViewModelImpl: PaymentViewModel {
         self.transaction = transaction
         self.transaction.value = transactionViewModel.transactionAmount
         self.transactionId = transactionViewModel.transactionId
+        self.transaction.id = transactionViewModel.transactionId
     }
     
     var titleText: String {
@@ -105,10 +107,18 @@ class PaymentViewModelImpl: PaymentViewModel {
     var toText = "To"
     
     var merchantNameText = "Rainbow Store"
-    var merchantIban = "DE 88762181787817687"
+    var merchantIban = "DE86 2107 0020 0123 0101 01"
     var merchantInvoice = "Ref: Invoice #378981798"
     var invoiceText = "Invoice"
+    
     var priceText: String {
+        if case .installment(let total, _) = type {
+            return "€ \(String(format: "%.2f", transaction.value / Double(total)))"
+        }
+        
+        if let nrOfInstallments = nrOfInstallments {
+            return "€ \(String(format: "%.2f", transaction.value / Double(nrOfInstallments))) / mo"
+        }
         return "€ \(String(format: "%.2f", transaction.value))"
     }
     var payNowText = "Pay now"
@@ -120,5 +130,31 @@ class PaymentViewModelImpl: PaymentViewModel {
     
     var viewUpdater: PaymentViewUpdater?
     var selectedAccount = Account(id: "2", name: "Savings Account", iban: "DE23 3701 0044 1344 8291 01", amount: "€6.231,40")
-    var dateText = "23 May, 2022"
+    var dateText: String {
+        if case .installment(_, let paid) = type {
+            if let date = Calendar.current.date(byAdding: .month, value: paid, to: Date()) {
+                return format(date: date)
+            }
+            return ""
+        }
+        return ""
+    }
+    
+    var nrOfInstallments: Int?
+    
+    var amountPerThreeMonths: Double {
+        return transaction.value / 3
+    }
+    var amountPerSixMonths: Double {
+        return transaction.value / 6
+    }
+    var amountPerNineMonths: Double {
+        return transaction.value / 9
+    }
+    
+    private func format(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd, yyyy"
+        return dateFormatter.string(from: date)
+    }
 }

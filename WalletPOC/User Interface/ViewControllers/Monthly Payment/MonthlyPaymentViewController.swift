@@ -17,7 +17,7 @@ final class MonthlyPaymentViewController: BaseViewController {
     }()
     
     private lazy var progressView: ProgressView = {
-        let view = ProgressView(totalPortions: 3, portionsDone: 2, totalWidth: view.frame.width - Double(2 * .padding3x))
+        let view = ProgressView(totalPortions: viewModel.totalMonths, portionsDone: viewModel.paidMonths, totalWidth: view.frame.width - Double(2 * .padding3x))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -77,12 +77,16 @@ final class MonthlyPaymentViewController: BaseViewController {
     
     private let viewModel: MonthlyPaymentViewModel
     
+    var transactionUpdated: ((Transaction) -> ())? = nil
+    
     // MARK: - Lifecycle
     
     init(viewModel: MonthlyPaymentViewModel) {
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
+        
+        viewModel.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -136,6 +140,10 @@ final class MonthlyPaymentViewController: BaseViewController {
         grayView.addSubview(fullAmountValueLabel)
         bottomView.addSubview(actionButton)
         bottomView.addSubview(separatorView)
+        
+        footerView.merchantDetailsView.ibanLabel.text = viewModel.merchantIban
+        
+        actionButton.addTarget(self, action: #selector(didTapPayNext), for: .touchUpInside)
     }
     
     private func setupLayout() {
@@ -178,9 +186,17 @@ final class MonthlyPaymentViewController: BaseViewController {
     }
     
     // MARK: - Actions
+    
+    @objc private func didTapPayNext() {
+        let paymentViewController = PaymentViewController(viewModel: PaymentViewModelImpl(type: .installment(total: viewModel.totalMonths, paid: viewModel.paidMonths), transactionViewModel: TransactionViewModel(merchantAppScheme: "", transactionId: "", buyNowPayLater: "", transactionAmount: viewModel.totalAmount), transaction: viewModel.transaction))
+        if paymentViewController.walletDelegate == nil {
+            paymentViewController.walletDelegate = viewModel
+        }
+        navigationController?.pushViewController(paymentViewController, animated: true)
+    }
 }
 
-extension MonthlyPaymentViewController: UITableViewDataSource {
+extension MonthlyPaymentViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.sectionModels.count
@@ -190,9 +206,6 @@ extension MonthlyPaymentViewController: UITableViewDataSource {
         let view = tableView.dequeueReusableHeaderFooterView(viewType: WalletSectionHeader.self)
         view?.title = viewModel.sectionModels[section].title
         view?.canSchedule = viewModel.sectionModels[section].canSchedulePayment
-        view?.scheduleTapped = {
-            self.presnetScheduleAppointmentView()
-        }
         return view
     }
     
@@ -213,19 +226,6 @@ extension MonthlyPaymentViewController: UITableViewDataSource {
         }
         return nil
     }
-    
-    private func presnetScheduleAppointmentView() {
-        let alertView = SchedulePaymentsAlertView(viewModel: SchedulePaymentsAlertViewModel(numberOfSchedules: 3, totalAmount: viewModel.totalAmount, consignee: "Zalando"))
-        alertView.delegate = self
-        let alertViewController = AlertViewController()
-        alertViewController.modalPresentationStyle = .overFullScreen
-        alertViewController.populate(with: alertView)
-        present(alertViewController, animated: true)
-    }
-}
-
-extension MonthlyPaymentViewController: UITableViewDelegate {
-    
 }
 
 extension MonthlyPaymentViewController: SchedulePaymentsAlertViewDelegate {
@@ -241,5 +241,17 @@ extension UIView {
         let mask = CAShapeLayer()
         mask.path = path.cgPath
         layer.mask = mask
+    }
+}
+
+extension MonthlyPaymentViewController: MonthlyPaymentViewUpdater {
+    func update(with transaction: Transaction) {
+        transactionUpdated?(transaction)
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func reloadData() {
+        progressView.portionsDone = viewModel.paidMonths
+        tableView.reloadData()
     }
 }
