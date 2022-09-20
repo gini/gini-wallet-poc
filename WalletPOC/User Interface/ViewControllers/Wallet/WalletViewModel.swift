@@ -26,7 +26,7 @@ class WalletViewModel {
     var sectionModels: [SectionModel]
     
     var paidTransactions: [Transaction] = []
-    var upcomingTransactions: [Transaction] = []
+    var upcomingTransactions: [Transaction] = [] 
     
     weak var viewUpdater: WalletViewUpdater?
     

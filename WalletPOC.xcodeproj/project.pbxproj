@@ -41,6 +41,8 @@
 		2E81253828CB66030051B787 /* AppStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81253728CB66030051B787 /* AppStyle.swift */; };
 		2E81253C28CB89EF0051B787 /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E81253B28CB89EF0051B787 /* PDFViewController.swift */; };
 		2E82FF1428D33CBE00C59638 /* TransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E82FF1328D33CBE00C59638 /* TransactionViewModel.swift */; };
+		2E82FF1728DA081200C59638 /* TransactionOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E82FF1628DA081200C59638 /* TransactionOverviewViewController.swift */; };
+		2E82FF1B28DA24C200C59638 /* receipt.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 2E82FF1A28DA24C200C59638 /* receipt.pdf */; };
 		F41C08B028BE51310050510E /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41C08AF28BE51310050510E /* PaymentViewModel.swift */; };
 		F41C08B228BE59A70050510E /* pdfMock2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F41C08B128BE59A70050510E /* pdfMock2.pdf */; };
 		F41C08B428C0D3400050510E /* DS-01.xml in Resources */ = {isa = PBXBuildFile; fileRef = F41C08B328C0D33F0050510E /* DS-01.xml */; };
@@ -139,6 +141,8 @@
 		2E81253728CB66030051B787 /* AppStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStyle.swift; sourceTree = "<group>"; };
 		2E81253B28CB89EF0051B787 /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
 		2E82FF1328D33CBE00C59638 /* TransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewModel.swift; sourceTree = "<group>"; };
+		2E82FF1628DA081200C59638 /* TransactionOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionOverviewViewController.swift; sourceTree = "<group>"; };
+		2E82FF1A28DA24C200C59638 /* receipt.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = receipt.pdf; sourceTree = "<group>"; };
 		F41C08AF28BE51310050510E /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		F41C08B128BE59A70050510E /* pdfMock2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = pdfMock2.pdf; sourceTree = "<group>"; };
 		F41C08B328C0D33F0050510E /* DS-01.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "DS-01.xml"; sourceTree = "<group>"; };
@@ -236,6 +240,7 @@
 		2E1BB15828C8A46D007F3587 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				2E82FF1528DA07F700C59638 /* TransactionOverview */,
 				2E40C8AE28D083C500D438AF /* Monthly Payment */,
 				2E40C8A128CF79AD00D438AF /* Wallet */,
 				2E1BB15928C8A47F007F3587 /* AlertViewController.swift */,
@@ -338,6 +343,14 @@
 				2E40C8B328D0CCEB00D438AF /* ProgressView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		2E82FF1528DA07F700C59638 /* TransactionOverview */ = {
+			isa = PBXGroup;
+			children = (
+				2E82FF1628DA081200C59638 /* TransactionOverviewViewController.swift */,
+			);
+			path = TransactionOverview;
 			sourceTree = "<group>";
 		};
 		F41C08B728C5CF800050510E /* Fonts */ = {
@@ -447,6 +460,7 @@
 				2E1BB14F28C88504007F3587 /* Strings */,
 				F41C08B728C5CF800050510E /* Fonts */,
 				F41C08B128BE59A70050510E /* pdfMock2.pdf */,
+				2E82FF1A28DA24C200C59638 /* receipt.pdf */,
 				F9D38E24253793E3007D4888 /* Colors.xcassets */,
 				F9C2B947258954E1002DBADF /* Images.xcassets */,
 			);
@@ -648,6 +662,7 @@
 				F41C08CB28C5D71E0050510E /* PlusJakartaSans-ExtraBoldItalic.ttf in Resources */,
 				F41C08D028C5D7D10050510E /* PlusJakartaSans-Regular.ttf in Resources */,
 				F9D38E25253793E3007D4888 /* Colors.xcassets in Resources */,
+				2E82FF1B28DA24C200C59638 /* receipt.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -732,6 +747,7 @@
 				F41C08B628C5CD910050510E /* Account.swift in Sources */,
 				F9CB747525CDA816006F0FE2 /* AppEngine.swift in Sources */,
 				2E1BB15A28C8A47F007F3587 /* AlertViewController.swift in Sources */,
+				2E82FF1728DA081200C59638 /* TransactionOverviewViewController.swift in Sources */,
 				2E40C8A728CF7C3D00D438AF /* TransactionCell.swift in Sources */,
 				F42109E428BDE85D0069F486 /* PaymentViewController.swift in Sources */,
 				F9C2B92F25893B6B002DBADF /* Config.swift in Sources */,

@@ -180,6 +180,12 @@ extension WalletViewController: UITableViewDelegate {
         switch cellModel.type {
         case .open:
             viewModel.upcomingTransactions.remove(at: indexPath.row)
+            viewModel.sectionModels[indexPath.row].cellModels.remove(at: indexPath.row)
+            if viewModel.sectionModels[indexPath.row].cellModels.isEmpty {
+                viewModel.sectionModels.remove(at: 0)
+            }
+            tableView.reloadData()
+            
             let paymentVC = PaymentViewController(viewModel: PaymentViewModelImpl(type: .buyNow, transactionViewModel: TransactionViewModel(merchantAppScheme: "", transactionId: transaction.id, buyNowPayLater: "false", transactionAmount: transaction.value), transaction: transaction))
             if paymentVC.walletDelegate == nil {
                 paymentVC.walletDelegate = viewModel
@@ -197,7 +203,9 @@ extension WalletViewController: UITableViewDelegate {
             
         default:
             // TODO: [Noemi] open already payed transaction overview
-            print("Should open payed transactions overview")
+            print("p open payed transactions overview")
+            let transactionOverviewVC = TransactionOverviewViewController(transaction: transaction)
+            navigationController?.pushViewController(transactionOverviewVC, animated: true)
         }
     }
 }

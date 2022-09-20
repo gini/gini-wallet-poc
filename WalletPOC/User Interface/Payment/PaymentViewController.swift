@@ -215,7 +215,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         
         [amountLabel, payNowButton, payLaterButton, refuseButton, bottomTinyView].forEach{ bottomView.addSubview($0) }
         
-        guard let path = Bundle.main.url(forResource: "pdfMock2", withExtension: "pdf") else {
+        guard let path = Bundle.main.url(forResource: "receipt", withExtension: "pdf") else {
             return }
         
         if let document = PDFDocument(url: path) {
@@ -557,6 +557,9 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     }
     
     @objc private func didTapPayNow() {
+        viewModel.transaction.account = viewModel.selectedAccount
+        viewModel.transaction.merchantIban = viewModel.merchantIban
+        
         let vc = FaceIDViewController(isLoader: true)
         vc.modalPresentationStyle = .overFullScreen
         vc.didAuthorize = { _ in
@@ -591,6 +594,8 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     }
     
     @objc private func didTapPayLater() {
+        viewModel.transaction.account = viewModel.selectedAccount
+        viewModel.transaction.merchantIban = viewModel.merchantIban
         let vc = FaceIDViewController()
         vc.modalPresentationStyle = .overFullScreen
         vc.didAuthorize = { _ in
@@ -667,7 +672,7 @@ extension PaymentViewController: SuccessAlertViewDelegate {
             
             dismiss(animated: true)
             
-            let url = URL(string: "\(viewModel.transactionViewModel.merchantAppScheme)://option?")
+            let url = URL(string: "merchantpoc://option?")
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.33) {
                 UIApplication.shared.open(url!) { (result) in
                     if result {
@@ -694,7 +699,7 @@ extension PaymentViewController: SuccessAlertViewDelegate {
                 
                 navigationController?.popViewController(animated: true)
             } else {
-                let url = URL(string: "\(viewModel.transactionViewModel.merchantAppScheme)://option?")
+                let url = URL(string: "merchantpoc://option?")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.33) {
                     UIApplication.shared.open(url!) { (result) in
                         if result {
@@ -720,6 +725,15 @@ extension PaymentViewController: RefusePaymentViewDelegate {
             switch result {
             case .success:
                 self.dismiss(animated: true)
+                
+                let url = URL(string: "merchantpoc://option?")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.33) {
+                    UIApplication.shared.open(url!) { (result) in
+                        if result {
+                            print("successfully navigated to merchant app")
+                        }
+                    }
+                }
                 self.navigationController?.popViewController(animated: true)
             case .failure:
                 print("Error while accepting payment")

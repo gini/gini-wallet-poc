@@ -11,6 +11,7 @@ enum PaymentViewModelType {
     case buyNow
     case buyLater
     case installment(total: Int, paid: Int)
+    case paid
     
     var title: String {
         switch(self) {

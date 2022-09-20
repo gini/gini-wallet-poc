@@ -10,7 +10,13 @@ import Foundation
 import UIKit
 import PDFKit
 
+protocol PaymentFooterViewDelegate: AnyObject {
+    func openPDFDetail()
+}
+
 final class PaymentFooterView: UIView {
+    
+    weak var delegate: PaymentFooterViewDelegate?
     
     private lazy var stackView: UIStackView = {
         let view = UIStackView()
@@ -80,12 +86,15 @@ final class PaymentFooterView: UIView {
     // MARK: - UI
     
     private func setupUI() {
-        guard let path = Bundle.main.url(forResource: "pdfMock2", withExtension: "pdf") else {
+        guard let path = Bundle.main.url(forResource: "receipt", withExtension: "pdf") else {
             return }
         
         if let document = PDFDocument(url: path) {
             pdfView.document = document
         }
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapPDFView))
+        pdfView.addGestureRecognizer(tapGesture)
         
         merchantDetailsView.accountNameLabel.text = "Rainbow Store"
         merchantDetailsView.ibanLabel.text  = "DE 88762181787817687"
@@ -112,5 +121,9 @@ final class PaymentFooterView: UIView {
             pdfView.heightAnchor.constraint(equalToConstant: 420),
             merchantDetailsView.heightAnchor.constraint(equalToConstant: 100),
         ])
+    }
+    
+    @objc private func didTapPDFView() {
+        delegate?.openPDFDetail()
     }
 }
