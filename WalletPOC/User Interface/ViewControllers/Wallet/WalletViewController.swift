@@ -180,7 +180,7 @@ extension WalletViewController: UITableViewDelegate {
         switch cellModel.type {
         case .open:
             viewModel.upcomingTransactions.remove(at: indexPath.row)
-            let paymentVC = PaymentViewController(viewModel: PaymentViewModelImpl(type: .buyNow, transactionViewModel: TransactionViewModel(merchantAppScheme: "", transactionId: "transaction.id", buyNowPayLater: "false", transactionAmount: transaction.value), transaction: transaction))
+            let paymentVC = PaymentViewController(viewModel: PaymentViewModelImpl(type: .buyNow, transactionViewModel: TransactionViewModel(merchantAppScheme: "", transactionId: transaction.id, buyNowPayLater: "false", transactionAmount: transaction.value), transaction: transaction))
             if paymentVC.walletDelegate == nil {
                 paymentVC.walletDelegate = viewModel
             }
@@ -189,7 +189,6 @@ extension WalletViewController: UITableViewDelegate {
         case .scheduledUpcoming(let totalInstallments, let paidInstallments):
             let monthlyPaymentVC = MonthlyPaymentViewController(viewModel: MonthlyPaymentViewModel(totalMonths: totalInstallments, paidMonths: paidInstallments, transaction: transaction))
             monthlyPaymentVC.transactionUpdated = { transaction in
-                print("====DAAAAAAAA \(transaction.type)")
                 self.viewModel.updateList(with: transaction, at: indexPath.row)
                 self.reloadData()
                 self.navigationController?.popToRootViewController(animated: true)

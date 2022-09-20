@@ -85,6 +85,7 @@ class PaymentViewModelImpl: PaymentViewModel {
         self.transaction = transaction
         self.transaction.value = transactionViewModel.transactionAmount
         self.transactionId = transactionViewModel.transactionId
+        self.transaction.id = transactionViewModel.transactionId
     }
     
     var titleText: String {
