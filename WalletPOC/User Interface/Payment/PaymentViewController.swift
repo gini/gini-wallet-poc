@@ -140,14 +140,14 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         payNowButton.addTarget(self, action: #selector(didTapPayNow), for: .touchUpInside)
         payNowButton.backgroundColor = UIColor(named: "AccentColor")
         
-        payNowButton.layer.cornerRadius = 5
+        payNowButton.layer.cornerRadius = 12
         payNowButton.layer.borderWidth = 1
         payNowButton.layer.borderColor = UIColor(named: "AccentColor")?.cgColor
         payNowButton.titleLabel?.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
         
         payLaterButton.setTitle("Pay Later", for: .normal)
         payLaterButton.addTarget(self, action: #selector(didTapPayLater), for: .touchUpInside)
-        payLaterButton.layer.cornerRadius = 5
+        payLaterButton.layer.cornerRadius = 12
         payLaterButton.layer.borderWidth = 1
         payLaterButton.layer.borderColor = UIColor(named: "borderGray")?.cgColor
         payLaterButton.backgroundColor = .clear
@@ -174,6 +174,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         horizontalScrollView.backgroundColor = .white
         horizontalScrollView.contentInsetAdjustmentBehavior = .never
         horizontalScrollView.isScrollEnabled = true
+        horizontalScrollView.showsHorizontalScrollIndicator = false
         //horizontalScrollView.backgroundColor = .green
         
         acceptLabel.text = viewModel.acceptText
@@ -278,7 +279,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
             refuseButton.centerXAnchor.constraint(equalTo: bottomView.centerXAnchor),
             refuseButton.topAnchor.constraint(equalTo: amountLabel.bottomAnchor, constant: 86),
             refuseButton.leadingAnchor.constraint(greaterThanOrEqualTo: bottomView.leadingAnchor, constant: 20),
-            refuseButton.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor, constant: 10),
+            refuseButton.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor, constant: -16),
             
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -378,7 +379,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         
         
         let constraints = [
-            installmentsLabel.topAnchor.constraint(equalTo: payFullButton.bottomAnchor, constant: 15),
+            installmentsLabel.topAnchor.constraint(equalTo: payFullButton.bottomAnchor, constant: 30),
             installmentsLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             
             horizontalScrollView.topAnchor.constraint(equalTo: installmentsLabel.bottomAnchor, constant: 20),

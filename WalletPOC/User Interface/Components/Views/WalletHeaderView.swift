@@ -12,7 +12,7 @@ final class WalletHeaderView: UIView {
     
     private lazy var qrImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = Asset.Images.giniQr.image
+        imageView.image = Asset.Images.qrCode.image
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -51,7 +51,7 @@ final class WalletHeaderView: UIView {
             qrImageView.topAnchor.constraint(equalTo: topAnchor, constant: 30),
             qrImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
             qrImageView.heightAnchor.constraint(equalToConstant: 110),
-            qrImageView.heightAnchor.constraint(equalToConstant: 110),
+            qrImageView.widthAnchor.constraint(equalToConstant: 110),
             
             stackView.topAnchor.constraint(equalTo: qrImageView.bottomAnchor),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),

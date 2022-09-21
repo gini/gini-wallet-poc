@@ -179,7 +179,7 @@ final class TransactionOverviewViewController: UIViewController {
         
         view.addSubview(bottomView)
         bottomView.addSubview(amountLabel)
-        amountLabel.text = "€\(transaction.value)"
+        amountLabel.text = "€\(transaction.value)".replacingOccurrences(of: ".", with: ",")
         bottomView.addSubview(separatorView)
     }
     

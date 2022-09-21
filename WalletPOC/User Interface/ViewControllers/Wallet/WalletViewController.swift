@@ -129,6 +129,14 @@ final class WalletViewController: BaseViewController {
         guard let transactionViewModel = transactionViewModel else {
             return
         }
+        navigationController?.popToRootViewController(animated: true)
+        
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.light)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight] // for supporting device rotation
+        view.addSubview(blurEffectView)
         
         let vc = FaceIDViewController(isLoader: true)
         vc.modalPresentationStyle = .overFullScreen
@@ -150,6 +158,7 @@ final class WalletViewController: BaseViewController {
                     if isEnabled {
                         vc.didAuthorize?(isEnabled)
                         vc.dismiss(animated: true)
+                        blurEffectView.removeFromSuperview()
                     }
                 case .failure:
                     print("Error while loading transaction state")
@@ -218,6 +227,11 @@ extension WalletViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = tableView.dequeueReusableHeaderFooterView(viewType: WalletSectionHeader.self)
         view?.title = viewModel.sectionModels[section].title
+        if viewModel.sectionModels[section].isUpcoming {
+            view?.color = Asset.Colors.lightYellow.color.withAlphaComponent(0.5)
+        } else {
+            view?.color = .clear
+        }
         return view
     }
     
@@ -228,6 +242,12 @@ extension WalletViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: TransactionCell.self)
         cell.viewModel = viewModel.sectionModels[indexPath.section].cellModels[indexPath.row]
+        cell.hideSeparator = indexPath.row + 1 == viewModel.sectionModels[indexPath.section].cellModels.count
+        if viewModel.sectionModels[indexPath.section].isUpcoming {
+            cell.color = Asset.Colors.lightYellow.color.withAlphaComponent(0.5)
+        } else {
+            cell.color = .clear
+        }
         return cell
     }
 }

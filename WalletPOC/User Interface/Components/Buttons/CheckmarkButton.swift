@@ -58,6 +58,6 @@ final class CheckmarkButton: UIButton {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        decorate(with: [BorderDecorator(borderWidth: 1, borderColor: borderColor), CornerRadiusDecorator(radius: 4)])
+        decorate(with: [BorderDecorator(borderWidth: 1, borderColor: borderColor), CornerRadiusDecorator(radius: 8)])
     }
 }

@@ -205,7 +205,6 @@ extension MonthlyPaymentViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = tableView.dequeueReusableHeaderFooterView(viewType: WalletSectionHeader.self)
         view?.title = viewModel.sectionModels[section].title
-        view?.canSchedule = viewModel.sectionModels[section].canSchedulePayment
         return view
     }
     

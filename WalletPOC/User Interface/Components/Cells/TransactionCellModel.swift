@@ -58,7 +58,7 @@ class TransactionCellModel {
         self.type = type
         
         title = transaction.merchantName
-        amount = "- €\(String(format: "%.2f", transaction.value))"
+        amount = "- €\(String(format: "%.2f", transaction.value))".replacingOccurrences(of: ".", with: ",")
         logo = transaction.merchantLogo
         
         switch type {

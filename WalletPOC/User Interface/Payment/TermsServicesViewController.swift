@@ -12,11 +12,7 @@ protocol TermsServicesProtocol {
     func termsAccepted()
 }
 
-class TermsServicesViewController: UIViewController {
-    
-//    private let accountsArray = [Account(id: "1", name: "Main Account", iban: "DE23 3701 0044 2344 8191 02", amount: "€3.111,03"), Account(id: "2", name: "Savings Account", iban: "DE23 3701 0044 1344 8291 01", amount: "€6.231,40")]
-//
-    
+class TermsServicesViewController: UIViewController { 
     // 1
     lazy var containerView: UIView = {
         let view = UIView()
