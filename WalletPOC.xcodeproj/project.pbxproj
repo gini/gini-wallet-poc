@@ -47,6 +47,7 @@
 		2E9D969328DAE15300708C34 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 2E9D969228DAE15300708C34 /* AppCenterCrashes */; };
 		2E9D969528DAE15300708C34 /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = 2E9D969428DAE15300708C34 /* AppCenterDistribute */; };
 		2E9D969E28DB39F600708C34 /* Rainbow_store_invoice.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 2E9D969D28DB39F600708C34 /* Rainbow_store_invoice.pdf */; };
+		2E9D96A028DB476400708C34 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9D969F28DB476400708C34 /* LaunchScreenViewController.swift */; };
 		F41C08B028BE51310050510E /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41C08AF28BE51310050510E /* PaymentViewModel.swift */; };
 		F41C08B228BE59A70050510E /* pdfMock2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F41C08B128BE59A70050510E /* pdfMock2.pdf */; };
 		F41C08B428C0D3400050510E /* DS-01.xml in Resources */ = {isa = PBXBuildFile; fileRef = F41C08B328C0D33F0050510E /* DS-01.xml */; };
@@ -148,6 +149,7 @@
 		2E82FF1628DA081200C59638 /* TransactionOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionOverviewViewController.swift; sourceTree = "<group>"; };
 		2E82FF1A28DA24C200C59638 /* receipt.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = receipt.pdf; sourceTree = "<group>"; };
 		2E9D969D28DB39F600708C34 /* Rainbow_store_invoice.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Rainbow_store_invoice.pdf; sourceTree = "<group>"; };
+		2E9D969F28DB476400708C34 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		F41C08AF28BE51310050510E /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		F41C08B128BE59A70050510E /* pdfMock2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = pdfMock2.pdf; sourceTree = "<group>"; };
 		F41C08B328C0D33F0050510E /* DS-01.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "DS-01.xml"; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 				2E81253328CB2C5E0051B787 /* FaceIDViewController.swift */,
 				2E81253B28CB89EF0051B787 /* PDFViewController.swift */,
 				2E40C89B28CF531D00D438AF /* TabbarViewController.swift */,
+				2E9D969F28DB476400708C34 /* LaunchScreenViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -722,6 +725,7 @@
 				F9CB746D25CDA388006F0FE2 /* BaseViewController.swift in Sources */,
 				2E1BB15D28C8AA8C007F3587 /* ViewDecorator.swift in Sources */,
 				2E81252E28CA0D110051B787 /* SuccessAlertView.swift in Sources */,
+				2E9D96A028DB476400708C34 /* LaunchScreenViewController.swift in Sources */,
 				2E81252C28CA0D110051B787 /* CheckmarkButton.swift in Sources */,
 				2E1BB15728C89253007F3587 /* Color.swift in Sources */,
 				2E40C8A928CF7C4900D438AF /* TransactionCellModel.swift in Sources */,

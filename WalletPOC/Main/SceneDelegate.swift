@@ -89,6 +89,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
            let merchantAppScheme = params.first(where: { $0.name == Params.merchantAppScheme.rawValue })?.value,
            let transactionAmountString = params.first(where: { $0.name == Params.transactionAmount.rawValue })?.value, let transactionAmount = Double(transactionAmountString) {
             self.transactionViewModel = TransactionViewModel(merchantAppScheme: merchantAppScheme, transactionId: transactionId, buyNowPayLater: buyNowPayLater, transactionAmount: transactionAmount)
+            
             tabbarController?.transactionViewModel = transactionViewModel
         } else {
             print("Params are missing")

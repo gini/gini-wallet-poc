@@ -14,7 +14,16 @@ final class WalletViewController: BaseViewController {
     // MARK: - Properties
     var transactionViewModel: TransactionViewModel? {
         didSet {
-            presentPaymentIfNeeded()
+            guard transactionViewModel != nil else { return }
+            let launch = LaunchScreenViewController()
+            launch.modalPresentationStyle = .overFullScreen
+            launch.modalTransitionStyle = .crossDissolve
+            present(launch, animated: false)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+                guard let self = self else { return }
+                self.dismiss(animated: true)
+                self.presentPaymentIfNeeded()
+            }
         }
     }
     
