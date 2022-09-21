@@ -114,13 +114,13 @@ class PaymentViewModelImpl: PaymentViewModel {
     
     var priceText: String {
         if case .installment(let total, _) = type {
-            return "€ \(String(format: "%.2f", transaction.value / Double(total)))".replacingOccurrences(of: ".", with: ",")
+            return "€\(String(format: "%.2f", transaction.value / Double(total)))".replacingOccurrences(of: ".", with: ",")
         }
         
         if let nrOfInstallments = nrOfInstallments {
-            return "€ \(String(format: "%.2f", transaction.value / Double(nrOfInstallments))) / mo".replacingOccurrences(of: ".", with: ",")
+            return "€\(String(format: "%.2f", transaction.value / Double(nrOfInstallments))) / mo".replacingOccurrences(of: ".", with: ",")
         }
-        return "€ \(String(format: "%.2f", transaction.value))".replacingOccurrences(of: ".", with: ",")
+        return "€\(String(format: "%.2f", transaction.value))".replacingOccurrences(of: ".", with: ",")
     }
     var payNowText = "Pay now"
     var payLaterText = "Pay later"

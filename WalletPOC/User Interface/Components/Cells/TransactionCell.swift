@@ -53,7 +53,7 @@ final class TransactionCell: UITableViewCell {
     private lazy var separatorView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .borderColor
+        view.backgroundColor = .borderColor.withAlphaComponent(0.6)
         return view
     }()
     
@@ -64,6 +64,18 @@ final class TransactionCell: UITableViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    var hideSeparator: Bool = false {
+        didSet {
+            separatorView.isHidden = hideSeparator
+        }
+    }
+    
+    var color: UIColor = .clear {
+        didSet {
+            contentView.backgroundColor = color
+        }
+    }
     
     // MARK: - Lifecycle
     
