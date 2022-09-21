@@ -36,7 +36,7 @@ final class PDFViewController: BaseViewController {
         
         view.addSubview(closeButton)
         closeButton.tintColor = .secondaryText
-        guard let path = Bundle.main.url(forResource: "receipt", withExtension: "pdf") else {
+        guard let path = Bundle.main.url(forResource: "Rainbow_store_invoice", withExtension: "pdf") else {
             return }
         
         pdfView.autoScales = true

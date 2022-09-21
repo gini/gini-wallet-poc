@@ -141,7 +141,7 @@ final class TransactionOverviewViewController: UIViewController {
         view.backgroundColor = .white
         navigationItem.title = "Online payment"
         
-        guard let path = Bundle.main.url(forResource: "receipt", withExtension: "pdf") else {
+        guard let path = Bundle.main.url(forResource: "Rainbow_store_invoice", withExtension: "pdf") else {
             return }
         
         if let document = PDFDocument(url: path) {
