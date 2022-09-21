@@ -43,6 +43,9 @@
 		2E82FF1428D33CBE00C59638 /* TransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E82FF1328D33CBE00C59638 /* TransactionViewModel.swift */; };
 		2E82FF1728DA081200C59638 /* TransactionOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E82FF1628DA081200C59638 /* TransactionOverviewViewController.swift */; };
 		2E82FF1B28DA24C200C59638 /* receipt.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 2E82FF1A28DA24C200C59638 /* receipt.pdf */; };
+		2E9D969128DAE15300708C34 /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2E9D969028DAE15300708C34 /* AppCenterAnalytics */; };
+		2E9D969328DAE15300708C34 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 2E9D969228DAE15300708C34 /* AppCenterCrashes */; };
+		2E9D969528DAE15300708C34 /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = 2E9D969428DAE15300708C34 /* AppCenterDistribute */; };
 		F41C08B028BE51310050510E /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41C08AF28BE51310050510E /* PaymentViewModel.swift */; };
 		F41C08B228BE59A70050510E /* pdfMock2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F41C08B128BE59A70050510E /* pdfMock2.pdf */; };
 		F41C08B428C0D3400050510E /* DS-01.xml in Resources */ = {isa = PBXBuildFile; fileRef = F41C08B328C0D33F0050510E /* DS-01.xml */; };
@@ -213,6 +216,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E9D969528DAE15300708C34 /* AppCenterDistribute in Frameworks */,
+				2E9D969128DAE15300708C34 /* AppCenterAnalytics in Frameworks */,
+				2E9D969328DAE15300708C34 /* AppCenterCrashes in Frameworks */,
 				F9BAE6BF253799BF008FF118 /* Core in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -590,6 +596,9 @@
 			name = WalletPOC;
 			packageProductDependencies = (
 				F9BAE6BE253799BF008FF118 /* Core */,
+				2E9D969028DAE15300708C34 /* AppCenterAnalytics */,
+				2E9D969228DAE15300708C34 /* AppCenterCrashes */,
+				2E9D969428DAE15300708C34 /* AppCenterDistribute */,
 			);
 			productName = skeleton;
 			productReference = F9D38E18253793E3007D4888 /* WalletPOC.app */;
@@ -624,6 +633,7 @@
 			mainGroup = F9D38E0F253793E3007D4888;
 			packageReferences = (
 				F955ED2A256D1CF8005299AC /* XCRemoteSwiftPackageReference "ViewInspector" */,
+				2E9D968F28DAE15300708C34 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
 			);
 			productRefGroup = F9D38E19253793E3007D4888 /* Products */;
 			projectDirPath = "";
@@ -1127,6 +1137,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2E9D968F28DAE15300708C34 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/microsoft/appcenter-sdk-apple.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		F955ED2A256D1CF8005299AC /* XCRemoteSwiftPackageReference "ViewInspector" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/nalexn/ViewInspector.git";
@@ -1138,6 +1156,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2E9D969028DAE15300708C34 /* AppCenterAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2E9D968F28DAE15300708C34 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterAnalytics;
+		};
+		2E9D969228DAE15300708C34 /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2E9D968F28DAE15300708C34 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		2E9D969428DAE15300708C34 /* AppCenterDistribute */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2E9D968F28DAE15300708C34 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterDistribute;
+		};
 		F955ED2B256D1CF8005299AC /* ViewInspector */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F955ED2A256D1CF8005299AC /* XCRemoteSwiftPackageReference "ViewInspector" */;

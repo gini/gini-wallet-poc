@@ -11,12 +11,30 @@
         }
       },
       {
+        "package": "AppCenter",
+        "repositoryURL": "https://github.com/microsoft/appcenter-sdk-apple.git",
+        "state": {
+          "branch": null,
+          "revision": "b2dc99cfedead0bad4e6573d86c5228c89cff332",
+          "version": "4.4.3"
+        }
+      },
+      {
         "package": "DIKit",
         "repositoryURL": "https://github.com/Liftric/DIKit.git",
         "state": {
           "branch": null,
           "revision": "dd076cb4ba22e97599a7aff0f1fb3d43ffb8ac8e",
           "version": "1.6.1"
+        }
+      },
+      {
+        "package": "PLCrashReporter",
+        "repositoryURL": "https://github.com/microsoft/PLCrashReporter.git",
+        "state": {
+          "branch": null,
+          "revision": "81cdec2b3827feb03286cb297f4c501a8eb98df1",
+          "version": "1.10.2"
         }
       },
       {
