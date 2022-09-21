@@ -24,6 +24,7 @@ final class TransactionCell: UITableViewCell {
     
     private lazy var sideImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -63,7 +64,6 @@ final class TransactionCell: UITableViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
     
     // MARK: - Lifecycle
     

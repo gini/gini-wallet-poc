@@ -15,7 +15,7 @@ class SchedulePaymentCellModel {
         return formatDate()
     }
     var amountString: String {
-        return "- €\(String(format: "%.2f", amount))"
+        return "- €\(String(format: "%.2f", amount))".replacingOccurrences(of: ".", with: ",")
     }
     
     var isEnabled: Bool = true

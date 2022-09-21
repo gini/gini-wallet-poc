@@ -27,7 +27,7 @@ final class MonthlyPaymentViewModel {
     var transaction: Transaction
     
     var totalAmountText: String? {
-        return "€\(String(format: "%.2f", totalAmount))"
+        return "€\(String(format: "%.2f", totalAmount))".replacingOccurrences(of: ".", with: ",")
     }
     
     var merchantIban = "DE86 2107 0020 0123 0101 01"
