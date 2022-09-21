@@ -126,9 +126,12 @@ final class WalletViewController: BaseViewController {
     }
     
     private func presentPaymentIfNeeded() {
+        
+        
         guard let transactionViewModel = transactionViewModel else {
             return
         }
+        navigationController?.popToRootViewController(animated: true)
         
         let vc = FaceIDViewController(isLoader: true)
         vc.modalPresentationStyle = .overFullScreen
