@@ -10,6 +10,7 @@ import Core
 import DIKit
 import CoreData
 import AppCenter
+import AppCenterAnalytics
 import AppCenterCrashes
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         appEngine.prepareAppStart()
-        AppCenter.start(withAppSecret: "", services: [Crashes.self])
+        AppCenter.start(withAppSecret: "bf07bc0f-7a97-47ed-a5e1-86cd27f13884", services: [Analytics.self, Crashes.self])
         return true
     }
     
