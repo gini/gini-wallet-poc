@@ -14,6 +14,7 @@ final class WalletViewController: BaseViewController {
     // MARK: - Properties
     var transactionViewModel: TransactionViewModel? {
         didSet {
+            self.navigationController?.popToRootViewController(animated: false)
             guard transactionViewModel != nil else { return }
             let launch = LaunchScreenViewController()
             launch.modalPresentationStyle = .overFullScreen
