@@ -27,7 +27,7 @@ enum AccountType {
     
     var switchAccountImage: UIImage {
         switch self {
-        case .sender: return UIImage(systemName: "chevron.down") ?? UIImage()
+        case .sender: return UIImage(systemName: "chevron.down")?.withRenderingMode(.alwaysTemplate) ?? UIImage()
         case .merchant: return UIImage(named: "rainbowStore") ?? UIImage()
         }
     }
@@ -52,14 +52,15 @@ class AccountView: UIView {
      var accountNameLabel = UILabel.autoLayout()
      var ibanLabel = UILabel.autoLayout()
      var amountInvoiceLabel = UILabel.autoLayout()
-     var switchAccountButton = UIButton.autoLayout()
+     var switchAccountIcon = UIImageView.autoLayout()
     
     var isIconHidden: Bool = false {
         didSet {
             if isIconHidden {
-                switchAccountButton.setImage(nil, for: .normal)
+                switchAccountIcon.image = nil
             } else {
-                switchAccountButton.setImage(type.switchAccountImage, for: .normal)
+                switchAccountIcon.image = type.switchAccountImage
+                switchAccountIcon.tintColor = .secondaryText
             }
         }
     }
@@ -75,8 +76,10 @@ class AccountView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        self.switchAccountButton.imageView?.clipsToBounds = true
-        self.switchAccountButton.imageView?.layer.cornerRadius = 20
+        if type == .merchant {
+            self.switchAccountIcon.clipsToBounds = true
+            self.switchAccountIcon.layer.cornerRadius = 20
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -97,11 +100,9 @@ class AccountView: UIView {
         amountInvoiceLabel.textColor = type.amountInvoiceColor
         amountInvoiceLabel.font = type.amountInvoiceFont
         
-        switchAccountButton.setImage(type.switchAccountImage, for: .normal)
+        switchAccountIcon.image = type.switchAccountImage
         
-        [accountNameLabel, ibanLabel, amountInvoiceLabel, switchAccountButton].forEach { self.addSubview($0) }
-
-        
+        [accountNameLabel, ibanLabel, amountInvoiceLabel, switchAccountIcon].forEach { self.addSubview($0) }
     }
     
     private func setupConstraints() {
@@ -117,10 +118,10 @@ class AccountView: UIView {
             amountInvoiceLabel.topAnchor.constraint(equalTo: ibanLabel.bottomAnchor, constant: 5),
             amountInvoiceLabel.leadingAnchor.constraint(equalTo: accountNameLabel.leadingAnchor),
             
-            switchAccountButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            switchAccountButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15),
-            switchAccountButton.widthAnchor.constraint(equalToConstant: 40),
-            switchAccountButton.heightAnchor.constraint(equalToConstant: 40),
+            switchAccountIcon.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            switchAccountIcon.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15),
+            switchAccountIcon.widthAnchor.constraint(equalToConstant: type == .sender ? 20 : 40),
+            switchAccountIcon.heightAnchor.constraint(equalTo: switchAccountIcon.widthAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
     }

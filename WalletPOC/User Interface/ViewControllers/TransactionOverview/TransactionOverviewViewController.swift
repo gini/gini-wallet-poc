@@ -154,7 +154,7 @@ final class TransactionOverviewViewController: UIViewController {
         merchantDetailsView.ibanLabel.text  = transaction.merchantIban
         merchantDetailsView.amountInvoiceLabel.text = "Ref: Invoice #378981798"
         merchantDetailsView.decorate(with: CornerRadiusDecorator(radius: .viewRadius))
-        merchantDetailsView.switchAccountButton.setImage(transaction.merchantLogo, for: .normal)
+        merchantDetailsView.switchAccountIcon.image = transaction.merchantLogo
         
         senderDetailsView.accountNameLabel.text = transaction.account.name
         senderDetailsView.ibanLabel.text  = transaction.account.iban

@@ -106,8 +106,9 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         senderDetailsView.accountNameLabel.text = viewModel.userAccountText
         senderDetailsView.ibanLabel.text = viewModel.userAccountNumber
         senderDetailsView.amountInvoiceLabel.text = viewModel.userAccountAmount
-        senderDetailsView.switchAccountButton.tintColor = .black
+        senderDetailsView.switchAccountIcon.tintColor = .black
         senderDetailsView.decorate(with: CornerRadiusDecorator(radius: .viewRadius))
+        senderDetailsView.isIconHidden = false
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         senderDetailsView.addGestureRecognizer(tap)
