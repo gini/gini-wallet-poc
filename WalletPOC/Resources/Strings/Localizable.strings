@@ -93,6 +93,6 @@ my_wallet = "My wallet";
 //MonthlyPaymentVC&VM
 upcoming = "Upcoming";
 full_amount = "Full amount";
-pay_next_installment = "Pay next installment"
+pay_next_installment = "Pay next installment";
 monthly_payment = "Monthly payment";
 

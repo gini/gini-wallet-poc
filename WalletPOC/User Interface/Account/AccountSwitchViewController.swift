@@ -96,7 +96,7 @@ class AccountSwitchViewController: UIViewController {
         dimmedView.addGestureRecognizer(tap)
 
         cancelButton.setTitleColor(.gray, for: .normal)
-        cancelButton.setTitle(L10n.cancel, for: .normal)
+        cancelButton.setTitle("Cancel", for: .normal)
         cancelButton.titleLabel?.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
 
