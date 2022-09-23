@@ -22,16 +22,16 @@ final class SuccessAlertView: UIView {
         
         var title: String {
             switch self {
-            case .paymentAdded: return "Open payment added"
-            case .paymentConfirmed: return "Payment confirmed"
-            case .firstPaymentConfirmed: return "First payment confirmed"
-            case .installmentPaid: return "Installment was paid"
+            case .paymentAdded: return L10n.openPayments
+            case .paymentConfirmed: return L10n.paymentConfirmed
+            case .firstPaymentConfirmed: return L10n.firstPaymentConfirmed
+            case .installmentPaid: return L10n.installmentWasPaid
             }
         }
         
         var message: String {
             switch self {
-            case .firstPaymentConfirmed(let value, let installments): return "You will pay a total of €\(value) in \(installments) installments."
+            case .firstPaymentConfirmed(let value, let installments): return L10n.youWillPayTotalOf(Int(value), Int(installments))
             default: return ""
             }
         }
@@ -71,7 +71,7 @@ final class SuccessAlertView: UIView {
     private lazy var actionButton: ActionButton = {
         let button = ActionButton(style: .constructive)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Close", for: .normal)
+        button.setTitle(L10n.close, for: .normal)
         return button
     }()
     

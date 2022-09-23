@@ -19,7 +19,7 @@ final class SchedulePaymentsAlertView: UIView {
     private lazy var actionButton: ActionButton = {
         let button = ActionButton(style: .constructive)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Confirm", for: .normal)
+        button.setTitle(L10n.confirm, for: .normal)
         return button
     }()
     

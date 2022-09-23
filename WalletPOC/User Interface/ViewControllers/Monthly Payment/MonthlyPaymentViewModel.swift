@@ -42,7 +42,7 @@ final class MonthlyPaymentViewModel {
         setupUpcomingTransaction()
         
         sectionModels = [
-            SectionModel(title: "Upcoming", isUpcoming: true, cellModels: upcomingTransactions.map { TransactionCellModel(transaction: $0, type: .simple)}, canSchedulePayment: false, backGroundColor: .yellow),
+            SectionModel(title: L10n.upcoming, isUpcoming: true, cellModels: upcomingTransactions.map { TransactionCellModel(transaction: $0, type: .simple)}, canSchedulePayment: false, backGroundColor: .yellow),
         ]
     }
     
@@ -60,7 +60,7 @@ extension MonthlyPaymentViewModel: DataViewUpdater {
         paidMonths += 1
         upcomingTransactions.removeFirst()
         sectionModels = [
-            SectionModel(title: "Upcoming", isUpcoming: true, cellModels: upcomingTransactions.map { TransactionCellModel(transaction: $0, type: .simple)}, canSchedulePayment: false, backGroundColor: .yellow),
+            SectionModel(title: L10n.upcoming, isUpcoming: true, cellModels: upcomingTransactions.map { TransactionCellModel(transaction: $0, type: .simple)}, canSchedulePayment: false, backGroundColor: .yellow),
         ]
         delegate?.reloadData()
         delegate?.update(with: transaction)

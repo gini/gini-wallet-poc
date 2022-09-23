@@ -24,7 +24,7 @@ final class RefusePaymentView: UIView {
         label.textColor = .primaryText
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.text = "Refuse payment?"
+        label.text = L10n.refusePayment
         return label
     }()
     
@@ -35,7 +35,7 @@ final class RefusePaymentView: UIView {
         label.textColor = .secondaryText
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.text = "This is permanent, if you change your mind, you will have to trigger the payment again."
+        label.text = L10n.refuseInformation
         return label
     }()
     
@@ -50,13 +50,13 @@ final class RefusePaymentView: UIView {
     
     private lazy var cancelButton: ActionButton = {
         let button = ActionButton(style: .bordered)
-        button.setTitle("Cancel", for: .normal)
+        button.setTitle(L10n.cancel, for: .normal)
         return button
     }()
     
     private lazy var refuseButton: ActionButton = {
         let button = ActionButton(style: .destructive)
-        button.setTitle("Refuse", for: .normal)
+        button.setTitle(L10n.refuse, for: .normal)
         return button
     }()
     

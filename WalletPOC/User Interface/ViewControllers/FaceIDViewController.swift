@@ -34,7 +34,7 @@ final class FaceIDViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .secondaryText
-        label.text = "Face ID"
+        label.text = L10n.faceid
         return label
     }()
     

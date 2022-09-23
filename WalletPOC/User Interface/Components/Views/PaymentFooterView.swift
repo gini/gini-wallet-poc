@@ -58,7 +58,7 @@ final class PaymentFooterView: UIView {
     
     private lazy var toLabel: UILabel = {
         let label = UILabel()
-        label.text = "To"
+        label.text = L10n.to
         label.font = .subtitleSmall
         label.textColor = .primaryText
         return label
@@ -66,7 +66,7 @@ final class PaymentFooterView: UIView {
     
     private lazy var invoiceLabel: UILabel = {
         let label = UILabel()
-        label.text = "Invoice"
+        label.text = L10n.invoice
         label.font = .subtitleSmall
         label.textColor = .primaryText
         return label

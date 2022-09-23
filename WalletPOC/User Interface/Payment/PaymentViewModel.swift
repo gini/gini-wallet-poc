@@ -16,16 +16,16 @@ enum PaymentViewModelType {
     var title: String {
         switch(self) {
         case .installment:
-            return "Next installment"
+            return L10n.nextInstallment
         default:
-            return "Online payment"
+            return L10n.onlinePayment
         }
     }
     
     var subtitle: String {
         switch(self) {
         case .installment(let total, let paid):
-            return "\(paid + 1) of \(total)"
+            return "\(paid + 1) \(L10n.of) \(total)"
         default:
             return ""
         }
@@ -97,20 +97,20 @@ class PaymentViewModelImpl: PaymentViewModel {
         type.subtitle
     }
         
-    var fromText = "From"
+    var fromText = L10n.fromPaymentvc
     
-    var userAccountText = "Savings Account"
+    var userAccountText = L10n.savingsAccountPaymentVC
     
     var userAccountNumber = "DE23 3701 0044 1344 8291 01"
     
     var userAccountAmount = "€6.231,40"
     
-    var toText = "To"
+    var toText = L10n.to
     
     var merchantNameText = "Rainbow Store"
     var merchantIban = "DE86 2107 0020 0123 0101 01"
     var merchantInvoice = "Ref: Invoice #378981798"
-    var invoiceText = "Invoice"
+    var invoiceText = L10n.invoice
     
     var priceText: String {
         if case .installment(let total, _) = type {
@@ -122,15 +122,15 @@ class PaymentViewModelImpl: PaymentViewModel {
         }
         return "€\(String(format: "%.2f", transaction.value))".replacingOccurrences(of: ".", with: ",")
     }
-    var payNowText = "Pay now"
-    var payLaterText = "Pay later"
-    var refuseText = "Refuse"
-    var installmentsText = "Installments"
-    var acceptText = "I accept the"
-    var termsConditionsText = "Terms and Conditions"
+    var payNowText = L10n.payNowPaymentvc
+    var payLaterText =  L10n.payLaterPaymentvc
+    var refuseText = L10n.refuse
+    var installmentsText = L10n.installmentsPaymentvc
+    var acceptText = L10n.acceptPaymentvc
+    var termsConditionsText = L10n.termsConditions
     
     var viewUpdater: PaymentViewUpdater?
-    var selectedAccount = Account(id: "2", name: "Savings Account", iban: "DE23 3701 0044 1344 8291 01", amount: "€6.231,40")
+    var selectedAccount = Account(id: "2", name: L10n.savingsAccountPaymentVC, iban: "DE23 3701 0044 1344 8291 01", amount: "€6.231,40")
     var dateText: String {
         if case .installment(_, let paid) = type {
             if let date = Calendar.current.date(byAdding: .month, value: paid, to: Date()) {

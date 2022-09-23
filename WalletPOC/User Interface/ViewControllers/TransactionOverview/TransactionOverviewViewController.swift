@@ -65,7 +65,7 @@ final class TransactionOverviewViewController: UIViewController {
     
     private lazy var toLabel: UILabel = {
         let label = UILabel()
-        label.text = "To"
+        label.text = L10n.to
         label.font = .subtitleSmall
         label.textColor = .primaryText
         return label
@@ -79,7 +79,7 @@ final class TransactionOverviewViewController: UIViewController {
     
     private lazy var fromLabel: UILabel = {
         let label = UILabel()
-        label.text = "From"
+        label.text = L10n.fromPaymentvc
         label.font = .subtitleSmall
         label.textColor = .primaryText
         return label
@@ -87,7 +87,7 @@ final class TransactionOverviewViewController: UIViewController {
     
     private lazy var invoiceLabel: UILabel = {
         let label = UILabel()
-        label.text = "Invoice"
+        label.text = L10n.invoice
         label.font = .subtitleSmall
         label.textColor = .primaryText
         return label
@@ -139,7 +139,7 @@ final class TransactionOverviewViewController: UIViewController {
     
     private func setupUI() {
         view.backgroundColor = .white
-        navigationItem.title = "Online payment"
+        navigationItem.title = L10n.onlinePayment
         
         guard let path = Bundle.main.url(forResource: "Rainbow_store_invoice", withExtension: "pdf") else {
             return }

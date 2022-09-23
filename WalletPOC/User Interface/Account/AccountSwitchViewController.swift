@@ -14,7 +14,7 @@ protocol AccountSwitchProtocol {
 
 class AccountSwitchViewController: UIViewController {
     
-    private let accountsArray = [Account(id: "1", name: "Main Account", iban: "DE23 3701 0044 2344 8191 02", amount: "€3.111,03"), Account(id: "2", name: "Savings Account", iban: "DE23 3701 0044 1344 8291 01", amount: "€6.231,40")]
+    private let accountsArray = [Account(id: "1", name: L10n.mainAccount, iban: "DE23 3701 0044 2344 8191 02", amount: "€3.111,03"), Account(id: "2", name: L10n.savingsAccountPaymentVC, iban: "DE23 3701 0044 1344 8291 01", amount: "€6.231,40")]
     
     
     // 1
@@ -89,14 +89,14 @@ class AccountSwitchViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        titleLabel.text = "Account from"
+        titleLabel.text = L10n.accountFrom
         titleLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         dimmedView.addGestureRecognizer(tap)
 
         cancelButton.setTitleColor(.gray, for: .normal)
-        cancelButton.setTitle("Cancel", for: .normal)
+        cancelButton.setTitle(L10n.cancel, for: .normal)
         cancelButton.titleLabel?.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
 

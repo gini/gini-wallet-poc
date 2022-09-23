@@ -18,8 +18,8 @@ enum PayButtonType {
     
     var title: String {
         switch self {
-        case .payNowFull: return "Pay now \n in full"
-        case .buyNowPayLater: return "Buy now, \n Pay later"
+        case .payNowFull: return L10n.payNowInFull
+        case .buyNowPayLater: return L10n.buyNowPayLater
         }
     }
 }
@@ -31,9 +31,9 @@ enum InstallmentButtonType {
     
     var periodLabel: String {
         switch self {
-        case .threeMonths: return "for 3 months"
-        case .sixMonths: return "for 6 months"
-        case .nineMonths: return "for 9 months"
+        case .threeMonths: return L10n.forThreeMonths
+        case .sixMonths: return L10n.forSixMonths
+        case .nineMonths: return L10n.forNineMonths
         }
     }
 }

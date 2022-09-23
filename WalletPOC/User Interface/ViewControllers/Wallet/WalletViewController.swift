@@ -104,7 +104,7 @@ final class WalletViewController: BaseViewController {
     // MARK: - UI
     
     private func setupUI() {
-        navigationItem.title = "My wallet"
+        navigationItem.title = L10n.myWallet
         viewModel.viewUpdater = self
         view.backgroundColor = .white
         view.addSubview(backgroundImageView)

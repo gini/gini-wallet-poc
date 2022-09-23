@@ -31,7 +31,7 @@ final class PaymentConfirmedAlertView: UIView {
         label.textColor = .primaryText
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.text = "First payment confirmed"
+        label.text = L10n.firstPaymentConfirmed
         return label
     }()
     
@@ -42,14 +42,15 @@ final class PaymentConfirmedAlertView: UIView {
         label.textColor = .secondaryText
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.text = "You will pay a total of €\(amountToPay) in 3 installments."
+        label.text = L10n.youWillPayTotalOf(Int(amountToPay), 3)
+        
         return label
     }()
     
     private lazy var actionButton: ActionButton = {
         let button = ActionButton(style: .constructive)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Confirm", for: .normal)
+        button.setTitle(L10n.confirm, for: .normal)
         return button
     }()
     
@@ -81,7 +82,7 @@ final class PaymentConfirmedAlertView: UIView {
         label.font = UIFont.bodyLarge
         label.textColor = .primaryText
         label.numberOfLines = 0
-        label.text = "Schedule payments"
+        label.text = L10n.schedulePayments
         return label
     }()
     

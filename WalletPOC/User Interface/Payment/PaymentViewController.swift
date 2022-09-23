@@ -137,7 +137,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         amountLabel.text = viewModel.priceText
         amountLabel.font = UIFont(name: "PlusJakartaSans-Bold", size: 32)
         
-        payNowButton.setTitle("Pay Now", for: .normal)
+        payNowButton.setTitle(L10n.payNowPaymentvc, for: .normal)
         payNowButton.addTarget(self, action: #selector(didTapPayNow), for: .touchUpInside)
         payNowButton.backgroundColor = UIColor(named: "AccentColor")
         
@@ -146,7 +146,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         payNowButton.layer.borderColor = UIColor(named: "AccentColor")?.cgColor
         payNowButton.titleLabel?.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
         
-        payLaterButton.setTitle("Pay Later", for: .normal)
+        payLaterButton.setTitle(L10n.payLaterPaymentvc, for: .normal)
         payLaterButton.addTarget(self, action: #selector(didTapPayLater), for: .touchUpInside)
         payLaterButton.layer.cornerRadius = 12
         payLaterButton.layer.borderWidth = 1
@@ -188,7 +188,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         checkmarkButton.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)
         
         let attributeString = NSMutableAttributedString(
-            string: "Refuse",
+            string: L10n.refuse,
             attributes: refuseAttributes
         )
         refuseButton.setAttributedTitle(attributeString, for: .normal)
@@ -200,7 +200,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         
         dueDateLabel.textColor = UIColor(named: "gray")
         dueDateLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 14)
-        dueDateLabel.text = "Due date"
+        dueDateLabel.text = L10n.dueDatePaymentvc
         
         dateLabel.font = UIFont(name: "PlusJakartaSans-Medium", size: 16)
         dateLabel.textColor = .black
@@ -470,7 +470,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     @objc private func payFullTapped() {
         viewModel.nrOfInstallments = nil
         updateAmountText()
-        payNowButton.setTitle("Pay now", for: .normal)
+        payNowButton.setTitle(L10n.payNowPaymentvc, for: .normal)
         if payFullButton.backgroundColor == .clear {
             buttonSelect(button: payFullButton)
             buttonDeselect(button: buyNowPayLaterButton)

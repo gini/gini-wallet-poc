@@ -63,21 +63,21 @@ class TransactionCellModel {
         
         switch type {
         case .paid:
-            message = "Online shopping"
+            message = L10n.onlineShopping
         case .open:
             if let dueDate = transaction.dueDate {
-                message = "Due \(format(date: dueDate))"
+                message = L10n.dueDateTransactioncell(format(date: dueDate))
             }
         case .recurring:
             if let dueDate = transaction.dueDate {
-                message = "Monthly: Next \(format(date: dueDate))"
+                message = L10n.monthlyNext(format(date: dueDate))
             }
         case .scheduledUpcoming:
             if let dueDate = transaction.dueDate {
-                message = "Monthly: Next \(format(date: dueDate))"
+                message = L10n.monthlyNext(format(date: dueDate))
             }
         case .scheduledPaid:
-            message = "Online shopping"
+            message = L10n.onlineShopping
         case .simple:
             if let dueDate = transaction.dueDate {
                 message = format(date: dueDate)

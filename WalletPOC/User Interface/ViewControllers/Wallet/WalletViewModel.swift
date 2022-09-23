@@ -38,7 +38,7 @@ class WalletViewModel {
         ]
         
         sectionModels = [
-            SectionModel(title: "Today", isUpcoming: false, cellModels: paidTransactions.map { TransactionCellModel(transaction: $0, type: .paid)})
+            SectionModel(title: L10n.today, isUpcoming: false, cellModels: paidTransactions.map { TransactionCellModel(transaction: $0, type: .paid)})
         ]
         // MARK: - de aici incepe :-?
         getData()
@@ -86,10 +86,10 @@ class WalletViewModel {
         
         sectionModels = []
         if !upcomingTransactions.isEmpty {
-            sectionModels.append(SectionModel(title: "Open payments", isUpcoming: true, cellModels: upcomingTransactionCellModels))
+            sectionModels.append(SectionModel(title: L10n.openPayments, isUpcoming: true, cellModels: upcomingTransactionCellModels))
         }
         if !paidTransactions.isEmpty {
-            sectionModels.append(SectionModel(title: "Today", isUpcoming: false, cellModels: paidTransactionCellModels))
+            sectionModels.append(SectionModel(title: L10n.today, isUpcoming: false, cellModels: paidTransactionCellModels))
         }
     }
 }
@@ -103,9 +103,9 @@ extension WalletViewModel: DataViewUpdater {
             paidTransactions = paidTransactions.reversed()
             sectionModels = []
             if !upcomingTransactions.isEmpty {
-                sectionModels.append(SectionModel(title: "Open payments", isUpcoming: true, cellModels: upcomingTransactionCellModels))
+                sectionModels.append(SectionModel(title: L10n.openPayments, isUpcoming: true, cellModels: upcomingTransactionCellModels))
             }
-            sectionModels.append(SectionModel(title: "Today", isUpcoming: false, cellModels: paidTransactionCellModels))
+            sectionModels.append(SectionModel(title: L10n.today isUpcoming: false, cellModels: paidTransactionCellModels))
             viewUpdater?.reloadData()
             
         case .upcoming:
@@ -114,9 +114,9 @@ extension WalletViewModel: DataViewUpdater {
             upcomingTransactions = upcomingTransactions.reversed()
             sectionModels = []
             
-            sectionModels.append(SectionModel(title: "Open payments", isUpcoming: true, cellModels: upcomingTransactions.map { TransactionCellModel(transaction: $0, type: .open)}))
+            sectionModels.append(SectionModel(title: L10n.openPayments, isUpcoming: true, cellModels: upcomingTransactions.map { TransactionCellModel(transaction: $0, type: .open)}))
             if !paidTransactions.isEmpty {
-                sectionModels.append(SectionModel(title: "Today", isUpcoming: false, cellModels: paidTransactions.map { TransactionCellModel(transaction: $0, type: .paid)}))
+                sectionModels.append(SectionModel(title: L10n.today, isUpcoming: false, cellModels: paidTransactions.map { TransactionCellModel(transaction: $0, type: .paid)}))
             }
             viewUpdater?.reloadData()
             
@@ -128,9 +128,9 @@ extension WalletViewModel: DataViewUpdater {
                 upcomingTransactions = upcomingTransactions.reversed()
                 sectionModels = []
                 
-                sectionModels.append(SectionModel(title: "Open payments", isUpcoming: true, cellModels: upcomingTransactionCellModels))
+                sectionModels.append(SectionModel(title: L10n.openPayments, isUpcoming: true, cellModels: upcomingTransactionCellModels))
                 if !paidTransactions.isEmpty {
-                    sectionModels.append(SectionModel(title: "Today", isUpcoming: false, cellModels: paidTransactionCellModels))
+                    sectionModels.append(SectionModel(title: L10n.today, isUpcoming: false, cellModels: paidTransactionCellModels))
                 }
                 viewUpdater?.reloadData()
                 
@@ -141,9 +141,9 @@ extension WalletViewModel: DataViewUpdater {
                 paidTransactions = paidTransactions.reversed()
                 sectionModels = []
                 if !upcomingTransactions.isEmpty {
-                    sectionModels.append(SectionModel(title: "Open payments", isUpcoming: true, cellModels: upcomingTransactionCellModels))
+                    sectionModels.append(SectionModel(title: L10n.openPayments, isUpcoming: true, cellModels: upcomingTransactionCellModels))
                 }
-                sectionModels.append(SectionModel(title: "Today", isUpcoming: false, cellModels: paidTransactionCellModels))
+                sectionModels.append(SectionModel(title: L10n.today, isUpcoming: false, cellModels: paidTransactionCellModels))
                 viewUpdater?.reloadData()
             }
         }
