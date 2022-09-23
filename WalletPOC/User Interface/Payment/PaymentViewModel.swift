@@ -109,7 +109,7 @@ class PaymentViewModelImpl: PaymentViewModel {
     
     var merchantNameText = "Rainbow Store"
     var merchantIban = "DE86 2107 0020 0123 0101 01"
-    var merchantInvoice = "Ref: Invoice #378981798"
+    var merchantInvoice = "Ref: \(L10n.invoice) #378981798"
     var invoiceText = L10n.invoice
     
     var priceText: String {

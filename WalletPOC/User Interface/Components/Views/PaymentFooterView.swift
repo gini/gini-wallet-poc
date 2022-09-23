@@ -98,7 +98,7 @@ final class PaymentFooterView: UIView {
         
         merchantDetailsView.accountNameLabel.text = "Rainbow Store"
         merchantDetailsView.ibanLabel.text  = "DE 88762181787817687"
-        merchantDetailsView.amountInvoiceLabel.text = "Ref: Invoice #378981798"
+        merchantDetailsView.amountInvoiceLabel.text = "Ref: \(L10n.invoice) #378981798"
         merchantDetailsView.decorate(with: CornerRadiusDecorator(radius: .viewRadius))
         
         addSubview(stackView)

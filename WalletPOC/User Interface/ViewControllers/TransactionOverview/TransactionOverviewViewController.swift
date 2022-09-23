@@ -152,7 +152,7 @@ final class TransactionOverviewViewController: UIViewController {
         
         merchantDetailsView.accountNameLabel.text = transaction.merchantName
         merchantDetailsView.ibanLabel.text  = transaction.merchantIban
-        merchantDetailsView.amountInvoiceLabel.text = "Ref: Invoice #378981798"
+        merchantDetailsView.amountInvoiceLabel.text = "Ref: \(L10n.invoice) #378981798"
         merchantDetailsView.decorate(with: CornerRadiusDecorator(radius: .viewRadius))
         merchantDetailsView.switchAccountIcon.image = transaction.merchantLogo
         

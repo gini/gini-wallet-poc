@@ -105,7 +105,7 @@ extension WalletViewModel: DataViewUpdater {
             if !upcomingTransactions.isEmpty {
                 sectionModels.append(SectionModel(title: L10n.openPayments, isUpcoming: true, cellModels: upcomingTransactionCellModels))
             }
-            sectionModels.append(SectionModel(title: L10n.today isUpcoming: false, cellModels: paidTransactionCellModels))
+            sectionModels.append(SectionModel(title: L10n.today, isUpcoming: false, cellModels: paidTransactionCellModels))
             viewUpdater?.reloadData()
             
         case .upcoming:
