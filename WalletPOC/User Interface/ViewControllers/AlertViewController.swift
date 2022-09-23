@@ -51,7 +51,6 @@ final class AlertViewController: UIViewController {
     
     private func setupUI() {
         view.addSubview(contentView)
-        
         contentView.decorate(with: CornerRadiusDecorator(radius: .alertViewRadius))
     }
     
