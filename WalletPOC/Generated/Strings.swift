@@ -15,8 +15,6 @@ internal enum L10n {
   internal static let acceptTerms = L10n.tr("Localizable", "accept_terms", fallback: "Accept terms")
   /// Account from
   internal static let accountFrom = L10n.tr("Localizable", "account_from", fallback: "Account from")
-  /// Already have an account?
-  internal static let alreadyHaveAccount = L10n.tr("Localizable", "already_have_account", fallback: "Already have an account?")
   /// Buy now, 
   ///  Pay later
   internal static let buyNowPayLater = L10n.tr("Localizable", "buy_now_pay_later", fallback: "Buy now, \n Pay later")
@@ -28,18 +26,12 @@ internal enum L10n {
   internal static let close = L10n.tr("Localizable", "close", fallback: "Close")
   /// Confirm
   internal static let confirm = L10n.tr("Localizable", "confirm", fallback: "Confirm")
-  /// Don't have an account?
-  internal static let dontHaveAccount = L10n.tr("Localizable", "dont_have_account", fallback: "Don't have an account?")
   /// Due date
   internal static let dueDatePaymentvc = L10n.tr("Localizable", "due_date_paymentvc", fallback: "Due date")
   /// Due %@
   internal static func dueDateTransactioncell(_ p1: Any) -> String {
     return L10n.tr("Localizable", "due_date_transactioncell", String(describing: p1), fallback: "Due %@")
   }
-  /// Email
-  internal static let email = L10n.tr("Localizable", "email", fallback: "Email")
-  /// Ooups
-  internal static let errorTitleGeneral = L10n.tr("Localizable", "error_title_general", fallback: "Ooups")
   /// Face ID
   internal static let faceid = L10n.tr("Localizable", "faceid", fallback: "Face ID")
   /// First payment confirmed
@@ -50,10 +42,6 @@ internal enum L10n {
   internal static let forSixMonths = L10n.tr("Localizable", "for_six_months", fallback: "for 6 months")
   /// for 3 months
   internal static let forThreeMonths = L10n.tr("Localizable", "for_three_months", fallback: "for 3 months")
-  /// Forgot password
-  internal static let forgotPassword = L10n.tr("Localizable", "forgot_password", fallback: "Forgot password")
-  /// Did you forget your password? No worries, we have you covered
-  internal static let forgotPasswordTitle = L10n.tr("Localizable", "forgot_password_title", fallback: "Did you forget your password? No worries, we have you covered")
   /// From
   internal static let fromPaymentvc = L10n.tr("Localizable", "from_paymentvc", fallback: "From")
   /// Full amount
@@ -66,10 +54,10 @@ internal enum L10n {
   internal static let installmentsPaymentvc = L10n.tr("Localizable", "installments_paymentvc", fallback: "Installments")
   /// Invoice
   internal static let invoice = L10n.tr("Localizable", "invoice", fallback: "Invoice")
-  /// Log In
-  internal static let logIn = L10n.tr("Localizable", "log_in", fallback: "Log In")
   /// Main Account
   internal static let mainAccount = L10n.tr("Localizable", "main_account", fallback: "Main Account")
+  /// mo
+  internal static let mo = L10n.tr("Localizable", "mo", fallback: "mo")
   /// Monthly: Next %@
   internal static func monthlyNext(_ p1: Any) -> String {
     return L10n.tr("Localizable", "monthly_next", String(describing: p1), fallback: "Monthly: Next %@")
@@ -78,8 +66,6 @@ internal enum L10n {
   internal static let monthlyPayment = L10n.tr("Localizable", "monthly_payment", fallback: "Monthly payment")
   /// My wallet
   internal static let myWallet = L10n.tr("Localizable", "my_wallet", fallback: "My wallet")
-  /// Name
-  internal static let name = L10n.tr("Localizable", "name", fallback: "Name")
   /// Next installment
   internal static let nextInstallment = L10n.tr("Localizable", "next_installment", fallback: "Next installment")
   /// of
@@ -94,8 +80,6 @@ internal enum L10n {
   internal static let openPaymentAdded = L10n.tr("Localizable", "open_payment_added", fallback: "Open payment added")
   /// Open payments
   internal static let openPayments = L10n.tr("Localizable", "open_payments", fallback: "Open payments")
-  /// Password
-  internal static let password = L10n.tr("Localizable", "password", fallback: "Password")
   /// Pay later
   internal static let payLaterPaymentvc = L10n.tr("Localizable", "pay_later_paymentvc", fallback: "Pay later")
   /// Pay next installment
@@ -107,6 +91,8 @@ internal enum L10n {
   internal static let payNowPaymentvc = L10n.tr("Localizable", "pay_now_paymentvc", fallback: "Pay now")
   /// Payment confirmed
   internal static let paymentConfirmed = L10n.tr("Localizable", "payment_confirmed", fallback: "Payment confirmed")
+  /// Rainbow Store
+  internal static let rainbowStore = L10n.tr("Localizable", "rainbow_store", fallback: "Rainbow Store")
   /// Refuse
   internal static let refuse = L10n.tr("Localizable", "refuse", fallback: "Refuse")
   /// This is permanent, if you change your mind, you will have to trigger the payment again.
@@ -119,8 +105,6 @@ internal enum L10n {
   internal static let schedulePayments = L10n.tr("Localizable", "schedule_payments", fallback: "Schedule payments")
   /// Settings
   internal static let settingsTabbar = L10n.tr("Localizable", "settings_tabbar", fallback: "Settings")
-  /// Sign Up
-  internal static let signUp = L10n.tr("Localizable", "sign_up", fallback: "Sign Up")
   /// A. INTRODUCTION TO OUR SERVICES 
   ///  
   ///  This Agreement governs your use of Apple’s Services (“Services” – e.g., and where available, App Store, Apple Arcade, Apple Books, Apple Fitness+, Apple Music, Apple News, Apple News+, Apple One, Apple Podcasts, Apple Podcast Subscriptions, Apple TV, Apple TV+, Apple TV Channels, Game Center, iTunes), through which you can buy, get, license, rent or subscribe to content, Apps (as defined below), and other in-app services (collectively, “Content”). Content may be offered through the Services by Apple or a third party. Our Services are available for your use in your country or territory of residence (“Home Country”). By creating an account for use of the Services in a particular country or territory you are specifying it as your Home Country. To use our Services, you need compatible hardware, software (latest version recommended and sometimes required) and Internet access (fees may apply). Our Services’ performance may be affected by these factors. 
