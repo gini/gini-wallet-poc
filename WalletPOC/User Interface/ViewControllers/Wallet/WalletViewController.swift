@@ -50,6 +50,8 @@ final class WalletViewController: BaseViewController {
         return header
     }()
     
+    private var tableIndexPath = -1
+    
     private let viewModel: WalletViewModel
     
     // MARK: - Lifecycle
@@ -198,14 +200,16 @@ extension WalletViewController: UITableViewDelegate {
         
         switch cellModel.type {
         case .open:
-            viewModel.upcomingTransactions.remove(at: indexPath.row)
-            viewModel.sectionModels[indexPath.row].cellModels.remove(at: indexPath.row)
-            if viewModel.sectionModels[indexPath.row].cellModels.isEmpty {
-                viewModel.sectionModels.remove(at: 0)
-            }
+            tableIndexPath = indexPath.row
+            //viewModel.upcomingTransactions.remove(at: indexPath.row)
+//            viewModel.sectionModels[indexPath.row].cellModels.remove(at: indexPath.row)
+//            if viewModel.sectionModels[indexPath.row].cellModels.isEmpty {
+//                viewModel.sectionModels.remove(at: 0)
+//            }
             tableView.reloadData()
             
             let paymentVC = PaymentViewController(viewModel: PaymentViewModelImpl(type: .buyNow, transactionViewModel: TransactionViewModel(merchantAppScheme: "", transactionId: transaction.id, buyNowPayLater: "false", transactionAmount: transaction.value), transaction: transaction))
+            paymentVC.paymentDelegate = self
             if paymentVC.walletDelegate == nil {
                 paymentVC.walletDelegate = viewModel
             }
@@ -263,5 +267,15 @@ extension WalletViewController: UITableViewDataSource {
 extension WalletViewController: WalletViewUpdater {
     func reloadData() {
         tableView.reloadData()
+    }
+}
+
+extension WalletViewController: PaymentVCProtocol {
+    func removeOpenPaymentFromList() {
+        viewModel.upcomingTransactions.remove(at: tableIndexPath)
+        viewModel.sectionModels[tableIndexPath].cellModels.remove(at: tableIndexPath)
+        if viewModel.sectionModels[tableIndexPath].cellModels.isEmpty {
+            viewModel.sectionModels.remove(at: 0)
+        }
     }
 }

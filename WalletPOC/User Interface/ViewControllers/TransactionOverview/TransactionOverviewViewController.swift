@@ -74,6 +74,8 @@ final class TransactionOverviewViewController: UIViewController {
     lazy var senderDetailsView: AccountView = {
         let view = AccountView(type: .sender)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.switchAccountIcon.tintColor = .black
+
         return view
     }()
     
@@ -160,7 +162,6 @@ final class TransactionOverviewViewController: UIViewController {
         senderDetailsView.ibanLabel.text  = transaction.account.iban
         senderDetailsView.amountInvoiceLabel.text = "€6.231,40"
         senderDetailsView.decorate(with: CornerRadiusDecorator(radius: .viewRadius))
-        senderDetailsView.isIconHidden = true
         
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
@@ -179,7 +180,7 @@ final class TransactionOverviewViewController: UIViewController {
         
         view.addSubview(bottomView)
         bottomView.addSubview(amountLabel)
-        amountLabel.text = "€\(transaction.value)".replacingOccurrences(of: ".", with: ",")
+        amountLabel.text = "€\(String(format: "%.2f", transaction.value))".replacingOccurrences(of: ".", with: ",")
         bottomView.addSubview(separatorView)
     }
     

@@ -37,8 +37,8 @@ public class TransactionService {
         }
     }
     
-    public func updateTransactionState(transactionId: String, iban: String, amount: Double, accepted: Bool, completion: @escaping (Result<Void, AFError>) -> Void) {
-        let request = UpdateTransactionStateRequest(transactionId: transactionId, iban: iban, amount: amount, accepted: accepted)
+    public func updateTransactionState(transactionId: String, iban: String, amount: Double, accepted: Bool, timestamp: String, completion: @escaping (Result<Void, AFError>) -> Void) {
+        let request = UpdateTransactionStateRequest(transactionId: transactionId, iban: iban, amount: amount, accepted: accepted, timestamp: timestamp)
         networkService.execute(with: request) { response in
             switch response.result {
             case .success:

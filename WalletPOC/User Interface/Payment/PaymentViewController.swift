@@ -15,6 +15,10 @@ protocol DataViewUpdater: AnyObject {
     func updateTransactionList(transaction: Transaction)
 }
 
+protocol PaymentVCProtocol: AnyObject {
+    func removeOpenPaymentFromList()
+}
+
 class PaymentViewController: BaseViewController, XMLParserDelegate {
     
     private let fromLabel = UILabel.autoLayout()
@@ -67,6 +71,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     private var transactionService = TransactionService()
     
     weak var walletDelegate: DataViewUpdater?
+    weak var paymentDelegate: PaymentVCProtocol?
     
     init(viewModel: PaymentViewModel) {
         self.viewModel = viewModel
@@ -226,6 +231,12 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         
         buttonSelect(button: payFullButton)
         buttonDeselect(button: buyNowPayLaterButton)
+        
+        if case .upcoming = viewModel.transaction.type {
+            refuseButton.isHidden = true
+        } else {
+            refuseButton.isHidden = false
+        }
     }
     
     private func setupConstraints() {
@@ -559,6 +570,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     }
     
     @objc private func didTapPayNow() {
+        paymentDelegate?.removeOpenPaymentFromList()
         viewModel.transaction.account = viewModel.selectedAccount
         viewModel.transaction.merchantIban = viewModel.merchantIban
         
@@ -581,7 +593,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
             guard let self = self else { return }
-            self.transactionService.updateTransactionState(transactionId: self.viewModel.transactionId, iban: self.viewModel.merchantIban, amount: self.viewModel.transaction.value, accepted: true) { result in
+            self.transactionService.updateTransactionState(transactionId: self.viewModel.transactionId, iban: self.viewModel.merchantIban, amount: self.viewModel.transaction.value, accepted: true, timestamp: "2022-01-07T20:42:56") { result in
                 switch result {
                 case .success:
                     vc.didAuthorize?(true)
@@ -596,6 +608,8 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     }
     
     @objc private func didTapPayLater() {
+        paymentDelegate?.removeOpenPaymentFromList()
+
         viewModel.transaction.account = viewModel.selectedAccount
         viewModel.transaction.merchantIban = viewModel.merchantIban
         let vc = FaceIDViewController()
@@ -605,10 +619,24 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
                 self.presentSuccessAlert(with: .paymentAdded)
             }
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+            guard let self = self else { return }
+            self.transactionService.updateTransactionState(transactionId: self.viewModel.transactionId, iban: self.viewModel.merchantIban, amount: self.viewModel.transaction.value, accepted: true, timestamp: self.paymentDateFormat()) { result in
+                switch result {
+                case .success:
+                    vc.didAuthorize?(true)
+                    vc.dismiss(animated: true)
+                case .failure:
+                    print("Error while accepting payment")
+                }
+            }
+        }
         present(vc, animated: true)
     }
     
     @objc private func didTapRefuse() {
+        paymentDelegate?.removeOpenPaymentFromList()
         let alertView = RefusePaymentView()
         alertView.delegate = self
         let alertViewController = AlertViewController()
@@ -634,6 +662,14 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     
     private func updateAmountText() {
         amountLabel.text = viewModel.priceText
+    }
+    
+    private func paymentDateFormat() -> String {
+        let date = Calendar.current.date(byAdding: .day, value: 2, to: Date()) ?? Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        let paymentDate = formatter.string(from: date)
+        return "\(paymentDate)"
     }
 }
 
@@ -669,19 +705,26 @@ extension PaymentViewController: SuccessAlertViewDelegate {
             navigationController?.popViewController(animated: true)
         case .paymentConfirmed:
             viewModel.transaction.dueDate = Date()
+            var isUpComing = false
+            if case .upcoming = viewModel.transaction.type {
+                isUpComing = true
+            }
             viewModel.transaction.type = .paid
             walletDelegate?.updateTransactionList(transaction: viewModel.transaction)
             
             dismiss(animated: true)
             
-            let url = URL(string: "merchantpoc://option?")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.33) {
-                UIApplication.shared.open(url!) { (result) in
-                    if result {
-                        print("successfully navigated to merchant app")
+            if !isUpComing {
+                let url = URL(string: "merchantpoc://option?")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.33) {
+                    UIApplication.shared.open(url!) { (result) in
+                        if result {
+                            print("successfully navigated to merchant app")
+                        }
                     }
                 }
             }
+          
             navigationController?.popViewController(animated: true)
             
         case .firstPaymentConfirmed(_, let installments):
@@ -722,20 +765,27 @@ extension PaymentViewController: RefusePaymentViewDelegate {
     }
     
     func didRefuse() {
-        self.transactionService.updateTransactionState(transactionId: self.viewModel.transactionId, iban: self.viewModel.merchantIban, amount: self.viewModel.transaction.value, accepted: false) { [weak self] result in
+        var isUpComing = false
+        if case .upcoming = viewModel.transaction.type {
+            isUpComing = true
+        }
+        self.transactionService.updateTransactionState(transactionId: self.viewModel.transactionId, iban: self.viewModel.merchantIban, amount: self.viewModel.transaction.value, accepted: false, timestamp: paymentDateFormat()) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success:
                 self.dismiss(animated: true)
                 
-                let url = URL(string: "merchantpoc://option?")
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.33) {
-                    UIApplication.shared.open(url!) { (result) in
-                        if result {
-                            print("successfully navigated to merchant app")
+                if !isUpComing {
+                    let url = URL(string: "merchantpoc://option?")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.33) {
+                        UIApplication.shared.open(url!) { (result) in
+                            if result {
+                                print("successfully navigated to merchant app")
+                            }
                         }
                     }
                 }
+
                 self.navigationController?.popViewController(animated: true)
             case .failure:
                 print("Error while accepting payment")

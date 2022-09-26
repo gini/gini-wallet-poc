@@ -40,12 +40,6 @@ class WalletViewModel {
         sectionModels = [
             SectionModel(title: L10n.today, isUpcoming: false, cellModels: paidTransactions.map { TransactionCellModel(transaction: $0, type: .paid)})
         ]
-        // MARK: - de aici incepe :-?
-        getData()
-    }
-    
-    func getData() {
-
     }
     
     var upcomingTransactionCellModels: [TransactionCellModel] {

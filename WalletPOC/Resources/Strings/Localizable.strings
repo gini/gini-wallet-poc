@@ -1,19 +1,6 @@
 ok = "Ok";
 cancel = "Cancel";
 
-name = "Name";
-email = "Email";
-password = "Password";
-
-error_title_general = "Ooups";
-
-log_in = "Log In";
-dont_have_account = "Don't have an account?";
-sign_up = "Sign Up";
-already_have_account = "Already have an account?";
-forgot_password = "Forgot password";
-forgot_password_title = "Did you forget your password? No worries, we have you covered";
-
 //TabBar
 home_tabbar = "Home";
 wallet_tabbar = "Walet";
@@ -97,4 +84,4 @@ pay_next_installment = "Pay next installment";
 monthly_payment = "Monthly payment";
 
 rainbow_store = "Rainbow Store";
-mo = "mo"
+mo = "mo";
