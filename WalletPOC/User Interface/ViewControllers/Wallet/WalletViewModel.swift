@@ -16,7 +16,6 @@ struct SectionModel {
     var backGroundColor: UIColor = .white
 }
 
-// MARK: - asta e pt comunicarea inspre VC
 protocol WalletViewUpdater: AnyObject {
     func reloadData()
 }
@@ -32,9 +31,9 @@ class WalletViewModel {
     
     init() {
         paidTransactions = [
-            Transaction(merchantName: "Zalando", value: 123, merchantLogo: Asset.Images.zalando.image, dueDate: Date(), mention: ""),
-            Transaction(merchantName: "Telekom", value: 50, merchantLogo: Asset.Images.telekom.image, dueDate: Date(), mention: ""),
-            Transaction(merchantName: "Zalando", value: 1234.9999, merchantLogo: Asset.Images.zalando.image, dueDate: Date(), mention: ""),
+            Transaction(merchantName: "Zalando", value: 123, merchantLogo: Asset.Images.zalando.image, dueDate: Date(), mention: "", account: AccountConstants.accountsArray.first ?? Account()),
+            Transaction(merchantName: "Telekom", value: 50, merchantLogo: Asset.Images.telekom.image, dueDate: Date(), mention: "", account: AccountConstants.accountsArray.last ?? Account()),
+            Transaction(merchantName: "Zalando", value: 1234.9999, merchantLogo: Asset.Images.zalando.image, dueDate: Date(), mention: "", account: AccountConstants.accountsArray.first ?? Account()),
         ]
         
         sectionModels = [

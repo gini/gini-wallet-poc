@@ -44,7 +44,7 @@ class CustomInstallmentButton: UIButton {
         didSet {
             guard let price = price else { return }
             let priceString = String(format: "%.2f", price).replacingOccurrences(of: ".", with: ",")
-            priceLabel.text = "€\(priceString) / mo"
+            priceLabel.text = "€\(priceString) / \(L10n.mo)"
         }
     }
         

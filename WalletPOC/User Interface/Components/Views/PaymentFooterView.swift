@@ -96,7 +96,7 @@ final class PaymentFooterView: UIView {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapPDFView))
         pdfView.addGestureRecognizer(tapGesture)
         
-        merchantDetailsView.accountNameLabel.text = "Rainbow Store"
+        merchantDetailsView.accountNameLabel.text = L10n.rainbowStore
         merchantDetailsView.ibanLabel.text  = "DE 88762181787817687"
         merchantDetailsView.amountInvoiceLabel.text = "Ref: \(L10n.invoice) #378981798"
         merchantDetailsView.decorate(with: CornerRadiusDecorator(radius: .viewRadius))

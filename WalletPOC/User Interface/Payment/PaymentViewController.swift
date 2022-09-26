@@ -674,6 +674,7 @@ extension PaymentViewController: AccountSwitchProtocol {
         senderDetailsView.ibanLabel.text = account.iban
         senderDetailsView.amountInvoiceLabel.text = account.amount
         viewModel.selectedAccount = account
+        viewModel.transaction.account = account
     }
 }
 

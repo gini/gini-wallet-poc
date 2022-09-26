@@ -160,7 +160,7 @@ final class TransactionOverviewViewController: UIViewController {
         
         senderDetailsView.accountNameLabel.text = transaction.account.name
         senderDetailsView.ibanLabel.text  = transaction.account.iban
-        senderDetailsView.amountInvoiceLabel.text = "€6.231,40"
+        senderDetailsView.amountInvoiceLabel.text = transaction.account.amount
         senderDetailsView.decorate(with: CornerRadiusDecorator(radius: .viewRadius))
         
         view.addSubview(scrollView)

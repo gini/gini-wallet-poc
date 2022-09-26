@@ -49,7 +49,7 @@ final class MonthlyPaymentViewModel {
     private func setupUpcomingTransaction() {
         for i in 1...(totalMonths - paidMonths) {
             let date = Calendar.current.date(byAdding: .month, value: i, to: Date())
-            upcomingTransactions.append(Transaction(merchantName: "Rainbow Store", value: amountPerMonth, merchantLogo: Asset.Images.rainbowStore.image, dueDate: date, mention: ""))
+            upcomingTransactions.append(Transaction(merchantName: L10n.rainbowStore, value: amountPerMonth, merchantLogo: Asset.Images.rainbowStore.image, dueDate: date, mention: "", account: Account()))
         }
     }
 }

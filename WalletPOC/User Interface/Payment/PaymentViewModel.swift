@@ -108,7 +108,7 @@ class PaymentViewModelImpl: PaymentViewModel {
     
     var toText = L10n.to
     
-    var merchantNameText = "Rainbow Store"
+    var merchantNameText = L10n.rainbowStore
     var merchantIban = "DE86 2107 0020 0123 0101 01"
     var merchantInvoice = "Ref: \(L10n.invoice) #378981798"
     var invoiceText = L10n.invoice
@@ -119,7 +119,7 @@ class PaymentViewModelImpl: PaymentViewModel {
         }
         
         if let nrOfInstallments = nrOfInstallments {
-            return "€\(String(format: "%.2f", transaction.value / Double(nrOfInstallments))) / mo".replacingOccurrences(of: ".", with: ",")
+            return "€\(String(format: "%.2f", transaction.value / Double(nrOfInstallments))) / \(L10n.mo)".replacingOccurrences(of: ".", with: ",")
         }
         return "€\(String(format: "%.2f", transaction.value))".replacingOccurrences(of: ".", with: ",")
     }

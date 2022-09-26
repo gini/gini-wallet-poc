@@ -18,7 +18,7 @@ struct Transaction {
     var dueDate: Date?
     var mention: String?
     var type: TransactionType = .paid
-    var account: Account = Account(id: "1", name: L10n.mainAccount, iban: "DE23 3701 0044 2344 8191 02", amount: "€3.111,03")
+    var account: Account
     var merchantIban: String = "DE86 2107 0020 0123 0101 01"
 }
 
