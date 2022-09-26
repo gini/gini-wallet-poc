@@ -581,7 +581,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
             guard let self = self else { return }
-            self.transactionService.updateTransactionState(transactionId: self.viewModel.transactionId, iban: self.viewModel.merchantIban, amount: self.viewModel.transaction.value, accepted: true) { result in
+            self.transactionService.updateTransactionState(transactionId: self.viewModel.transactionId, iban: self.viewModel.merchantIban, amount: self.viewModel.transaction.value, accepted: true, timestamp: "2022-01-07T20:42:56") { result in
                 switch result {
                 case .success:
                     vc.didAuthorize?(true)
@@ -603,6 +603,19 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         vc.didAuthorize = { _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                 self.presentSuccessAlert(with: .paymentAdded)
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+            guard let self = self else { return }
+            self.transactionService.updateTransactionState(transactionId: self.viewModel.transactionId, iban: self.viewModel.merchantIban, amount: self.viewModel.transaction.value, accepted: true, timestamp: self.paymentDateFormat()) { result in
+                switch result {
+                case .success:
+                    vc.didAuthorize?(true)
+                    vc.dismiss(animated: true)
+                case .failure:
+                    print("Error while accepting payment")
+                }
             }
         }
         present(vc, animated: true)
@@ -634,6 +647,14 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     
     private func updateAmountText() {
         amountLabel.text = viewModel.priceText
+    }
+    
+    private func paymentDateFormat() -> String {
+        let date = Calendar.current.date(byAdding: .day, value: 2, to: Date()) ?? Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        let paymentDate = formatter.string(from: date)
+        return "\(paymentDate)"
     }
 }
 
@@ -722,7 +743,7 @@ extension PaymentViewController: RefusePaymentViewDelegate {
     }
     
     func didRefuse() {
-        self.transactionService.updateTransactionState(transactionId: self.viewModel.transactionId, iban: self.viewModel.merchantIban, amount: self.viewModel.transaction.value, accepted: false) { [weak self] result in
+        self.transactionService.updateTransactionState(transactionId: self.viewModel.transactionId, iban: self.viewModel.merchantIban, amount: self.viewModel.transaction.value, accepted: false, timestamp: paymentDateFormat()) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success:

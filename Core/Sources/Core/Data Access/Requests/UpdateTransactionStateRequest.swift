@@ -61,7 +61,7 @@ struct UpdateTransactionStateRequest: Request {
                 <!-- AT-R10 Payer’s response date/time -->
                 <DbtrDcsnDtTm>2022-04-16T19:19:45.54</DbtrDcsnDtTm>
                 <!-- AT-67 Payment date/time (as decided by the Payer) -->
-                <AccptncDtTm>2022-01-07T20:42:56</AccptncDtTm>
+                <AccptncDtTm>\(timestamp)</AccptncDtTm>
                 <OrgnlTxRef>
                   <Amt>
                     <!-- refers to InstdAmt in DS-01 -->
@@ -236,12 +236,14 @@ struct UpdateTransactionStateRequest: Request {
     private let iban: String
     private let amount: Double
     private let accepted: Bool
+    private let timestamp: String
     
-    init(transactionId: String, iban: String, amount: Double, accepted: Bool) {
+    init(transactionId: String, iban: String, amount: Double, accepted: Bool, timestamp: String) {
         self.transactionId = transactionId
         self.iban = iban
         self.amount = amount
         self.accepted = accepted
+        self.timestamp = timestamp
         
         path = accepted ? APIConstants.Endpoints.Transactions.accept.path : APIConstants.Endpoints.Transactions.refuse.path
         method = .post
