@@ -231,12 +231,6 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         
         buttonSelect(button: payFullButton)
         buttonDeselect(button: buyNowPayLaterButton)
-        
-        if case .upcoming = viewModel.transaction.type {
-            refuseButton.isHidden = true
-        } else {
-            refuseButton.isHidden = false
-        }
     }
     
     private func setupConstraints() {
@@ -458,7 +452,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     
     // MARK: - Tap handles
     @objc private func handleTap(_ sender: UITapGestureRecognizer? = nil) {
-        let accountVC = AccountSwitchViewController(selectedAccount: viewModel.selectedAccount)
+        let accountVC = AccountSwitchViewController(selectedAccount: viewModel.selectedAccount ?? Account())
         accountVC.modalPresentationStyle = .overFullScreen
         accountVC.delegateProtocol = self
         present(accountVC, animated: true)
@@ -571,7 +565,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     
     @objc private func didTapPayNow() {
         paymentDelegate?.removeOpenPaymentFromList()
-        viewModel.transaction.account = viewModel.selectedAccount
+        viewModel.transaction.account = viewModel.selectedAccount ?? Account()
         viewModel.transaction.merchantIban = viewModel.merchantIban
         
         let vc = FaceIDViewController(isLoader: true)
@@ -610,7 +604,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     @objc private func didTapPayLater() {
         paymentDelegate?.removeOpenPaymentFromList()
 
-        viewModel.transaction.account = viewModel.selectedAccount
+        viewModel.transaction.account = viewModel.selectedAccount ?? Account()
         viewModel.transaction.merchantIban = viewModel.merchantIban
         let vc = FaceIDViewController()
         vc.modalPresentationStyle = .overFullScreen

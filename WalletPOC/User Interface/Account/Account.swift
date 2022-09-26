@@ -30,4 +30,11 @@ struct Account {
         amount = "amount"
         //fact = details["text"] as? String ?? ""
     }
+    
+    init() {
+        id = "0"
+        name = ""
+        iban = ""
+        amount = ""
+    }
 }

@@ -41,7 +41,7 @@ protocol PaymentViewModel {
     var subtitleText: String { get }
 
     var fromText: String { get }
-    var userAccountText: String { get }
+    var userAccountText: String? { get }
     var userAccountNumber: String { get }
     var userAccountAmount: String { get }
     
@@ -60,7 +60,7 @@ protocol PaymentViewModel {
     var acceptText: String { get }
     var termsConditionsText: String { get }
     var viewUpdater: PaymentViewUpdater? { get set }
-    var selectedAccount: Account { get set }
+    var selectedAccount: Account? { get set }
     var type: PaymentViewModelType { get }
     var transactionViewModel: TransactionViewModel { get }
     var transaction: Transaction { get set }
@@ -75,6 +75,7 @@ protocol PaymentViewModel {
 }
 
 class PaymentViewModelImpl: PaymentViewModel {
+        
     var transaction: Transaction
     let type: PaymentViewModelType
     let transactionViewModel: TransactionViewModel
@@ -99,7 +100,7 @@ class PaymentViewModelImpl: PaymentViewModel {
         
     var fromText = L10n.fromPaymentvc
     
-    var userAccountText = L10n.savingsAccountPaymentVC
+    var userAccountText = AccountConstants.accountsArray.first?.name
     
     var userAccountNumber = "DE23 3701 0044 1344 8291 01"
     
@@ -130,7 +131,7 @@ class PaymentViewModelImpl: PaymentViewModel {
     var termsConditionsText = L10n.termsConditions
     
     var viewUpdater: PaymentViewUpdater?
-    var selectedAccount = Account(id: "2", name: L10n.savingsAccountPaymentVC, iban: "DE23 3701 0044 1344 8291 01", amount: "€6.231,40")
+    var selectedAccount = AccountConstants.accountsArray.last
     var dateText: String {
         if case .installment(_, let paid) = type {
             if let date = Calendar.current.date(byAdding: .month, value: paid, to: Date()) {

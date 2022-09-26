@@ -74,7 +74,7 @@ final class TransactionOverviewViewController: UIViewController {
     lazy var senderDetailsView: AccountView = {
         let view = AccountView(type: .sender)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.switchAccountIcon.tintColor = .black
+        view.isIconHidden = true
 
         return view
     }()
