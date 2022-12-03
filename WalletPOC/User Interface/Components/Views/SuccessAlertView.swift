@@ -22,10 +22,10 @@ final class SuccessAlertView: UIView {
         
         var title: String {
             switch self {
-            case .paymentAdded: return "Open payment added"
-            case .paymentConfirmed: return "Payment confirmed"
-            case .firstPaymentConfirmed: return "First payment confirmed"
-            case .installmentPaid: return "Installment was paid"
+            case .paymentAdded: return NSLocalizedString("open_payment_added", comment: "open_payment_added")
+            case .paymentConfirmed: return NSLocalizedString("payment_confirmed", comment: "payment_confirmed")
+            case .firstPaymentConfirmed: return NSLocalizedString("first_payment_confirmed", comment: "first_payment_confirmed")
+            case .installmentPaid: return NSLocalizedString("installment_was_paid", comment: "installment_was_paid")
             }
         }
         
@@ -71,7 +71,7 @@ final class SuccessAlertView: UIView {
     private lazy var actionButton: ActionButton = {
         let button = ActionButton(style: .constructive)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Close", for: .normal)
+        button.setTitle(NSLocalizedString("payment_close", comment: "payment_close"), for: .normal)
         return button
     }()
     

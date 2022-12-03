@@ -61,7 +61,7 @@ ein schriftlicher Vertrag bzw. unsere schriftliche Bestätigung maßgebend.";
 
 "schedule_payments" = "Schedule payments";
 //SuccessAlertView
-"open_payment_added" = "Open payment added";
+"open_payment_added" = "Offene Zahlung hinzugefügt";
 "payment_confirmed" = "Zahlung bestätigt";
 "first_payment_confirmed" = "Erste Bezahlung bestätigt";
 "installment_was_paid" = "Rate wurde bezahlt";
@@ -85,3 +85,5 @@ ein schriftlicher Vertrag bzw. unsere schriftliche Bestätigung maßgebend.";
 "monthly_payment" = "Zahlungsplan";
 "rainbow_store" = "The Rainbow Store";
 "mo" = "Mo";
+"payment_close" = "Alles klar";
+"payment_confirmed" = "Zahlung erfolgreich";

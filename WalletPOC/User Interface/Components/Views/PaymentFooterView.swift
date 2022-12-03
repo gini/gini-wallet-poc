@@ -58,7 +58,7 @@ final class PaymentFooterView: UIView {
     
     private lazy var toLabel: UILabel = {
         let label = UILabel()
-        label.text = "To"
+        label.text = NSLocalizedString("to", comment: "to")
         label.font = .subtitleSmall
         label.textColor = .primaryText
         return label
@@ -96,7 +96,7 @@ final class PaymentFooterView: UIView {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapPDFView))
         pdfView.addGestureRecognizer(tapGesture)
         
-        merchantDetailsView.accountNameLabel.text = "Rainbow Store"
+        merchantDetailsView.accountNameLabel.text = NSLocalizedString("rainbow_store", comment: "rainbow_store")
         merchantDetailsView.ibanLabel.text  = "DE 88762181787817687"
         merchantDetailsView.amountInvoiceLabel.text = "Ref: Invoice #378981798"
         merchantDetailsView.decorate(with: CornerRadiusDecorator(radius: .viewRadius))

@@ -152,7 +152,7 @@ final class WalletViewController: BaseViewController {
         vc.didAuthorize = { isEnabled in
             guard isEnabled else { return }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                let walletVc = PaymentViewController(viewModel: PaymentViewModelImpl(type: transactionViewModel.buyNowPayLater == "true" ? .buyLater : .buyNow, transactionViewModel: transactionViewModel, transaction: Transaction(merchantName: "Rainbow store", value: 300, merchantLogo: Asset.Images.rainbowStore.image, dueDate: Date(), mention: "")))
+                let walletVc = PaymentViewController(viewModel: PaymentViewModelImpl(type: transactionViewModel.buyNowPayLater == "true" ? .buyLater : .buyNow, transactionViewModel: transactionViewModel, transaction: Transaction(merchantName: NSLocalizedString("rainbow_store", comment: "rainbow_store"), value: 300, merchantLogo: Asset.Images.rainbowStore.image, dueDate: Date(), mention: "")))
                 walletVc.walletDelegate = self.viewModel
                 self.navigationController?.pushViewController(walletVc, animated: true)
             }
