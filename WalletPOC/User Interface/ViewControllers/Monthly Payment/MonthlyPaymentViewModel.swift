@@ -42,14 +42,14 @@ final class MonthlyPaymentViewModel {
         setupUpcomingTransaction()
         
         sectionModels = [
-            SectionModel(title: "Upcoming", isUpcoming: true, cellModels: upcomingTransactions.map { TransactionCellModel(transaction: $0, type: .simple)}, canSchedulePayment: false, backGroundColor: .yellow),
+            SectionModel(title: NSLocalizedString("upcoming", comment: "upcoming"), isUpcoming: true, cellModels: upcomingTransactions.map { TransactionCellModel(transaction: $0, type: .simple)}, canSchedulePayment: false, backGroundColor: .yellow),
         ]
     }
     
     private func setupUpcomingTransaction() {
         for i in 1...(totalMonths - paidMonths) {
             let date = Calendar.current.date(byAdding: .month, value: i, to: Date())
-            upcomingTransactions.append(Transaction(merchantName: "Rainbow Store", value: amountPerMonth, merchantLogo: Asset.Images.rainbowStore.image, dueDate: date, mention: ""))
+            upcomingTransactions.append(Transaction(merchantName: NSLocalizedString("rainbow_store", comment: "rainbow_store"), value: amountPerMonth, merchantLogo: Asset.Images.rainbowStore.image, dueDate: date, mention: ""))
         }
     }
 }
@@ -60,7 +60,7 @@ extension MonthlyPaymentViewModel: DataViewUpdater {
         paidMonths += 1
         upcomingTransactions.removeFirst()
         sectionModels = [
-            SectionModel(title: "Upcoming", isUpcoming: true, cellModels: upcomingTransactions.map { TransactionCellModel(transaction: $0, type: .simple)}, canSchedulePayment: false, backGroundColor: .yellow),
+            SectionModel(title: NSLocalizedString("upcoming", comment: "upcoming"), isUpcoming: true, cellModels: upcomingTransactions.map { TransactionCellModel(transaction: $0, type: .simple)}, canSchedulePayment: false, backGroundColor: .yellow),
         ]
         delegate?.reloadData()
         delegate?.update(with: transaction)

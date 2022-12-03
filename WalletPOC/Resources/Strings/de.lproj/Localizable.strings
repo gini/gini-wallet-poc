@@ -1,0 +1,87 @@
+/* 
+  Localizable.strings
+  WalletPOC
+
+  Created by Nadya Karaban on 02.12.22.
+  
+*/
+"ok" = "Ok";
+"cancel" = "Abbrechen";
+//TabBar
+"home_tabbar" = "Home";
+"wallet_tabbar" = "Wallet";
+"trading_tabbar" = "Trading";
+"settings_tabbar" = "Konfig";
+//Face ID
+"faceid" = "Face ID";
+//PaymentVC
+"pay_now_paymentvc" = "Jetzt bezahlen";
+"pay_later_paymentvc" = "Später bezahlen";
+"refuse" = "Ablehnen";
+"due_date_paymentvc" = "Fälligkeitsdatum";
+"buynow_paylater_paymentvc" = "Buy now, Pay later";
+"from_paymentvc" = "Aus";
+"to" = "Empfänger";
+"of" = "von";
+"savings_account_paymentVC" = "Girokonto";
+"invoice" = "Rechnung";
+"installments_paymentvc" = "Ratenzahlung";
+"accept_paymentvc" = "Ich akzeptiere die";
+"terms_conditions" = "AGBs";
+"next_installment" = "Nächste Zahlung";
+"online_payment" = "Online Zahlung";
+//TermsServicesVC
+"terms" =
+"§ 1 Geltungsbereich 1. Diese Verkaufsbedingungen gelten ausschließlich gegenüber
+Unternehmern, juristischen Personen des öffentlichen Rechts oder öffentlich-rechtlichen
+Sondervermögen im Sinne von § 310 Absatz 1 BGB. Entgegenstehende oder von unseren
+Verkaufsbedingungen abweichende Bedingungen des Bestellers erkennen wir nur an, wenn wir
+ausdrücklich schriftlich der Geltung zustimmen. 2. Diese Verkaufsbedingungen gelten auch für
+alle zukünftigen Geschäfte mit dem Besteller, soweit es sich um Rechtsgeschäfte verwandter Art handelt
+(vorsorglich sollten die Verkaufsbedingungen in jedem Fall der Auftragsbestätigung beigefügt werden).
+3. Im Einzelfall getroffene, individuelle Vereinbarungen mit dem Käufer (einschließlich
+Nebenabreden, Ergänzungen und Änderungen) haben in jedem Fall Vorrang vor diesen
+Verkaufsbedingungen. Für den Inhalt derartiger Vereinbarungen ist, vorbehaltlich des Gegenbeweises,
+ein schriftlicher Vertrag bzw. unsere schriftliche Bestätigung maßgebend.";
+
+"accept_terms" = "AGBs akzeptieren";
+// CustomInstallmentButton
+"pay_now_in_full" = "Vollständig \n bezahlen";
+"buy_now_pay_later" = "Buy now, \n Pay later";
+"for_three_months" = "3 Monaten";
+"for_six_months" = "6 Monaten";
+"for_nine_months" = "9 Monaten";
+//Refuse payment view
+"refuse_payment" = "Zahlung ablehnen?";
+"refuse_information" = "Lehnen Sie diese Zahlungsaufforderung, um den Zahlungsvorgang abzubrechen.";
+//PaymentConfirmedAlertView
+"first_payment_confirmed" = "Erste Zahlung bestätigt";
+"total_pay_of" = "Sie zahlen %d € in 3 Raten.";
+"confirm" = "Bestätigen";
+
+"schedule_payments" = "Schedule payments";
+//SuccessAlertView
+"open_payment_added" = "Open payment added";
+"payment_confirmed" = "Zahlung bestätigt";
+"first_payment_confirmed" = "Erste Bezahlung bestätigt";
+"installment_was_paid" = "Rate wurde bezahlt";
+"you_will_pay_total_of" = "Sie werden insgesamt €%d in %d Raten zahlen.";
+"close" = "Schliesen";
+//TransactionCellModel
+"online_shopping" = "Online shopping";
+"due_date_transactioncell" = "Bis";
+"monthly_next" = "Monatlich: nächst";
+//AccountSwitchVC
+"main_account" = "Girokonto";
+"account_from" = "Konto wählen";
+//WalletViewModel
+"today" = "Heute";
+"open_payments" = "Offene Zahlungen";
+"my_wallet" = "Meine Wallet";
+//MonthlyPaymentVC&VM
+"upcoming" = "Demnächst";
+"full_amount" = "Gesamtbetrag";
+"pay_next_installment" = "Nächste Rate zahlen";
+"monthly_payment" = "Zahlungsplan";
+"rainbow_store" = "The Rainbow Store";
+"mo" = "Mo";

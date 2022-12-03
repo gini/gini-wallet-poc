@@ -62,22 +62,16 @@ class TransactionCellModel {
         logo = transaction.merchantLogo
         
         switch type {
-        case .paid:
-            message = "Online shopping"
+        case .paid, .scheduledPaid:
+            message = NSLocalizedString("online_shopping", comment: "online_shopping")
         case .open:
             if let dueDate = transaction.dueDate {
-                message = "Due \(format(date: dueDate))"
+                message = NSLocalizedString("due_date_transactioncell", comment: "due_date_transactioncell") + " \(format(date: dueDate))"
             }
-        case .recurring:
+        case .recurring, .scheduledUpcoming:
             if let dueDate = transaction.dueDate {
-                message = "Monthly: Next \(format(date: dueDate))"
+                message = NSLocalizedString("monthly_next", comment: "monthly_next") + " \(format(date: dueDate))"
             }
-        case .scheduledUpcoming:
-            if let dueDate = transaction.dueDate {
-                message = "Monthly: Next \(format(date: dueDate))"
-            }
-        case .scheduledPaid:
-            message = "Online shopping"
         case .simple:
             if let dueDate = transaction.dueDate {
                 message = format(date: dueDate)

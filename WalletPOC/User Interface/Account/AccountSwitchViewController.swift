@@ -14,7 +14,7 @@ protocol AccountSwitchProtocol {
 
 class AccountSwitchViewController: UIViewController {
     
-    private let accountsArray = [Account(id: "1", name: "Main Account", iban: "DE23 3701 0044 2344 8191 02", amount: "€3.111,03"), Account(id: "2", name: "Savings Account", iban: "DE23 3701 0044 1344 8291 01", amount: "€6.231,40")]
+    private let accountsArray = [Account(id: "1", name: NSLocalizedString("main_account", comment: "main_account"), iban: "DE23 3701 0044 2344 8191 02", amount: "€3.111,03"), Account(id: "2", name: NSLocalizedString("savings_account_paymentVC", comment: "savings_account_paymentVC"), iban: "DE23 3701 0044 1344 8291 01", amount: "€6.231,40")]
     
     
     // 1
@@ -89,14 +89,14 @@ class AccountSwitchViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        titleLabel.text = "Account from"
+        titleLabel.text = NSLocalizedString("account_from", comment: "account_from")
         titleLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         dimmedView.addGestureRecognizer(tap)
 
         cancelButton.setTitleColor(.gray, for: .normal)
-        cancelButton.setTitle("Cancel", for: .normal)
+        cancelButton.setTitle(NSLocalizedString("cancel", comment: "cancel"), for: .normal)
         cancelButton.titleLabel?.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
 

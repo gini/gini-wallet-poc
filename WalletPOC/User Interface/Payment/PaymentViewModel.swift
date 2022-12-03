@@ -16,9 +16,9 @@ enum PaymentViewModelType {
     var title: String {
         switch(self) {
         case .installment:
-            return "Next installment"
+            return NSLocalizedString("next_installment", comment: "next_installment")
         default:
-            return "Online payment"
+            return NSLocalizedString("online_payment", comment: "online_payment")
         }
     }
     
@@ -97,17 +97,17 @@ class PaymentViewModelImpl: PaymentViewModel {
         type.subtitle
     }
         
-    var fromText = "From"
+    var fromText = NSLocalizedString("from_paymentvc", comment: "from_paymentvc")
     
-    var userAccountText = "Savings Account"
+    var userAccountText = NSLocalizedString("savings_account_paymentVC", comment: "savings_account_paymentVC")
     
     var userAccountNumber = "DE23 3701 0044 1344 8291 01"
     
     var userAccountAmount = "€6.231,40"
     
-    var toText = "To"
+    var toText = NSLocalizedString("to", comment: "to")
     
-    var merchantNameText = "Rainbow Store"
+    var merchantNameText = NSLocalizedString("rainbow_store", comment: "rainbow_store")
     var merchantIban = "DE86 2107 0020 0123 0101 01"
     var merchantInvoice = "Ref: Invoice #378981798"
     var invoiceText = "Invoice"
@@ -122,15 +122,15 @@ class PaymentViewModelImpl: PaymentViewModel {
         }
         return "€\(String(format: "%.2f", transaction.value))".replacingOccurrences(of: ".", with: ",")
     }
-    var payNowText = "Pay now"
-    var payLaterText = "Pay later"
-    var refuseText = "Refuse"
-    var installmentsText = "Installments"
-    var acceptText = "I accept the"
-    var termsConditionsText = "Terms and Conditions"
+    var payNowText = NSLocalizedString("pay_now_paymentvc", comment: "pay_now_paymentvc")
+    var payLaterText = NSLocalizedString("pay_later_paymentvc", comment: "pay_later_paymentvc")
+    var refuseText = NSLocalizedString("refuse", comment: "refuse")
+    var installmentsText = NSLocalizedString("installments_paymentvc", comment: "installments_paymentvc")
+    var acceptText = NSLocalizedString("accept_paymentvc", comment: "accept_paymentvc")
+    var termsConditionsText = NSLocalizedString("terms_conditions", comment: "terms_conditions")
     
     var viewUpdater: PaymentViewUpdater?
-    var selectedAccount = Account(id: "2", name: "Savings Account", iban: "DE23 3701 0044 1344 8291 01", amount: "€6.231,40")
+    var selectedAccount = Account(id: "2", name: NSLocalizedString("savings_account_paymentVC", comment: "savings_account_paymentVC"), iban: "DE23 3701 0044 1344 8291 01", amount: "€6.231,40")
     var dateText: String {
         if case .installment(_, let paid) = type {
             if let date = Calendar.current.date(byAdding: .month, value: paid, to: Date()) {

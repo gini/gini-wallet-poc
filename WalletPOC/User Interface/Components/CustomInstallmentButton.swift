@@ -18,8 +18,8 @@ enum PayButtonType {
     
     var title: String {
         switch self {
-        case .payNowFull: return "Pay now \n in full"
-        case .buyNowPayLater: return "Buy now, \n Pay later"
+        case .payNowFull: return NSLocalizedString("pay_now_paymentvc", comment: "pay_now_paymentvc")
+        case .buyNowPayLater: return NSLocalizedString("buynow_paylater_paymentvc", comment: "buynow_paylater_paymentvc")
         }
     }
 }
@@ -31,9 +31,9 @@ enum InstallmentButtonType {
     
     var periodLabel: String {
         switch self {
-        case .threeMonths: return "for 3 months"
-        case .sixMonths: return "for 6 months"
-        case .nineMonths: return "for 9 months"
+        case .threeMonths: return NSLocalizedString("for_three_months", comment: "for_three_months")
+        case .sixMonths: return NSLocalizedString("for_six_months", comment: "for_six_months")
+        case .nineMonths: return NSLocalizedString("for_nine_months", comment: "for_nine_months")
         }
     }
 }

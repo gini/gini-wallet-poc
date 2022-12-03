@@ -70,6 +70,7 @@
 		F42109E428BDE85D0069F486 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42109E328BDE85D0069F486 /* PaymentViewController.swift */; };
 		F42109E628BDE8C80069F486 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42109E528BDE8C80069F486 /* SceneDelegate.swift */; };
 		F42109E928BDEF7D0069F486 /* UIView+Autolayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42109E828BDEF7D0069F486 /* UIView+Autolayout.swift */; };
+		F4548D39293A693200092E9B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F4548D3B293A693200092E9B /* Localizable.strings */; };
 		F45EDDA028D1B548006ED3CA /* NavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45EDD9F28D1B547006ED3CA /* NavigationItem.swift */; };
 		F4E49CD228CB2C4100BE74F5 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E49CD128CB2C4100BE74F5 /* RadioButton.swift */; };
 		F955ED20256D1C20005299AC /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F955ED1F256D1C20005299AC /* Tests.swift */; };
@@ -77,7 +78,6 @@
 		F97E1BFD25D3D8F7000884B4 /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E1BFC25D3D8F7000884B4 /* AnalyticsEvent.swift */; };
 		F97E1C0325D3D993000884B4 /* AnalyticsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97E1C0225D3D993000884B4 /* AnalyticsProvider.swift */; };
 		F98344A925CC021F0096DA55 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98344A825CC021F0096DA55 /* Bundle.swift */; };
-		F997090A2549FBC700E24EAA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F99709092549FBC700E24EAA /* Localizable.strings */; };
 		F9BAE6BF253799BF008FF118 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = F9BAE6BE253799BF008FF118 /* Core */; };
 		F9C2B92F25893B6B002DBADF /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2B92E25893B6B002DBADF /* Config.swift */; };
 		F9C2B948258954E1002DBADF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9C2B947258954E1002DBADF /* Images.xcassets */; };
@@ -177,6 +177,9 @@
 		F42109E328BDE85D0069F486 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		F42109E528BDE8C80069F486 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F42109E828BDEF7D0069F486 /* UIView+Autolayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Autolayout.swift"; sourceTree = "<group>"; };
+		F4548D38293A692B00092E9B /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		F4548D3C293A696800092E9B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F4548D3D293A6A0400092E9B /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F45EDD9F28D1B547006ED3CA /* NavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationItem.swift; sourceTree = "<group>"; };
 		F4E49CCC28CB1FF900BE74F5 /* ActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		F4E49CCE28CB1FF900BE74F5 /* RefusePaymentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefusePaymentView.swift; sourceTree = "<group>"; };
@@ -190,7 +193,6 @@
 		F99709042549FAEA00E24EAA /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		F99709052549FB0100E24EAA /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		F99709062549FB0100E24EAA /* Internal.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Internal.xcconfig; sourceTree = "<group>"; };
-		F99709092549FBC700E24EAA /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		F9C2B92E25893B6B002DBADF /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		F9C2B947258954E1002DBADF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F9CB746C25CDA388006F0FE2 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -242,7 +244,7 @@
 		2E1BB14F28C88504007F3587 /* Strings */ = {
 			isa = PBXGroup;
 			children = (
-				F99709092549FBC700E24EAA /* Localizable.strings */,
+				F4548D3B293A693200092E9B /* Localizable.strings */,
 			);
 			path = Strings;
 			sourceTree = "<group>";
@@ -635,6 +637,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = F9D38E0F253793E3007D4888;
 			packageReferences = (
@@ -675,7 +678,7 @@
 				F41C08CD28C5D7280050510E /* PlusJakartaSans-Medium.ttf in Resources */,
 				F41C08C928C5D7150050510E /* PlusJakartaSans-BoldItalic.ttf in Resources */,
 				2E9D969E28DB39F600708C34 /* Rainbow_store_invoice.pdf in Resources */,
-				F997090A2549FBC700E24EAA /* Localizable.strings in Resources */,
+				F4548D39293A693200092E9B /* Localizable.strings in Resources */,
 				F41C08CB28C5D71E0050510E /* PlusJakartaSans-ExtraBoldItalic.ttf in Resources */,
 				F41C08D028C5D7D10050510E /* PlusJakartaSans-Regular.ttf in Resources */,
 				F9D38E25253793E3007D4888 /* Colors.xcassets in Resources */,
@@ -795,10 +798,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		F4548D3B293A693200092E9B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F4548D3C293A696800092E9B /* en */,
+				F4548D3D293A6A0400092E9B /* de */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		F9D38E26253793E3007D4888 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				F9D38E27253793E3007D4888 /* Base */,
+				F4548D38293A692B00092E9B /* de */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -874,6 +887,7 @@
 			baseConfigurationReference = F99709062549FB0100E24EAA /* Internal.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -932,7 +946,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y6P2NYW2G8;
+				DEVELOPMENT_TEAM = BQY9KX4V88;
 				INFOPLIST_FILE = "$(SRCROOT)/WalletPOC/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -952,6 +966,7 @@
 			baseConfigurationReference = F99709042549FAEA00E24EAA /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1014,6 +1029,7 @@
 			baseConfigurationReference = F99709052549FB0100E24EAA /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1072,7 +1088,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y6P2NYW2G8;
+				DEVELOPMENT_TEAM = BQY9KX4V88;
 				INFOPLIST_FILE = "$(SRCROOT)/WalletPOC/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1094,7 +1110,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y6P2NYW2G8;
+				DEVELOPMENT_TEAM = BQY9KX4V88;
 				INFOPLIST_FILE = "$(SRCROOT)/WalletPOC/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (

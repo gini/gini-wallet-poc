@@ -27,7 +27,7 @@ final class MonthlyPaymentViewController: BaseViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .body
         label.textColor = .secondaryText
-        label.text = "Full amount"
+        label.text = NSLocalizedString("full_amount", comment: "full_amount")
         return label
     }()
     
@@ -64,7 +64,7 @@ final class MonthlyPaymentViewController: BaseViewController {
     private lazy var actionButton: ActionButton = {
         let button = ActionButton(style: .constructive)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Pay next installment", for: .normal)
+        button.setTitle(NSLocalizedString("pay_next_installment", comment: "pay_next_installment"), for: .normal)
         return button
     }()
     
@@ -122,7 +122,7 @@ final class MonthlyPaymentViewController: BaseViewController {
     
     private func setupUI() {
         view.backgroundColor = .white
-        navigationItem.title = "Monthly payment"
+        navigationItem.title = NSLocalizedString("monthly_payment", comment: "monthly_payment")
         
         tableView.delegate = self
         tableView.dataSource = self
