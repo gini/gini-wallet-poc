@@ -110,7 +110,7 @@ class PaymentViewModelImpl: PaymentViewModel {
     var merchantNameText = NSLocalizedString("rainbow_store", comment: "rainbow_store")
     var merchantIban = "DE86 2107 0020 0123 0101 01"
     var merchantInvoice = "Ref: Invoice #378981798"
-    var invoiceText = "Invoice"
+    var invoiceText = NSLocalizedString("invoice", comment: "invoice")
     
     var priceText: String {
         if case .installment(let total, _) = type {

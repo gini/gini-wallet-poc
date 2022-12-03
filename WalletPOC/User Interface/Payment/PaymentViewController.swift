@@ -136,7 +136,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         amountLabel.text = viewModel.priceText
         amountLabel.font = UIFont(name: "PlusJakartaSans-Bold", size: 32)
         
-        payNowButton.setTitle("Pay Now", for: .normal)
+        payNowButton.setTitle(NSLocalizedString("pay_now_paymentvc", comment: "pay_now_paymentvc"), for: .normal)
         payNowButton.addTarget(self, action: #selector(didTapPayNow), for: .touchUpInside)
         payNowButton.backgroundColor = UIColor(named: "AccentColor")
         
@@ -145,7 +145,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         payNowButton.layer.borderColor = UIColor(named: "AccentColor")?.cgColor
         payNowButton.titleLabel?.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
         
-        payLaterButton.setTitle("Pay Later", for: .normal)
+        payLaterButton.setTitle(NSLocalizedString("pay_later_paymentvc", comment: "pay_later_paymentvc"), for: .normal)
         payLaterButton.addTarget(self, action: #selector(didTapPayLater), for: .touchUpInside)
         payLaterButton.layer.cornerRadius = 12
         payLaterButton.layer.borderWidth = 1
@@ -187,7 +187,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         checkmarkButton.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)
         
         let attributeString = NSMutableAttributedString(
-            string: "Refuse",
+            string: NSLocalizedString("refuse", comment: "refuse"),
             attributes: refuseAttributes
         )
         refuseButton.setAttributedTitle(attributeString, for: .normal)
@@ -199,7 +199,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         
         dueDateLabel.textColor = UIColor(named: "gray")
         dueDateLabel.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 14)
-        dueDateLabel.text = "Due date"
+        dueDateLabel.text = NSLocalizedString("due_date_transactioncell", comment: "due_date_transactioncell")
         
         dateLabel.font = UIFont(name: "PlusJakartaSans-Medium", size: 16)
         dateLabel.textColor = .black
@@ -457,7 +457,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
             viewModel.nrOfInstallments = 3
         }
         updateAmountText()
-        payNowButton.setTitle("Buy now, Pay later", for: .normal)
+        payNowButton.setTitle(NSLocalizedString("buynow_paylater_paymentvc", comment: "buynow_paylater_paymentvc"), for: .normal)
         if buyNowPayLaterButton.backgroundColor == .clear  {
             buttonSelect(button: buyNowPayLaterButton)
             buttonDeselect(button: payFullButton)
@@ -469,7 +469,7 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
     @objc private func payFullTapped() {
         viewModel.nrOfInstallments = nil
         updateAmountText()
-        payNowButton.setTitle("Pay now", for: .normal)
+        payNowButton.setTitle(NSLocalizedString("pay_now_paymentvc", comment: "pay_now_paymentvc"), for: .normal)
         if payFullButton.backgroundColor == .clear {
             buttonSelect(button: payFullButton)
             buttonDeselect(button: buyNowPayLaterButton)

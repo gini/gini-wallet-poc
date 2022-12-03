@@ -66,7 +66,7 @@ final class PaymentFooterView: UIView {
     
     private lazy var invoiceLabel: UILabel = {
         let label = UILabel()
-        label.text = "Invoice"
+        label.text = NSLocalizedString("invoice", comment: "invoice")
         label.font = .subtitleSmall
         label.textColor = .primaryText
         return label

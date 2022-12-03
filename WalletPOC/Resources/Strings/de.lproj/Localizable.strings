@@ -16,7 +16,7 @@
 "faceid" = "Face ID";
 //PaymentVC
 "pay_now_paymentvc" = "Jetzt bezahlen";
-"pay_later_paymentvc" = "Später bezahlen";
+"pay_later_paymentvc" = "Später";
 "refuse" = "Ablehnen";
 "due_date_paymentvc" = "Fälligkeitsdatum";
 "buynow_paylater_paymentvc" = "Buy now, Pay later";
