@@ -231,6 +231,12 @@ class PaymentViewController: BaseViewController, XMLParserDelegate {
         
         buttonSelect(button: payFullButton)
         buttonDeselect(button: buyNowPayLaterButton)
+        
+        if case .upcoming = viewModel.transaction.type {
+            refuseButton.isHidden = true
+        } else {
+            refuseButton.isHidden = false
+        }
     }
     
     private func setupConstraints() {
