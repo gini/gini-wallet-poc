@@ -2,7 +2,7 @@ input_dir: WalletPOC
 output_dir: WalletPOC/Generated/
 
 strings:
-  inputs: Resources/Strings/Localizable.strings
+  inputs: Resources/Strings/en.lproj/Localizable.strings
   outputs:
     templateName: flat-swift5
     output: Strings.swift

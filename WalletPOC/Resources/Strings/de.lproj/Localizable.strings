@@ -63,8 +63,8 @@ you_will_pay_total_of = "Sie werden insgesamt €%d in %d Raten zahlen.";
 close = "Schliesen";
 //TransactionCellModel
 online_shopping = "Online shopping";
-due_date_transactioncell = "Bis";
-monthly_next = "Monatlich: nächst";
+due_date_transactioncell = "Bis %@";
+monthly_next = "Monatlich: nächst %@";
 //AccountSwitchVC
 main_account = "Girokonto";
 account_from = "Konto wählen";
